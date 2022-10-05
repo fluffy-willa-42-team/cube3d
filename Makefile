@@ -6,7 +6,7 @@
 #    By: awillems <awillems@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/05 10:47:56 by awillems          #+#    #+#              #
-#    Updated: 2022/10/05 10:56:25 by awillems         ###   ########.fr        #
+#    Updated: 2022/10/05 11:50:03 by awillems         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 #                                  CONFIG
 # **************************************************************************** #
 
-NAME		= minishell
+NAME		= cube3d
 
 # **************************************************************************** #
 
@@ -35,9 +35,9 @@ CC			= gcc
 OBJ_EXT		= .o
 CODE_EXT	= .c
 HEAD_EXT	= .h
-INC			= -I include -I lib/libft/include -I lib/vector-lib/include -I lib/MLX42/
-FLAGS		= -Wall -Wextra -Werror
-FLAGS_COMP	= lib/MLX42/libmlx42.a -lglfw -L "/Users/awillems/.brew/opt/glfw/lib/"
+INC			= -I include -I lib/MLX42/include/MLX42/
+FLAGS		= -Wall -Wextra -Werror 
+FLAGS_COMP	= -lglfw -L "/Users/awillems/.brew/opt/glfw/lib/"
 
 # **************************************************************************** #
 #                                  PARAMS
@@ -64,15 +64,6 @@ ifeq ($(DEBUG), 1)
 	FLAGS += -g3
 	FLAGS += -D DEBUG_PRINT=1
 	MAKE_FLAG += DEBUG=1
-endif
-
-ifeq ($(shell uname),Darwin)
-	INC += -I$(shell brew --prefix readline)/include
-	FLAGS_COMP += -L$(shell brew --prefix readline)/lib
-endif
-
-ifeq ($(WRA), 1)
-        FLAGS += -D WRA -I lib/wraloc
 endif
 
 # **************************************************************************** #
@@ -121,7 +112,7 @@ lib_comp:
 # Takes any C/CPP files and transforms into an object into the OBJ_DIR
 $(OBJ_DIR)/%$(OBJ_EXT): %$(CODE_EXT) $(HEADER)
 	@$(CC) $(FLAGS) $(INC) -o $@ -c $<
-	@printf "$(COLOR_RED).$(COLOR_NORMAL)"
+	@printf "$(COLOR_RED).$(COLOR_NORMAL)\n"
 
 # Takes any header files and creates a hard link in INC_DIR
 $(INC_DIR)/%$(HEAD_EXT): %$(HEAD_EXT)
@@ -130,7 +121,7 @@ $(INC_DIR)/%$(HEAD_EXT): %$(HEAD_EXT)
 
 # Takes an name of executable and compiles everything into it
 $(NAME): print $(HEADER) $(OBJ)
-	@$(CC) $(FLAGS) $(OBJ) $(INC) $(FLAGS_COMP) $(LIB) -o $(NAME)
+	$(CC) $(FLAGS) $(LIB) $(INC) $(OBJ) $(FLAGS_COMP)  -o $(NAME)
 	@chmod 777 $(NAME)
 	@printf "\n"
 	@if [ $(DEBUG) = 2 ]; then printf "$(COLOR_RED)/!\ DEBUG ENABLE /!\ $(COLOR_NORMAL)\nFlag used:\n"; printf "    %s\n" $(FLAGS);fi
@@ -149,9 +140,6 @@ clean:
 		fi; \
 	done
 
-c:
-	@rm -rf $(OBJ)
-
 # **************************************************************************** #
 
 fclean:
@@ -161,9 +149,6 @@ fclean:
 			make -sC $$path fclean;\
 		fi; \
 	done
-
-fc:
-	@rm -rf $(OBJ) $(INC_DIR)* $(NAME)
 
 # **************************************************************************** #
 
@@ -187,56 +172,3 @@ exe: all
 # **************************************************************************** #
 
 .PHONY: all, fclean, clean, re, print_src, $(ALL_LIB), exe, fc, r, c
-
-# **************************************************************************** #
-#                               DEV TOOLS
-# **************************************************************************** #
-
-STUFF_TO_REMOVE =	\
-					*.o\
-					*.a\
-					.DS_Store\
-					.vscode\
-					*.dSYM
-
-remove_stuff:
-	@for stuff in $(STUFF_TO_REMOVE); do \
-	printf "remove all [%s]\n" $$stuff;\
-		find . -name $$stuff -prune -exec rm -rf {} \; ;\
-	done
-
-update_lib:
-	@for path in $(ALL_LIB); do \
-		printf "    [%s]\n" $$path;\
-		if [ -f $$path/Makefile ]; then \
-		make -C $$path fclean ;\
-		branch=`git -C $$path symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@'`;\
-		git -C $$path pull origin $$branch;\
-		git -C $$path checkout $$branch;\
-		else echo "No Makefile"; fi; \
-	done
-
-update: update_lib
-	git pull origin $(shell git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')
-
-ping:
-	@printf "[%s] pong!\n" $(THISPATH)
-
-ping_lib:
-	@for path in $(ALL_LIB); do \
-		printf "    [%s]\n" $$path;\
-		if [ -f $$path/Makefile ]; then \
-		make -C $$path ping;\
-		else echo "No Makefile"; fi; \
-	done
-
-git:
-	@git pull
-	@git diff
-	@-git add .
-	@git commit -am "Makefile push `date +'%Y-%m-%d %H:%M:%S'`"
-	@-git push
-
-# **************************************************************************** #
-
-.PHONY: remove_stuff, update_lib, update, ping, ping_lib, git, willa, fluffy
