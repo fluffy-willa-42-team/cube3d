@@ -6,7 +6,7 @@
 #    By: awillems <awillems@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/05 10:47:56 by awillems          #+#    #+#              #
-#    Updated: 2022/10/05 11:50:03 by awillems         ###   ########.fr        #
+#    Updated: 2022/10/05 12:16:24 by awillems         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ CODE_EXT	= .c
 HEAD_EXT	= .h
 INC			= -I include -I lib/MLX42/include/MLX42/
 FLAGS		= -Wall -Wextra -Werror 
-FLAGS_COMP	= -lglfw -L "/Users/awillems/.brew/opt/glfw/lib/"
+FLAGS_COMP	= -lglfw -L "/Users/awillems/.brew/opt/glfw/lib/" -L lib/MLX42/
 
 # **************************************************************************** #
 #                                  PARAMS
@@ -121,7 +121,7 @@ $(INC_DIR)/%$(HEAD_EXT): %$(HEAD_EXT)
 
 # Takes an name of executable and compiles everything into it
 $(NAME): print $(HEADER) $(OBJ)
-	$(CC) $(FLAGS) $(LIB) $(INC) $(OBJ) $(FLAGS_COMP)  -o $(NAME)
+	$(CC) $(FLAGS) $(INC) $(OBJ) $(FLAGS_COMP) -o $(NAME)
 	@chmod 777 $(NAME)
 	@printf "\n"
 	@if [ $(DEBUG) = 2 ]; then printf "$(COLOR_RED)/!\ DEBUG ENABLE /!\ $(COLOR_NORMAL)\nFlag used:\n"; printf "    %s\n" $(FLAGS);fi
@@ -162,8 +162,6 @@ print_src:
 
 re: fclean all
 
-r: fc all
-
 # **************************************************************************** #
 
 exe: all
@@ -171,4 +169,4 @@ exe: all
 
 # **************************************************************************** #
 
-.PHONY: all, fclean, clean, re, print_src, $(ALL_LIB), exe, fc, r, c
+.PHONY: all, fclean, clean, re, print_src, $(ALL_LIB), exe
