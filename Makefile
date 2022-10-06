@@ -6,7 +6,7 @@
 #    By: awillems <awillems@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/05 10:47:56 by awillems          #+#    #+#              #
-#    Updated: 2022/10/06 10:28:35 by awillems         ###   ########.fr        #
+#    Updated: 2022/10/06 11:42:20 by awillems         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -134,21 +134,21 @@ print:
 
 clean:
 	@rm -rf $(OBJ)
-	@for path in $(ALL_LIB); do \
-		if [ -f $$path/Makefile ]; then \
-			make -sC $$path clean;\
-		fi; \
-	done
+# @for path in $(ALL_LIB); do \
+# 	if [ -f $$path/Makefile ]; then \
+# 		make -sC $$path clean;\
+# 	fi; \
+# done
 
 # **************************************************************************** #
 
 fclean:
 	@rm -rf $(OBJ) $(INC_DIR)* $(NAME)
-	@for path in $(ALL_LIB); do \
-		if [ -f $$path/Makefile ]; then \
-			make -sC $$path fclean;\
-		fi; \
-	done
+# @for path in $(ALL_LIB); do \
+# 	if [ -f $$path/Makefile ]; then \
+# 		make -sC $$path fclean;\
+# 	fi; \
+# done
 
 # **************************************************************************** #
 
