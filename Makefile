@@ -6,7 +6,7 @@
 #    By: awillems <awillems@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/05 10:47:56 by awillems          #+#    #+#              #
-#    Updated: 2022/10/10 10:55:47 by awillems         ###   ########.fr        #
+#    Updated: 2022/10/10 10:56:39 by awillems         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -112,7 +112,7 @@ lib_comp:
 # Takes any C/CPP files and transforms into an object into the OBJ_DIR
 $(OBJ_DIR)/%$(OBJ_EXT): %$(CODE_EXT) $(HEADER)
 	@$(CC) $(FLAGS) $(INC) -o $@ -c $<
-	@printf "$(COLOR_RED).$(COLOR_NORMAL)\n"
+	@printf "$(COLOR_RED).$(COLOR_NORMAL)"
 
 # Takes any header files and creates a hard link in INC_DIR
 $(INC_DIR)/%$(HEAD_EXT): %$(HEAD_EXT)
@@ -123,6 +123,7 @@ $(INC_DIR)/%$(HEAD_EXT): %$(HEAD_EXT)
 $(NAME): print $(HEADER) $(OBJ)
 	@$(CC) $(FLAGS) $(INC) $(OBJ) $(LIB) $(FLAGS_COMP) -o $(NAME)
 	@chmod 777 $(NAME)
+	@printf "\n"
 	@if [ $(DEBUG) = 2 ]; then printf "$(COLOR_RED)/!\ DEBUG ENABLE /!\ $(COLOR_NORMAL)\nFlag used:\n"; printf "    %s\n" $(FLAGS);fi
 
 print:
