@@ -6,7 +6,7 @@
 #    By: awillems <awillems@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/05 10:47:56 by awillems          #+#    #+#              #
-#    Updated: 2022/10/06 11:42:20 by awillems         ###   ########.fr        #
+#    Updated: 2022/10/10 10:55:47 by awillems         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -123,7 +123,6 @@ $(INC_DIR)/%$(HEAD_EXT): %$(HEAD_EXT)
 $(NAME): print $(HEADER) $(OBJ)
 	@$(CC) $(FLAGS) $(INC) $(OBJ) $(LIB) $(FLAGS_COMP) -o $(NAME)
 	@chmod 777 $(NAME)
-	@printf "\n"
 	@if [ $(DEBUG) = 2 ]; then printf "$(COLOR_RED)/!\ DEBUG ENABLE /!\ $(COLOR_NORMAL)\nFlag used:\n"; printf "    %s\n" $(FLAGS);fi
 
 print:
