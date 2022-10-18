@@ -169,4 +169,9 @@ exe: all
 
 # **************************************************************************** #
 
-.PHONY: all, fclean, clean, re, print_src, $(ALL_LIB), exe
+fluffy:
+	git config user.name "matthew-dreemurr"
+	git config user.email "hadadmat@gmail.com"
+
+
+.PHONY: all, fclean, clean, re, print_src, $(ALL_LIB), exe, fluffy
