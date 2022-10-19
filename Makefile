@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: awillems <awillems@student.42.fr>          +#+  +:+       +#+         #
+#    By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/05 10:47:56 by awillems          #+#    #+#              #
-#    Updated: 2022/10/10 10:56:39 by awillems         ###   ########.fr        #
+#    Updated: 2022/10/19 09:42:47 by mahadad          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ CODE_EXT	= .c
 HEAD_EXT	= .h
 INC			= -I include -I lib/MLX42/include/ -I lib/MLX42/
 FLAGS		= -Wall -Wextra -Werror
-FLAGS_COMP	= -lglfw -L "/Users/awillems/.brew/opt/glfw/lib/"
+FLAGS_COMP	= 
 
 # **************************************************************************** #
 #                                  PARAMS
@@ -64,6 +64,14 @@ ifeq ($(DEBUG), 1)
 	FLAGS += -g3
 	FLAGS += -D DEBUG_PRINT=1
 	MAKE_FLAG += DEBUG=1
+endif
+
+ifeq ($(shell uname),Darwin)
+	FLAGS_COMP	+= -lglfw -L "/Users/awillems/.brew/opt/glfw/lib/"
+endif
+
+ifeq ($(shell uname),Linux)
+	FLAGS_COMP	+= -ldl -lglfw -pthread -lm
 endif
 
 # **************************************************************************** #
@@ -134,21 +142,21 @@ print:
 
 clean:
 	@rm -rf $(OBJ)
-# @for path in $(ALL_LIB); do \
-# 	if [ -f $$path/Makefile ]; then \
-# 		make -sC $$path clean;\
-# 	fi; \
-# done
+	@for path in $(ALL_LIB); do \
+	if [ -f $$path/Makefile ]; then \
+		make -sC $$path clean;\
+	fi; \
+done
 
 # **************************************************************************** #
 
 fclean:
 	@rm -rf $(OBJ) $(INC_DIR)* $(NAME)
-# @for path in $(ALL_LIB); do \
-# 	if [ -f $$path/Makefile ]; then \
-# 		make -sC $$path fclean;\
-# 	fi; \
-# done
+	@for path in $(ALL_LIB); do \
+	if [ -f $$path/Makefile ]; then \
+		make -sC $$path fclean;\
+	fi; \
+done
 
 # **************************************************************************** #
 
