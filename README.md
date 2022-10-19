@@ -23,7 +23,7 @@ or if you have `Oh-My-Zsh`
 gcl git@github.com:fluffy-willa-42-team/cube3d.git
 ```
 
-## You need the GNU readline lib
+## You need to install some lib before compile
 
 ### MacOS
 
