@@ -4,3 +4,6 @@
 [submodule "lib/vector-lib"]
 	path = lib/vector-lib
 	url = git@github.com:fluffy-willa-42-team/vector-lib.git
+[submodule "lib/libft"]
+	path = lib/libft
+	url = git@github.com:fluffy-willa-42-team/libft.git
