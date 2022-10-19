@@ -6,7 +6,7 @@
 #    By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/05 10:47:56 by awillems          #+#    #+#              #
-#    Updated: 2022/10/19 09:42:47 by mahadad          ###   ########.fr        #
+#    Updated: 2022/10/19 09:55:30 by mahadad          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,7 +67,8 @@ ifeq ($(DEBUG), 1)
 endif
 
 ifeq ($(shell uname),Darwin)
-	FLAGS_COMP	+= -lglfw -L "/Users/awillems/.brew/opt/glfw/lib/"
+	INC 		+= -I$(shell brew --prefix glfw)/include
+	FLAGS_COMP	+= -lglfw -L $(shell brew --prefix glfw)/lib
 endif
 
 ifeq ($(shell uname),Linux)
