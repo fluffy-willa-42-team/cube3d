@@ -66,7 +66,7 @@ static int	bufftrim(t_vec *buff)
 		len--;
 	}
 	buff->len = ft_strlen(str);
-	v_print(buff);//TODO REMOVE
+	// v_print(buff);//TODO REMOVE
 	return (EXIT_SUCCESS);
 }
 

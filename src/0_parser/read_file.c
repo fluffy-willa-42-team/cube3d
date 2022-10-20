@@ -21,16 +21,19 @@
 static int	read_to_vec(t_parser *data, t_vec *buff)
 {
 	int	ret;
-
+	write(1, "start read\n", 12);
 	ret = 1;
 	*buff = v_init(sizeof(char), NULL, NULL);
+	v_alloc(buff, SET, 5000000);
 	while (ret != 0)
 	{
+	write(1, "read\n", 6);
 		ret = v_readline(buff, data->file_fd);
 		if (ret == -1 || !v_add(buff, STRING, "\n")/* //TODO change check after the lib update ! */)
 			return (ret_print(EXIT_FAILURE, ERR_VEC_FAIL));
 	}
 	v_print(buff);//TODO REMOVE
+	write(1, "finish\n", 8);
 	return (EXIT_SUCCESS);
 }
 
