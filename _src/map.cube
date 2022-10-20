@@ -1,0 +1,23 @@
+N ./path_to_the_north_texture
+S ./path_to_the_south_texture
+W ./path_to_the_west_texture
+E ./path_to_the_east_texture
+
+F 220,100,0
+C 225,30,0
+
+         CN.CN.CN.CN.CN.CN.CN.CN.
+         W.EW.EW.EW.EW.EW.EW.EW.E
+         FS.FS.FS.FS.FS.FS.FS.FS.
+         CN.C..C..C..C..C..C..CN.
+         W.E..................W.E
+         FS.F..F..F..F..F..F..FS.
+CN.CN.CN.CN.C..C..C..C..C..C..CN.CN.CN.CN.CN.
+W.EW.EW.EW.E.............P....W.EW.EW.EW.EW.E
+FS.FS.FS.FS.F..F..F..F..F.NF..FS.FS.FS.FS.FS.
+CN.C..C..C..C..C..C..C..C..C..C..C..C..C..CN.
+W.E.......................................W.E
+FS.F..F..F..F..F..F..F..F..F..F..F..F..F..FS.
+CN.CN.CN.CN.CN.CN.CN.CN.CN.CN.CN.CN.CN.CN.CN.
+W.EW.EW.EW.EW.EW.EW.EW.EW.EW.EW.EW.EW.EW.EW.E
+FS.FS.FS.FS.FS.FS.FS.FS.FS.FS.FS.FS.FS.FS.FS.
