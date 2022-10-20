@@ -182,5 +182,17 @@ fluffy:
 	git config user.name "matthew-dreemurr"
 	git config user.email "hadadmat@gmail.com"
 
+STUFF_TO_REMOVE =	\
+					*.o\
+					*.a\
+					.DS_Store\
+					.vscode\
+					*.dSYM
+
+remove_stuff:
+	@for stuff in $(STUFF_TO_REMOVE); do \
+	printf "remove all [%s]\n" $$stuff;\
+		find . -name $$stuff -prune -exec rm -rf {} \; ;\
+	done
 
 .PHONY: all, fclean, clean, re, print_src, $(ALL_LIB), exe, fluffy
