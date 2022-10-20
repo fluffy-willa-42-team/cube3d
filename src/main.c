@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 10:16:26 by awillems          #+#    #+#             */
-/*   Updated: 2022/10/20 16:12:25 by awillems         ###   ########.fr       */
+/*   Updated: 2022/10/20 17:54:05 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,30 +80,35 @@ void draw_minimap(void)
 	}
 }
 
-void draw_line(double x1, double y1, double x2, double y2, double width)
+void draw_line(double x1, double y1, double x2, double y2)
 {
-	for (int x = 0; x < WIDTH; x++)
-	{
-		for (int y = 0; y < HEIGHT; y++)
-		{
-			// double dist = fabs(((cos(a) / sin(a)) * (x1 - x)) - y1 - y) / sqrt((powf(cos(a), 2) / powf(sin(a), 2)) + 1);
-			double dist = fabs(   (y1 - y2) / (x2 - x1) * x        + y          + ((x1 * y2) - (x2 * y1)) / (x2 - x1)     )
-							/ sqrt((powf((y2 - y1) * (x2 - x1), 2) + 1));
-			// printf("%f\n", dist);
-			if (dist < width)
-				mlx_put_pixel(g_img, x, y, 0x00fffffff);
-		}
+	float step;
+	float dx = (x2 - x1);
+	float dy = (y2 - y1);
+	if (fabs(dx) >= fabs(dy))
+		step = fabs(dx);
+	else
+		step = fabs(dy);
+	dx = dx / step;
+	dy = dy / step;
+	float x = x1;
+	float y = y1;
+	int i = 1;
+	while (i <= step) {
+		if (0 <= x && x < WIDTH && 0 <= y && y < HEIGHT)
+			mlx_put_pixel(g_img, x, y, 0x00fffffff);
+		x = x + dx;
+		y = y + dy;
+		i = i + 1;
 	}
 }
 
 void draw_image(t_game	*game)
 {
 	(void) game;
-	// draw_minimap();
+	draw_minimap();
 	draw_square(game->p_x - 0.5, game->p_y - 0.5, MINIMAP_SIZE, 0xff0000ff);
-	// printf("%f %f %f %f\n", game->p_x * MINIMAP_SIZE, game->p_y * MINIMAP_SIZE, (game->p_x + game->p_dx) * MINIMAP_SIZE, (game->p_y + game->p_dy) * MINIMAP_SIZE);
-	// draw_line(game->p_x * MINIMAP_SIZE, game->p_y * MINIMAP_SIZE, (game->p_x + game->p_dx) * MINIMAP_SIZE, (game->p_y + game->p_dy) * MINIMAP_SIZE, 0.01);
-	draw_square(game->p_x + game->p_dx - 0.5, game->p_y + game->p_dy - 0.5, MINIMAP_SIZE, 0xff00ffff);
+	draw_line(game->p_x * MINIMAP_SIZE, game->p_y * MINIMAP_SIZE, (game->p_x + game->p_dx) * MINIMAP_SIZE, (game->p_y + game->p_dy) * MINIMAP_SIZE);
 }
 
 void	hook(void *param)
@@ -115,11 +120,11 @@ void	hook(void *param)
 	if (mlx_is_key_down(game->mlx, MLX_KEY_DOWN))	{ game->p_y += 0.1; if (game->p_y > MAP_HEIGHT)	game->p_y -= MAP_HEIGHT; }
 	if (mlx_is_key_down(game->mlx, MLX_KEY_LEFT))	{ game->p_x -= 0.1; if (game->p_x < 0)			game->p_x += MAP_WIDTH;	}
 	if (mlx_is_key_down(game->mlx, MLX_KEY_RIGHT))	{ game->p_x += 0.1; if (game->p_x > MAP_WIDTH)	game->p_x -= MAP_WIDTH; }
-	if (mlx_is_key_down(game->mlx, MLX_KEY_A))		{ game->p_a -= 0.05; if (game->p_a < 0)			game->p_a += 2 * PI;
+	if (mlx_is_key_down(game->mlx, MLX_KEY_A))		{ game->p_a -= PI/16; if (game->p_a < 0)			game->p_a += 2 * PI;
 		game->p_dx = cos(game->p_a);
 		game->p_dy = sin(game->p_a);
 	}
-	if (mlx_is_key_down(game->mlx, MLX_KEY_D))		{ game->p_a += 0.05;	if (game->p_a > 2 * PI)		game->p_a -= 2 * PI;
+	if (mlx_is_key_down(game->mlx, MLX_KEY_D))		{ game->p_a += PI/16; if (game->p_a > 2 * PI)		game->p_a -= 2 * PI;
 		game->p_dx = cos(game->p_a);
 		game->p_dy = sin(game->p_a);
 	}
