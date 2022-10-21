@@ -58,3 +58,4 @@ include/
 *.log
 *.txt
 tester/tester
+*.err

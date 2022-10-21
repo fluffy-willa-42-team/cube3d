@@ -177,17 +177,17 @@ exe: all
 	@bash -c "./$(NAME)"
 
 test: clear_test
-	make re SANI=1
-	gcc -Wall -Wextra -Werror tester/tester.c -o tester/tester
+	@make re SANI=1
+	@gcc -Wall -Wextra -Werror tester/tester.c -o tester/tester
 	@./tester/tester
 
 run_test:
-	gcc -Wall -Wextra -Werror tester/tester.c -o tester/tester
+	@gcc -Wall -Wextra -Werror tester/tester.c -o tester/tester
 	@./tester/tester
 
 clear_test:
-	find . -type f -name "*.err" -prune -exec rm -rf {} \;
-	find . -type f -name "*.out" -prune -exec rm -rf {} \;
+	@find . -type f -name "*.err" -prune -exec rm -rf {} \;
+	@find . -type f -name "*.out" -prune -exec rm -rf {} \;
 # **************************************************************************** #
 
 fluffy:

@@ -18,6 +18,7 @@
 #define YELHB "\e[0;103m"
 #define RES "\033[0m"
 #define BLK "\e[0;30m"
+#define BLU "\e[0;34m"
 
 int		fd_out;
 int		fd_err;
@@ -160,7 +161,7 @@ int	run(const char *file)
 	return(-255);
 }
 
-void	test(const char *file, int ret)
+void	test(const char *file, int ret, const char *comm)
 {
 	test_no++;
 
@@ -171,15 +172,15 @@ void	test(const char *file, int ret)
 	int run_ret = run(file);
 
 	reset_file();
-	
+	printf(BLU"Test [%d]: %s\n"RES, test_no, comm);
 	if (run_ret == ret)
-		printf(GRE"OK (%d)"RES" [%s]\n", run_ret, file);
+		printf(GRE"    OK (%d)"RES" [%s]\n", run_ret, file);
 	else
 	{
-		printf(RED"K0! (%d)"RES" [%s]\n", run_ret, file);
-		printf(BLK"    ./cube3d tester/map/%s\n"RES, file);
+		printf(RED"    K0! (%d)"RES" [%s]\n", run_ret, file);
+		printf(BLK"        ./cube3d tester/map/%s\n"RES, file);
 	}
-	printf("    ["BYEL"./tester/%d.out"RES"] ["YEL"./tester/%d.err"RES"]\n\n", test_no, test_no);
+	printf("        ["BYEL"./tester/%d.out"RES"] ["YEL"./tester/%d.err"RES"]\n\n", test_no, test_no);
 }
 
 int main(int argc, char const *argv[])
@@ -187,10 +188,21 @@ int main(int argc, char const *argv[])
 	(void)argc;
 	(void)argv;
 	
-	test("cub_map.cub", EXIT_SUCCESS);
-	test("cub_map.cube", EXIT_FAILURE);
-	test("empty_file.cub", EXIT_FAILURE);
-	test("empty_file.cube", EXIT_FAILURE);
+	test(	"cub_map.cub",
+			EXIT_SUCCESS,
+			"Normal cub file");
+
+	test(	"cub_map.cube",
+			EXIT_FAILURE,
+			"Normal cub file with .cube extention");
+
+	test(	"empty_file.cub",
+			EXIT_FAILURE,
+			"Empty file .cub");
+
+	test(	"empty_file.cube",
+			EXIT_FAILURE,
+			"Empty file .cube");
 
 
 	close(fd_out);
