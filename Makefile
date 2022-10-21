@@ -176,6 +176,18 @@ re: fclean all
 exe: all
 	@bash -c "./$(NAME)"
 
+test: clear_test
+	make re SANI=1
+	gcc -Wall -Wextra -Werror tester/tester.c -o tester/tester
+	@./tester/tester
+
+run_test:
+	gcc -Wall -Wextra -Werror tester/tester.c -o tester/tester
+	@./tester/tester
+
+clear_test:
+	find . -type f -name "*.err" -prune -exec rm -rf {} \;
+	find . -type f -name "*.out" -prune -exec rm -rf {} \;
 # **************************************************************************** #
 
 fluffy:
@@ -187,12 +199,17 @@ STUFF_TO_REMOVE =	\
 					*.a\
 					.DS_Store\
 					.vscode\
-					*.dSYM
+					*.dSYM\
+					*.log\
+					*.txt\
+					tester\
+					*.err\
+					*.out
 
 remove_stuff:
 	@for stuff in $(STUFF_TO_REMOVE); do \
 	printf "remove all [%s]\n" $$stuff;\
-		find . -name $$stuff -prune -exec rm -rf {} \; ;\
+		find . -type f -name $$stuff -prune -exec rm -rf {} \; ;\
 	done
 
 .PHONY: all, fclean, clean, re, print_src, $(ALL_LIB), exe, fluffy

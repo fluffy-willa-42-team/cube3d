@@ -54,3 +54,7 @@ dkms.conf
 
 cube3d
 include/
+.vscode/settings.json
+*.log
+*.txt
+tester/tester
