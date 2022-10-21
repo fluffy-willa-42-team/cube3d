@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 10:16:26 by awillems          #+#    #+#             */
-/*   Updated: 2022/10/20 17:54:05 by awillems         ###   ########.fr       */
+/*   Updated: 2022/10/21 10:06:19 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,8 @@ void draw_square(float x, float y, int size, int32_t color)
 	{
 		for (int j = 0; j < size; j++)
 		{
-			if (x * size + i >= 0 && y * size + j >= 0 &&
-				x * size + i < MAP_WIDTH * size && y * size + j < MAP_HEIGHT * size)
-				mlx_put_pixel(g_img, x * size + i, y * size + j, color);
+			if (0 <= x + i && x + i < WIDTH && 0 <= y + j && y + j < HEIGHT)
+				mlx_put_pixel(g_img, x + i, y + j, color);
 		}
 	}
 }
@@ -72,10 +71,11 @@ void draw_minimap(void)
 	{
 		for (int y = 0; y < 8; y++)
 		{
+			draw_square(x * MINIMAP_SIZE, y * MINIMAP_SIZE, MINIMAP_SIZE, 0x111111ff);
 			if (map[y][x] == 1)
-				draw_square(x, y, MINIMAP_SIZE, 0xffff00ff);
+				draw_square(x * MINIMAP_SIZE + 2, y * MINIMAP_SIZE + 2, MINIMAP_SIZE - 4, 0xffff22ff);
 			else
-				draw_square(x, y, MINIMAP_SIZE, 0x222222ff);
+				draw_square(x * MINIMAP_SIZE + 2, y * MINIMAP_SIZE + 2, MINIMAP_SIZE - 4, 0x333333ff);
 		}
 	}
 }
@@ -103,12 +103,21 @@ void draw_line(double x1, double y1, double x2, double y2)
 	}
 }
 
+void draw_ray(t_game *game)
+{
+	(void) game;
+	
+	draw_line(game->p_x * MINIMAP_SIZE, game->p_y * MINIMAP_SIZE, (game->p_x + game->p_dx) * MINIMAP_SIZE, (game->p_y + game->p_dy) * MINIMAP_SIZE);
+}
+
 void draw_image(t_game	*game)
 {
 	(void) game;
 	draw_minimap();
-	draw_square(game->p_x - 0.5, game->p_y - 0.5, MINIMAP_SIZE, 0xff0000ff);
-	draw_line(game->p_x * MINIMAP_SIZE, game->p_y * MINIMAP_SIZE, (game->p_x + game->p_dx) * MINIMAP_SIZE, (game->p_y + game->p_dy) * MINIMAP_SIZE);
+	draw_square((game->p_x - 0.5) * MINIMAP_SIZE + 8, (game->p_y - 0.5) * MINIMAP_SIZE + 8, MINIMAP_SIZE - 16, 0xff2222ff);
+	draw_ray(game);
+
+	
 }
 
 void	hook(void *param)
@@ -137,7 +146,7 @@ int	main(void)
 	t_game game;
 
 	game.p_x = 2.5;
-	game.p_y = 3.5;
+	game.p_y = 5.5;
 	game.p_a = 0;
 	game.p_dx = cos(game.p_a);
 	game.p_dy = sin(game.p_a);
