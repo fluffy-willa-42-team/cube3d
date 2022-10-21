@@ -6,6 +6,8 @@
 # define CUB_FILE 1
 # define CUBE_FILE 2
 
+# define DEFAUT_TEX_NB 6
+
 /**
  * @param type     (int)    Type of the file `.cub` or `.cube`
  * @param file_fd  (int)    Fd of the file
@@ -19,7 +21,9 @@ typedef struct s_parser
 	int		file_fd;
 	char	*path;
 	t_vec	cub;
+	t_vec	buff[3];
 	t_vec	cube;
+	char	tex[DEFAUT_TEX_NB];
 }				t_parser;
 
 int parser(char *av);
@@ -27,5 +31,6 @@ int	open_file(t_parser *data);
 int	read_file(t_parser *data);
 int	file_sani(t_parser *data);
 int	file_conv(t_parser *data);
+
 
 #endif /* PARSER_H */

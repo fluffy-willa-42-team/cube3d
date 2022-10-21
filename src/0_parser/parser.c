@@ -28,7 +28,7 @@ int parser(char *av)
 	|| read_file(&data)
 	|| file_sani(&data)
 	|| file_conv(&data)
-	|| file_to_t_map(&data))//WIP
+	/**|| file_to_t_map(&data)**/)//WIP
 		return (EXIT_FAILURE);
 	v_delete(&data.cube)/* //TODO change check after the lib update ! */;
 	return (EXIT_SUCCESS);

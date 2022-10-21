@@ -29,9 +29,9 @@ static int	read_to_vec(t_parser *data, t_vec *buff)
 	{
 		ret = v_readline(buff, data->file_fd);
 		if (ret == -1 || !v_add(buff, STRING, "\n")/* //TODO change check after the lib update ! */)
-			return (ret_print(EXIT_FAILURE, ERR_VEC_FAIL));
+			return (ret_print(EXIT_FAILURE, ERR_RDL_FAIL));
 	}
-	v_print(buff);//TODO REMOVE
+	// v_print(buff);//TODO REMOVE
 	return (EXIT_SUCCESS);
 }
 
