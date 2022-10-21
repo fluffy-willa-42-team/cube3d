@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 10:16:26 by awillems          #+#    #+#             */
-/*   Updated: 2022/10/21 10:06:19 by awillems         ###   ########.fr       */
+/*   Updated: 2022/10/21 11:35:59 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,18 @@ typedef struct s_game
 {
 	mlx_t	*mlx;
 	
-	float	p_x;
-	float	p_y;
-	float	p_a;
-	float	p_dx;
-	float	p_dy;
+	double	p_x;
+	double	p_y;
+	double	p_a;
+	double	p_dx;
+	double	p_dy;
 }	t_game;
+
+typedef struct s_coord
+{
+	double	x;
+	double	y;
+}	t_coord;
 
 
 mlx_image_t	*g_img;
@@ -80,7 +86,7 @@ void draw_minimap(void)
 	}
 }
 
-void draw_line(double x1, double y1, double x2, double y2)
+void draw_line(double x1, double y1, double x2, double y2, int32_t color)
 {
 	float step;
 	float dx = (x2 - x1);
@@ -96,18 +102,68 @@ void draw_line(double x1, double y1, double x2, double y2)
 	int i = 1;
 	while (i <= step) {
 		if (0 <= x && x < WIDTH && 0 <= y && y < HEIGHT)
-			mlx_put_pixel(g_img, x, y, 0x00fffffff);
+			mlx_put_pixel(g_img, x, y, color);
 		x = x + dx;
 		y = y + dy;
 		i = i + 1;
 	}
 }
 
+t_coord find_init_vertical(t_game *game, double delta)
+{
+	t_coord res;
+	
+	res.x = (int) game->p_x;
+	if (game->p_dx > 0)
+		res.x++;
+
+	res.y = delta * (res.x - game->p_x) + game->p_y;
+	if (res.y > MAP_HEIGHT)
+		res.y = MAP_HEIGHT;
+	if (res.y < 0)
+		res.y = 0;
+	
+	return (res);
+}
+
+t_coord find_init_horizontal(t_game *game, double delta)
+{
+	t_coord res;
+	
+	res.y = (int) game->p_y;
+	if (game->p_dy > 0)
+		res.y++;
+
+	res.x = (1 / delta) * (res.y - game->p_y) + game->p_x;
+	if (res.x > MAP_HEIGHT)
+		res.x = MAP_HEIGHT;
+	if (res.x < 0)
+		res.x = 0;
+	
+	return (res);
+}
+
 void draw_ray(t_game *game)
 {
 	(void) game;
-	
-	draw_line(game->p_x * MINIMAP_SIZE, game->p_y * MINIMAP_SIZE, (game->p_x + game->p_dx) * MINIMAP_SIZE, (game->p_y + game->p_dy) * MINIMAP_SIZE);
+
+	if (0 <= game->p_dx && game->p_dx < 0.00001)
+		game->p_dx = 0.00001;
+	if (-0.00001 < game->p_dx && game->p_dx < 0)
+		game->p_dx = -0.00001;
+	if (0 <= game->p_dy && game->p_dy < 0.00001)
+		game->p_dy = 0.00001;
+	if (-0.00001 < game->p_dy && game->p_dy < 0)
+		game->p_dy = -0.00001;
+	double delta = game->p_dy / game->p_dx;
+
+	t_coord dh = find_init_horizontal(game, delta);
+	// t_coord dv = find_init_vertical(game, delta);
+	// printf("%f %f\n", dh.x, dh.y);
+			
+	draw_line(game->p_x * MINIMAP_SIZE, game->p_y * MINIMAP_SIZE, (game->p_x + game->p_dx) * MINIMAP_SIZE, (game->p_y + game->p_dy) * MINIMAP_SIZE, 0x00fffffff);
+	draw_line(game->p_x * MINIMAP_SIZE, game->p_y * MINIMAP_SIZE, dh.x * MINIMAP_SIZE, dh.x * MINIMAP_SIZE, 0x00ff00ff);
+	// draw_line(game->p_x * MINIMAP_SIZE + 1, game->p_y * MINIMAP_SIZE + 1, dv.x * MINIMAP_SIZE + 1, dv.y * MINIMAP_SIZE + 1, 0x0000ffff);
 }
 
 void draw_image(t_game	*game)
@@ -129,11 +185,11 @@ void	hook(void *param)
 	if (mlx_is_key_down(game->mlx, MLX_KEY_DOWN))	{ game->p_y += 0.1; if (game->p_y > MAP_HEIGHT)	game->p_y -= MAP_HEIGHT; }
 	if (mlx_is_key_down(game->mlx, MLX_KEY_LEFT))	{ game->p_x -= 0.1; if (game->p_x < 0)			game->p_x += MAP_WIDTH;	}
 	if (mlx_is_key_down(game->mlx, MLX_KEY_RIGHT))	{ game->p_x += 0.1; if (game->p_x > MAP_WIDTH)	game->p_x -= MAP_WIDTH; }
-	if (mlx_is_key_down(game->mlx, MLX_KEY_A))		{ game->p_a -= PI/16; if (game->p_a < 0)			game->p_a += 2 * PI;
+	if (mlx_is_key_down(game->mlx, MLX_KEY_A))		{ game->p_a -= 0.01; if (game->p_a < 0)			game->p_a += 2 * PI;
 		game->p_dx = cos(game->p_a);
 		game->p_dy = sin(game->p_a);
 	}
-	if (mlx_is_key_down(game->mlx, MLX_KEY_D))		{ game->p_a += PI/16; if (game->p_a > 2 * PI)		game->p_a -= 2 * PI;
+	if (mlx_is_key_down(game->mlx, MLX_KEY_D))		{ game->p_a += 0.01; if (game->p_a > 2 * PI)		game->p_a -= 2 * PI;
 		game->p_dx = cos(game->p_a);
 		game->p_dy = sin(game->p_a);
 	}
@@ -147,7 +203,7 @@ int	main(void)
 
 	game.p_x = 2.5;
 	game.p_y = 5.5;
-	game.p_a = 0;
+	game.p_a = 3*PI/2;
 	game.p_dx = cos(game.p_a);
 	game.p_dy = sin(game.p_a);
 	
