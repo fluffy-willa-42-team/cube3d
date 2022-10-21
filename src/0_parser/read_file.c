@@ -21,6 +21,9 @@
 static int	read_to_vec(t_parser *data, t_vec *buff)
 {
 	int	ret;
+	int	len;
+
+	len = 0;
 	ret = 1;
 	*buff = v_init_r(sizeof(char), NULL, NULL, 1000000);
 	v_alloc(buff, SET, 5000000);// TODO check for opti
@@ -28,9 +31,12 @@ static int	read_to_vec(t_parser *data, t_vec *buff)
 	while (ret != 0)
 	{
 		ret = v_readline(buff, data->file_fd);
+		len += ret;
 		if (ret == -1 || !v_add(buff, STRING, "\n")/* //TODO change check after the lib update ! */)
 			return (ret_print(EXIT_FAILURE, ERR_RDL_FAIL));
 	}
+	if (!len)
+		return(ret_print(EXIT_FAILURE, ERR_EMPTY_FILE));
 	// v_print(buff);//TODO REMOVE
 	return (EXIT_SUCCESS);
 }
@@ -56,6 +62,6 @@ int	read_file(t_parser *data)
 	else
 		return(ret_print(EXIT_FAILURE, ERR_RFILE_TYPE));
 	if (err)
-		return (ret_print(EXIT_FAILURE, ERR_READ_TO_VEC));
+		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

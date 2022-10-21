@@ -7,6 +7,8 @@
 /* EXIT_SUCCESS, EXIT_FAILURE*/
 #include <stdlib.h>
 
+#include <stdio.h>//TODO REMOVE
+
 /**
  * @brief Return texture index [0->5] and check if there is no duplicate,
  *        if an error occur return `-1`.
@@ -77,6 +79,8 @@ static int	texture_conv(t_parser *data)
 	tmp = data->cub.buffer;
 	while (tmp[++i])
 	{
+		if (is_all_tex(data))
+			break ;
 		if (tmp[i] == '\n')
 			continue;
 		index = check_texture(&tmp[i], data);
@@ -98,11 +102,9 @@ static int	texture_conv(t_parser *data)
 			return (ret_print(EXIT_FAILURE, ERR_VEC_ADD));
 		if (!tmp[i])
 			return (ret_print(EXIT_FAILURE, ERR_NO_MAP_AFTER_TEX));
-		if (is_all_tex(data))
-			break ;
 	}
-	// v_print(&data->cube);
-	printf("%s\n", (char *)data->cube.buffer);
+	// v_print(&data->cube);//TODO REMOVE
+	printf("map:\n%s\n", (char *)data->cube.buffer);//TODO REMOVE
 	return (EXIT_SUCCESS);
 }
 
@@ -114,7 +116,8 @@ static int	conversion(t_parser *data)
 	while (i < 3)
 		data->buff[i++] = v_init(sizeof(char), NULL, NULL);
 	data->cube = v_init(sizeof(char), NULL, NULL);
-	texture_conv(data);
+	if (texture_conv(data))
+		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
 
