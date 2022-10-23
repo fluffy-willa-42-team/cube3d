@@ -52,15 +52,36 @@ Install lib dependencies
 
 To compile
 
-```make```
+```
+make
+```
 
 Compile and run
 
-```make exe```
+```
+make exe
+```
 
 Compile with `fsanitize=address`
 
-```make SANI=1```
+```
+make SANI=1
+```
+
+Compile with `fsanitize=address` and execute a test unit
+
+```
+make test
+```
+
+Execute test unit
+
+```
+make run_test
+```
+
+<img src="https://user-images.githubusercontent.com/57049713/197414688-4eb211ea-b19c-4d87-a209-6bc36e419416.png" height="250">
+
 
 ---
 
