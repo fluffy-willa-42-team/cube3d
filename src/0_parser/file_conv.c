@@ -40,6 +40,31 @@ static int	check_texture(char *str, t_parser *data)
 }
 
 /**
+ * @brief Return texture index [0->5] and check if there is no duplicate,
+ *        if an error occur return `-1`.
+ * 
+ * @return int Texture index otherwise `-1`
+ */
+static int	get_tex(char *str)
+{
+	const char	*id[DEFAUT_TEX_NB] = {"NO", "SO", "WE", "EA", "F", "C"};
+	int			index;
+	int			x;
+
+	index = 0;
+	while (index < DEFAUT_TEX_NB)
+	{
+		x = 0;
+		while (id[index][x] && str[x] == id[index][x])
+			x++;
+		if (!id[index][x] && !str[x])
+			return (index + '0');
+		index ++;
+	}
+	return(ret_print(-1, ERR_TEX_FORMAT));
+}
+
+/**
  * @Matthew-Dreemurr
  * 
  * @brief Check in `data.tex[]` if all the texture have been find.
@@ -61,6 +86,39 @@ static int	is_all_tex(t_parser *data)
 	return (1);
 }
 #include <stdio.h>//TODO REMOVE DEBUG
+
+
+/**
+ * @brief Convert the texture name with arbitrary index and the texture path.
+ * 
+ * @example `WE ./path_to_the_west_texture` -> `2 ./path_to_the_west_texture`
+ * 
+ * @param data Parser struct
+ * @param tmp ptr to the `.cub` string
+ * @param tex_index index of the texture.
+ * @return  int Return 1 if the `c` is find in the `set` otherwise return 0.
+ */
+static int cub_tex_to_cube(t_parser *data, char *tmp, int tex_index)
+{
+	if (!v_add(&data->cube, STRING, "%c ", '0' + tex_index))
+		return (ret_print(EXIT_FAILURE, ERR_VEC_ADD));
+	while (tmp[data->index] != ' ')
+		data->index++;
+	while (tmp[data->index] == ' ')
+		data->index++;
+	while (tmp[data->index] && tmp[data->index] != '\n')
+	{
+		if (!v_add(&data->cube, STRING, "%c", tmp[data->index]))
+			return (ret_print(EXIT_FAILURE, ERR_VEC_ADD));
+		data->index++;
+	}
+	if (!v_add(&data->cube, STRING, "\n"))
+		return (ret_print(EXIT_FAILURE, ERR_VEC_ADD));
+	if (!tmp[data->index])
+		return (ret_print(EXIT_FAILURE, ERR_NO_MAP_AFTER_TEX));
+	return (EXIT_SUCCESS);
+}
+
 /**
  * @Matthew-Dreemurr
  * 
@@ -69,42 +127,25 @@ static int	is_all_tex(t_parser *data)
  * @param data Parser structure.
  * @return int Return 1 if the `c` is find in the `set` otherwise return 0.
  */
-static int	texture_conv(t_parser *data)//TODO NEED A REWORK
+static int	texture_conv(t_parser *data)
 {
-	int			i;
 	char		*tmp;
 	int			index;
 
-	i = -1;
+	data->index = -1;
 	tmp = data->cub.buffer;
-	while (tmp[++i])
+	while (tmp[++data->index])
 	{
 		if (is_all_tex(data))
 			break ;
-		if (tmp[i] == '\n')
+		if (tmp[data->index] == '\n')
 			continue;
-		index = check_texture(&tmp[i], data);
+		index = check_texture(&tmp[data->index], data);
 		if (index == -1)
 			return(EXIT_FAILURE);
-		if (!v_add(&data->cube, STRING, "%c ", '0' + index))
-			return (ret_print(EXIT_FAILURE, ERR_VEC_ADD));
-		while (tmp[i] != ' ')
-			i++;
-		while (tmp[i] == ' ')
-			i++;
-		while (tmp[i] && tmp[i] != '\n')
-		{
-			if (!v_add(&data->cube, STRING, "%c", tmp[i]))
-				return (ret_print(EXIT_FAILURE, ERR_VEC_ADD));
-			i++;
-		}
-		if (!v_add(&data->cube, STRING, "\n"))
-			return (ret_print(EXIT_FAILURE, ERR_VEC_ADD));
-		if (!tmp[i])
-			return (ret_print(EXIT_FAILURE, ERR_NO_MAP_AFTER_TEX));
+		if (cub_tex_to_cube(data, tmp, index))
+			return (EXIT_FAILURE);
 	}
-	// v_print(&data->cube);//TODO REMOVE
-	printf("map:\n%s\n", (char *)data->cube.buffer);//TODO REMOVE
 	return (EXIT_SUCCESS);
 }
 
@@ -116,28 +157,88 @@ static int	texture_conv(t_parser *data)//TODO NEED A REWORK
  *     BOTTOM | SOUTH | TAG
  */
 
+
+/**
+ * @brief Will push 3 char to create a chunk level in the `.cube` buffer.
+ * 
+ * @param a First char
+ * @param b Second char
+ * @param c Last char
+ * @return int 
+ */
+int	push_chunk_part(t_parser *data, int a, int b, int c)
+{
+	char	buff[4];
+
+	buff[0] = a;
+	buff[1] = b;
+	buff[2] = c;
+	buff[3] = '\0';
+	if (!v_add(&data->cube, STRING, buff))
+		return (ret_print(EXIT_FAILURE, ERR_VEC_ADD));
+	return (EXIT_SUCCESS);
+}
+
 /**
  * @brief Convert to the first chunk line.
  *     TOP, NORTH, ENTITY
  *
- * 
  * @return int 
  */
-int	conv_chunk_1(t_parser *data, char *line)
+int	conv_chunk_1(t_parser *data)
 {
+	int		i;
+	char	*tmp;
 
+	i = 0;
+	tmp = &((char *)data->cub.buffer)[data->index];
+	while (tmp[i] && tmp[i] != '\n')
+	{
+		if (tmp[i] == ' ')
+			push_chunk_part(data, ' ', ' ', ' ');
+		else if (tmp[i] == '0')
+			push_chunk_part(data, '.', '.', '.');
+		else if (tmp[i] == '1')
+			push_chunk_part(data, get_tex("C"), get_tex("NO"), '!');
+		else
+		{
+			push_chunk_part(data, '!', '!', '!');
+		}
+		i++;
+	}
+	if (!v_add(&data->cube, STRING, "\n"))
+		return (ret_print(EXIT_FAILURE, ERR_VEC_ADD));
+	return (EXIT_SUCCESS);
 }
 
 /**
  * @brief Convert to the first chunk line.
  *     WEST, TAG, EAST
  *
- * 
  * @return int 
  */
-int	conv_chunk_2(t_parser *data, char *line)
+int	conv_chunk_2(t_parser *data)
 {
+	int		i;
+	char	*tmp;
 
+	i = 0;
+	tmp = &((char *)data->cub.buffer)[data->index];
+	while (tmp[i] && tmp[i] != '\n')
+	{
+		if (tmp[i] == ' ')
+			push_chunk_part(data, ' ', ' ', ' ');
+		else if (tmp[i] == '0')
+			push_chunk_part(data, '.', '.', '.');
+		else if (tmp[i] == '1')
+			push_chunk_part(data, get_tex("WE"), '!', get_tex("EA"));
+		else
+			push_chunk_part(data, '!', '!', '!');
+		i++;
+	}
+	if (!v_add(&data->cube, STRING, "\n"))
+		return (ret_print(EXIT_FAILURE, ERR_VEC_ADD));
+	return (EXIT_SUCCESS);
 }
 
 /**
@@ -147,23 +248,56 @@ int	conv_chunk_2(t_parser *data, char *line)
  * 
  * @return int 
  */
-int	conv_chunk_3(t_parser *data, char *line)
+int	conv_chunk_3(t_parser *data)
 {
+	int		i;
+	char	*tmp;
 
+	i = 0;
+	tmp = &((char *)data->cub.buffer)[data->index];
+	while (tmp[i] && tmp[i] != '\n')
+	{
+		if (tmp[i] == ' ')
+			push_chunk_part(data, ' ', ' ', ' ');
+		else if (tmp[i] == '0')
+			push_chunk_part(data, '.', '.', '.');
+		else if (tmp[i] == '1')
+			push_chunk_part(data, get_tex("F"), get_tex("SO"), '!');
+		else
+			push_chunk_part(data, '!', '!', '!');
+		i++;
+	}
+	if (!v_add(&data->cube, STRING, "\n"))
+		return (ret_print(EXIT_FAILURE, ERR_VEC_ADD));
+	return (EXIT_SUCCESS);
 }
 
 /**
  * @brief Convert `.cub` map to `.cube` chunk.
- * 
+ *        Call `conv_chunk_{1,2,3}` each line.
  * 
  * @param data 
  * @return int 
  */
 int	map_conv(t_parser *data)
 {
-	conv_chunk_1();
-	conv_chunk_2();
-	conv_chunk_3();
+	char	*tmp;
+
+	tmp = data->cub.buffer;
+	while (tmp[data->index] && tmp[data->index] == '\n')
+		data->index++;
+	while (tmp[data->index])
+	{
+		conv_chunk_1(data);
+		conv_chunk_2(data);
+		conv_chunk_3(data);
+		while (tmp[data->index] && tmp[data->index] != '\n')
+			data->index++;
+		if (tmp[data->index])
+			data->index++;
+	}
+	printf("\n[%s]\n", (char *)data->cube.buffer);//TODO REMOVE DEBUG
+	return (EXIT_SUCCESS);
 }
 
 /**
@@ -175,11 +309,6 @@ int	map_conv(t_parser *data)
  */
 static int	conversion(t_parser *data)
 {
-	int	i;
-
-	i = 0;
-	while (i < 3)
-		data->buff[i++] = v_init(sizeof(char), NULL, NULL);
 	data->cube = v_init(sizeof(char), NULL, NULL);
 	if (texture_conv(data) || map_conv(data)/*//WIP*/)
 		return (EXIT_FAILURE);

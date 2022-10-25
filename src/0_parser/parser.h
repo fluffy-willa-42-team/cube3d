@@ -21,8 +21,8 @@ typedef struct s_parser
 	int		file_fd;
 	char	*path;
 	t_vec	cub;
-	t_vec	buff[3];
 	t_vec	cube;
+	int		index;
 	char	tex[DEFAUT_TEX_NB];
 }				t_parser;
 
