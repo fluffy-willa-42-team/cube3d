@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:50:02 by awillems          #+#    #+#             */
-/*   Updated: 2022/10/19 14:53:38 by awillems         ###   ########.fr       */
+/*   Updated: 2022/10/25 11:44:04 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,14 @@ t_coord_i32	init_coord_i32(void)
 
 	res.x = 0;
 	res.y = 0;
-	res.z = 0;
 	return (res);
 }
 
-t_coord_f32	init_coord_f32(void)
+t_coord_f64	init_coord_f64(void)
 {
-	t_coord_f32	res;
+	t_coord_f64	res;
 
 	res.x = 0;
 	res.y = 0;
-	res.z = 0;
 	return (res);
 }
