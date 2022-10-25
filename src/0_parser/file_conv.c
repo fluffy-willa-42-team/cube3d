@@ -69,7 +69,7 @@ static int	is_all_tex(t_parser *data)
  * @param data Parser structure.
  * @return int Return 1 if the `c` is find in the `set` otherwise return 0.
  */
-static int	texture_conv(t_parser *data)
+static int	texture_conv(t_parser *data)//TODO NEED A REWORK
 {
 	int			i;
 	char		*tmp;
@@ -108,6 +108,71 @@ static int	texture_conv(t_parser *data)
 	return (EXIT_SUCCESS);
 }
 
+/**
+ *     TOP    | NORTH | ENTITY
+ *     -------0-------0-------
+ *     WEST   | TAG   | EAST
+ *     -------0-------0-------
+ *     BOTTOM | SOUTH | TAG
+ */
+
+/**
+ * @brief Convert to the first chunk line.
+ *     TOP, NORTH, ENTITY
+ *
+ * 
+ * @return int 
+ */
+int	conv_chunk_1(t_parser *data, char *line)
+{
+
+}
+
+/**
+ * @brief Convert to the first chunk line.
+ *     WEST, TAG, EAST
+ *
+ * 
+ * @return int 
+ */
+int	conv_chunk_2(t_parser *data, char *line)
+{
+
+}
+
+/**
+ * @brief Convert to the first chunk line.
+ *     BOTTOM, SOUTH, TAG
+ *
+ * 
+ * @return int 
+ */
+int	conv_chunk_3(t_parser *data, char *line)
+{
+
+}
+
+/**
+ * @brief Convert `.cub` map to `.cube` chunk.
+ * 
+ * 
+ * @param data 
+ * @return int 
+ */
+int	map_conv(t_parser *data)
+{
+	conv_chunk_1();
+	conv_chunk_2();
+	conv_chunk_3();
+}
+
+/**
+ * @brief Try to find all mandatory texture and convert to `.cube` format. Then
+ *        convert map to `.cube` format.
+ * 
+ * @param data Parser structure
+ * @return int Return 1 if the `c` is find in the `set` otherwise return 0. 
+ */
 static int	conversion(t_parser *data)
 {
 	int	i;
@@ -116,7 +181,7 @@ static int	conversion(t_parser *data)
 	while (i < 3)
 		data->buff[i++] = v_init(sizeof(char), NULL, NULL);
 	data->cube = v_init(sizeof(char), NULL, NULL);
-	if (texture_conv(data))
+	if (texture_conv(data) || map_conv(data)/*//WIP*/)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
