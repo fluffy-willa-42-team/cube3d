@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:33:07 by awillems          #+#    #+#             */
-/*   Updated: 2022/10/25 13:39:28 by awillems         ###   ########.fr       */
+/*   Updated: 2022/10/26 09:17:42 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,11 @@
 
 /* ************************************************************************** */
 
+# define PI 3.14159265359
 # define MINIMAP_SIZE 64
 
-#  define WIN_WIDTH 500
-#  define WIN_HEIGHT 500
+# define WIN_WIDTH 640
+# define WIN_HEIGHT 640
 
 /* ************************************************************************** */
 
@@ -78,10 +79,18 @@ typedef struct s_mlx_param {
 	int32_t 	width;
 }	t_mlx_param;
 
+typedef struct s_player {
+	t_coord_f64 coord;
+	double		alpha;
+	t_coord_f64 dir;
+}	t_player;
+
 typedef struct s_game {
 	t_mlx_param param;
 	t_map 		map;
+	t_player	player;
 }	t_game;
+
 
 /* ************************************************************************** */
 
