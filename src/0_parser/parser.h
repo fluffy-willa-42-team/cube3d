@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:53:43 by mahadad           #+#    #+#             */
-/*   Updated: 2022/10/26 11:53:45 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/10/26 12:17:27 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,10 @@ int	read_file(t_parser *data);
 int	file_sani(t_parser *data);
 int	file_conv(t_parser *data);
 
+int	texture_conv(t_parser *data);
+int	map_conv(t_parser *data);
+
+int	get_tex(char *str);
+int	check_texture(char *str, t_parser *data);
 
 #endif /* PARSER_H */
