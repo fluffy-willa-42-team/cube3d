@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:33:07 by awillems          #+#    #+#             */
-/*   Updated: 2022/10/26 11:56:04 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/10/26 16:07:38 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,61 @@ typedef struct s_coord_f32 {
 
 /* ************************************************************************** */
 
+/**
+ *     TOP    | NORTH | ENTITY
+ *     -------0-------0-------
+ *     WEST   | EAST  | TEX
+ *     -------0-------0-------
+ *     BOTTOM | SOUTH | OPT
+ */
+
 typedef struct s_chunk {
-	int32_t		type;
 	t_coord_i32	coord;
 	t_texture	north;
+	t_texture	south;
 	t_texture	east;
 	t_texture	west;
-	t_texture	south;
 	t_texture	ceiling;
 	t_texture	floor;
 }	t_chunk;
+
+# define E_EMPTY '.'
+
+/**
+ * Player macro
+ */
+
+# define	E_PLAYER			'P'
+# define	OPT_P_NORTH			'N'
+# define	OPT_P_SOUTH			'S'
+# define	OPT_P_EAST			'E'
+# define	OPT_P_WEST			'W'
+
+/**
+ * Enemy macro
+ */
+# define	E_ENEMY			'E'
+# define	T_ENEMY_DEFAULT	'./TODO'
+# define	OPT_E_DEFAULT	'.'
+
+/**
+ * Collectible macro
+ */
+# define	E_COLLECTIBLE	'C'
+# define	OPT_C_AMMO		'A'
+# define	OPT_C_HEALTH	'H'
+
+/**
+ * Door macro
+ */
+# define	E_DOOR			'D'
+# define	OPT_D_N			'N'
+# define	OPT_D_E			'E'
+
+/**
+ * Furniture macro
+ */
+# define	E_FURNITURE		'F'
 
 typedef struct s_entity {
 	int32_t		type;

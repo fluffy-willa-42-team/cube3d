@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:53:52 by mahadad           #+#    #+#             */
-/*   Updated: 2022/10/26 11:54:10 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/10/26 16:05:18 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static int	read_to_vec(t_parser *data, t_vec *buff)
 }
 
 /**
- * @Matthew-Dreemurr
+ * @author Matthew-Dreemurr
  * 
  * @brief Read the file and store in `data->cube, if is a `.cub` will  read in
  *        `data->cub` and convert to `.cube` format in `data->cube`.

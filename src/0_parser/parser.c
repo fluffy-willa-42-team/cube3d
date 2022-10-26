@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:53:32 by mahadad           #+#    #+#             */
-/*   Updated: 2022/10/26 11:53:34 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/10/26 16:05:18 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 #include <stdlib.h>
 
 /**
- * @Matthew-Dreemurr
+ * @author Matthew-Dreemurr
  *
  * @brief Check if the file name have `.cub(e)`, try to open the file and store
  *        in the memory.

@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:01:25 by mahadad           #+#    #+#             */
-/*   Updated: 2022/10/26 12:28:41 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/10/26 16:05:18 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 #include <stdio.h>//TODO REMOVE
 
 /**
- * @Matthew-Dreemurr
+ * @author Matthew-Dreemurr
  * 
  * @brief Check in `data.tex[]` if all the texture have been find.
  * 
@@ -75,7 +75,7 @@ static int	cub_tex_to_cube(t_parser *data, char *tmp, int tex_index)
 }
 
 /**
- * @Matthew-Dreemurr
+ * @author Matthew-Dreemurr
  * 
  * @brief Convert all texture name to the `.cube` format.
  * 

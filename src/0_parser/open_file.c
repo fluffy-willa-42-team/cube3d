@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:50:53 by mahadad           #+#    #+#             */
-/*   Updated: 2022/10/26 11:51:59 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/10/26 16:05:18 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 #include "lib_str.h"
 
 /**
- * @Matthew-Dreemurr
+ * @author Matthew-Dreemurr
  * 
  * @brief Check if the `path` file extension is the same as `ext`.
  *
@@ -55,7 +55,7 @@ static int	extcmp(char *path, const char *ext)
 }
 
 /**
- * @Matthew-Dreemurr
+ * @author Matthew-Dreemurr
  * 
  * @brief Check if the file in path have `.cub` or `.cube` extension.
  *        Will set `data.type` with the macro `CUB_FILE` or `CUBE_FILE`.
@@ -76,7 +76,7 @@ static int	check_extension(t_parser *data)
 }
 
 /**
- * @Matthew-Dreemurr
+ * @author Matthew-Dreemurr
  *
  * @brief Open file and set the fd in `data->file_fd`.
  * 
@@ -93,7 +93,7 @@ static int	open_fd(t_parser *data)
 }
 
 /**
- * @Matthew-Dreemurr
+ * @author Matthew-Dreemurr
  *
  *  @brief Check extention and open file. Set `data->file_fd` with the file fd.
  * 
