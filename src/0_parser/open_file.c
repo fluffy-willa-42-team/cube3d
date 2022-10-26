@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   open_file.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/26 11:50:53 by mahadad           #+#    #+#             */
+/*   Updated: 2022/10/26 11:51:59 by mahadad          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "parser.h"
 
 #include "cube3d_utils.h"
@@ -25,11 +37,11 @@
  * @return int If the file have the rigth extension will return zero else
  *             non zero value.
  */
-static int extcmp(char *path, const char *ext)
+static int	extcmp(char *path, const char *ext)
 {
-	char *tmp;
-	size_t path_len;
-	size_t ext_len;
+	char	*tmp;
+	size_t	path_len;
+	size_t	ext_len;
 
 	if (!path || !ext)
 		return (EXIT_FAILURE);
@@ -52,7 +64,7 @@ static int extcmp(char *path, const char *ext)
  * @return int Return zero value if the extesion is correcte, if not return
  *             non zero value.
  */
-static int check_extension(t_parser *data)
+static int	check_extension(t_parser *data)
 {
 	if (!extcmp(data->path, ".cub"))
 		data->type = CUB_FILE;
@@ -72,11 +84,11 @@ static int check_extension(t_parser *data)
  * @return int Return zero value if the file is open, if not return
  *             non zero value.
  */
-static int open_fd(t_parser *data)
+static int	open_fd(t_parser *data)
 {
 	data->file_fd = open(data->path, O_RDONLY);
 	if (data->file_fd == -1)
-		return(ret_print(EXIT_FAILURE, ERR_OPEN_FILE));
+		return (ret_print(EXIT_FAILURE, ERR_OPEN_FILE));
 	return (EXIT_SUCCESS);
 }
 

@@ -1,5 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cube3d_debug.h                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/26 11:54:56 by mahadad           #+#    #+#             */
+/*   Updated: 2022/10/26 11:54:58 by mahadad          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUBE3D_DEBUG_H
-#define CUBE3D_DEBUG_H
+# define CUBE3D_DEBUG_H
 
 int	ret_print(int ret, const char *msg);
 
@@ -14,7 +26,7 @@ int	ret_print(int ret, const char *msg);
 # define ERR_TEX_DUP     "Error\nDuplicate texture !\n"
 # define ERR_NO_MAP_AFTER_TEX   "Error\nNo map after texture !\n"
 
-#define UNAUTHORIZED_SPACE "\t\v\f\r"
-#define WHITE_SPACE "\t\v\f\r \n"
+# define UNAUTHORIZED_SPACE "\t\v\f\r"
+# define WHITE_SPACE "\t\v\f\r \n"
 
 #endif /* CUBE3D_DEBUG_H */

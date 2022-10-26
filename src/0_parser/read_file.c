@@ -1,4 +1,14 @@
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   read_file.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/26 11:53:52 by mahadad           #+#    #+#             */
+/*   Updated: 2022/10/26 11:54:10 by mahadad          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "parser.h"
 
@@ -36,7 +46,7 @@ static int	read_to_vec(t_parser *data, t_vec *buff)
 			return (ret_print(EXIT_FAILURE, ERR_RDL_FAIL));
 	}
 	if (!len)
-		return(ret_print(EXIT_FAILURE, ERR_EMPTY_FILE));
+		return (ret_print(EXIT_FAILURE, ERR_EMPTY_FILE));
 	// v_print(buff);//TODO REMOVE
 	return (EXIT_SUCCESS);
 }
@@ -60,7 +70,7 @@ int	read_file(t_parser *data)
 	else if (data->type == CUBE_FILE)
 		err = read_to_vec(data, &data->cube);
 	else
-		return(ret_print(EXIT_FAILURE, ERR_RFILE_TYPE));
+		return (ret_print(EXIT_FAILURE, ERR_RFILE_TYPE));
 	if (err)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);

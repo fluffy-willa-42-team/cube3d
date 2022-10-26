@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/26 11:53:43 by mahadad           #+#    #+#             */
+/*   Updated: 2022/10/26 11:53:45 by mahadad          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PARSER_H
 # define PARSER_H
 
@@ -26,7 +38,7 @@ typedef struct s_parser
 	char	tex[DEFAUT_TEX_NB];
 }				t_parser;
 
-int parser(char *av);
+int	parser(char *av);
 int	open_file(t_parser *data);
 int	read_file(t_parser *data);
 int	file_sani(t_parser *data);

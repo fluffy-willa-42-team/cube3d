@@ -1,4 +1,14 @@
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   file_conv.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/26 11:52:08 by mahadad           #+#    #+#             */
+/*   Updated: 2022/10/26 11:52:47 by mahadad          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "parser.h"
 
@@ -36,7 +46,7 @@ static int	check_texture(char *str, t_parser *data)
 		}
 		index ++;
 	}
-	return(ret_print(-1, ERR_TEX_FORMAT));
+	return (ret_print(-1, ERR_TEX_FORMAT));
 }
 
 /**
@@ -61,7 +71,7 @@ static int	get_tex(char *str)
 			return (index + '0');
 		index ++;
 	}
-	return(ret_print(-1, ERR_TEX_FORMAT));
+	return (ret_print(-1, ERR_TEX_FORMAT));
 }
 
 /**
@@ -98,7 +108,7 @@ static int	is_all_tex(t_parser *data)
  * @param tex_index index of the texture.
  * @return  int Return 1 if the `c` is find in the `set` otherwise return 0.
  */
-static int cub_tex_to_cube(t_parser *data, char *tmp, int tex_index)
+static int	cub_tex_to_cube(t_parser *data, char *tmp, int tex_index)
 {
 	if (!v_add(&data->cube, STRING, "%c ", '0' + tex_index))
 		return (ret_print(EXIT_FAILURE, ERR_VEC_ADD));
@@ -139,10 +149,10 @@ static int	texture_conv(t_parser *data)
 		if (is_all_tex(data))
 			break ;
 		if (tmp[data->index] == '\n')
-			continue;
+			continue ;
 		index = check_texture(&tmp[data->index], data);
 		if (index == -1)
-			return(EXIT_FAILURE);
+			return (EXIT_FAILURE);
 		if (cub_tex_to_cube(data, tmp, index))
 			return (EXIT_FAILURE);
 	}
@@ -327,6 +337,6 @@ int	file_conv(t_parser *data)
 {
 	if (data->type == CUB_FILE)
 		if (conversion(data) || !v_delete(&data->cub)/* //TODO change check after the lib update ! */)
-			return(EXIT_FAILURE);
+			return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

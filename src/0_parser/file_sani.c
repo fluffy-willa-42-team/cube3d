@@ -1,4 +1,14 @@
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   file_sani.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/26 11:52:52 by mahadad           #+#    #+#             */
+/*   Updated: 2022/10/26 11:53:10 by mahadad          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "parser.h"
 
@@ -45,9 +55,9 @@ static int	charset(char const *set, char c)
  */
 static int	bufftrim(t_vec *buff)
 {
-	char *str;
-	int	trim;
-	int	len;
+	char	*str;
+	int		trim;
+	int		len;
 
 	trim = 0;
 	str = (char *)buff->buffer;
@@ -99,14 +109,14 @@ static int	sanitize_white_space(t_vec *buff)
  */
 int	file_sani(t_parser *data)
 {
-	t_vec *buff;
+	t_vec	*buff;
 
 	if (data->type == CUB_FILE)
 		buff = &data->cub;
 	else if (data->type == CUBE_FILE)
 		buff = &data->cube;
 	else
-		return(ret_print(EXIT_FAILURE, ERR_RFILE_TYPE));
+		return (ret_print(EXIT_FAILURE, ERR_RFILE_TYPE));
 	if (sanitize_white_space(buff) || bufftrim(buff))
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
