@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:33:07 by awillems          #+#    #+#             */
-/*   Updated: 2022/10/26 09:17:42 by awillems         ###   ########.fr       */
+/*   Updated: 2022/10/26 14:12:29 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,18 @@
 # include <stdint.h>
 # include <stddef.h>
 
+# include "cube_types.h"
+
 /* ************************************************************************** */
 
-# define PI 3.14159265359
+# define PI    3.14159265359
+# define PI1_2 1.57079632679
+# define PI3_2 4.71238898038
+# define PI2   6.28318530718
 # define MINIMAP_SIZE 64
 
-# define WIN_WIDTH 640
-# define WIN_HEIGHT 640
+# define WIN_WIDTH 512
+# define WIN_HEIGHT 512
 
 /* ************************************************************************** */
 
@@ -34,15 +39,6 @@ typedef struct s_texture {
 	int		color;
 }	t_texture;
 
-typedef struct s_coord_i32 {
-	int32_t x;
-	int32_t y;
-}	t_coord_i32;
-
-typedef struct s_coord_f64 {
-	double x;
-	double y;
-}	t_coord_f64;
 
 /* ************************************************************************** */
 
@@ -68,7 +64,7 @@ typedef struct s_entity {
 
 typedef struct s_map {
 	int32_t array[8][8];
-	int32_t heigth;
+	int32_t height;
 	int32_t width;
 }	t_map;
 
