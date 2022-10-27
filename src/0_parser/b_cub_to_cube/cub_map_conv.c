@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:04:10 by mahadad           #+#    #+#             */
-/*   Updated: 2022/10/27 19:11:31 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/10/27 19:15:05 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	conv_space(t_parser *data, char c)
 	return (EXIT_SUCCESS);
 }
 
-//TODO Rework C3_DEBUG and add it to cube3d_debug.h
+//TODO #2 Rework C3_DEBUG and add it to cube3d_debug.h
 # define C3_DEBUG(ret, msg) d_r(ret, msg, __FILE__, __LINE__, __FUNCTION__);
 
 int	d_r(int err,const char *msg, const char *file, const int line, const char *func)
