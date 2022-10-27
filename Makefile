@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: awillems <awillems@student.42.fr>          +#+  +:+       +#+         #
+#    By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/05 10:47:56 by awillems          #+#    #+#              #
-#    Updated: 2022/10/19 17:44:33 by awillems         ###   ########.fr        #
+#    Updated: 2022/10/27 19:25:39 by mahadad          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -189,6 +189,11 @@ clear_test:
 	@find . -type f -name "*.err" -prune -exec rm -rf {} \;
 	@find . -type f -name "*.out" -prune -exec rm -rf {} \;
 # **************************************************************************** #
+
+update_lib: fclean remove_stuff
+	git submodule init
+	git submodule update
+	git pull
 
 fluffy:
 	git config user.name "matthew-dreemurr"
