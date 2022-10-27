@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:53:43 by mahadad           #+#    #+#             */
-/*   Updated: 2022/10/26 15:03:16 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/10/27 17:39:14 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@
 # define CUBE_FILE 2
 
 # define DEFAUT_TEX_NB 6
-
-typedef int	(*t_conv_fct)();
 
 /**
  * @param type     (int)    Type of the file `.cub` or `.cube`
@@ -39,6 +37,8 @@ typedef struct s_parser
 	int				index;
 	char			tex[DEFAUT_TEX_NB];
 }				t_parser;
+
+typedef int	(*t_conv_fct)(t_parser *data, char c);
 
 int	parser(char *av);
 int	open_file(t_parser *data);

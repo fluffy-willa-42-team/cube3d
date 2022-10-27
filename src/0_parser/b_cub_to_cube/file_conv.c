@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:52:08 by mahadad           #+#    #+#             */
-/*   Updated: 2022/10/26 16:05:18 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/10/27 18:55:23 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 
 /* EXIT_SUCCESS, EXIT_FAILURE*/
 #include <stdlib.h>
-
 #include <stdio.h>//TODO REMOVE
 
 /**
@@ -40,7 +39,7 @@ static int	cub_to_cube(t_parser *data)
  * @param data 
  * @return int 
  */
-static int	cube_to_t_map(t_parser *data)
+static int	cube_to_t_map(t_parser *data)//WIP
 {
 	(void)data;
 	return (EXIT_SUCCESS);
