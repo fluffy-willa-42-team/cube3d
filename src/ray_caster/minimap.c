@@ -51,9 +51,10 @@ double prot_tan(double alpha)
 // can give negative !!!!
 t_coord_f64 get_wall_coord(t_coord_f64 p, double alpha, int opt)
 {
+	// printf("(%.50f %.50f) (%i %i)\n", p.x, p.y, (int) p.x, (int) p.y);
 	return (set_f64(
-		(((int) p.x) - ((int []){0, 1}[PI1_2 <= alpha && alpha < PI3_2]) * opt),
-		(((int) p.y) - ((int []){1, 0}[0 <= alpha && alpha < PI]) * !opt))
+		(((int) (float) p.x) - ((int []){0, 1}[PI1_2 <= alpha && alpha < PI3_2]) * opt),
+		(((int) (float) p.y) - ((int []){1, 0}[0 <= alpha && alpha < PI]) * !opt))
 	);
 }
 
@@ -83,23 +84,29 @@ t_coord_f64 get_intersect(t_game *game, t_player *player, double alpha)
 	(void) xIntercept;
 	(void) yIntercept;
 	
-	// xIntercept = add_f64(xIntercept, set_f64(
-	// 	(double []){-1, 1}[0 <= alpha && alpha < PI] / tan_a,
-	// 	(double []){-1, 1}[0 <= alpha && alpha < PI]
-	// ));
-	// yIntercept = add_f64(yIntercept, set_f64(
-	// 	(double []){1, -1}[PI1_2 <= alpha && alpha < PI3_2],
-	// 	(double []){1, -1}[PI1_2 <= alpha && alpha < PI3_2] * tan_a
-	// ));
+	
+	
 
 
-	if (is_wall(game, get_wall_coord(xIntercept, alpha, 0)))
-		draw_rectangle_s(&game->param, get_wall_coord(xIntercept, alpha, 0), set_i32(1, 1), 0x51b8b8AA);
-	if (is_wall(game, get_wall_coord(yIntercept, alpha, 1)))
-		draw_rectangle_s(&game->param, get_wall_coord(yIntercept, alpha, 1), set_i32(1, 1), 0xE3c611FF);
+	while (!is_wall(game, get_wall_coord(xIntercept, alpha, 0)))
+	{
+		xIntercept = add_f64(xIntercept, set_f64(
+			(double []){-1, 1}[0 <= alpha && alpha < PI] / tan_a,
+			(double []){-1, 1}[0 <= alpha && alpha < PI]
+		));
+	}
+	while (!is_wall(game, get_wall_coord(yIntercept, alpha, 1)))
+	{
+		yIntercept = add_f64(yIntercept, set_f64(
+			(double []){1, -1}[PI1_2 <= alpha && alpha < PI3_2],
+			(double []){1, -1}[PI1_2 <= alpha && alpha < PI3_2] * tan_a
+		));
+	}
+	draw_rectangle_s(&game->param, get_wall_coord(xIntercept, alpha, 0), set_i32(1, 1), 0x51b8b8AA);
+	draw_rectangle_s(&game->param, get_wall_coord(yIntercept, alpha, 1), set_i32(1, 1), 0xE3c611FF);
 	draw_line_s(&game->param, player->coord, xIntercept, 0x51b8b8FF);
 	draw_line_s(&game->param, player->coord, yIntercept, 0xE3c611FF);
-	printf("(%f %f) (%d %d)\n", xIntercept.x, xIntercept.y, (int) xIntercept.x, (int) xIntercept.y);
+	// printf("(%f %f) (%d %d)\n", xIntercept.x, xIntercept.y, (int) xIntercept.x, (int) xIntercept.y);
 	return (init_f64());
 }
 
