@@ -20,6 +20,8 @@
 #define BLK "\e[0;30m"
 #define BLU "\e[0;34m"
 
+#define TEST_PRINT(x) printf(RED"\n-------=====$$[%s]$$=====-------\n"RES"\n", x);
+
 int		fd_out;
 int		fd_err;
 int		file_out;
@@ -173,11 +175,12 @@ void	test(const char *file, int ret, const char *comm)
 
 	reset_file();
 	printf(BLU"Test [%d]: %s\n"RES, test_no, comm);
+
 	if (run_ret == ret)
-		printf(GRE"    OK (%d)"RES" [%s]\n", run_ret, file);
+		printf(GRE"    OK ([%d])"RES" [%s]\n", run_ret, file);
 	else
 	{
-		printf(RED"    K0! (%d)"RES" [%s]\n", run_ret, file);
+		printf(RED"    K0! ([%d] vs %d)"RES" [%s]\n", run_ret, ret, file);
 		printf(BLK"        ./cube3d tester/map/%s\n"RES, file);
 	}
 	printf("        ["BYEL"./tester/%d.out"RES"] ["YEL"./tester/%d.err"RES"]\n\n", test_no, test_no);
@@ -187,14 +190,20 @@ int main(int argc, char const *argv[])
 {
 	(void)argc;
 	(void)argv;
+
+	TEST_PRINT("BASIC FILE TEST")
 	
 	test(	"cub_map.cub",
 			EXIT_SUCCESS,
 			"Normal cub file");
 
+	test(	"cube_map.cube",
+			EXIT_SUCCESS,
+			"Normal cube file");
+
 	test(	"cub_map.cube",
 			EXIT_FAILURE,
-			"Normal cub file with .cube extention");
+			".cube file with a .cub map format");
 
 	test(	"empty_file.cub",
 			EXIT_FAILURE,
@@ -204,6 +213,89 @@ int main(int argc, char const *argv[])
 			EXIT_FAILURE,
 			"Empty file .cube");
 
+	test(	"cub_no_rwx_perm.cub",
+			EXIT_FAILURE,
+			".cub file -rwx");
+
+	test(	"cub_no_rwx_perm.cube",
+			EXIT_FAILURE,
+			".cube file -rwx");
+
+	test(	"no_rwx_perm",
+			EXIT_FAILURE,
+			"Empty file no extention -rwx");
+
+	TEST_PRINT("PLAYER TEST")
+
+	test(	"cub_player_W.cub",
+			EXIT_SUCCESS,
+			"Good cub file with player to W");
+
+	test(	"cub_player_S.cub",
+			EXIT_SUCCESS,
+			"Good cub file with player to S");
+
+	test(	"cub_player_E.cub",
+			EXIT_SUCCESS,
+			"Good cub file with player to E");
+
+	test(	"cub_player_N.cub",
+			EXIT_SUCCESS,
+			"Good cub file with player to N");
+
+	test(	"cub_player_none.cub",
+			EXIT_FAILURE,
+			"Good cub file without player");
+
+	TEST_PRINT("TEXTURE TEST")
+
+	test(	"cub_tex_without_F.cub",
+		EXIT_FAILURE,
+		"Good cub file without F texture");
+
+	test(	"cub_tex_without_C.cub",
+		EXIT_FAILURE,
+		"Good cub file without C texture");
+
+	test(	"cub_tex_without_NO.cub",
+		EXIT_FAILURE,
+		"Good cub file without NO texture");
+
+	test(	"cub_tex_without_SO.cub",
+		EXIT_FAILURE,
+		"Good cub file without SO texture");
+
+	test(	"cub_tex_without_WE.cub",
+		EXIT_FAILURE,
+		"Good cub file without WE texture");
+
+	test(	"cub_tex_without_EA.cub",
+		EXIT_FAILURE,
+		"Good cub file without EA texture");
+
+	test(	"cub_tex_dup_NO.cub",
+		EXIT_FAILURE,
+		"Good cub file with duplication NO texture");
+
+	test(	"cub_tex_dup_SO.cub",
+		EXIT_FAILURE,
+		"Good cub file with duplication SO texture");
+
+	test(	"cub_tex_dup_EA.cub",
+		EXIT_FAILURE,
+		"Good cub file with duplication EA texture");
+
+	test(	"cub_tex_dup_WE.cub",
+		EXIT_FAILURE,
+		"Good cub file with duplication WE texture");
+
+	test(	"cub_tex_dup_C.cub",
+		EXIT_FAILURE,
+		"Good cub file with duplication C texture");
+
+	test(	"cub_tex_dup_F.cub",
+		EXIT_FAILURE,
+		"Good cub file with duplication F texture");
 
 	close(fd_out);
 	close(fd_err);

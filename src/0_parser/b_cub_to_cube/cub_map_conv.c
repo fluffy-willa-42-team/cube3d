@@ -6,11 +6,13 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:04:10 by mahadad           #+#    #+#             */
-/*   Updated: 2022/10/27 19:15:05 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/10/30 16:31:39 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
+
+#include "cube3d.h"
 
 #include "cube3d_debug.h"
 
@@ -27,7 +29,7 @@
  * @param c Last char
  * @return int 
  */
-static int	push_chunk_part(t_parser *data, int a, int b, int c)
+int	push_chunk_part(t_parser *data, int a, int b, int c)
 {
 	char	buff[4];
 
@@ -40,32 +42,8 @@ static int	push_chunk_part(t_parser *data, int a, int b, int c)
 	return (EXIT_SUCCESS);
 }
 
-/**
- * @brief 
- * 
- * @param c 
- * @return int 
- */
-int	conv_space(t_parser *data, char c)
-{
-	if (push_chunk_part(data, c, c, c))
-		return (ret_print(EXIT_FAILURE, ERR_VEC_ADD));
-	return (EXIT_SUCCESS);
-}
-
-//TODO #2 Rework C3_DEBUG and add it to cube3d_debug.h
-# define C3_DEBUG(ret, msg) d_r(ret, msg, __FILE__, __LINE__, __FUNCTION__);
-
-int	d_r(int err,const char *msg, const char *file, const int line, const char *func)
-{
-	if (/*TODO C3_DEBUG*/ 1)
-		printf("[DEBUG]: %s:%d In function `%s`\n    [%s]\n    return (%d)\n", file, line, func, msg, err);
-	return (err);
-}
-
 int	dummy(t_parser *data, char c)
 {
-	C3_DEBUG(23, "test 123");
 	printf("dummy[%c]\n", c);
 	(void)data;
 	return (0);
@@ -75,30 +53,40 @@ int	dummy(t_parser *data, char c)
  * @Matthew-Dreemurr
  * 
  * @brief Find the right function to execute for each tree floor of a chunk.
+ *        All the function name call will follow this partern:
+ *          f_{floor_level}_{char_type}
  * 
  * @param c `.cub` character
  * @return int Return zero value, if there is a error return non zero value.
  */
-int	exe_conv(t_parser *data, char c)
+int	conv_line(t_parser *data, char *line)
 {
 	const char			set[8] = {' ', '0', '1', 'N', 'S', 'E', 'W', '\0'};
 	const t_conv_fct	func[3][7] = {
-	{conv_space, dummy, dummy, dummy, dummy, dummy, dummy},
-	{conv_space, dummy, dummy, dummy, dummy, dummy, dummy},
-	{conv_space, dummy, dummy, dummy, dummy, dummy, dummy}};
-	int					index;
+	{f_123_space, f_1_zero, f_1_one, f_1_p, f_1_p, f_1_p, f_1_p},
+	{f_123_space, f_2_zero, f_2_one, f_2_p, f_2_p, f_2_p, f_2_p},
+	{f_123_space, f_3_zero, f_3_one, f_3_p, f_3_p, f_3_p, f_3_p}};
+	int					set_index;
 	int					floor;
+	char				*tmp;
 
-	index = 0;
 	floor = 0;
-	while (set[index] != c)
-		index++;
-	if (!set[index])
-		return (ret_print(EXIT_FAILURE, ERR_BAD_CUB_CHAR));
 	while (floor < 3)
 	{
-		if (func[floor][index](data, c))
-			return (EXIT_FAILURE);
+		tmp = line;
+		while (*tmp && *tmp != '\n')
+		{
+			set_index = 0;
+			while (set[set_index] && set[set_index] != *tmp)
+				set_index++;
+			if (!set[set_index])
+				return (ret_print(EXIT_FAILURE, ERR_BAD_CUB_CHAR));
+			if (func[floor][set_index](data, *tmp))
+				return (EXIT_FAILURE);
+			tmp++;
+		}
+		if (!v_add(&data->cube, STRING, "\n"))
+			return (ret_print(EXIT_FAILURE, ERR_VEC_ADD));
 		floor++;
 	}
 	return (EXIT_SUCCESS);
@@ -156,13 +144,14 @@ int	map_conv(t_parser *data)
 		data->index++;
 	while (tmp[data->index])
 	{
-		if (exe_conv(data, tmp[data->index]))
+		if (conv_line(data, &tmp[data->index]))
 			return (EXIT_FAILURE);
+		data->index++;
 		while (tmp[data->index] && tmp[data->index] != '\n')
 			data->index++;
 		if (tmp[data->index])
 			data->index++;
 	}
-	printf("\n[%s]\n", (char *)data->cube.buffer);//TODO REMOVE DEBUG
+	printf("\n(CUB CONV)\n%s\n", (char *)data->cube.buffer);//TODO REMOVE DEBUG
 	return (EXIT_SUCCESS);
 }

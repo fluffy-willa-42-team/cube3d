@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:10:55 by mahadad           #+#    #+#             */
-/*   Updated: 2022/10/26 12:17:32 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/10/30 17:36:15 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 #include <stdlib.h>
 
 /**
- * @brief Return texture index [0->5] and check if there is no duplicate,
+ * @brief Return texture index [0->5] {"NO", "SO", "WE", "EA", "F", "C"},
  *        if an error occur return `-1`.
  * 
  * @return int Texture index otherwise `-1`

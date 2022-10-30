@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:53:43 by mahadad           #+#    #+#             */
-/*   Updated: 2022/10/27 17:39:14 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/10/30 15:35:17 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,21 @@ int	map_conv(t_parser *data);
 
 int	get_tex(char *str);
 int	check_texture(char *str, t_parser *data);
+
+int	push_chunk_part(t_parser *data, int a, int b, int c);
+
+int	f_123_space(t_parser *data, char c);
+
+int	f_1_zero(t_parser *data, char c);
+int	f_2_zero(t_parser *data, char c);
+int	f_3_zero(t_parser *data, char c);
+
+int	f_1_one(t_parser *data, char c);
+int	f_2_one(t_parser *data, char c);
+int	f_3_one(t_parser *data, char c);
+
+int	f_1_p(t_parser *data, char c);
+int	f_2_p(t_parser *data, char c);
+int	f_3_p(t_parser *data, char c);
 
 #endif /* PARSER_H */

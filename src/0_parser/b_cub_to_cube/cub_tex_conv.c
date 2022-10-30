@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:01:25 by mahadad           #+#    #+#             */
-/*   Updated: 2022/10/26 16:05:18 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/10/30 17:38:39 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ int	texture_conv(t_parser *data)
 			break ;
 		if (tmp[data->index] == '\n')
 			continue ;
-		index = check_texture(&tmp[data->index], data);
+		index = check_texture(&tmp[data->index], data);//BUG #3 Duplication texture check behaviour.
 		if (index == -1)
 			return (EXIT_FAILURE);
 		if (cub_tex_to_cube(data, tmp, index))
