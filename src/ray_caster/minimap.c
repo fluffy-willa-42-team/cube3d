@@ -65,8 +65,9 @@ int is_wall2(t_game *game, t_intersect inter)
 
 double dist(t_coord_f64 a, t_coord_f64 b)
 {
-	return (sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y)));
+	return (fabs(a.x - b.x) + fabs(a.y - b.y));
 }
+// return (sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y)));
 
 t_intersect get_intersect2(t_game *game, t_player *player, double alpha)
 {
@@ -157,8 +158,12 @@ int draw_minimap(t_game *game)
 	}
 	draw_player(game);
 	draw_ray(game, game->player.alpha);
+	draw_ray(game, game->player.alpha - 0.15);
+	draw_ray(game, game->player.alpha + 0.15);
 	draw_ray(game, game->player.alpha - 0.25);
 	draw_ray(game, game->player.alpha + 0.25);
+	draw_ray(game, game->player.alpha - 0.35);
+	draw_ray(game, game->player.alpha + 0.35);
 	draw_ray(game, game->player.alpha - 0.5);
 	draw_ray(game, game->player.alpha + 0.5);
 	// printf("===================================\n");
