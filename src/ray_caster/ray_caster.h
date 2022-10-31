@@ -21,6 +21,11 @@
 
 int draw_minimap(t_game *game);
 
+typedef struct s_intersect {
+	t_coord_f64 point;
+	t_coord_i32 wall;
+}	t_intersect;
+
 /* ************************************************************************** */
 
 #endif /* RAY_CASTER */
