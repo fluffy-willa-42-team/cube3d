@@ -132,9 +132,6 @@ void draw_player(t_game *game)
 	draw_rectangle(param,
 			set_f64(player->coord.x * si - 2, player->coord.y * si - 2),
 			set_i32(4, 4), 0xFF00FFFF);
-	draw_line(param, set_f64(player->coord.x * si, player->coord.y * si),
-		set_f64((player->coord.x + player->dir.x) * si,
-		(player->coord.y + player->dir.y) * si), 0x00FF00FF);
 }
 
 int draw_minimap(t_game *game)
@@ -158,14 +155,18 @@ int draw_minimap(t_game *game)
 	}
 	draw_player(game);
 	draw_ray(game, game->player.alpha);
+	draw_ray(game, game->player.alpha - 0.1);
+	draw_ray(game, game->player.alpha + 0.1);
 	draw_ray(game, game->player.alpha - 0.15);
 	draw_ray(game, game->player.alpha + 0.15);
+	draw_ray(game, game->player.alpha - 0.2);
+	draw_ray(game, game->player.alpha + 0.2);
 	draw_ray(game, game->player.alpha - 0.25);
 	draw_ray(game, game->player.alpha + 0.25);
+	draw_ray(game, game->player.alpha - 0.3);
+	draw_ray(game, game->player.alpha + 0.3);
 	draw_ray(game, game->player.alpha - 0.35);
 	draw_ray(game, game->player.alpha + 0.35);
-	draw_ray(game, game->player.alpha - 0.5);
-	draw_ray(game, game->player.alpha + 0.5);
 	// printf("===================================\n");
 	return (1);
 }

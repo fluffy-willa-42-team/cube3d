@@ -34,8 +34,6 @@ void angle_hook(t_game *game, double incrementation)
 		game->player.alpha += PI2;
 	else if (game->player.alpha > PI2)
 		game->player.alpha -= PI2;
-	game->player.dir.x = cos(game->player.alpha);
-	game->player.dir.y = sin(game->player.alpha);
 }
 
 void	hook(void *param)
@@ -76,7 +74,7 @@ int main(void)
 			{1, 0, 0, 0, 0, 0, 0, 1},
 			{1, 1, 1, 1, 1, 1, 1, 1},
 		}, 8, 8},
-		{{3.5f, 3.5f}, 0.0f, {cos(0), sin(0)}}
+		{{3.5f, 3.5f}, 0.0f}
 	};
 	
 
