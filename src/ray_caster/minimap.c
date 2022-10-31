@@ -45,85 +45,6 @@ double prot_tan(double alpha)
 	return (res);
 }
 
-// Return the index of the chunk in the map with the pos and the angle given
-// opt = 0 : Horzontal  / x
-// opt = 1 : Vertical   / y
-// can give negative !!!!
-t_coord_f64 get_wall_coord(t_coord_f64 p, double alpha, int opt)
-{
-	return (set_f64(
-		(((int) (float) p.x) - ((int []){0, 1}[PI1_2 <= alpha && alpha < PI3_2]) * opt),
-		(((int) (float) p.y) - ((int []){1, 0}[0 <= alpha && alpha < PI]) * !opt)
-	));
-}
-
-int is_wall(t_game *game, t_coord_f64 a)
-{
-	if (0 <= a.x && a.x < game->map.width && 0 <= a.y && a.y < game->map.height)
-		return (game->map.array[(int) a.y][(int) a.x]);
-	return (-1);
-}
-
-t_coord_f64 get_intersect(t_game *game, t_player *player, double alpha, int *opt)
-{
-	const t_coord_i32 pos	= set_i32(player->coord.x, player->coord.y);
-	const t_coord_f64 delta	= set_f64(player->coord.x - pos.x, player->coord.y - pos.y);
-	const double tan_a = prot_tan(alpha);
-
-	t_coord_f64 xIntercept = add_f64(player->coord, set_f64(
-		(double []){-delta.y, 1 - delta.y}[0 <= alpha && alpha < PI] / tan_a,
-		(double []){-delta.y, 1 - delta.y}[0 <= alpha && alpha < PI]
-	));
-	
-	t_coord_f64 yIntercept = add_f64(player->coord, set_f64(
-		(double []){1 - delta.x, -delta.x}[PI1_2 <= alpha && alpha < PI3_2],
-		(double []){1 - delta.x, -delta.x}[PI1_2 <= alpha && alpha < PI3_2] * tan_a
-	));
-
-	int x_is_wall = is_wall(game, get_wall_coord(xIntercept, alpha, 0));
-	int y_is_wall = is_wall(game, get_wall_coord(yIntercept, alpha, 1));
-	
-	while (x_is_wall != -1 || y_is_wall != -1)
-	{
-		xIntercept = add_f64(xIntercept, set_f64(
-			(double []){-1, 1}[0 <= alpha && alpha < PI] / tan_a,
-			(double []){-1, 1}[0 <= alpha && alpha < PI]
-		));
-		yIntercept = add_f64(yIntercept, set_f64(
-			(double []){1, -1}[PI1_2 <= alpha && alpha < PI3_2],
-			(double []){1, -1}[PI1_2 <= alpha && alpha < PI3_2] * tan_a
-		));
-		
-		if (x_is_wall != -1)
-			x_is_wall = is_wall(game, get_wall_coord(xIntercept, alpha, 0));
-		if (y_is_wall != -1)
-			y_is_wall = is_wall(game, get_wall_coord(yIntercept, alpha, 1));
-
-		if (x_is_wall == 1 && y_is_wall == 1)
-		{
-			draw_rectangle_s(&game->param, get_wall_coord(xIntercept, alpha, 0), set_i32(1, 1), 0x51b8b8AA);
-			draw_rectangle_s(&game->param, get_wall_coord(yIntercept, alpha, 1), set_i32(1, 1), 0xE3c611FF);
-			draw_line_s(&game->param, player->coord, xIntercept, 0x51b8b8FF);
-			draw_line_s(&game->param, player->coord, yIntercept, 0xE3c611FF);
-			return (set_f64(8, 8));
-		}
-		else if (x_is_wall == 1)
-		{
-			*opt = 0;
-			return (xIntercept);
-		}
-		else if (y_is_wall == 1)
-		{
-			*opt = 1;
-			return (yIntercept);
-		}
-	}
-	return (init_f64());
-}
-
-
-
-
 t_intersect	get_init_x(t_player *player, t_coord_f64 delta, double alpha, double tan_a);
 t_intersect	get_init_y(t_player *player, t_coord_f64 delta, double alpha, double tan_a);
 t_intersect get_step_x(t_intersect prev, double alpha, double tan_a);
@@ -142,6 +63,11 @@ int is_wall2(t_game *game, t_intersect inter)
 	return (-1);
 }
 
+double dist(t_coord_f64 a, t_coord_f64 b)
+{
+	return (sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y)));
+}
+
 t_intersect get_intersect2(t_game *game, t_player *player, double alpha)
 {
 	const t_coord_i32 pos	= set_i32(player->coord.x, player->coord.y);
@@ -154,22 +80,19 @@ t_intersect get_intersect2(t_game *game, t_player *player, double alpha)
 	int x_is_wall = is_wall2(game, xIntersect);
 	int y_is_wall = is_wall2(game, yIntersect);
 
-	while (x_is_wall == 0 || y_is_wall == 0)
+	while (x_is_wall == 0)
 	{
+		xIntersect = get_step_x(xIntersect, alpha, tan_a);
 		x_is_wall = is_wall2(game, xIntersect);
-		y_is_wall = is_wall2(game, yIntersect);
-		if (x_is_wall == 1 && y_is_wall == 1)
-			return (xIntersect);
-		else if (x_is_wall == 1)
-			return (xIntersect);
-		else if (y_is_wall == 1)
-			return (yIntersect);
-		if (x_is_wall != -1)
-			xIntersect = get_step_x(xIntersect, alpha, tan_a);
-		if (y_is_wall != -1)
-			yIntersect = get_step_y(yIntersect, alpha, tan_a);
 	}
-	return ((t_intersect){init_f64(), init_i32()});
+	while (y_is_wall == 0)
+	{
+		yIntersect = get_step_y(yIntersect, alpha, tan_a);
+		y_is_wall = is_wall2(game, yIntersect);
+	}
+	if (dist(player->coord, xIntersect.point) < dist(player->coord, yIntersect.point))
+		return (xIntersect);
+	return (yIntersect);
 }
 
 
@@ -192,12 +115,6 @@ t_intersect get_intersect2(t_game *game, t_player *player, double alpha)
 
 void draw_ray(t_game *game, double alpha)
 {
-	// int opt;
-	// t_coord_f64 x = get_intersect(game, &game->player, alpha, &opt);
-	// draw_line_s(&game->param, game->player.coord, x, 0x4dad2dFF);
-	// draw_rectangle_s(&game->param, get_wall_coord(x, alpha, opt), set_i32(1, 1), 0x4dad2dAA);
-	// (void) x;
-
 	t_intersect test = get_intersect2(game, &game->player, alpha);
 	draw_line_s(&game->param, game->player.coord, test.point, 0xfcba03FF);
 	if (is_wall2(game, test))
@@ -240,8 +157,10 @@ int draw_minimap(t_game *game)
 	}
 	draw_player(game);
 	draw_ray(game, game->player.alpha);
-	// draw_ray(game, game->player.alpha - 0.5);
-	// draw_ray(game, game->player.alpha + 0.5);
+	draw_ray(game, game->player.alpha - 0.25);
+	draw_ray(game, game->player.alpha + 0.25);
+	draw_ray(game, game->player.alpha - 0.5);
+	draw_ray(game, game->player.alpha + 0.5);
 	// printf("===================================\n");
 	return (1);
 }
