@@ -36,7 +36,7 @@ void draw_rectangle_s(t_mlx_param *param, t_coord_f64 point, t_coord_i32 size, u
 void draw_ray(t_game *game, double alpha)
 {
 	t_intersect test = get_intersect(game, &game->player, alpha);
-	draw_line_s(&game->param, game->player.coord, test.point, 0xfcba03FF);
+	draw_line_s(&game->param, game->player.coord, test.point, 0xfcba0355);
 	draw_rectangle_s(&game->param, set_f64(test.wall.x, test.wall.y), set_i32(1, 1), 0xfcba03FF);
 }
 
@@ -83,19 +83,25 @@ int draw_minimap(t_game *game)
 
 	}
 	draw_player(game);
-	draw_ray(game, loop_len(game->player.alpha, PI2));
-	draw_ray(game, loop_len(game->player.alpha - 0.1, PI2));
-	draw_ray(game, loop_len(game->player.alpha + 0.1, PI2));
-	draw_ray(game, loop_len(game->player.alpha - 0.15, PI2));
-	draw_ray(game, loop_len(game->player.alpha + 0.15, PI2));
-	draw_ray(game, loop_len(game->player.alpha - 0.2, PI2));
-	draw_ray(game, loop_len(game->player.alpha + 0.2, PI2));
-	draw_ray(game, loop_len(game->player.alpha - 0.25, PI2));
-	draw_ray(game, loop_len(game->player.alpha + 0.25, PI2));
-	draw_ray(game, loop_len(game->player.alpha - 0.3, PI2));
-	draw_ray(game, loop_len(game->player.alpha + 0.3, PI2));
-	draw_ray(game, loop_len(game->player.alpha - 0.35, PI2));
-	draw_ray(game, loop_len(game->player.alpha + 0.35, PI2));
+	draw_ray(game, loop_len(game->player.alpha, 		PI2));
+	draw_ray(game, loop_len(game->player.alpha - 0.05,	PI2));
+	draw_ray(game, loop_len(game->player.alpha + 0.05,	PI2));
+	draw_ray(game, loop_len(game->player.alpha - 0.1,	PI2));
+	draw_ray(game, loop_len(game->player.alpha + 0.1,	PI2));
+	draw_ray(game, loop_len(game->player.alpha - 0.15,	PI2));
+	draw_ray(game, loop_len(game->player.alpha + 0.15,	PI2));
+	draw_ray(game, loop_len(game->player.alpha - 0.2,	PI2));
+	draw_ray(game, loop_len(game->player.alpha + 0.2,	PI2));
+	draw_ray(game, loop_len(game->player.alpha - 0.25,	PI2));
+	draw_ray(game, loop_len(game->player.alpha + 0.25,	PI2));
+	draw_ray(game, loop_len(game->player.alpha - 0.3,	PI2));
+	draw_ray(game, loop_len(game->player.alpha + 0.3,	PI2));
+	draw_ray(game, loop_len(game->player.alpha - 0.35,	PI2));
+	draw_ray(game, loop_len(game->player.alpha + 0.35,	PI2));
+	draw_ray(game, loop_len(game->player.alpha - 0.4,	PI2));
+	draw_ray(game, loop_len(game->player.alpha + 0.4,	PI2));
+	draw_ray(game, loop_len(game->player.alpha - 0.45,	PI2));
+	draw_ray(game, loop_len(game->player.alpha + 0.45,	PI2));
 	// printf("===================================\n");
 	return (1);
 }
