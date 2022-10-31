@@ -84,54 +84,12 @@ int draw_minimap(t_game *game)
 	}
 	draw_player(game);
 	draw_ray(game, loop_len(game->player.alpha, 		PI2));
-	draw_ray(game, loop_len(game->player.alpha - 0.02,	PI2));
-	draw_ray(game, loop_len(game->player.alpha + 0.02,	PI2));
-	draw_ray(game, loop_len(game->player.alpha - 0.04,	PI2));
-	draw_ray(game, loop_len(game->player.alpha + 0.04,	PI2));
-	draw_ray(game, loop_len(game->player.alpha - 0.06,	PI2));
-	draw_ray(game, loop_len(game->player.alpha + 0.06,	PI2));
-	draw_ray(game, loop_len(game->player.alpha - 0.08,	PI2));
-	draw_ray(game, loop_len(game->player.alpha + 0.08,	PI2));
-	draw_ray(game, loop_len(game->player.alpha - 0.10,	PI2));
-	draw_ray(game, loop_len(game->player.alpha + 0.10,	PI2));
-	draw_ray(game, loop_len(game->player.alpha - 0.12,	PI2));
-	draw_ray(game, loop_len(game->player.alpha + 0.12,	PI2));
-	draw_ray(game, loop_len(game->player.alpha - 0.14,	PI2));
-	draw_ray(game, loop_len(game->player.alpha + 0.14,	PI2));
-	draw_ray(game, loop_len(game->player.alpha - 0.16,	PI2));
-	draw_ray(game, loop_len(game->player.alpha + 0.16,	PI2));
-	draw_ray(game, loop_len(game->player.alpha - 0.18,	PI2));
-	draw_ray(game, loop_len(game->player.alpha + 0.18,	PI2));
-	draw_ray(game, loop_len(game->player.alpha - 0.20,	PI2));
-	draw_ray(game, loop_len(game->player.alpha + 0.20,	PI2));
-	draw_ray(game, loop_len(game->player.alpha - 0.22,	PI2));
-	draw_ray(game, loop_len(game->player.alpha + 0.22,	PI2));
-	draw_ray(game, loop_len(game->player.alpha - 0.24,	PI2));
-	draw_ray(game, loop_len(game->player.alpha + 0.24,	PI2));
-	draw_ray(game, loop_len(game->player.alpha - 0.26,	PI2));
-	draw_ray(game, loop_len(game->player.alpha + 0.26,	PI2));
-	draw_ray(game, loop_len(game->player.alpha - 0.28,	PI2));
-	draw_ray(game, loop_len(game->player.alpha + 0.28,	PI2));
-	draw_ray(game, loop_len(game->player.alpha - 0.30,	PI2));
-	draw_ray(game, loop_len(game->player.alpha + 0.30,	PI2));
-	draw_ray(game, loop_len(game->player.alpha - 0.32,	PI2));
-	draw_ray(game, loop_len(game->player.alpha + 0.32,	PI2));
-	draw_ray(game, loop_len(game->player.alpha - 0.34,	PI2));
-	draw_ray(game, loop_len(game->player.alpha + 0.34,	PI2));
-	draw_ray(game, loop_len(game->player.alpha - 0.36,	PI2));
-	draw_ray(game, loop_len(game->player.alpha + 0.36,	PI2));
-	draw_ray(game, loop_len(game->player.alpha - 0.38,	PI2));
-	draw_ray(game, loop_len(game->player.alpha + 0.38,	PI2));
-	draw_ray(game, loop_len(game->player.alpha - 0.40,	PI2));
-	draw_ray(game, loop_len(game->player.alpha + 0.40,	PI2));
-	draw_ray(game, loop_len(game->player.alpha - 0.42,	PI2));
-	draw_ray(game, loop_len(game->player.alpha + 0.42,	PI2));
-	draw_ray(game, loop_len(game->player.alpha - 0.44,	PI2));
-	draw_ray(game, loop_len(game->player.alpha + 0.44,	PI2));
-	draw_ray(game, loop_len(game->player.alpha - 0.46,	PI2));
-	draw_ray(game, loop_len(game->player.alpha + 0.46,	PI2));
-	draw_ray(game, loop_len(game->player.alpha - 0.48,	PI2));
-	draw_ray(game, loop_len(game->player.alpha + 0.48,	PI2));
-	// printf("===================================\n");
+	float i = 0.02;
+	while (i < 0.5)
+	{
+		draw_ray(game, loop_len(game->player.alpha - i,	PI2));
+		draw_ray(game, loop_len(game->player.alpha + i,	PI2));
+		i += 0.02;
+	}
 	return (1);
 }
