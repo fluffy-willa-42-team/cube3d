@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:53:52 by mahadad           #+#    #+#             */
-/*   Updated: 2022/10/26 16:05:18 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/10/31 12:04:04 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 
 /* EXIT_SUCCESS, EXIT_FAILURE*/
 #include <stdlib.h>
+
+#include <stdio.h>//TODO REMOVE
 
 /**
  * @brief Read file and wirte in the `buff`.
@@ -36,8 +38,8 @@ static int	read_to_vec(t_parser *data, t_vec *buff)
 	len = 0;
 	ret = 1;
 	*buff = v_init_r(sizeof(char), NULL, NULL, 1000000);
-	v_alloc(buff, SET, 5000000);// TODO check for opti
-
+	if (!v_alloc(buff, SET, 5000000))// TODO check for opti
+		return(ret_print(EXIT_FAILURE, "//TODO FAIL v_alloc"));
 	while (ret != 0)
 	{
 		ret = v_readline(buff, data->file_fd);
@@ -47,7 +49,6 @@ static int	read_to_vec(t_parser *data, t_vec *buff)
 	}
 	if (!len)
 		return (ret_print(EXIT_FAILURE, ERR_EMPTY_FILE));
-	// v_print(buff);//TODO REMOVE
 	return (EXIT_SUCCESS);
 }
 

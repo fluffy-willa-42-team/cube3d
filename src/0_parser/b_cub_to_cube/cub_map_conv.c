@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:04:10 by mahadad           #+#    #+#             */
-/*   Updated: 2022/10/30 16:31:39 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/10/31 11:06:48 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 #include <stdio.h>//TODO REMOVE
 
 /**
+ * @Matthew-Dreemurr
+ * 
  * @brief Will push 3 char to create a chunk floor in the `.cube` buffer.
  * 
  * @param a First char
@@ -42,11 +44,33 @@ int	push_chunk_part(t_parser *data, int a, int b, int c)
 	return (EXIT_SUCCESS);
 }
 
-int	dummy(t_parser *data, char c)
+/**
+ * @Matthew-Dreemurr
+ * 
+ * @brief Find the rigth function for the floor given.
+ * 
+ * @param data Parser structure
+ * @param line The current line
+ * @param floor The chunk floor to create
+ * @return int Return zero value, if there is a error return non zero value.
+ */
+int	exe_conv(t_parser *data, char *line, int floor)
 {
-	printf("dummy[%c]\n", c);
-	(void)data;
-	return (0);
+	const t_conv_fct	func[3][7] = {
+	{f_123_space, f_1_zero, f_1_one, f_1_p, f_1_p, f_1_p, f_1_p},
+	{f_123_space, f_2_zero, f_2_one, f_2_p, f_2_p, f_2_p, f_2_p},
+	{f_123_space, f_3_zero, f_3_one, f_3_p, f_3_p, f_3_p, f_3_p}};
+	const char			set[8] = {' ', '0', '1', 'N', 'S', 'E', 'W', '\0'};
+	int					set_index;
+
+	set_index = 0;
+	while (set[set_index] && set[set_index] != *line)
+		set_index++;
+	if (!set[set_index])
+		return (ret_print(EXIT_FAILURE, ERR_BAD_CUB_CHAR));
+	if (func[floor][set_index](data, *line))
+		return (ret_print(EXIT_FAILURE, ERR_CUB_CONV_FUNC));
+	return (EXIT_SUCCESS);
 }
 
 /**
@@ -61,12 +85,6 @@ int	dummy(t_parser *data, char c)
  */
 int	conv_line(t_parser *data, char *line)
 {
-	const char			set[8] = {' ', '0', '1', 'N', 'S', 'E', 'W', '\0'};
-	const t_conv_fct	func[3][7] = {
-	{f_123_space, f_1_zero, f_1_one, f_1_p, f_1_p, f_1_p, f_1_p},
-	{f_123_space, f_2_zero, f_2_one, f_2_p, f_2_p, f_2_p, f_2_p},
-	{f_123_space, f_3_zero, f_3_one, f_3_p, f_3_p, f_3_p, f_3_p}};
-	int					set_index;
 	int					floor;
 	char				*tmp;
 
@@ -76,12 +94,7 @@ int	conv_line(t_parser *data, char *line)
 		tmp = line;
 		while (*tmp && *tmp != '\n')
 		{
-			set_index = 0;
-			while (set[set_index] && set[set_index] != *tmp)
-				set_index++;
-			if (!set[set_index])
-				return (ret_print(EXIT_FAILURE, ERR_BAD_CUB_CHAR));
-			if (func[floor][set_index](data, *tmp))
+			if (exe_conv(data, tmp, floor))
 				return (EXIT_FAILURE);
 			tmp++;
 		}
