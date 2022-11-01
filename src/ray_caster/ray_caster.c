@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 10:01:39 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/01 11:46:37 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/01 11:53:07 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ void ray_caster(t_game *game)
 		t_intersect inter = get_intersect(game, game->player.coord,
 			loop_len(game->player.alpha - PI / 6 + alpha_incre * i, PI2));
 		double dist = 256 / distance(game, inter);
+		if (dist > WIN_HEIGHT)
+			dist = WIN_HEIGHT;
 		draw_rectangle(&game->param,
 			set_f64(i, WIN_HEIGHT / 2 - 128 - (int) dist),
 			set_i32(4, (int) dist * 2), 

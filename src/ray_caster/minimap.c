@@ -73,13 +73,14 @@ int draw_minimap(t_game *game)
 		set_f64(game->player.coord.x * si - 2, game->player.coord.y * si - 2),
 		set_i32(4, 4), 0xFF00FFFF
 	);
-	draw_ray(game, loop_len(game->player.alpha, 		PI2));
-	float i = 0.02;
-	while (i < PI/6)
-	{
-		draw_ray(game, loop_len(game->player.alpha - i,	PI2));
-		draw_ray(game, loop_len(game->player.alpha + i,	PI2));
-		i += 0.02;
-	}
+	// draw_ray(game, loop_len(game->player.alpha, 		PI2));
+	// float i = 0.02;
+	// while (i < PI/6)
+	// {
+	// 	draw_ray(game, loop_len(game->player.alpha - i,	PI2));
+	// 	draw_ray(game, loop_len(game->player.alpha + i,	PI2));
+	// 	i += 0.02;
+	// }
+	draw_line_s(&game->param, game->player.coord, add_f64(game->player.coord, game->player.delta), 0xFF00FFFF);
 	return (1);
 }
