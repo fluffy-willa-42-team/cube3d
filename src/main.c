@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:49:27 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/01 11:31:05 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/01 13:12:43 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,20 @@
 #include "ray_caster.h"
 #include "MLX42/MLX42.h"
 
-void pos_hook(double *coord, double incrementation, double size)
+void pos2_hook(t_player *player, double incr_x, double incr_y, double size)
 {
-	*coord += incrementation;
-	if (*coord < 0)
-		*coord += size;
-	else if (*coord > size)
-		*coord -= size;
+	incr_x *= player->delta.x;
+	incr_y *= player->delta.y;
+	player->coord.x += incr_x;
+	if (player->coord.x < 0)
+		player->coord.x += size;
+	else if (player->coord.x > size)
+		player->coord.x -= size;
+	player->coord.y += incr_y;
+	if (player->coord.y < 0)
+		player->coord.y += size;
+	else if (player->coord.y > size)
+		player->coord.y -= size;
 }
 
 void angle_hook(t_game *game, double incrementation)
@@ -45,13 +52,9 @@ void	hook(void *param)
 	if (mlx_is_key_down(game->param.mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(game->param.mlx);
 	if (mlx_is_key_down(game->param.mlx, MLX_KEY_UP))
-		pos_hook(&game->player.coord.y, -0.02, game->map.height);
+		pos2_hook(&game->player, 0.02, 0.02, game->map.height);
 	if (mlx_is_key_down(game->param.mlx, MLX_KEY_DOWN))
-		pos_hook(&game->player.coord.y, 0.02, game->map.height);
-	if (mlx_is_key_down(game->param.mlx, MLX_KEY_LEFT))
-		pos_hook(&game->player.coord.x, -0.02, game->map.width);
-	if (mlx_is_key_down(game->param.mlx, MLX_KEY_RIGHT))
-		pos_hook(&game->player.coord.x, 0.02, game->map.width);
+		pos2_hook(&game->player, -0.02, -0.02, game->map.height);
 	if (mlx_is_key_down(game->param.mlx, MLX_KEY_A))
 		angle_hook(game, -0.03);
 	if (mlx_is_key_down(game->param.mlx, MLX_KEY_D))
