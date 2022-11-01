@@ -51,18 +51,6 @@ double loop_len(double n, double len)
 	return (n);
 }
 
-void draw_player(t_game *game)
-{
-	t_mlx_param *param	= &game->param;
-	t_player *player	= &game->player;
-	int si = MINIMAP_SIZE;
-
-	draw_rectangle(param,
-		set_f64(player->coord.x * si - 2, player->coord.y * si - 2),
-		set_i32(4, 4), 0xFF00FFFF
-	);
-}
-
 int draw_minimap(t_game *game)
 {
 	t_mlx_param *param	= &game->param;
@@ -80,12 +68,14 @@ int draw_minimap(t_game *game)
 				draw_rectangle(param, (t_coord_f64){x * si, y * si},
 					(t_coord_i32){si, si}, 0x222222FF);
 		}
-
 	}
-	draw_player(game);
+	draw_rectangle(param,
+		set_f64(game->player.coord.x * si - 2, game->player.coord.y * si - 2),
+		set_i32(4, 4), 0xFF00FFFF
+	);
 	draw_ray(game, loop_len(game->player.alpha, 		PI2));
 	float i = 0.02;
-	while (i < 0.5)
+	while (i < PI/6)
 	{
 		draw_ray(game, loop_len(game->player.alpha - i,	PI2));
 		draw_ray(game, loop_len(game->player.alpha + i,	PI2));

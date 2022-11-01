@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:49:27 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/01 09:37:22 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/01 10:06:26 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void	hook(void *param)
 	if (mlx_is_key_down(game->param.mlx, MLX_KEY_E))
 		angle_hook(game, 0.001);
 	draw_minimap(game);
+	ray_caster(game);
 }
 
 int main(void)
