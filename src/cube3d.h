@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:33:07 by awillems          #+#    #+#             */
-/*   Updated: 2022/10/26 14:12:29 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/01 09:32:56 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@
 # define PI1_2 1.57079632679
 # define PI3_2 4.71238898038
 # define PI2   6.28318530718
-# define MINIMAP_SIZE 64
+# define MINIMAP_SIZE 32
 
-# define WIN_WIDTH 512
-# define WIN_HEIGHT 512
+# define WIN_WIDTH 1000
+# define WIN_HEIGHT 600
 
 /* ************************************************************************** */
 

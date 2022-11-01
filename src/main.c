@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:49:27 by awillems          #+#    #+#             */
-/*   Updated: 2022/10/28 09:28:21 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/01 09:37:22 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	hook(void *param)
 
 int main(void)
 {
-	t_game game = {{NULL, NULL, WIN_WIDTH, WIN_HEIGHT},
+	t_game game = {{NULL, NULL, WIN_HEIGHT, WIN_WIDTH},
 		{{
 			{1, 1, 1, 1, 1, 1, 1, 1},
 			{1, 0, 1, 0, 0, 0, 0, 1},
@@ -79,13 +79,11 @@ int main(void)
 	
 
 	game.param.mlx = mlx_init(game.param.width, game.param.height, "MLX42", true);
-	
+	if (!game.param.mlx)
+		return (EXIT_FAILURE);
 	game.param.img = mlx_new_image(game.param.mlx, game.param.width, game.param.height);
-
 	
-	draw_minimap(&game);
 	mlx_loop_hook(game.param.mlx, &hook, &game);
-
 	mlx_image_to_window(game.param.mlx, game.param.img, 0, 0);
 	mlx_loop(game.param.mlx);
 
