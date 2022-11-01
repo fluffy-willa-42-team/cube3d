@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:52:08 by mahadad           #+#    #+#             */
-/*   Updated: 2022/10/31 11:53:51 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/01 16:23:42 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,18 +36,6 @@ static int	cub_to_cube(t_parser *data)
 }
 
 /**
- * @brief 
- * 
- * @param data 
- * @return int 
- */
-static int	cube_to_t_map(t_parser *data)//WIP
-{
-	(void)data;
-	return (EXIT_SUCCESS);
-}
-
-/**
  * @author Matthew-Dreemurr
  * 
  * @brief Convert `.cub` to `.cube` format if need. Otherwise convert `.cube` to
@@ -60,11 +48,8 @@ int	file_conv(t_parser *data)
 {
 	if (data->type == CUB_FILE)
 	{
-		if (cub_to_cube(data) || !v_delete(&data->cub)/* //TODO change check after the lib update ! */)
+		if (cub_to_cube(data) || !v_delete(&data->cub)/* //TODO change check after the lib update ! */ /*//TODO REMOVE, free only in main*/)
 			return (EXIT_FAILURE);
 	}
-	else if (data->type == CUBE_FILE)
-		if (cube_to_t_map(data))
-			return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

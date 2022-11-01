@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:10:55 by mahadad           #+#    #+#             */
-/*   Updated: 2022/10/30 17:36:15 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/01 16:08:57 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	get_tex(char *str)
 			return (index + '0');
 		index ++;
 	}
-	return (ret_print(-1, ERR_TEX_FORMAT));
+	return (-1);
 }
 
 /**

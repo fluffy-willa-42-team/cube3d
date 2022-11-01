@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:53:32 by mahadad           #+#    #+#             */
-/*   Updated: 2022/10/26 16:05:18 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/01 16:15:43 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ int	parser(char *av)
 		|| read_file(&data)
 		|| file_sani(&data)
 		|| file_conv(&data)
-		/**|| file_to_t_map(&data)**/)//WIP
+		|| cube_to_t_map(&data))
 		return (EXIT_FAILURE);
-	v_delete(&data.cube)/* //TODO change check after the lib update ! */;
+	if (!v_delete(&data.cube))/* //TODO change check after the lib update ! */;//TODO REMOVE, free only in main
 	return (EXIT_SUCCESS);
 }

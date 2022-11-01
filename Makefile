@@ -6,7 +6,7 @@
 #    By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/05 10:47:56 by awillems          #+#    #+#              #
-#    Updated: 2022/10/27 19:25:39 by mahadad          ###   ########.fr        #
+#    Updated: 2022/11/01 16:05:43 by mahadad          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,8 +51,15 @@ COLOR_GREEN	= \033[32;1m
 # **************************************************************************** #
 
 DEBUG		= 0
+TEST_UNIT	= 0
 SANI		= 0
 WRA			= 0
+
+ifeq ($(TEST_UNIT), 1)
+	SANI = 1
+	FLAGS += -D CUBE3D_UNITEST_PARSER=1
+	MAKE_FLAG += TEST_UNIT=1
+endif
 
 ifeq ($(SANI), 1)
 	FLAGS += -fsanitize=address
@@ -177,9 +184,8 @@ exe: all
 	@bash -c "./$(NAME)"
 
 test: clear_test
-	@make re SANI=1
+	@make re SANI=1 TEST_UNIT=1
 	@gcc -Wall -Wextra -Werror tester/tester.c -o tester/tester
-	@./tester/tester
 
 run_test:
 	@gcc -Wall -Wextra -Werror tester/tester.c -o tester/tester

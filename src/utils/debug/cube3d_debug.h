@@ -6,12 +6,16 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:54:56 by mahadad           #+#    #+#             */
-/*   Updated: 2022/10/31 10:58:04 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/01 16:04:30 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUBE3D_DEBUG_H
 # define CUBE3D_DEBUG_H
+
+# ifndef CUBE3D_UNITEST_PARSER
+#  define CUBE3D_UNITEST_PARSER 0
+# endif
 
 int	ret_print(int ret, const char *msg);
 
