@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 10:01:39 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/01 11:30:08 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/01 11:46:37 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ double distance(t_game *game, t_intersect inter)
 
 void ray_caster(t_game *game)
 {
-	const uint32_t fov_width = WIN_WIDTH / 4;
+	const uint32_t fov_width = WIN_WIDTH;
 	const double alpha_incre = PI / 3 / fov_width;
 
 	draw_rectangle(&game->param, set_f64(0, 0), set_i32(WIN_WIDTH, WIN_HEIGHT), 0x000000FF);
@@ -50,7 +50,7 @@ void ray_caster(t_game *game)
 			loop_len(game->player.alpha - PI / 6 + alpha_incre * i, PI2));
 		double dist = 256 / distance(game, inter);
 		draw_rectangle(&game->param,
-			set_f64(i * 4, WIN_HEIGHT / 2 - 128 - (int) dist),
+			set_f64(i, WIN_HEIGHT / 2 - 128 - (int) dist),
 			set_i32(4, (int) dist * 2), 
 			get_color_for_direction(inter)
 		);
