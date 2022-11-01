@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:49:27 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/01 13:12:43 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/01 14:01:18 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@
 
 void pos2_hook(t_player *player, double incr_x, double incr_y, double size)
 {
-	incr_x *= player->delta.x;
-	incr_y *= player->delta.y;
 	player->coord.x += incr_x;
 	if (player->coord.x < 0)
 		player->coord.x += size;
@@ -52,9 +50,13 @@ void	hook(void *param)
 	if (mlx_is_key_down(game->param.mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(game->param.mlx);
 	if (mlx_is_key_down(game->param.mlx, MLX_KEY_UP))
-		pos2_hook(&game->player, 0.02, 0.02, game->map.height);
+		pos2_hook(&game->player, 0.02 * game->player.delta.x, 0.02 * game->player.delta.y, game->map.height);
 	if (mlx_is_key_down(game->param.mlx, MLX_KEY_DOWN))
-		pos2_hook(&game->player, -0.02, -0.02, game->map.height);
+		pos2_hook(&game->player, -0.02 * game->player.delta.x, -0.02 * game->player.delta.y, game->map.height);
+	if (mlx_is_key_down(game->param.mlx, MLX_KEY_LEFT))
+		pos2_hook(&game->player, 0.02 * game->player.delta.y, -0.02 * game->player.delta.x, game->map.height);
+	if (mlx_is_key_down(game->param.mlx, MLX_KEY_RIGHT))
+		pos2_hook(&game->player, -0.02 * game->player.delta.y, 0.02 * game->player.delta.x, game->map.height);
 	if (mlx_is_key_down(game->param.mlx, MLX_KEY_A))
 		angle_hook(game, -0.03);
 	if (mlx_is_key_down(game->param.mlx, MLX_KEY_D))
