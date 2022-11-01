@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:49:27 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/01 10:52:10 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/01 11:31:05 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ void angle_hook(t_game *game, double incrementation)
 		game->player.alpha += PI2;
 	else if (game->player.alpha > PI2)
 		game->player.alpha -= PI2;
+	game->player.delta.x = cos(game->player.alpha);
+	game->player.delta.y = sin(game->player.alpha);
 }
 
 void	hook(void *param)
@@ -75,7 +77,7 @@ int main(void)
 			{1, 0, 0, 0, 0, 0, 0, 1},
 			{1, 1, 1, 1, 1, 1, 1, 1},
 		}, 8, 8},
-		{{3.5f, 3.5f}, 0.0f}
+		{{3.5f, 3.5f}, 0.0f, {cos(0), sin(0)}}
 	};
 	
 

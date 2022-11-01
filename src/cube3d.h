@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:33:07 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/01 09:32:56 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/01 11:28:43 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ typedef struct s_mlx_param {
 typedef struct s_player {
 	t_coord_f64 coord;
 	double		alpha;
+	t_coord_f64 delta;
 }	t_player;
 
 typedef struct s_game {
