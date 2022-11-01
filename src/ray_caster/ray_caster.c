@@ -6,12 +6,13 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 10:01:39 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/01 10:37:47 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/01 11:13:46 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ray_caster.h"
 #include <stdio.h>
+#include <math.h>
 
 #include "mlx_utils.h"
 
@@ -31,17 +32,41 @@ uint32_t get_color_for_direction(const t_intersect inter)
 	return (0);
 }
 
+int distance(t_game *game, t_intersect inter, double cos_a, double sin_a)
+{
+	double deltaX = inter.point.x - game->player.coord.x;
+	double deltaY = inter.point.y - game->player.coord.y;
+	double res = deltaX * cos_a + deltaY * sin_a;
+	
+	if (res >= 0 && res < 0.00000001)
+		res = 0.00000001;
+	else if (res <= -0 && res > -0.00000001)
+		res = -0.00000001;
+
+	res = 256 / res;
+	return (res);
+}
+
 void ray_caster(t_game *game)
 {
 	const uint32_t fov_width = WIN_WIDTH / 4;
 	const double alpha_incre = PI / 3 / fov_width;
-	const t_coord_i32 pixel = set_i32(4, 128);
 
+	const double cos_a = cos(game->player.alpha);
+	const double sin_a = sin(game->player.alpha);
+	
+
+	draw_rectangle(&game->param, set_f64(0, 0), set_i32(WIN_WIDTH, WIN_HEIGHT), 0x000000FF
+		);
 	for (uint32_t i = 0; i < fov_width; i++)
 	{
 		t_intersect inter = get_intersect(game, game->player.coord,
 			loop_len(game->player.alpha - PI / 6 + alpha_incre * i, PI2));
-		draw_rectangle(&game->param, set_f64(i * 4, WIN_HEIGHT - 128), pixel, 
-			get_color_for_direction(inter));
+		int dist = distance(game, inter, cos_a, sin_a);
+		draw_rectangle(&game->param,
+			set_f64(i * 4, WIN_HEIGHT / 2 - 128 - dist),
+			set_i32(4, dist * 2), 
+			get_color_for_direction(inter)
+		);
 	}
 }
