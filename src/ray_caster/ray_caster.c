@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 10:01:39 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/01 11:13:46 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/01 11:24:59 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,19 +32,10 @@ uint32_t get_color_for_direction(const t_intersect inter)
 	return (0);
 }
 
-int distance(t_game *game, t_intersect inter, double cos_a, double sin_a)
+double distance(t_game *game, t_intersect inter, double cos_a, double sin_a)
 {
-	double deltaX = inter.point.x - game->player.coord.x;
-	double deltaY = inter.point.y - game->player.coord.y;
-	double res = deltaX * cos_a + deltaY * sin_a;
-	
-	if (res >= 0 && res < 0.00000001)
-		res = 0.00000001;
-	else if (res <= -0 && res > -0.00000001)
-		res = -0.00000001;
-
-	res = 256 / res;
-	return (res);
+	return ((inter.point.x - game->player.coord.x) * cos_a
+		+ (inter.point.y - game->player.coord.y) * sin_a);
 }
 
 void ray_caster(t_game *game)
@@ -54,7 +45,6 @@ void ray_caster(t_game *game)
 
 	const double cos_a = cos(game->player.alpha);
 	const double sin_a = sin(game->player.alpha);
-	
 
 	draw_rectangle(&game->param, set_f64(0, 0), set_i32(WIN_WIDTH, WIN_HEIGHT), 0x000000FF
 		);
@@ -62,10 +52,10 @@ void ray_caster(t_game *game)
 	{
 		t_intersect inter = get_intersect(game, game->player.coord,
 			loop_len(game->player.alpha - PI / 6 + alpha_incre * i, PI2));
-		int dist = distance(game, inter, cos_a, sin_a);
+		double dist = 256 / distance(game, inter, cos_a, sin_a);
 		draw_rectangle(&game->param,
-			set_f64(i * 4, WIN_HEIGHT / 2 - 128 - dist),
-			set_i32(4, dist * 2), 
+			set_f64(i * 4, WIN_HEIGHT / 2 - 128 - (int) dist),
+			set_i32(4, (int) dist * 2), 
 			get_color_for_direction(inter)
 		);
 	}
