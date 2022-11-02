@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:33:07 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/02 11:12:43 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/02 12:14:27 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,17 +42,17 @@
 
 /* ************************************************************************** */
 
-/**
- * @brief Structure for storing any type of texture.
- * @param Type 0 Undefined
- * @param Type 1 color
- * @param Type 2 image
- */
+typedef enum s_texture_type {
+	UNDEFINED	= 0,
+	COLOR		= 1,
+	IMAGE		= 2,
+}	t_texture_type;
+
 typedef struct s_texture {
-	int		type;
-	char	*path;
-	void	*image;
-	int		color;
+	t_texture_type	type;
+	char			*path;
+	void			*image;
+	int				color;
 }	t_texture;
 
 /* ************************************************************************** */

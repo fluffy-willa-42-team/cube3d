@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:31:46 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/02 10:42:19 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/02 11:38:37 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,14 @@ uint32_t get_color_for_direction(const t_intersect inter)
 	return (0);
 }
 
+t_texture get_texture(t_game *game, int x, int y)
+{
+	(void) x;
+	(void) y;
+	(void) game;
+	return ((t_texture) {1, NULL, NULL, 0xFF00FFFF});
+}
+
 void draw_simple(t_game *game, t_intersect inter, uint32_t x, int32_t height)
 {
 	draw_rectangle(&game->param,
@@ -40,8 +48,17 @@ void draw_simple(t_game *game, t_intersect inter, uint32_t x, int32_t height)
 
 void draw_column(t_game *game, t_intersect inter, uint32_t x, int32_t height)
 {
-	(void) game;
-	(void) inter;
-	(void) x;
-	(void) height;
+	t_texture texture = get_texture(game, inter.wall.x, inter.wall.y);
+	if (texture.type == COLOR)
+	{
+		draw_rectangle(&game->param,
+			set_f64(x, WIN_HEIGHT / 2 - height),
+			set_i32(COLUMN_WIDTH, height * 2), 
+			texture.color
+		);
+	}
+	else if (texture.type == IMAGE && texture.image)
+	{
+		
+	}
 }
