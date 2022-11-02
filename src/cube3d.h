@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:33:07 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/02 12:33:44 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/02 13:14:44 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ typedef enum s_texture_type {
 
 typedef struct s_texture {
 	t_texture_type	type;
-	void			*image;
+	mlx_image_t		*image;
 	int				color;
 }	t_texture;
 
@@ -99,6 +99,7 @@ typedef struct s_game {
 	t_mlx_param param;
 	t_map 		map;
 	t_player	player;
+	t_texture	temp;
 }	t_game;
 
 

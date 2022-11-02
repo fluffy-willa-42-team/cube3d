@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:31:46 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/02 12:33:48 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/02 13:31:58 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,9 @@ uint32_t get_color_for_direction(const t_intersect inter)
 
 t_texture get_texture(t_game *game, int x, int y)
 {
-	static t_texture xd;
-
-	xd.type = 1;
-	xd.color = 0xFF00FFFF;
-	xd.image = NULL;
-	mlx_load_xpm42();
 	(void) x;
 	(void) y;
-	(void) game;
-	return (xd);
+	return (game->temp);
 }
 
 void draw_simple(t_game *game, t_intersect inter, uint32_t x, int32_t height)
@@ -52,6 +45,14 @@ void draw_simple(t_game *game, t_intersect inter, uint32_t x, int32_t height)
 	);
 }
 
+/**
+ * @brief 
+ * 
+ * @param game 
+ * @param inter 	
+ * @param x 		pos x on screen
+ * @param height 	Line Height
+ */
 void draw_column(t_game *game, t_intersect inter, uint32_t x, int32_t height)
 {
 	t_texture texture = get_texture(game, inter.wall.x, inter.wall.y);
@@ -65,6 +66,13 @@ void draw_column(t_game *game, t_intersect inter, uint32_t x, int32_t height)
 	}
 	else if (texture.type == IMAGE && texture.image)
 	{
-		
+		uint32_t ratio_texture_pixel = texture.image->height / height;
+		uint32_t ratio_visible = height / WIN_HEIGHT / 2;
+		for (uint32_t i = 0; i < ratio_visible; i++)
+		{
+			put_pixel(&game->param, x, i, get_pixel_image());
+			i++;
+		}
+		// printf("%f")
 	}
 }

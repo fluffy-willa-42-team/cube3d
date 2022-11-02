@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:49:27 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/02 09:43:30 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/02 13:00:34 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,19 +82,29 @@ int main(void)
 			{1, 0, 0, 0, 0, 0, 0, 1},
 			{1, 1, 1, 1, 1, 1, 1, 1},
 		}, 8, 8},
-		{{3.5f, 3.5f}, 0.0f, {cos(0), sin(0)}}
+		{{3.5f, 3.5f}, 0.0f, {cos(0), sin(0)}},
+		{0, NULL, 0}
 	};
+
+	game.temp.type = 1;
+	game.temp.color = 0xFF00FFFF;
+	game.temp.image = NULL;
+	xpm_t *test = mlx_load_xpm42("../cool.xpm42");
 	
 
 	game.param.mlx = mlx_init(game.param.width, game.param.height, "MLX42", true);
 	if (!game.param.mlx)
 		return (EXIT_FAILURE);
+	game.temp.image = mlx_texture_to_image(game.param.mlx, &test->texture);
+	
 	game.param.img = mlx_new_image(game.param.mlx, game.param.width, game.param.height);
 	
 	mlx_loop_hook(game.param.mlx, &hook, &game);
 	mlx_image_to_window(game.param.mlx, game.param.img, 0, 0);
+	// mlx_image_to_window(game.param.mlx, game.temp.image, 0, 0);
 	mlx_loop(game.param.mlx);
 
+	mlx_delete_xpm42(test);
 	mlx_delete_image(game.param.mlx, game.param.img);
 	mlx_terminate(game.param.mlx);
 	return (EXIT_SUCCESS);
