@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 16:12:15 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/02 17:55:05 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/02 19:11:28 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 #include "cube3d_debug.h"
 
-#include "lib_str.h" /* ft_isdigit */
+#include "lib_is_check.h" /* ft_isdigit */
 
 /* EXIT_SUCCESS, EXIT_FAILURE*/
 #include <stdlib.h>
