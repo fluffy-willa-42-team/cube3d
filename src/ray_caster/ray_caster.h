@@ -18,6 +18,7 @@
 #include "cube3d.h"
 
 /* #####=====----------		Ray Caster In Program Var	 ----------=====##### */
+// DONT TOUCH
 
 # define FOV_ANGLE1_2		FOV_ANGLE / 2
 # define FOV_WIDTH			WIN_WIDTH / COLUMN_WIDTH
