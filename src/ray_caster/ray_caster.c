@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 10:01:39 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/02 10:33:02 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/02 10:42:37 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ double loop_len(double n, double len);
 t_intersect get_intersect(t_game *game, t_coord_f64 player, double alpha);
 
 void draw_simple(t_game *game, t_intersect inter, uint32_t x, int32_t height);
+void draw_column(t_game *game, t_intersect inter, uint32_t x, int32_t height);
 
 double distance(t_game *game, t_intersect inter)
 {
@@ -39,6 +40,6 @@ void ray_caster(t_game *game)
 		if (dist < min_dist)
 			dist = min_dist;
 		draw_simple(game, inter, i * COLUMN_WIDTH, HEIGTH_OF_BLOCK / dist);
-		// draw_column(game, inter, i * COLUMN_WIDTH, HEIGTH_OF_BLOCK / dist);
+		draw_column(game, inter, i * COLUMN_WIDTH, HEIGTH_OF_BLOCK / dist);
 	}
 }

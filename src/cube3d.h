@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:33:07 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/02 10:29:22 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/02 10:42:58 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@
 
 /* #####=====----------			Mlx Config Var			 ----------=====##### */
 
-# define WIN_WIDTH	800
-# define WIN_HEIGHT	800
+# define WIN_WIDTH	600
+# define WIN_HEIGHT	600
 
 /* #####=====----------		Ray Caster Config Var		 ----------=====##### */
 

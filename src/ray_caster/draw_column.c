@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:31:46 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/02 10:33:06 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/02 10:42:19 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,12 @@ void draw_simple(t_game *game, t_intersect inter, uint32_t x, int32_t height)
 		set_i32(COLUMN_WIDTH, height * 2), 
 		get_color_for_direction(inter)
 	);
+}
+
+void draw_column(t_game *game, t_intersect inter, uint32_t x, int32_t height)
+{
+	(void) game;
+	(void) inter;
+	(void) x;
+	(void) height;
 }
