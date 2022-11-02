@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:49:27 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/02 15:09:54 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/02 16:20:27 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include "cube3d.h"
 #include "ray_caster.h"
 #include "MLX42/MLX42.h"
+#include "mlx_utils.h"
 
 void pos2_hook(t_player *player, double incr_x, double incr_y, double size)
 {
@@ -89,7 +90,7 @@ int main(void)
 	game.temp.type = IMAGE;
 	game.temp.color = 0xFF00FFFF;
 	game.temp.image = NULL;
-	xpm_t *test = mlx_load_xpm42("../cool.xpm42");
+	xpm_t *test = mlx_load_xpm42("../amazing.xpm42");
 	if (!test)
 		return (EXIT_FAILURE);
 	game.temp.image = &test->texture;
