@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:53:43 by mahadad           #+#    #+#             */
-/*   Updated: 2022/10/30 15:35:17 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/02 12:54:20 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,13 @@ typedef struct s_parser
 	t_vec			cube;
 	int				index;
 	char			tex[DEFAUT_TEX_NB];
+	t_vec			tex_list;
 }				t_parser;
 
 typedef int	(*t_conv_fct)(t_parser *data, char c);
 
 int	parser(char *av);
+
 int	open_file(t_parser *data);
 int	read_file(t_parser *data);
 int	file_sani(t_parser *data);
@@ -67,5 +69,7 @@ int	f_3_one(t_parser *data, char c);
 int	f_1_p(t_parser *data, char c);
 int	f_2_p(t_parser *data, char c);
 int	f_3_p(t_parser *data, char c);
+
+int	cube_to_t_map(t_parser *data);
 
 #endif /* PARSER_H */

@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:33:07 by awillems          #+#    #+#             */
-/*   Updated: 2022/10/26 16:07:38 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/02 14:26:29 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,24 @@
 
 /* ************************************************************************** */
 
+typedef enum s_texture_type {
+	UNDEFINED	= 0,
+	COLOR		= 1,
+	IMAGE		= 2,
+}	t_texture_type;
+
 typedef struct s_texture {
-	int		type;
-	char	*path;
-	void	*image;
-	int		color;
+	t_texture_type	type;
+	char			token;
+	char			*path;
+	void			*image;
+	int				color;
 }	t_texture;
+
+typedef struct s_coord_f64 {
+	double x;
+	double y;
+}	t_coord_f64;
 
 typedef struct s_coord_i32 {
 	int32_t	x;
@@ -46,16 +58,23 @@ typedef struct s_coord_f32 {
  *     -------0-------0-------
  *     BOTTOM | SOUTH | OPT
  */
-
 typedef struct s_chunk {
+	int32_t		type;
 	t_coord_i32	coord;
 	t_texture	north;
-	t_texture	south;
 	t_texture	east;
 	t_texture	west;
+	t_texture	south;
 	t_texture	ceiling;
 	t_texture	floor;
 }	t_chunk;
+
+typedef struct s_entity {
+	int32_t		type;
+	t_coord_f64	coord;
+	int 		nb_texture;
+	t_texture	*texture;
+}	t_entity;
 
 # define E_EMPTY '.'
 
@@ -95,16 +114,13 @@ typedef struct s_chunk {
  */
 # define	E_FURNITURE		'F'
 
-typedef struct s_entity {
-	int32_t		type;
-	t_coord_f32	coord;
-	int			nb_texture;
-	t_texture	*texture;
-}	t_entity;
-
-typedef struct s_map {
-
-}	t_map;
+typedef struct s_map
+{
+	int32_t height;
+	int32_t width;
+	t_vec	tex_list;
+	t_vec	map;
+}				t_map;
 
 /* ************************************************************************** */
 

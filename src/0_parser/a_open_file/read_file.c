@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:53:52 by mahadad           #+#    #+#             */
-/*   Updated: 2022/10/31 12:04:04 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/02 13:03:01 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int	read_to_vec(t_parser *data, t_vec *buff)
 	ret = 1;
 	*buff = v_init_r(sizeof(char), NULL, NULL, 1000000);
 	if (!v_alloc(buff, SET, 5000000))// TODO check for opti
-		return(ret_print(EXIT_FAILURE, "//TODO FAIL v_alloc"));
+		return(ret_print(EXIT_FAILURE, "ERR_VEC_ALLOC"));
 	while (ret != 0)
 	{
 		ret = v_readline(buff, data->file_fd);

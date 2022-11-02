@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:56:12 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/01 16:08:04 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/02 11:26:38 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int	main(int argc, char *argv[])
 		return (ret_print(1, "TODO\n"));
 	}
 	printf("Arg [%s]\n", argv[1]);
-	run(argv[1]);
+	if (run(argv[1]))
+		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
