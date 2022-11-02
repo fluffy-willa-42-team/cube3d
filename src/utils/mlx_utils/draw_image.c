@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 15:54:48 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/02 15:59:28 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/02 16:32:53 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,12 @@ static int get_rgba(int r, int g, int b, int a)
     return (r << 24 | g << 16 | b << 8 | a);
 }
 
-static uint32_t	get_pixel_image(t_texture texture, int x, int y, t_coord_f64 ratio)
+uint32_t	get_pixel_image(t_texture texture, uint32_t x, uint32_t y, t_coord_f64 ratio)
 {
+	if ((uint32_t) (y * ratio.y) >= texture.image->height
+		|| (uint32_t) (x * ratio.x) >= texture.image->width)
+		return (0);
+
 	uint8_t *ptr = &texture.image->pixels[
 		(((int) (y * ratio.y)) * texture.image->width + ((int) (x * ratio.x))) * 4
 	];

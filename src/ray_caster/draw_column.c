@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:31:46 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/02 16:20:16 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/02 16:45:44 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,14 @@ void draw_column(t_game *game, t_intersect inter, uint32_t x, int32_t height)
 	}
 	else if (texture.type == IMAGE && texture.image)
 	{
-		draw_image(game, texture, set_i32(50, 500), set_i32(500, 64));
+		t_coord_f64 ratio =  set_f64(1,
+			(double) texture.image->height /( (double) height * 2)
+		);
+		
+		for (int i = 0; i < COLUMN_WIDTH; i++)
+			for (int j = 0; j < height * 2; j++)
+				put_pixel(&game->param, x + i, WIN_HEIGHT / 2 - height + j,
+					get_pixel_image(texture, i, j, ratio));
+		
 	}
 }
