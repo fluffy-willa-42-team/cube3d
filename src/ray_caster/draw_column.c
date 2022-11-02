@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:31:46 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/02 11:38:37 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/02 12:33:48 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,16 @@ uint32_t get_color_for_direction(const t_intersect inter)
 
 t_texture get_texture(t_game *game, int x, int y)
 {
+	static t_texture xd;
+
+	xd.type = 1;
+	xd.color = 0xFF00FFFF;
+	xd.image = NULL;
+	mlx_load_xpm42();
 	(void) x;
 	(void) y;
 	(void) game;
-	return ((t_texture) {1, NULL, NULL, 0xFF00FFFF});
+	return (xd);
 }
 
 void draw_simple(t_game *game, t_intersect inter, uint32_t x, int32_t height)

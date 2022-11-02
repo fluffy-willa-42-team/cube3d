@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:33:07 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/02 12:14:27 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/02 12:33:44 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ typedef enum s_texture_type {
 
 typedef struct s_texture {
 	t_texture_type	type;
-	char			*path;
 	void			*image;
 	int				color;
 }	t_texture;
