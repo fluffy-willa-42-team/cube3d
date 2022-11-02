@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:33:07 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/02 10:23:22 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/02 10:29:22 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,14 @@
 
 /* #####=====----------			Mlx Config Var			 ----------=====##### */
 
-# define WIN_WIDTH	1200
+# define WIN_WIDTH	800
 # define WIN_HEIGHT	800
 
 /* #####=====----------		Ray Caster Config Var		 ----------=====##### */
 
 # define MINIMAP_SIZE		16
 # define COLUMN_WIDTH		4
-# define HEIGTH_OF_BLOCK	300
+# define HEIGTH_OF_BLOCK	WIN_HEIGHT / 2
 # define FOV_ANGLE			PI / 3
 # define FOV_ANGLE1_2		FOV_ANGLE / 2
 
