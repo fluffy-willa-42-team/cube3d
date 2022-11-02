@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:33:07 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/02 10:42:58 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/02 10:48:34 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@
 # define COLUMN_WIDTH		4
 # define HEIGTH_OF_BLOCK	WIN_HEIGHT / 2
 # define FOV_ANGLE			PI / 3
-# define FOV_ANGLE1_2		FOV_ANGLE / 2
 
 /* ************************************************************************** */
 
@@ -49,7 +48,6 @@ typedef struct s_texture {
 	void	*image;
 	int		color;
 }	t_texture;
-
 
 /* ************************************************************************** */
 

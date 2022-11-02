@@ -17,6 +17,13 @@
 
 #include "cube3d.h"
 
+/* #####=====----------		Ray Caster In Program Var	 ----------=====##### */
+
+# define FOV_ANGLE1_2		FOV_ANGLE / 2
+# define FOV_WIDTH			WIN_WIDTH / COLUMN_WIDTH
+# define FOV_INCRE			FOV_ANGLE * COLUMN_WIDTH / WIN_WIDTH
+# define MAX_DIST			HEIGTH_OF_BLOCK / WIN_WIDTH
+
 /* ************************************************************************** */
 
 int draw_minimap(t_game *game);
