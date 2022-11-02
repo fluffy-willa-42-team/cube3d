@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 10:01:39 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/02 13:26:47 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/02 14:47:29 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,6 @@ void ray_caster(t_game *game)
 		// if (dist < MAX_DIST)
 		// 	dist = MAX_DIST;
 		draw_simple(game, inter, i * COLUMN_WIDTH, HEIGTH_OF_BLOCK / dist);
-		// draw_column(game, inter, i * COLUMN_WIDTH, HEIGTH_OF_BLOCK / dist);
+		draw_column(game, inter, i * COLUMN_WIDTH, HEIGTH_OF_BLOCK / dist);
 	}
 }

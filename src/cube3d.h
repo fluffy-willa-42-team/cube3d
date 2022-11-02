@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:33:07 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/02 13:14:44 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/02 14:51:30 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@
 /* #####=====----------		Ray Caster Config Var		 ----------=====##### */
 
 # define MINIMAP_SIZE		16
-# define COLUMN_WIDTH		4
+# define COLUMN_WIDTH		64
 # define HEIGTH_OF_BLOCK	WIN_HEIGHT / 2
 # define FOV_ANGLE			PI / 3
 
@@ -50,7 +50,7 @@ typedef enum s_texture_type {
 
 typedef struct s_texture {
 	t_texture_type	type;
-	mlx_image_t		*image;
+	mlx_texture_t	*image;
 	int				color;
 }	t_texture;
 

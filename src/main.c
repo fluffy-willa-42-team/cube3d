@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:49:27 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/02 13:00:34 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/02 15:09:54 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	hook(void *param)
 	if (mlx_is_key_down(game->param.mlx, MLX_KEY_E))
 		angle_hook(game, 0.001);
 	ray_caster(game);
-	draw_minimap(game);
+	// draw_minimap(game);
 }
 
 int main(void)
@@ -86,22 +86,23 @@ int main(void)
 		{0, NULL, 0}
 	};
 
-	game.temp.type = 1;
+	game.temp.type = IMAGE;
 	game.temp.color = 0xFF00FFFF;
 	game.temp.image = NULL;
 	xpm_t *test = mlx_load_xpm42("../cool.xpm42");
-	
+	if (!test)
+		return (EXIT_FAILURE);
+	game.temp.image = &test->texture;
 
 	game.param.mlx = mlx_init(game.param.width, game.param.height, "MLX42", true);
 	if (!game.param.mlx)
 		return (EXIT_FAILURE);
-	game.temp.image = mlx_texture_to_image(game.param.mlx, &test->texture);
-	
+
 	game.param.img = mlx_new_image(game.param.mlx, game.param.width, game.param.height);
-	
+	if (!game.param.img)
+		return (EXIT_FAILURE);
 	mlx_loop_hook(game.param.mlx, &hook, &game);
 	mlx_image_to_window(game.param.mlx, game.param.img, 0, 0);
-	// mlx_image_to_window(game.param.mlx, game.temp.image, 0, 0);
 	mlx_loop(game.param.mlx);
 
 	mlx_delete_xpm42(test);
