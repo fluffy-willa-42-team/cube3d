@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:53:43 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/02 12:54:20 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/02 17:56:00 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,54 @@
 # define CUBE_FILE 2
 
 # define DEFAUT_TEX_NB 6
+
+/**
+ * @brief Cube separator sequence string
+ * @warning The sequence must be used only at the beginning of a new line.
+ *          If there is another character before the sequence in the line it is
+ *          an undefined behavior.
+ */
+# define SEQ           "~~~"
+
+/**
+ * @brief Cube separator sequence string len
+ * @warning The sequence must be used only at the beginning of a new line.
+ *          If there is another character before the sequence in the line it is
+ *          an undefined behavior.
+ */
+# define SEQ_LEN       3
+
+/**
+ * @brief No cube sequence find
+ * @warning The sequence must be used only at the beginning of a new line.
+ *          If there is another character before the sequence in the line it is
+ *          an undefined behavior.
+ */
+# define SEQ_NO        0
+
+/**
+ * @brief Cube bad separator sequence
+ * @warning The sequence must be used only at the beginning of a new line.
+ *          If there is another character before the sequence in the line it is
+ *          an undefined behavior.
+ */
+# define SEQ_ERR      -1
+
+/**
+ * @brief Cube comment sequence index
+ * @warning The sequence must be used only at the beginning of a new line.
+ *          If there is another character before the sequence in the line it is
+ *          an undefined behavior.
+ */
+# define SEQ_COMM      1
+
+/**
+ * @brief Cube separator sequence index
+ * @warning The sequence must be used only at the beginning of a new line.
+ *          If there is another character before the sequence in the line it is
+ *          an undefined behavior.
+ */
+# define SEQ_ENDOFTEX  2
 
 /**
  * @param type     (int)    Type of the file `.cub` or `.cube`

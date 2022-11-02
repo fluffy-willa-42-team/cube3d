@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:01:25 by mahadad           #+#    #+#             */
-/*   Updated: 2022/10/30 17:38:39 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/02 16:31:11 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,5 +101,7 @@ int	texture_conv(t_parser *data)
 		if (cub_tex_to_cube(data, tmp, index))
 			return (EXIT_FAILURE);
 	}
+	if (!v_add(&data->cube, STRING, SEQ"\n"))
+		return (ret_print(EXIT_FAILURE, ERR_VEC_ADD));
 	return (EXIT_SUCCESS);
 }

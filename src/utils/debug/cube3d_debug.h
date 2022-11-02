@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:54:56 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/02 13:35:18 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/02 17:54:01 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int	ret_print(int ret, const char *msg);
 # define ERR_NO_MAP_AFTER_TEX "Error\nNo map after texture !\n"
 # define ERR_BAD_CUB_CHAR "Error\nUnauthorized character in the map !\n"
 # define ERR_CUB_CONV_FUNC "Error\nf_{floor_level}_{char_type} fail !"
+# define ERR_SEQ_BAD     "Error\nBad cube sequence"
 
 # define UNAUTHORIZED_SPACE "\t\v\f\r"
 # define WHITE_SPACE "\t\v\f\r \n"

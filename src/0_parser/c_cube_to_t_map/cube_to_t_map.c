@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 16:12:15 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/02 14:50:49 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/02 17:55:05 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 #include "cube3d_utils.h"
 
 #include "cube3d_debug.h"
+
+#include "lib_str.h" /* ft_isdigit */
 
 /* EXIT_SUCCESS, EXIT_FAILURE*/
 #include <stdlib.h>
@@ -72,11 +74,6 @@
 int	authzed_cube_char(int c)
 {
 	return ((c >= '!') && (c <= '}'));
-}
-
-int	ft_isdigit(int c)
-{
-	return ((c >= '0') && (c <= '9'));
 }
 
 /**
@@ -153,6 +150,40 @@ int	store_tex(t_parser *data, char *tex)
 	return (EXIT_SUCCESS);
 }
 
+
+
+/**
+ * @brief Check if a line start with a sequence cube comment or
+ *        separator sequence.
+ *        Return `SEQ_NO`       if there is no sequence
+ *        Return `SEQ_ERR`      if there is a bad sequence
+ *        Return `SEQ_COMM`     if is a comment sequence (or `SEQ[0]`)
+ *        Return `SEQ_ENDOFTEX` if is a separator sequence (or `SEQ`)
+ *
+ * @warning The sequence must be used only at the beginning of a new line.
+ *          If there is another character before the sequence in the line it is
+ *          an undefined behavior.
+ * 
+ * @param line 
+ * @return int Return `SEQ_NO`, `SEQ_ERR`, `SEQ_COMM` or `SEQ_ENDOFTEX`
+ */
+int	which_escape_seq(char *line)
+{
+	int			len;
+
+	len = 0;
+	if (*line != SEQ[0])
+		return (SEQ_NO);
+	while(line[len] && line[len] == SEQ[0])
+		len++;
+	if (len == 1)
+		return (SEQ_COMM);
+	if (len == SEQ_LEN)
+		return (SEQ_ENDOFTEX);
+	return (SEQ_ERR);
+}
+
+
 /**
  * @brief Store all texture data in the `data.tex_list` array vector.
  *
@@ -168,7 +199,16 @@ int	store_texture(t_parser *data, char *tex)
 	{
 		while (*tex && (*tex == ' ' || *tex == '\n'))
 			tex++;
-		if (store_tex(data, tex))
+		if (*tex == SEQ[0])
+		{
+			if (which_escape_seq(tex) == SEQ_COMM)
+				;
+			else if (which_escape_seq(tex) == SEQ_ENDOFTEX)
+				break ;
+			else if (which_escape_seq(tex) == SEQ_ERR)
+				return(ret_print(EXIT_FAILURE, ERR_SEQ_BAD));
+		}
+		else if (store_tex(data, tex))
 			return(EXIT_FAILURE);
 
 		// break;//TODO #6 REMOVE Find a break condition when we find all texture
@@ -179,6 +219,8 @@ int	store_texture(t_parser *data, char *tex)
 		 * 
 		 */
 	}
+	//TODO//WIP skip the current line to the next
+
 	return (EXIT_SUCCESS);
 }
 
