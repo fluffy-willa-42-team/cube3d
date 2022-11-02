@@ -6,40 +6,17 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 10:01:39 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/02 10:22:18 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/02 10:33:02 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ray_caster.h"
-#include <stdio.h>
-#include <math.h>
-
 #include "mlx_utils.h"
 
 double loop_len(double n, double len);
 t_intersect get_intersect(t_game *game, t_coord_f64 player, double alpha);
 
-uint32_t get_color_for_direction(const t_intersect inter)
-{
-	if (inter.wall.x - 0.00001 < inter.point.x && inter.point.x < inter.wall.x + 0.00001)
-		return (0xeb4034FF);
-	if (inter.wall.x + 0.99999 < inter.point.x && inter.point.x < inter.wall.x + 1.00001)
-		return (0x4287f5FF);
-	if (inter.wall.y - 0.00001 < inter.point.y && inter.point.y < inter.wall.y + 0.00001)
-		return (0xfcba03FF);
-	if (inter.wall.y + 0.99999 < inter.point.y && inter.point.y < inter.wall.y + 1.00001)
-		return (0x32a852FF);
-	return (0);
-}
-
-void draw_simple(t_game *game, t_intersect inter, uint32_t x, int32_t height)
-{
-	draw_rectangle(&game->param,
-		set_f64(x, WIN_HEIGHT / 2 - height),
-		set_i32(COLUMN_WIDTH, height * 2), 
-		get_color_for_direction(inter)
-	);
-}
+void draw_simple(t_game *game, t_intersect inter, uint32_t x, int32_t height);
 
 double distance(t_game *game, t_intersect inter)
 {
@@ -62,5 +39,6 @@ void ray_caster(t_game *game)
 		if (dist < min_dist)
 			dist = min_dist;
 		draw_simple(game, inter, i * COLUMN_WIDTH, HEIGTH_OF_BLOCK / dist);
+		// draw_column(game, inter, i * COLUMN_WIDTH, HEIGTH_OF_BLOCK / dist);
 	}
 }
