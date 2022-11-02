@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:31:46 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/02 16:45:44 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/02 16:54:59 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,19 @@ void draw_simple(t_game *game, t_intersect inter, uint32_t x, int32_t height)
 	);
 }
 
+t_coord_f64 get_texture_inter(t_intersect inter)
+{
+	if (inter.wall.x - 0.00001 < inter.point.x && inter.point.x < inter.wall.x + 0.00001)
+		return (set_f64(0, inter.point.y - inter.wall.y));
+	if (inter.wall.x + 0.99999 < inter.point.x && inter.point.x < inter.wall.x + 1.00001)
+		return (set_f64(0, inter.point.y - inter.wall.y));
+	if (inter.wall.y - 0.00001 < inter.point.y && inter.point.y < inter.wall.y + 0.00001)
+		return (set_f64(inter.point.x - inter.wall.x, 0));
+	if (inter.wall.y + 0.99999 < inter.point.y && inter.point.y < inter.wall.y + 1.00001)
+		return (set_f64(inter.point.x - inter.wall.x, 0));
+	return (set_f64(0, 0));
+}
+
 /**
  * @param x 		pos x on screen
  * @param height 	Line Height
@@ -53,6 +66,7 @@ void draw_simple(t_game *game, t_intersect inter, uint32_t x, int32_t height)
 void draw_column(t_game *game, t_intersect inter, uint32_t x, int32_t height)
 {
 	const t_texture texture = get_texture(game, inter.wall.x, inter.wall.y);
+	const t_coord_f64 texture_inter = get_texture_inter(inter);
 	if (texture.type == COLOR)
 	{
 		draw_rectangle(&game->param,
@@ -70,7 +84,10 @@ void draw_column(t_game *game, t_intersect inter, uint32_t x, int32_t height)
 		for (int i = 0; i < COLUMN_WIDTH; i++)
 			for (int j = 0; j < height * 2; j++)
 				put_pixel(&game->param, x + i, WIN_HEIGHT / 2 - height + j,
-					get_pixel_image(texture, i, j, ratio));
+					get_pixel_image(texture,
+						i + texture_inter.x * texture.image->width + texture_inter.y * texture.image->height,
+						j,
+					ratio));
 		
 	}
 }

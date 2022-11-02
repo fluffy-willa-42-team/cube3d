@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:49:27 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/02 16:41:06 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/02 16:57:18 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int main(void)
 	game.temp.type = IMAGE;
 	game.temp.color = 0xFF00FFFF;
 	game.temp.image = NULL;
-	xpm_t *test = mlx_load_xpm42("../amazing.xpm42");
+	xpm_t *test = mlx_load_xpm42("./texture/cool.xpm42");
 	if (!test)
 		return (EXIT_FAILURE);
 	game.temp.image = &test->texture;
