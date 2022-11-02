@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:31:46 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/02 13:31:58 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/02 13:32:22 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,13 +66,13 @@ void draw_column(t_game *game, t_intersect inter, uint32_t x, int32_t height)
 	}
 	else if (texture.type == IMAGE && texture.image)
 	{
-		uint32_t ratio_texture_pixel = texture.image->height / height;
-		uint32_t ratio_visible = height / WIN_HEIGHT / 2;
-		for (uint32_t i = 0; i < ratio_visible; i++)
-		{
-			put_pixel(&game->param, x, i, get_pixel_image());
-			i++;
-		}
+		// uint32_t ratio_texture_pixel = texture.image->height / height;
+		// uint32_t ratio_visible = height / WIN_HEIGHT / 2;
+		// for (uint32_t i = 0; i < ratio_visible; i++)
+		// {
+		// 	put_pixel(&game->param, x, i, get_pixel_image());
+		// 	i++;
+		// }
 		// printf("%f")
 	}
 }
