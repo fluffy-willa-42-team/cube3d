@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 10:01:39 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/02 09:53:13 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/02 10:05:26 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,15 @@ uint32_t get_color_for_direction(const t_intersect inter)
 	return (0);
 }
 
+void draw_simple(t_game *game, t_intersect inter, uint32_t x, int32_t height)
+{
+	draw_rectangle(&game->param,
+		set_f64(x, WIN_HEIGHT / 2 - height),
+		set_i32(COLUMN_WIDTH, height * 2), 
+		get_color_for_direction(inter)
+	);
+}
+
 double distance(t_game *game, t_intersect inter)
 {
 	return ((inter.point.x - game->player.coord.x) * game->player.delta.x
@@ -52,11 +61,6 @@ void ray_caster(t_game *game)
 		double dist = distance(game, inter);
 		if (dist < min_dist)
 			dist = min_dist;
-		dist = HEIGTH_OF_BLOCK / dist;
-		draw_rectangle(&game->param,
-			set_f64(i * COLUMN_WIDTH, WIN_HEIGHT / 2 - (int) dist),
-			set_i32(COLUMN_WIDTH, (int) dist * 2), 
-			get_color_for_direction(inter)
-		);
+		draw_simple(game, inter, i * COLUMN_WIDTH, HEIGTH_OF_BLOCK / dist);
 	}
 }
