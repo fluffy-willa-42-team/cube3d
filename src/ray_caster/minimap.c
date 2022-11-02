@@ -26,18 +26,10 @@ void draw_line_s(t_mlx_param *param, t_coord_f64 a, t_coord_f64 b, int32_t color
 	));
 }
 
-void draw_rectangle_s(t_mlx_param *param, t_coord_f64 point, t_coord_i32 size, uint32_t color)
-{
-	for (int i = 0; i < size.x * MINIMAP_SIZE; i++)
-		for (int j = 0; j < size.y * MINIMAP_SIZE; j++)
-			put_pixel(param, point.x * MINIMAP_SIZE + i, point.y * MINIMAP_SIZE + j, color);
-}
-
 void draw_ray(t_game *game, double alpha)
 {
 	t_intersect test = get_intersect(game, game->player.coord, alpha);
 	draw_line_s(&game->param, game->player.coord, test.point, 0xfcba0355);
-	draw_rectangle_s(&game->param, set_f64(test.wall.x, test.wall.y), set_i32(1, 1), 0xfcba03FF);
 }
 
 double loop_len(double n, double len)
@@ -75,7 +67,7 @@ int draw_minimap(t_game *game)
 	);
 	// draw_ray(game, loop_len(game->player.alpha, 		PI2));
 	// float i = 0.02;
-	// while (i < PI/6)
+	// while (i < FOV_ANGLE1_2)
 	// {
 	// 	draw_ray(game, loop_len(game->player.alpha - i,	PI2));
 	// 	draw_ray(game, loop_len(game->player.alpha + i,	PI2));
