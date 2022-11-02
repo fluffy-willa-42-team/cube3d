@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 16:12:15 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/02 14:45:11 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/02 14:50:49 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,10 +171,10 @@ int	store_texture(t_parser *data, char *tex)
 		if (store_tex(data, tex))
 			return(EXIT_FAILURE);
 
-		// break;//TODO REMOVE Find a break condition when we find all texture
+		// break;//TODO #6 REMOVE Find a break condition when we find all texture
 		//WIP
 		/**
-		 * Int the cub conv add `~~~` to separate the end of the game texture from the map.
+		 * - [ ] cub conv add `~~~` to separate the end of the game texture from the map.
 		 * 
 		 * 
 		 */
