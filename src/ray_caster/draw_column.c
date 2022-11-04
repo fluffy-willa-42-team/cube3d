@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:31:46 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/03 12:06:02 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/04 10:21:03 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ t_coord_f64 get_texture_inter(t_intersect inter)
 	if (inter.wall.x - 0.00001 < inter.point.x && inter.point.x < inter.wall.x + 0.00001)
 		return (set_f64(0, inter.point.y - inter.wall.y));
 	if (inter.wall.x + 0.99999 < inter.point.x && inter.point.x < inter.wall.x + 1.00001)
-		return (set_f64(0, inter.point.y - inter.wall.y));
+		return (set_f64(0, 1 - (inter.point.y - inter.wall.y)));
 	if (inter.wall.y - 0.00001 < inter.point.y && inter.point.y < inter.wall.y + 0.00001)
-		return (set_f64(inter.point.x - inter.wall.x, 0));
+		return (set_f64(1 - (inter.point.x - inter.wall.x), 0));
 	if (inter.wall.y + 0.99999 < inter.point.y && inter.point.y < inter.wall.y + 1.00001)
 		return (set_f64(inter.point.x - inter.wall.x, 0));
 	return (set_f64(0, 0));
