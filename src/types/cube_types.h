@@ -35,6 +35,8 @@ t_coord_i32 set_i32(float x, float y);
 
 t_coord_f64 add_f64(t_coord_f64 a, t_coord_f64 b);
 
+int is_equal(double a, double b);
+
 /* ************************************************************************** */
 
 #endif /* CUBE_TYPES_H */
