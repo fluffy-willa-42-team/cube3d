@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:31:46 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/04 12:23:45 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/04 12:35:41 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 #include "mlx_utils.h"
 
-uint32_t get_color_for_direction(const t_intersect inter)
+uint32_t get_color_for_direction(const t_inter inter)
 {
 	if (inter.wall.x - 0.00001 < inter.point.x && inter.point.x < inter.wall.x + 0.00001)
 		return (0xeb4034FF);
@@ -30,7 +30,7 @@ uint32_t get_color_for_direction(const t_intersect inter)
 	return (0);
 }
 
-void draw_simple(t_game *game, t_intersect inter, uint32_t x, int32_t height)
+void draw_simple(t_game *game, t_inter inter, uint32_t x, int32_t height)
 {
 	draw_rectangle(&game->param,
 		set_f64(x, WIN_HEIGHT / 2 - height),
@@ -47,7 +47,7 @@ t_texture get_texture(t_game *game, int x, int y)
 	return (game->temp);
 }
 
-t_coord_f64 get_texture_inter(t_intersect inter)
+t_coord_f64 get_texture_inter(t_inter inter)
 {
 	if (is_equal(inter.point.x, inter.wall.x))
 		return (set_f64(0, inter.point.y - inter.wall.y));
@@ -64,7 +64,7 @@ t_coord_f64 get_texture_inter(t_intersect inter)
  * @param x 		pos x on screen
  * @param height 	Line Height
  */
-void draw_column(t_game *game, t_intersect inter, uint32_t x, int32_t height)
+void draw_column(t_game *game, t_inter inter, uint32_t x, int32_t height)
 {
 	const t_texture texture = get_texture(game, inter.wall.x, inter.wall.y);
 	const t_coord_f64 texture_inter = get_texture_inter(inter);

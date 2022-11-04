@@ -30,8 +30,12 @@
 int draw_minimap(t_game *game);
 void ray_caster(t_game *game);
 
+typedef struct s_inter {
+	t_coord_f64 point;
+	t_coord_i32 wall;
+}	t_inter;
+
 typedef struct s_intersect {
-	int			type;
 	t_coord_f64 point;
 	t_coord_i32 wall;
 	t_coord_i32 prev_wall;

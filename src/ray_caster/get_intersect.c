@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 13:23:03 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/04 12:29:14 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/04 12:41:14 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,24 +37,16 @@ double prot_tan(double alpha)
  */
 int is_wall(t_game *game, t_intersect inter)
 {
-	int res;
-	
 	if (0 <= inter.prev_wall.x && inter.prev_wall.x < game->map.width
 		&& 0 <= inter.prev_wall.y && inter.prev_wall.y < game->map.height)
 	{
-		res = game->map.array[inter.prev_wall.y][inter.prev_wall.x];
-		if (res)
-			inter.type = 1;
-		return (res);
+		if (game->map.array[inter.prev_wall.y][inter.prev_wall.x])
+			inter.wall = inter.prev_wall;
+		return (game->map.array[inter.prev_wall.y][inter.prev_wall.x]);
 	}
 	if (0 <= inter.wall.x && inter.wall.x < game->map.width
 		&& 0 <= inter.wall.y && inter.wall.y < game->map.height)
-	{
-		res = game->map.array[inter.wall.y][inter.wall.x];
-		if (res)
-			inter.type = 2;
-		return (res);
-	}
+		return (game->map.array[inter.wall.y][inter.wall.x]);
 	return (-1);
 }
 
@@ -63,7 +55,7 @@ double dist(t_coord_f64 a, t_coord_f64 b)
 	return (fabs(a.x - b.x) + fabs(a.y - b.y));
 }
 
-t_intersect get_intersect(t_game *game, t_coord_f64 player, double alpha)
+t_inter get_intersect(t_game *game, t_coord_f64 player, double alpha)
 {
 	const t_coord_i32 pos	= set_i32(player.x, player.y);
 	const t_coord_f64 delta	= set_f64(player.x - pos.x, player.y - pos.y);
@@ -86,6 +78,6 @@ t_intersect get_intersect(t_game *game, t_coord_f64 player, double alpha)
 		y_is_wall = is_wall(game, yIntersect);
 	}
 	if (dist(player, xIntersect.point) < dist(player, yIntersect.point))
-		return (xIntersect);
-	return (yIntersect);
+		return ((t_inter){xIntersect.point, xIntersect.wall});
+	return ((t_inter){yIntersect.point, yIntersect.wall});
 }
