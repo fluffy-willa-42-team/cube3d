@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 13:23:03 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/04 13:03:23 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/04 14:08:11 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,17 +38,19 @@ double prot_tan(double alpha)
  * 
  * @return 0 if not, 1 if yes, -1 if out 
  */
-int is_wall(t_game *game, t_intersect inter)
+int is_wall(t_game *game, t_intersect *inter)
 {
-	if (0 <= inter.wall.x && inter.wall.x < game->map.width
-		&& 0 <= inter.wall.y && inter.wall.y < game->map.height)
+	if (0 <= inter->prev_wall.x && inter->prev_wall.x < game->map.width
+		&& 0 <= inter->prev_wall.y && inter->prev_wall.y < game->map.height
+		&& game->map.array[inter->prev_wall.y][inter->prev_wall.x])
 	{
-		return (game->map.array[inter.wall.y][inter.wall.x]);	
+		inter->wall = inter->prev_wall;
+		return (1);	
 	}
-	if (0 <= inter.prev_wall.x && inter.prev_wall.x < game->map.width
-		&& 0 <= inter.prev_wall.y && inter.prev_wall.y < game->map.height)
+	else if (0 <= inter->wall.x && inter->wall.x < game->map.width
+		&& 0 <= inter->wall.y && inter->wall.y < game->map.height)
 	{
-		return (game->map.array[inter.prev_wall.y][inter.prev_wall.x]);	
+		return (game->map.array[inter->wall.y][inter->wall.x]);	
 	}
 	return (-1);
 }
@@ -67,18 +69,18 @@ t_inter get_intersect(t_game *game, t_coord_f64 player, double alpha)
 	t_intersect xIntersect = get_init_x(player, delta, alpha, tan_a);
 	t_intersect yIntersect = get_init_y(player, delta, alpha, tan_a);
 
-	int x_is_wall = is_wall(game, xIntersect);
-	int y_is_wall = is_wall(game, yIntersect);
+	int x_is_wall = is_wall(game, &xIntersect);
+	int y_is_wall = is_wall(game, &yIntersect);
 
 	while (x_is_wall == 0)
 	{
 		xIntersect = get_step_x(xIntersect, alpha, tan_a);
-		x_is_wall = is_wall(game, xIntersect);
+		x_is_wall = is_wall(game, &xIntersect);
 	}
 	while (y_is_wall == 0)
 	{
 		yIntersect = get_step_y(yIntersect, alpha, tan_a);
-		y_is_wall = is_wall(game, yIntersect);
+		y_is_wall = is_wall(game, &yIntersect);
 	}
 	if (dist(player, xIntersect.point) < dist(player, yIntersect.point))
 		return ((t_inter){xIntersect.point, xIntersect.wall});
