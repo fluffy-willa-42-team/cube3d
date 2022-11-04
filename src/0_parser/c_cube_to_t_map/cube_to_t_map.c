@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 16:12:15 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/04 17:00:28 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/04 18:43:09 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,7 +152,7 @@ int	store_tex(t_parser *data, char *tex)
 	tmp.type = find_tex_type(tex);
 	tmp.path = &*tex;
 	if (!v_add(&data->tex_list, DEFAULT, &tmp))
-		ret_print(EXIT_FAILURE, ERR_VEC_ADD);
+		return (ret_print(EXIT_FAILURE, ERR_VEC_ADD));
 	return (EXIT_SUCCESS);
 }
 
@@ -278,7 +278,7 @@ int	cube_to_t_map(t_parser *data)
 		return (EXIT_FAILURE);
 	t_texture *tmp = data->tex_list.buffer;
 	for (size_t i = 0; i < data->tex_list.len; i++)
-		printf("[%lu] {\n    type :   %d,\n    token :  \'%c\',\n    *path :  \"%s\",\n    *image : [%p],\n    color :  [%d, %d, %d, %d]\n    }\n", i, (&tmp[i])->type, (&tmp[i])->token, (&tmp[i])->path, (&tmp[i])->image, get_r((&tmp[i])->color), get_g((&tmp[i])->color), get_b((&tmp[i])->color), get_a((&tmp[i])->color));
+		printf("[%lu] {\n    type :   %d,\n    token :  \'%c\',\n    *path :  \"%.10s\",\n    *image : [%p],\n    color :  [%d, %d, %d, %d]\n    }\n", i, (&tmp[i])->type, (&tmp[i])->token, (&tmp[i])->path, (&tmp[i])->image, get_r((&tmp[i])->color), get_g((&tmp[i])->color), get_b((&tmp[i])->color), get_a((&tmp[i])->color));
 	
 	return (EXIT_SUCCESS);
 }
