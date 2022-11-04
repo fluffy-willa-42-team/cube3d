@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:33:07 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/02 14:26:29 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/04 16:12:58 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ typedef struct s_texture {
 	char			token;
 	char			*path;
 	void			*image;
-	int				color;
+	uint32_t		color;
 }	t_texture;
 
 typedef struct s_coord_f64 {

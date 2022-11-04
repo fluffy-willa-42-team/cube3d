@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 16:12:15 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/02 19:11:28 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/04 17:00:28 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,23 +102,29 @@ int	authzed_cube_char(int c)
 int	find_tex_type(char *tex)
 {
 	int	x;
+	int	num_len;
+	int	comma_nb;
 
 	if ((*tex && *tex == '.') && (*(tex + 1) && *(tex + 1) == '/'))
 		return (IMAGE);
 	x = 0;
-	while (tex[x])
+	comma_nb = 0;
+	num_len = 0;
+	while (ft_isdigit(tex[x]))
 	{
-		if (x == 3 || x == 7)
+		num_len++;
+		if (tex[x + 1] == ',')
 		{
-			if (tex[x] != ',')
-				return (UNDEFINED);
+			comma_nb++;
+			x++;
+			num_len = 0;
 		}
-		else if (!ft_isdigit(tex[x]))
+		if (num_len > 3)
 			return (UNDEFINED);
-		if (x == 10)
-			return (COLOR);
 		x++;
 	}
+	if (comma_nb == 2 && num_len)
+		return (COLOR);
 	return (UNDEFINED);
 }
 
@@ -134,19 +140,19 @@ int	store_tex(t_parser *data, char *tex)
 {
 	t_texture	tmp;
 
+	struct_set(&tmp, sizeof(t_texture));
 	if (!authzed_cube_char(*tex))
 		return (ret_print(EXIT_FAILURE, ERR_TEX_FORMAT));
-	data->tex_list = v_init(sizeof(t_texture), NULL, NULL);
-	if (!v_alloc(&data->tex_list, SET, 16))
-		return (ret_print(EXIT_FAILURE, ERR_VEC_ALLOC));
 	tmp.token = *tex;
 	tex++;
-	while (*tex && (*tex == ' ' || *tex == '\n'))
+	while (*tex && *tex == ' ')
 		tex++;
 	if (!*tex)
 		return (ret_print(EXIT_FAILURE, ERR_TEX_FORMAT));
 	tmp.type = find_tex_type(tex);
-	printf("token [%c]\ntype [%d]\n", tmp.token, tmp.type);
+	tmp.path = &*tex;
+	if (!v_add(&data->tex_list, DEFAULT, &tmp))
+		ret_print(EXIT_FAILURE, ERR_VEC_ADD);
 	return (EXIT_SUCCESS);
 }
 
@@ -195,10 +201,15 @@ int	which_escape_seq(char *line)
  */
 int	store_texture(t_parser *data, char *tex)
 {
+	data->tex_list = v_init(sizeof(t_texture), NULL, NULL);
+	if (!v_alloc(&data->tex_list, SET, 16))
+		return (ret_print(EXIT_FAILURE, ERR_VEC_ALLOC));
 	while (*tex)
 	{
 		while (*tex && (*tex == ' ' || *tex == '\n'))
 			tex++;
+		if (!*tex)
+			break ;
 		if (*tex == SEQ[0])
 		{
 			if (which_escape_seq(tex) == SEQ_COMM)
@@ -210,19 +221,50 @@ int	store_texture(t_parser *data, char *tex)
 		}
 		else if (store_tex(data, tex))
 			return(EXIT_FAILURE);
-
+		//TODO//WIP skip the current line to the next
+		while (*tex && *tex != '\n')
+			tex++;
 		// break;//TODO #6 REMOVE Find a break condition when we find all texture
 		//WIP
 		/**
-		 * - [ ] cub conv add `~~~` to separate the end of the game texture from the map.
+		 * - [x] cub conv add `~~~` to separate the end of the game texture from the map.
 		 * 
 		 * 
 		 */
 	}
-	//TODO//WIP skip the current line to the next
-
 	return (EXIT_SUCCESS);
 }
+
+//TODO REMOVE
+/******************************************************************************/
+/* */ // Get the red channel.
+/* */ int get_r(int rgba)
+/* */ {
+/* */     // Move 3 bytes to the right and mask out the first byte.
+/* */     return ((rgba >> 24) & 0xFF);
+/* */ }
+/* */ 
+/* */ // Get the green channel.
+/* */ int get_g(int rgba)
+/* */ {
+/* */     // Move 2 bytes to the right and mask out the first byte.
+/* */     return ((rgba >> 16) & 0xFF);
+/* */ }
+/* */ 
+/* */ // Get the blue channel.
+/* */ int get_b(int rgba)
+/* */ {
+/* */     // Move 1 byte to the right and mask out the first byte.
+/* */     return ((rgba >> 8) & 0xFF);
+/* */ }
+/* */ 
+/* */ // Get the alpha channel.
+/* */ int get_a(int rgba)
+/* */ {
+/* */     // Move 0 bytes to the right and mask out the first byte.
+/* */     return (rgba & 0xFF);
+/* */ }
+/******************************************************************************/
 
 /**
  * @brief 
@@ -234,5 +276,9 @@ int	cube_to_t_map(t_parser *data)
 {
 	if (store_texture(data, data->cube.buffer))
 		return (EXIT_FAILURE);
+	t_texture *tmp = data->tex_list.buffer;
+	for (size_t i = 0; i < data->tex_list.len; i++)
+		printf("[%lu] {\n    type :   %d,\n    token :  \'%c\',\n    *path :  \"%s\",\n    *image : [%p],\n    color :  [%d, %d, %d, %d]\n    }\n", i, (&tmp[i])->type, (&tmp[i])->token, (&tmp[i])->path, (&tmp[i])->image, get_r((&tmp[i])->color), get_g((&tmp[i])->color), get_b((&tmp[i])->color), get_a((&tmp[i])->color));
+	
 	return (EXIT_SUCCESS);
 }
