@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:49:27 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/03 12:04:41 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/04 10:10:48 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int main(void)
 	game.temp.type = IMAGE;
 	game.temp.color = 0xFF00FFFF;
 	game.temp.image = NULL;
-	xpm_t *test = mlx_load_xpm42("./texture/cool.xpm42");
+	xpm_t *test = mlx_load_xpm42("./texture/mc/grass_top.xpm42");
 	if (!test)
 		return (EXIT_FAILURE);
 	game.temp.image = &test->texture;
