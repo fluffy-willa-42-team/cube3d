@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:49:27 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/04 11:51:49 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/04 11:54:28 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,10 @@ int main(void)
 	mlx_image_to_window(game.param.mlx, game.param.img, 0, 0);
 	mlx_loop(game.param.mlx);
 
-	mlx_delete_texture(game.temp.image);
+	if (game.temp.image)
+		mlx_delete_texture(game.temp.image);
+	if (game.skybox.image)
+		mlx_delete_texture(game.skybox.image);
 	mlx_delete_image(game.param.mlx, game.param.img);
 	mlx_terminate(game.param.mlx);
 	return (EXIT_SUCCESS);
