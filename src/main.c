@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:49:27 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/04 12:24:40 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/04 14:46:01 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,9 +95,9 @@ int main(void)
 		return (EXIT_FAILURE);
 	// init_color(&game.temp, 0xFF00FFFF);
 	
-	// if (!init_image(&game.skybox, "./texture/sky.xpm42"))
-	// 	return (EXIT_FAILURE);
-	init_color(&game.skybox, 0x325884FF);
+	if (!init_image(&game.skybox, "./texture/sky.xpm42"))
+		return (EXIT_FAILURE);
+	// init_color(&game.skybox, 0x325884FF);
 
 	game.param.mlx = mlx_init(game.param.width, game.param.height, "MLX42", true);
 	if (!game.param.mlx)
