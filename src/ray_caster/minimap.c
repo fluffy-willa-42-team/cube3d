@@ -30,6 +30,7 @@ void draw_ray(t_game *game, double alpha)
 {
 	t_intersect test = get_intersect(game, game->player.coord, alpha);
 	draw_line_s(&game->param, game->player.coord, test.point, 0xfcba0355);
+	draw_rectangle(&game->param, set_f64(test.prev_wall.x * MINIMAP_SIZE, test.prev_wall.y * MINIMAP_SIZE), set_i32(MINIMAP_SIZE, MINIMAP_SIZE), 0xaF2278FF);
 }
 
 double loop_len(double n, double len)
@@ -65,7 +66,7 @@ int draw_minimap(t_game *game)
 		set_f64(game->player.coord.x * si - 2, game->player.coord.y * si - 2),
 		set_i32(4, 4), 0xFF00FFFF
 	);
-	// draw_ray(game, loop_len(game->player.alpha, 		PI2));
+	draw_ray(game, loop_len(game->player.alpha, 		PI2));
 	// float i = 0.02;
 	// while (i < FOV_ANGLE1_2)
 	// {
