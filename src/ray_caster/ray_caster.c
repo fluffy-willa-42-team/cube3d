@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 10:01:39 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/04 11:25:29 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/04 11:43:46 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,14 @@ double distance(t_game *game, t_intersect inter)
 		+ (inter.point.y - game->player.coord.y) * game->player.delta.y);
 }
 
+// draw Skybox to be redone (Extremely expensive in performense)
 void draw_skybox(t_game *game)
 {
 	if (game->skybox.type == IMAGE)
-		draw_image(game, game->skybox, set_i32(0, 0), set_i32(WIN_WIDTH * 4, WIN_HEIGHT));
+	{
+		draw_image(game, game->skybox, set_i32((-game->player.alpha / PI2) * 4 * WIN_WIDTH, 0), set_i32(WIN_WIDTH * 4, WIN_HEIGHT));
+		draw_image(game, game->skybox, set_i32((1 - game->player.alpha / PI2) * 4 * WIN_WIDTH, 0), set_i32(WIN_WIDTH * 4, WIN_HEIGHT));
+	}
 	else if (game->skybox.type == COLOR)
 		draw_rectangle(&game->param, set_f64(0, 0), set_i32(WIN_WIDTH, WIN_HEIGHT), game->skybox.color);
 	else
