@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:49:27 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/04 11:49:12 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/04 11:51:49 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,8 @@ int main(void)
 
 	if (!init_image(&game.temp, "./texture/mc/grass_side.xpm42"))
 		return (EXIT_FAILURE);
+	// init_color(&game.temp, 0xFF00FFFF);
+	
 	// if (!init_image(&game.skybox, "./texture/sky.xpm42"))
 	// 	return (EXIT_FAILURE);
 	init_color(&game.skybox, 0x325884FF);
