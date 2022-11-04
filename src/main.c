@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:49:27 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/04 10:23:21 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/04 10:38:01 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,9 @@ void	hook(void *param)
 	draw_minimap(game);
 }
 
+t_texture *init_image(t_texture *ptr, char *path);
+t_texture *init_color(t_texture *ptr, uint32_t color);
+
 int main(void)
 {
 	t_game game = {{NULL, NULL, WIN_HEIGHT, WIN_WIDTH},
@@ -84,17 +87,15 @@ int main(void)
 			{1, 1, 1, 1, 1, 1, 1, 1},
 		}, 8, 8},
 		{{3.5f, 3.5f}, 0.0f, {cos(0), sin(0)}},
+		{0, NULL, 0},
 		{0, NULL, 0}
 	};
 
-	game.temp.type = IMAGE;
-	game.temp.color = 0xFF00FFFF;
-	game.temp.image = NULL;
-	xpm_t *test = mlx_load_xpm42("./texture/mc/grass_side.xpm42");
-	if (!test)
+	if (!init_image(&game.temp, "./texture/mc/grass_side.xpm42"))
 		return (EXIT_FAILURE);
-	game.temp.image = &test->texture;
-
+	if (!init_image(&game.skybox, "./texture/cool.xpm42"))
+		return (EXIT_FAILURE);
+	
 	game.param.mlx = mlx_init(game.param.width, game.param.height, "MLX42", true);
 	if (!game.param.mlx)
 		return (EXIT_FAILURE);
@@ -106,7 +107,7 @@ int main(void)
 	mlx_image_to_window(game.param.mlx, game.param.img, 0, 0);
 	mlx_loop(game.param.mlx);
 
-	mlx_delete_xpm42(test);
+	mlx_delete_texture(game.temp.image);
 	mlx_delete_image(game.param.mlx, game.param.img);
 	mlx_terminate(game.param.mlx);
 	return (EXIT_SUCCESS);

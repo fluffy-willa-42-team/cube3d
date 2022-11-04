@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 10:01:39 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/04 10:24:21 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/04 10:27:34 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ double distance(t_game *game, t_intersect inter)
 
 void ray_caster(t_game *game)
 {
+	// draw_image(game, game->skybox);
 	draw_rectangle(&game->param, set_f64(0, 0), set_i32(WIN_WIDTH, WIN_HEIGHT), 0x000000FF);
 	for (uint32_t i = 0; i < FOV_WIDTH; i++)
 	{

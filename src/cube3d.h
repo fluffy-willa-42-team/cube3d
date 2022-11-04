@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:33:07 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/02 16:53:56 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/04 10:37:39 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ typedef struct s_game {
 	t_map 		map;
 	t_player	player;
 	t_texture	temp;
+	t_texture	skybox;
 }	t_game;
 
 
