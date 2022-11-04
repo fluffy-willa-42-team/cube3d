@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 10:14:48 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/04 12:40:04 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/04 12:43:11 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ t_intersect get_step_x(t_intersect prev, double alpha, double tan_a)
 		(double []){-1, 1}[0 <= alpha && alpha < PI]
 	));
 	res.prev_wall = prev.wall;
-	// res.prev_wall.y -= (int []){1, -1}[0 <= alpha && alpha < PI];
 	res.wall = set_i32(res.point.x,
 		(((float) res.point.y) - (int []){1, 0}[0 <= alpha && alpha < PI])
 	);
@@ -68,7 +67,6 @@ t_intersect get_step_y(t_intersect prev, double alpha, double tan_a)
 		(double []){1, -1}[PI1_2 <= alpha && alpha < PI3_2] * tan_a
 	));
 	res.prev_wall = prev.wall;
-	// res.prev_wall.x -= (int []){-1, 1}[PI1_2 <= alpha && alpha < PI3_2];
 	res.wall = set_i32(
 		(((float) res.point.x) - (int []){0, 1}[PI1_2 <= alpha && alpha < PI3_2]),
 		((float) res.point.y)

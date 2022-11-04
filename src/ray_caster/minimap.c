@@ -15,7 +15,7 @@
 
 #include <stdio.h>
 
-t_intersect get_intersect(t_game *game, t_coord_f64 player, double alpha);
+t_inter get_intersect(t_game *game, t_coord_f64 player, double alpha);
 
 void draw_line_s(t_mlx_param *param, t_coord_f64 a, t_coord_f64 b, int32_t color)
 {
@@ -28,9 +28,12 @@ void draw_line_s(t_mlx_param *param, t_coord_f64 a, t_coord_f64 b, int32_t color
 
 void draw_ray(t_game *game, double alpha)
 {
-	t_intersect test = get_intersect(game, game->player.coord, alpha);
+	t_inter test = get_intersect(game, game->player.coord, alpha);
 	draw_line_s(&game->param, game->player.coord, test.point, 0xfcba0355);
-	draw_rectangle(&game->param, set_f64(test.prev_wall.x * MINIMAP_SIZE, test.prev_wall.y * MINIMAP_SIZE), set_i32(MINIMAP_SIZE, MINIMAP_SIZE), 0xaF2278FF);
+	// draw_rectangle(&game->param,
+	// 	set_f64(test.wall.x * MINIMAP_SIZE, test.wall.y * MINIMAP_SIZE),
+	// 	set_i32(MINIMAP_SIZE, MINIMAP_SIZE), 0xaF2278FF
+	// );
 }
 
 double loop_len(double n, double len)

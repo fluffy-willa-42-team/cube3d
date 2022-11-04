@@ -6,12 +6,15 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 13:23:03 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/04 12:41:14 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/04 13:03:23 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ray_caster.h"
 #include <math.h>
+#include <stdio.h>
+
+#include "mlx_utils.h"
 
 t_intersect	get_init_x(t_coord_f64 player, t_coord_f64 delta, double alpha, double tan_a);
 t_intersect	get_init_y(t_coord_f64 player, t_coord_f64 delta, double alpha, double tan_a);
@@ -37,16 +40,16 @@ double prot_tan(double alpha)
  */
 int is_wall(t_game *game, t_intersect inter)
 {
+	if (0 <= inter.wall.x && inter.wall.x < game->map.width
+		&& 0 <= inter.wall.y && inter.wall.y < game->map.height)
+	{
+		return (game->map.array[inter.wall.y][inter.wall.x]);	
+	}
 	if (0 <= inter.prev_wall.x && inter.prev_wall.x < game->map.width
 		&& 0 <= inter.prev_wall.y && inter.prev_wall.y < game->map.height)
 	{
-		if (game->map.array[inter.prev_wall.y][inter.prev_wall.x])
-			inter.wall = inter.prev_wall;
-		return (game->map.array[inter.prev_wall.y][inter.prev_wall.x]);
+		return (game->map.array[inter.prev_wall.y][inter.prev_wall.x]);	
 	}
-	if (0 <= inter.wall.x && inter.wall.x < game->map.width
-		&& 0 <= inter.wall.y && inter.wall.y < game->map.height)
-		return (game->map.array[inter.wall.y][inter.wall.x]);
 	return (-1);
 }
 
