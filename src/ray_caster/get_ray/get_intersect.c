@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 13:23:03 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/07 11:34:32 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/07 11:53:43 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,13 @@ int is_wall(t_game *game, t_intersect *inter)
 	t_chunk next = get_chunk(game, inter->wall);
 	t_chunk prev = get_chunk(game, inter->prev_wall);
 	
-	if (prev.type > 0 && get_wall_texture(&prev, inter->point))
+	if (prev.type < 0 && next.type < 0)
+		return (-1);
+	if (get_wall_texture(&prev, inter->point))
 		return (1);
-	else if (next.type > -1)
-		return (next.type);	
-	return (-1);
+	else if (get_wall_texture(&next, inter->point))
+		return (1);
+	return (0);
 }
 
 double dist(t_coord_f64 a, t_coord_f64 b)
