@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 13:23:03 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/07 14:05:07 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/07 14:06:59 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,12 @@ int is_wall(t_game *game, t_intersect *inter)
 	
 	if (prev.type < 0 && next.type < 0)
 		return (-1);
-	if (get_wall_texture(&next, inter->point))
+	if (get_wall_texture(&prev, inter->point))
+	{
+		inter->wall = inter->prev_wall;
 		return (1);
-	else if (get_wall_texture(&prev, inter->point))
+	}
+	else if (get_wall_texture(&next, inter->point))
 		return (1);
 	return (0);
 }
