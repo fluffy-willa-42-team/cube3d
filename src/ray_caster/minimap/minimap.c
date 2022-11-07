@@ -15,6 +15,7 @@
 
 #include <stdio.h>
 
+double loop_len(double n, double len);
 t_inter get_intersect(t_game *game, t_coord_f64 player, double alpha);
 
 void draw_line_s(t_mlx_param *param, t_coord_f64 a, t_coord_f64 b, int32_t color)
@@ -34,17 +35,6 @@ void draw_ray(t_game *game, double alpha)
 	// 	set_f64(test.wall.x * MINIMAP_SIZE, test.wall.y * MINIMAP_SIZE),
 	// 	set_i32(MINIMAP_SIZE, MINIMAP_SIZE), 0xaF2278FF
 	// );
-}
-
-double loop_len(double n, double len)
-{
-	if (len == 0)
-		return (n);
-	while (n > len)
-		n -= len;
-	while (n < 0)
-		n += len;
-	return (n);
 }
 
 int draw_minimap(t_game *game)
