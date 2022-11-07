@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:33:07 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/07 12:29:23 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/07 12:32:37 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@
 
 /* #####=====----------		Ray Caster Config Var		 ----------=====##### */
 
-# define MINIMAP_SIZE		30
+# define MINIMAP_SIZE		20
 # define COLUMN_WIDTH		1
 # define HEIGTH_OF_BLOCK	WIN_HEIGHT / 2
 # define FOV_ANGLE			PI / 3
