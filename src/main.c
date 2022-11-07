@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:49:27 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/07 12:57:41 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/07 14:11:49 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,15 +79,16 @@ int main(void)
 	t_game game = {{NULL, NULL, WIN_HEIGHT, WIN_WIDTH},
 		{{
 			{1, 1, 1, 1, 1, 1, 1, 1},
+			{1, 0, 3, 0, 0, 0, 0, 1},
 			{1, 0, 2, 0, 0, 0, 0, 1},
-			{1, 0, 2, 0, 0, 0, 0, 1},
-			{1, 0, 0, 3, 3, 0, 0, 1},
-			{1, 0, 2, 0, 0, 0, 0, 1},
+			{1, 0, 4, 3, 3, 0, 0, 1},
+			{1, 0, 2, 1, 0, 0, 0, 1},
 			{1, 0, 0, 0, 0, 1, 0, 1},
 			{1, 0, 0, 0, 0, 0, 0, 1},
 			{1, 1, 1, 1, 1, 1, 1, 1},
 		}, 8, 8},
 		{{3.5f, 3.5f}, 0.0f, {cos(0), sin(0)}},
+		{0, NULL, 0},
 		{0, NULL, 0},
 		{0, NULL, 0}
 	};
@@ -95,6 +96,10 @@ int main(void)
 	if (!init_image(&game.temp, "./texture/mc/grass_side.xpm42"))
 		return (EXIT_FAILURE);
 	// init_color(&game.temp, 0xFF00FFFF);
+
+	if (!init_image(&game.temp1, "./texture/mc/stone.xpm42"))
+		return (EXIT_FAILURE);
+	// init_color(&game.temp1, 0xFF00FFFF);
 	
 	// if (!init_image(&game.skybox, "./texture/sky.xpm42"))
 	// 	return (EXIT_FAILURE);
@@ -113,6 +118,8 @@ int main(void)
 
 	if (game.temp.image)
 		mlx_delete_texture(game.temp.image);
+	if (game.temp.image)
+		mlx_delete_texture(game.temp1.image);
 	if (game.skybox.image)
 		mlx_delete_texture(game.skybox.image);
 	mlx_delete_image(game.param.mlx, game.param.img);

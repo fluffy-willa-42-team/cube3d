@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 10:56:11 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/07 12:24:17 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/07 14:10:47 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,8 @@ int is_equal(double a, double b);
 
 t_chunk get_chunk(t_game *game, t_coord_i32 coord)
 {
-	t_texture *ptr;
-
-	ptr = &game->temp;
+	t_texture *ptr = &game->temp;
+	t_texture *ptr1 = &game->temp1;
 	
 	if (!(0 <= coord.x && coord.x < (int) game->map.width
 		&& 0 <= coord.y && coord.y < (int) game->map.height))
@@ -28,9 +27,11 @@ t_chunk get_chunk(t_game *game, t_coord_i32 coord)
 	if (game->map.array[coord.y][coord.x] == 1)
 		return ((t_chunk) {1, coord, ptr, ptr, ptr, ptr, ptr, ptr});
 	if (game->map.array[coord.y][coord.x] == 2)
-		return ((t_chunk) {1, coord, NULL, NULL, ptr, ptr, ptr, ptr});
+		return ((t_chunk) {1, coord, NULL, NULL, ptr1, ptr1, ptr, ptr});
 	if (game->map.array[coord.y][coord.x] == 3)
-		return ((t_chunk) {1, coord, ptr, ptr, NULL, NULL, ptr, ptr});
+		return ((t_chunk) {1, coord, ptr1, ptr1, NULL, NULL, ptr, ptr});
+	if (game->map.array[coord.y][coord.x] == 4)
+		return ((t_chunk) {1, coord, NULL, NULL, ptr1, NULL, ptr, ptr});
 	return ((t_chunk) {0, coord, NULL, NULL, NULL, NULL, NULL, NULL});
 }
 
