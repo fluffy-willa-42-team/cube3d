@@ -30,7 +30,7 @@ void draw_line_s(t_mlx_param *param, t_coord_f64 a, t_coord_f64 b, int32_t color
 void draw_ray(t_game *game, double alpha)
 {
 	t_inter test = get_intersect(game, game->player.coord, alpha);
-	draw_line_s(&game->param, game->player.coord, test.point, 0xfcba0355);
+	draw_line_s(&game->param, game->player.coord, test.point, 0xfcba03FF);
 	// draw_rectangle(&game->param,
 	// 	set_f64(test.wall.x * MINIMAP_SIZE, test.wall.y * MINIMAP_SIZE),
 	// 	set_i32(MINIMAP_SIZE, MINIMAP_SIZE), 0xaF2278FF
@@ -50,9 +50,12 @@ int draw_minimap(t_game *game)
 			if (map->array[y][x] == 1)
 				draw_rectangle(param, (t_coord_f64){x * si, y * si},
 					(t_coord_i32){si, si}, 0x770000FF);
-			else if (map->array[y][x] > 1)
+			else if (map->array[y][x] == 2)
 				draw_rectangle(param, (t_coord_f64){x * si, y * si},
 					(t_coord_i32){si, si}, 0x21634cFF);
+			else if (map->array[y][x] == 3)
+				draw_rectangle(param, (t_coord_f64){x * si, y * si},
+					(t_coord_i32){si, si}, 0x5c1d4bFF);
 			else
 				draw_rectangle(param, (t_coord_f64){x * si, y * si},
 					(t_coord_i32){si, si}, 0x222222FF);
