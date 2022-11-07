@@ -20,10 +20,11 @@
 /* #####=====----------		Ray Caster In Program Var	 ----------=====##### */
 // DONT TOUCH
 
-# define FOV_ANGLE1_2		FOV_ANGLE / 2
-# define FOV_WIDTH			WIN_WIDTH / COLUMN_WIDTH
-# define FOV_INCRE			FOV_ANGLE * COLUMN_WIDTH / WIN_WIDTH
-# define MAX_DIST			HEIGTH_OF_BLOCK / WIN_WIDTH
+# define FOV_ANGLE1_2		(double) (FOV_ANGLE) / 2
+# define FOV_WIDTH			(double) (WIN_WIDTH) / COLUMN_WIDTH
+# define FOV_INCRE			(double) (FOV_ANGLE) * COLUMN_WIDTH / WIN_WIDTH
+# define MAX_DIST			(double) (HEIGTH_OF_BLOCK) / WIN_WIDTH
+# define MDDL_SCRN_HGTH		WIN_HEIGHT / 2 
 
 /* ************************************************************************** */
 
