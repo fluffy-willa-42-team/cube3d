@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:31:46 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/04 12:35:41 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/07 11:00:21 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 #include <stdlib.h>
 
 #include "mlx_utils.h"
+
+int is_equal(double a, double b);
 
 uint32_t get_color_for_direction(const t_inter inter)
 {

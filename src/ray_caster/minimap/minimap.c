@@ -43,9 +43,9 @@ int draw_minimap(t_game *game)
 	t_map *map			= &game->map;
 	int si = MINIMAP_SIZE;
 
-	for (int y = 0; y < map->width; y++)
+	for (uint32_t y = 0; y < map->width; y++)
 	{
-		for (int x = 0; x < map->width; x++)
+		for (uint32_t x = 0; x < map->width; x++)
 		{
 			if (map->array[y][x])
 				draw_rectangle(param, (t_coord_f64){x * si, y * si},

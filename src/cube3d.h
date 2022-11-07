@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:33:07 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/04 14:45:05 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/07 11:01:13 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@
 
 /* #####=====----------		Ray Caster Config Var		 ----------=====##### */
 
-# define MINIMAP_SIZE		40
+# define MINIMAP_SIZE		64
 # define COLUMN_WIDTH		1
 # define HEIGTH_OF_BLOCK	WIN_HEIGHT / 2
 # define FOV_ANGLE			PI / 3
@@ -59,12 +59,12 @@ typedef struct s_texture {
 typedef struct s_chunk {
 	int32_t		type;
 	t_coord_i32	coord;
-	t_texture	north;
-	t_texture	east;
-	t_texture	west;
-	t_texture	south;
-	t_texture	ceiling;
-	t_texture	floor;
+	t_texture	*north;
+	t_texture	*east;
+	t_texture	*west;
+	t_texture	*south;
+	t_texture	*ceiling;
+	t_texture	*floor;
 }	t_chunk;
 
 typedef struct s_entity {
@@ -78,8 +78,8 @@ typedef struct s_entity {
 
 typedef struct s_map {
 	int32_t array[8][8];
-	int32_t height;
-	int32_t width;
+	uint32_t height;
+	uint32_t width;
 }	t_map;
 
 typedef struct s_mlx_param {

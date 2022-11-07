@@ -35,6 +35,14 @@ typedef struct s_inter {
 	t_coord_i32 wall;
 }	t_inter;
 
+/**
+ * @brief Structure for get Intersect
+ * 
+ * @param point Point of intersection
+ * @param wall Coordinate of the wall of intersection in the direction of player
+ * @param prev_wall Coordinate of the wall of intersection in the reverse 
+ * direction of player
+ */
 typedef struct s_intersect {
 	t_coord_f64 point;
 	t_coord_i32 wall;

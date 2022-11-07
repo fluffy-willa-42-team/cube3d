@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:49:27 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/07 10:26:59 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/07 10:56:16 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,12 +66,13 @@ void	hook(void *param)
 		angle_hook(game, -0.001);
 	if (mlx_is_key_down(game->param.mlx, MLX_KEY_E))
 		angle_hook(game, 0.001);
-	ray_caster(game);
+	// ray_caster(game);
 	draw_minimap(game);
 }
 
 t_texture *init_image(t_texture *ptr, char *path);
 t_texture *init_color(t_texture *ptr, uint32_t color);
+
 
 int main(void)
 {
@@ -91,9 +92,9 @@ int main(void)
 		{0, NULL, 0}
 	};
 
-	if (!init_image(&game.temp, "./texture/mc/grass_side.xpm42"))
-		return (EXIT_FAILURE);
-	// init_color(&game.temp, 0xFF00FFFF);
+	// if (!init_image(&game.temp, "./texture/mc/grass_side.xpm42"))
+	// 	return (EXIT_FAILURE);
+	init_color(&game.temp, 0xFF00FFFF);
 	
 	// if (!init_image(&game.skybox, "./texture/sky.xpm42"))
 	// 	return (EXIT_FAILURE);
