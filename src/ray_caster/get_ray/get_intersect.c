@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 13:23:03 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/07 10:55:02 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/07 11:34:32 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
 
 #include "mlx_utils.h"
 
-t_chunk get_chunk(t_game *game, uint32_t x, uint32_t y);
+t_chunk get_chunk(t_game *game, t_coord_i32 coord);
+t_texture *get_wall_texture(t_chunk *chunk, t_coord_f64 inter);
 
 t_intersect	get_init_x(t_coord_f64 player, t_coord_f64 delta, double alpha, double tan_a);
 t_intersect	get_init_y(t_coord_f64 player, t_coord_f64 delta, double alpha, double tan_a);
@@ -42,17 +43,13 @@ double prot_tan(double alpha)
  */
 int is_wall(t_game *game, t_intersect *inter)
 {
-	if (0 <= inter->prev_wall.x && inter->prev_wall.x < (int) game->map.width
-		&& 0 <= inter->prev_wall.y && inter->prev_wall.y < (int) game->map.height
-		&& game->map.array[inter->prev_wall.y][inter->prev_wall.x])
-	{
-		return (1);	
-	}
-	else if (0 <= inter->wall.x && inter->wall.x < (int) game->map.width
-		&& 0 <= inter->wall.y && inter->wall.y < (int) game->map.height)
-	{
-		return (game->map.array[inter->wall.y][inter->wall.x]);	
-	}
+	t_chunk next = get_chunk(game, inter->wall);
+	t_chunk prev = get_chunk(game, inter->prev_wall);
+	
+	if (prev.type > 0 && get_wall_texture(&prev, inter->point))
+		return (1);
+	else if (next.type > -1)
+		return (next.type);	
 	return (-1);
 }
 

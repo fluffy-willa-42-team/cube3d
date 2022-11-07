@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:33:07 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/07 11:01:13 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/07 11:33:04 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@
 
 /* #####=====----------			Mlx Config Var			 ----------=====##### */
 
-# define WIN_WIDTH	1000
-# define WIN_HEIGHT	800
+# define WIN_WIDTH	600
+# define WIN_HEIGHT	600
 
 /* #####=====----------		Ray Caster Config Var		 ----------=====##### */
 
@@ -60,9 +60,9 @@ typedef struct s_chunk {
 	int32_t		type;
 	t_coord_i32	coord;
 	t_texture	*north;
+	t_texture	*south;
 	t_texture	*east;
 	t_texture	*west;
-	t_texture	*south;
 	t_texture	*ceiling;
 	t_texture	*floor;
 }	t_chunk;
