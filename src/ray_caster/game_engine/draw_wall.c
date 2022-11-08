@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_column.c                                      :+:      :+:    :+:   */
+/*   draw_wall.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:31:46 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/07 14:04:04 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/08 16:56:11 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ t_coord_f64 get_texture_inter(t_inter inter)
  * @param x 		pos x on screen
  * @param height 	Line Height
  */
-void draw_column(t_game *game, t_inter inter, uint32_t x, int32_t height)
+void draw_wall(t_game *game, t_inter inter, uint32_t x, int32_t height)
 {
 	const t_texture *texture = get_texture(game, inter);
 	const t_coord_f64 texture_inter = get_texture_inter(inter);
