@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 17:09:25 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/08 17:14:30 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/08 18:03:47 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@
 
 /**
  * @brief Will set a tmp `t_texture` struct and push it in the
- *        `t_data `data.tex_list array vector.
+ *        `t_data `data.tex_list array vector. Check if the texture has not
+ *        already been initiated.
  * 
  * @warning Texture `token` is only on char, if there is more than one return
- *          error.
- *          `token` and `path` texture need to be separated only by space and
- *          only one texture definition by line !
+ *          error. `token` and `path` texture need to be separated only by space
+ *          and only one texture definition by line !
  * 
  * @param data 
  * @param tex 
@@ -48,6 +48,8 @@ int	store_tex(t_parser *data, char *tex)
 	if (!authzed_cube_char(*tex))
 		return (ret_print(EXIT_FAILURE, ERR_TEX_FORMAT));
 	tmp.token = *tex;
+	if (get_tex_ptr(&data->tex_list, tmp.token)->token != '\0')
+		return (ret_print(EXIT_FAILURE, ERR_TEX_DUP));
 	tex++;
 	if (*tex != ' ')
 		return (ret_print(EXIT_FAILURE, ERR_TEX_FORMAT));
