@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:53:43 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/08 16:20:50 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/08 17:11:54 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,5 +120,7 @@ int	f_2_p(t_parser *data, char c);
 int	f_3_p(t_parser *data, char c);
 
 int	cube_to_t_map(t_parser *data);
+
+int	store_texture(t_parser *data, char *tex);
 
 #endif /* PARSER_H */
