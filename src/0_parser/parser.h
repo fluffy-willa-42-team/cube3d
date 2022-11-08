@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:53:43 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/02 17:56:00 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/08 16:20:50 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@
 # define CUB_FILE 1
 # define CUBE_FILE 2
 
-# define DEFAUT_TEX_NB 6
+# define DEFAUT_CUB_TEX_NB 6
+# define DEFAUT_CUBE_TEX_NB 92
 
 /**
  * @brief Cube separator sequence string
@@ -83,7 +84,7 @@ typedef struct s_parser
 	t_vec			cub;
 	t_vec			cube;
 	int				index;
-	char			tex[DEFAUT_TEX_NB];
+	char			tex[DEFAUT_CUB_TEX_NB];
 	t_vec			tex_list;
 }				t_parser;
 

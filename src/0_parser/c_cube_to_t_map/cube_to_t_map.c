@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 16:12:15 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/04 18:43:09 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/08 16:56:09 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 
 /* EXIT_SUCCESS, EXIT_FAILURE*/
 #include <stdlib.h>
+
+#include "lib_mem.h"
 
 #include <stdio.h>//TODO REMOVE
 
@@ -129,8 +131,51 @@ int	find_tex_type(char *tex)
 }
 
 /**
+ * @brief Get the texture index int the list.
+ * 
+ * @warning The function calculate only the token index, it dont check if the
+ *          element exist !
+ *          If the token is out of range from the `authzed_cube_char()`
+ *          will return `-1`.
+ * 
+ * @return int Return the index of the texture slot. Or `-1` if the token is
+ *             unauthorized.
+ */
+int	get_tex_index(char token)
+{
+	if (!authzed_cube_char(token))
+		return (-1);
+	return (token - '!');
+}
+
+/**
+ * @brief Get the texture ptr int the list.
+ * 
+ * @warning The function calculate only the pointer index, it dont check if the
+ *          element exist !
+ *          If the token is out of range from the `authzed_cube_char()`
+ *          will return `NULL`.
+ * 
+ * @return int Return a pointer of the texture slot. Or `-1` if the token is
+ *             unauthorized.
+ */
+t_texture *get_tex_ptr(t_vec *tex, char token)
+{
+	const int index = get_tex_index(token);
+
+	if (index == -1)
+		return (NULL);
+	return (&((t_texture *)tex->buffer)[get_tex_index(token)]);
+}
+
+/**
  * @brief Will set a tmp `t_texture` struct and push it in the
  *        `t_data `data.tex_list array vector.
+ * 
+ * @warning Texture `token` is only on char, if there is more than one return
+ *          error.
+ *          `token` and `path` texture need to be separated only by space and
+ *          only one texture definition by line !
  * 
  * @param data 
  * @param tex 
@@ -145,14 +190,17 @@ int	store_tex(t_parser *data, char *tex)
 		return (ret_print(EXIT_FAILURE, ERR_TEX_FORMAT));
 	tmp.token = *tex;
 	tex++;
+	if (*tex != ' ')
+		return (ret_print(EXIT_FAILURE, ERR_TEX_FORMAT));
 	while (*tex && *tex == ' ')
 		tex++;
 	if (!*tex)
 		return (ret_print(EXIT_FAILURE, ERR_TEX_FORMAT));
 	tmp.type = find_tex_type(tex);
 	tmp.path = &*tex;
-	if (!v_add(&data->tex_list, DEFAULT, &tmp))
-		return (ret_print(EXIT_FAILURE, ERR_VEC_ADD));
+	ft_memcpy(get_tex_ptr(&data->tex_list, tmp.token), &tmp, sizeof(t_texture));
+	// if (!v_add(&data->tex_list, DEFAULT, &tmp))
+		// return (ret_print(EXIT_FAILURE, ERR_VEC_ADD));
 	return (EXIT_SUCCESS);
 }
 
@@ -202,7 +250,7 @@ int	which_escape_seq(char *line)
 int	store_texture(t_parser *data, char *tex)
 {
 	data->tex_list = v_init(sizeof(t_texture), NULL, NULL);
-	if (!v_alloc(&data->tex_list, SET, 16))
+	if (!v_alloc(&data->tex_list, SET, DEFAUT_CUBE_TEX_NB))
 		return (ret_print(EXIT_FAILURE, ERR_VEC_ALLOC));
 	while (*tex)
 	{
@@ -276,9 +324,10 @@ int	cube_to_t_map(t_parser *data)
 {
 	if (store_texture(data, data->cube.buffer))
 		return (EXIT_FAILURE);
-	t_texture *tmp = data->tex_list.buffer;
-	for (size_t i = 0; i < data->tex_list.len; i++)
-		printf("[%lu] {\n    type :   %d,\n    token :  \'%c\',\n    *path :  \"%.10s\",\n    *image : [%p],\n    color :  [%d, %d, %d, %d]\n    }\n", i, (&tmp[i])->type, (&tmp[i])->token, (&tmp[i])->path, (&tmp[i])->image, get_r((&tmp[i])->color), get_g((&tmp[i])->color), get_b((&tmp[i])->color), get_a((&tmp[i])->color));
+	// t_texture *tmp = data->tex_list.buffer;
+	for (int i = '!'; i < (DEFAUT_CUBE_TEX_NB + '0'); i++)
+		printf("[%c] {\n    type :   %d,\n    token :  \'%c\',\n    *path :  \"%.10s\",\n    *image : [%p],\n    color :  [%d, %d, %d, %d]\n    }\n", (char)i, get_tex_ptr(&data->tex_list, i)->type, get_tex_ptr(&data->tex_list, i)->token, get_tex_ptr(&data->tex_list, i)->path, get_tex_ptr(&data->tex_list, i)->image, get_r(get_tex_ptr(&data->tex_list, i)->color), get_g(get_tex_ptr(&data->tex_list, i)->color), get_b(get_tex_ptr(&data->tex_list, i)->color), get_a(get_tex_ptr(&data->tex_list, i)->color));
+		// printf("[%lu] {\n    type :   %d,\n    token :  \'%c\',\n    *path :  \"%.10s\",\n    *image : [%p],\n    color :  [%d, %d, %d, %d]\n    }\n", i, (&tmp[i])->type, (&tmp[i])->token, (&tmp[i])->path, (&tmp[i])->image, get_r((&tmp[i])->color), get_g((&tmp[i])->color), get_b((&tmp[i])->color), get_a((&tmp[i])->color));
 	
 	return (EXIT_SUCCESS);
 }

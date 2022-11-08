@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:10:55 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/01 16:08:57 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/08 16:20:26 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@
  */
 int	get_tex(char *str)
 {
-	const char	*id[DEFAUT_TEX_NB] = {"NO", "SO", "WE", "EA", "F", "C"};
+	const char	*id[DEFAUT_CUB_TEX_NB] = {"NO", "SO", "WE", "EA", "F", "C"};
 	int			index;
 	int			x;
 
 	index = 0;
-	while (index < DEFAUT_TEX_NB)
+	while (index < DEFAUT_CUB_TEX_NB)
 	{
 		x = 0;
 		while (id[index][x] && str[x] == id[index][x])
@@ -50,12 +50,12 @@ int	get_tex(char *str)
  */
 int	check_texture(char *str, t_parser *data)
 {
-	const char	*id[DEFAUT_TEX_NB] = {"NO", "SO", "WE", "EA", "F", "C"};
+	const char	*id[DEFAUT_CUB_TEX_NB] = {"NO", "SO", "WE", "EA", "F", "C"};
 	int			index;
 	int			x;
 
 	index = 0;
-	while (index < DEFAUT_TEX_NB)
+	while (index < DEFAUT_CUB_TEX_NB)
 	{
 		x = 0;
 		while (id[index][x] && str[x] == id[index][x])
