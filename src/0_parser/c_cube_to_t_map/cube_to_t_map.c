@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 16:12:15 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/08 17:22:41 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/08 17:56:07 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,10 +84,15 @@ int	cube_to_t_map(t_parser *data)
 	if (store_texture(data, data->cube.buffer))
 		return (EXIT_FAILURE);
 	// t_texture *tmp = data->tex_list.buffer;
-	for (int i = '!'; i < (DEFAUT_CUBE_TEX_NB + '0'); i++)
-		if (get_tex_ptr(&data->tex_list, i)->type)
+	int tmp = 0;
+	for (int i = '!'; i < 125; i++)
+	{
+		printf("[%d]\n", i);
+		tmp = get_tex_ptr(&data->tex_list, i)->type;
+		if (tmp > 0)
 			printf("[%c] {\n    type :   %d,\n    token :  \'%c\',\n    *path :  \"%.10s\",\n    *image : [%p],\n    color :  [%d, %d, %d, %d]\n    }\n", (char)i, get_tex_ptr(&data->tex_list, i)->type, get_tex_ptr(&data->tex_list, i)->token, get_tex_ptr(&data->tex_list, i)->path, get_tex_ptr(&data->tex_list, i)->image, get_r(get_tex_ptr(&data->tex_list, i)->color), get_g(get_tex_ptr(&data->tex_list, i)->color), get_b(get_tex_ptr(&data->tex_list, i)->color), get_a(get_tex_ptr(&data->tex_list, i)->color));
 		// printf("[%lu] {\n    type :   %d,\n    token :  \'%c\',\n    *path :  \"%.10s\",\n    *image : [%p],\n    color :  [%d, %d, %d, %d]\n    }\n", i, (&tmp[i])->type, (&tmp[i])->token, (&tmp[i])->path, (&tmp[i])->image, get_r((&tmp[i])->color), get_g((&tmp[i])->color), get_b((&tmp[i])->color), get_a((&tmp[i])->color));
+	}
 	
 	return (EXIT_SUCCESS);
 }
