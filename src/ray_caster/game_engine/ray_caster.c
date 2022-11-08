@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 10:01:39 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/08 17:50:23 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/08 18:00:44 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,13 @@ void ray_caster(t_game *game)
 		if (heigth_drawn >= WIN_HEIGHT - 1)
 			continue ;
 		
-		//draw Floors
 		int rest_to_draw = MDDL_SCRN_HGTH - heigth_drawn + 1;
 		for (int32_t j = 0; j < rest_to_draw; j++)
 		{
+			//draw Floors
 			put_pixel(&game->param, i, WIN_HEIGHT - j, 0xFF00FFFF);
+			//draw Ceiling
+			put_pixel(&game->param, i, j, 0x5555FFFF);
 		}
 	}
 }
