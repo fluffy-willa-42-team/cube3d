@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:53:52 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/02 13:03:01 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/09 17:23:50 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,21 +33,21 @@
 static int	read_to_vec(t_parser *data, t_vec *buff)
 {
 	int	ret;
-	int	len;
+	int	line;
 
-	len = 0;
+	line = 0;
 	ret = 1;
-	*buff = v_init_r(sizeof(char), NULL, NULL, 1000000);
-	if (!v_alloc(buff, SET, 5000000))// TODO check for opti
+	*buff = v_init(sizeof(char), NULL, NULL);
+	if (!v_alloc(buff, SET, 5000000))
 		return(ret_print(EXIT_FAILURE, "ERR_VEC_ALLOC"));
 	while (ret != 0)
 	{
 		ret = v_readline(buff, data->file_fd);
-		len += ret;
+		line += ret;
 		if (ret == -1 || !v_add(buff, STRING, "\n")/* //TODO change check after the lib update ! */)
 			return (ret_print(EXIT_FAILURE, ERR_RDL_FAIL));
 	}
-	if (!len)
+	if (!line)
 		return (ret_print(EXIT_FAILURE, ERR_EMPTY_FILE));
 	return (EXIT_SUCCESS);
 }
@@ -72,6 +72,8 @@ int	read_file(t_parser *data)
 		err = read_to_vec(data, &data->cube);
 	else
 		return (ret_print(EXIT_FAILURE, ERR_RFILE_TYPE));
+	if (close(data->file_fd) == -1)
+		return (ret_print(EXIT_FAILURE, ERR_CLOSE_FILE));
 	if (err)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);

@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:54:56 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/02 17:54:01 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/09 17:23:26 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	ret_print(int ret, const char *msg);
 
 # define ERR_FILE_EXT    "Error\nBad file extension !\n"
 # define ERR_OPEN_FILE   "Error\nFailed to open file !\n"
+# define ERR_CLOSE_FILE  "Error\nFailed to close file !\n"
 # define ERR_RFILE_TYPE  "Error\nBad file data->type ?!\n"
 # define ERR_RDL_FAIL    "Error\nv_readline fail !\n"
 # define ERR_VEC_ADD     "Error\nv_add fail !\n"
