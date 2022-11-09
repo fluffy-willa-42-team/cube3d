@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 17:09:25 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/08 18:03:47 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/09 17:11:28 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,8 @@ int	which_escape_seq(char *line)
 
 
 /**
- * @brief Store all texture data in the `data.tex_list` array vector.
+ * @brief Store all texture data in the `data.tex_list` array vector. Finally
+ *        set `data.cube_map` to the cube separator sequence line.
  *
  * @warning Store raw data, there is no check if the texture input is valid !
  * 
@@ -141,5 +142,6 @@ int	store_texture(t_parser *data, char *tex)
 		 * 
 		 */
 	}
+	data->cube_map = tex;
 	return (EXIT_SUCCESS);
 }

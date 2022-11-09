@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:53:43 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/08 17:11:54 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/09 17:08:33 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ typedef struct s_parser
 	char			*path;
 	t_vec			cub;
 	t_vec			cube;
+	char			*cube_map;
 	int				index;
 	char			tex[DEFAUT_CUB_TEX_NB];
 	t_vec			tex_list;
