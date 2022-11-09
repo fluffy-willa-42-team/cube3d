@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:50:53 by mahadad           #+#    #+#             */
-/*   Updated: 2022/10/26 16:05:18 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/09 15:15:05 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,9 @@ static int	extcmp(char *path, const char *ext)
  * 
  * @brief Check if the file in path have `.cub` or `.cube` extension.
  *        Will set `data.type` with the macro `CUB_FILE` or `CUBE_FILE`.
+ *
+ * @warning The file path must contain only the path, if the string contains
+ *          white space before or after the function will return an error
  *
  * @param data Parser structure
  * @return int Return zero value if the extesion is correcte, if not return
