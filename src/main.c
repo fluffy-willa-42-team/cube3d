@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:49:27 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/07 14:11:49 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/10 10:24:08 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ void	hook(void *param)
 	if (mlx_is_key_down(game->param.mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(game->param.mlx);
 	if (mlx_is_key_down(game->param.mlx, MLX_KEY_UP))
-		pos2_hook(&game->player, 0.02 * game->player.delta.x, 0.02 * game->player.delta.y, game->map.height);
+		pos2_hook(&game->player, 0.02 * game->player.delta.x, 0.02 * game->player.delta.y, game->map.width);
 	if (mlx_is_key_down(game->param.mlx, MLX_KEY_DOWN))
-		pos2_hook(&game->player, -0.02 * game->player.delta.x, -0.02 * game->player.delta.y, game->map.height);
+		pos2_hook(&game->player, -0.02 * game->player.delta.x, -0.02 * game->player.delta.y, game->map.width);
 	if (mlx_is_key_down(game->param.mlx, MLX_KEY_LEFT))
 		pos2_hook(&game->player, 0.02 * game->player.delta.y, -0.02 * game->player.delta.x, game->map.height);
 	if (mlx_is_key_down(game->param.mlx, MLX_KEY_RIGHT))
@@ -78,15 +78,15 @@ int main(void)
 {
 	t_game game = {{NULL, NULL, WIN_HEIGHT, WIN_WIDTH},
 		{{
-			{1, 1, 1, 1, 1, 1, 1, 1},
-			{1, 0, 3, 0, 0, 0, 0, 1},
-			{1, 0, 2, 0, 0, 0, 0, 1},
-			{1, 0, 4, 3, 3, 0, 0, 1},
-			{1, 0, 2, 1, 0, 0, 0, 1},
-			{1, 0, 0, 0, 0, 1, 0, 1},
-			{1, 0, 0, 0, 0, 0, 0, 1},
-			{1, 1, 1, 1, 1, 1, 1, 1},
-		}, 8, 8},
+			{1, 1, 1, 1, 1, 1, 1, 1, 1},
+			{1, 0, 3, 0, 0, 0, 0, 0, 1},
+			{1, 0, 2, 0, 0, 0, 1, 0, 1},
+			{1, 0, 4, 3, 3, 0, 0, 0, 1},
+			{1, 0, 2, 1, 0, 0, 0, 0, 1},
+			{1, 0, 0, 0, 0, 0, 1, 0, 1},
+			{1, 0, 0, 0, 0, 0, 0, 0, 1},
+			{1, 1, 1, 1, 1, 1, 1, 1, 1},
+		}, 8, 9},
 		{{3.5f, 3.5f}, 0.0f, {cos(0), sin(0)}},
 		{0, NULL, 0},
 		{0, NULL, 0},
@@ -103,7 +103,7 @@ int main(void)
 	
 	// if (!init_image(&game.skybox, "./texture/sky.xpm42"))
 	// 	return (EXIT_FAILURE);
-	init_color(&game.skybox, 0x325884FF);
+	init_color(&game.skybox, 0x000000FF);
 
 	game.param.mlx = mlx_init(game.param.width, game.param.height, "MLX42", true);
 	if (!game.param.mlx)

@@ -43,7 +43,7 @@ int draw_minimap(t_game *game)
 	t_map *map			= &game->map;
 	int si = MINIMAP_SIZE;
 
-	for (uint32_t y = 0; y < map->width; y++)
+	for (uint32_t y = 0; y < map->height; y++)
 	{
 		for (uint32_t x = 0; x < map->width; x++)
 		{

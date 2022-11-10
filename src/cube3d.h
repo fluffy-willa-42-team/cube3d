@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:33:07 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/07 14:07:49 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/10 10:19:31 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ typedef struct s_entity {
 /* ************************************************************************** */
 
 typedef struct s_map {
-	int32_t array[8][8];
+	int32_t array[8][9];
 	uint32_t height;
 	uint32_t width;
 }	t_map;

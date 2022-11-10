@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:31:46 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/08 17:33:10 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/10 10:15:06 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,3 +81,24 @@ int32_t draw_wall(t_game *game, t_inter inter, uint32_t x, int32_t height)
 	}
 	return (parse_heigth);
 }
+
+
+// void	draw_floor(t_brain *b, double alpha, int y, double x)
+// {
+// 	t_fpoint	div;
+// 	t_point		pos;
+// 	float		dist;
+// 	int			color;
+
+// 	div.x = (double)b->map->bloc_size / 2;
+// 	div.y = b->player->cam->proj_size.y / 2;
+// 	while (y < b->ctx->height)
+// 	{
+// 		dist = (0.5 * b->player->cam->proj_dist) / ((y - player.z) - (div.y));
+// 		pos.x = player.x + dist * cos(alpha);
+// 		pos.y = player.y + dist * sin(alpha);
+// 		color = pixel_get(b->map->floor, pos.x, pos.y);
+// 		pixel_put(x, y, color, b->map->frame);
+// 		y++;
+// 	}
+// }
