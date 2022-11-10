@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 10:01:39 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/10 13:46:10 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/10 13:56:42 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void draw_floor(t_game *game, int x, double alpha, int heigth_drawn)
 	int rest_to_draw = MDDL_SCRN_HGTH - heigth_drawn + 1;
 	for (int32_t y = 0; y < rest_to_draw; y++)
 	{
-		dist = (0.5 * proj_dist) / (game->player.z * WIN_HEIGHT - y);
+		dist = proj_dist / (game->player.z * WIN_HEIGHT - y);
 		t_coord_f64 pos = set_f64(
 			game->player.coord.x + cos(alpha) * dist,
 			game->player.coord.y + sin(alpha) * dist
@@ -80,8 +80,6 @@ void draw_floor(t_game *game, int x, double alpha, int heigth_drawn)
 				)
 			);
 		}
-		
-		
 
 		if (chunk.ceiling && chunk.ceiling->type == IMAGE)
 		{
@@ -112,12 +110,8 @@ void ray_caster(t_game *game)
 		inter = get_intersect(game, game->player.coord, loop_len(angle, PI2));
 		dist = distance(game, inter);
 		int heigth_drawn = draw_wall(game, inter, i, HEIGTH_OF_BLOCK / dist);
-
 		if (heigth_drawn >= WIN_HEIGHT - 1)
 			continue ;
-		
 		draw_floor(game, i, angle, heigth_drawn);
-		
-		
 	}
 }

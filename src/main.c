@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:49:27 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/10 13:47:13 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/10 13:59:00 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,20 @@ void	hook(void *param)
 		pos2_hook(&game->player, 0.02 * game->player.delta.y, -0.02 * game->player.delta.x, game->map.width);
 	if (mlx_is_key_down(game->param.mlx, MLX_KEY_RIGHT))
 		pos2_hook(&game->player, -0.02 * game->player.delta.y, 0.02 * game->player.delta.x, game->map.width);
+	// if (mlx_is_key_down(game->param.mlx, MLX_KEY_W))
+	// {
+	// 	game->player.z += 0.02;
+	// 	// if (game->player.z >= 1)
+	// 	// 	game->player.z -= 1;
+	// 	printf("%f\n", game->player.z);
+	// }
+	// if (mlx_is_key_down(game->param.mlx, MLX_KEY_S))
+	// {
+	// 	game->player.z -= 0.02;
+	// 	// if (game->player.z <= 0)
+	// 	// 	game->player.z += 1;
+	// 	printf("%f\n", game->player.z);
+	// }
 	if (mlx_is_key_down(game->param.mlx, MLX_KEY_A))
 		angle_hook(game, -0.03);
 	if (mlx_is_key_down(game->param.mlx, MLX_KEY_D))
