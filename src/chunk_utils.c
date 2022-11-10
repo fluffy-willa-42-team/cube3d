@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 10:56:11 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/07 14:10:47 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/10 13:01:01 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_chunk get_chunk(t_game *game, t_coord_i32 coord)
 		return ((t_chunk) {1, coord, ptr1, ptr1, NULL, NULL, ptr, ptr});
 	if (game->map.array[coord.y][coord.x] == 4)
 		return ((t_chunk) {1, coord, NULL, NULL, ptr1, NULL, ptr, ptr});
-	return ((t_chunk) {0, coord, NULL, NULL, NULL, NULL, NULL, NULL});
+	return ((t_chunk) {0, coord, NULL, NULL, NULL, NULL, ptr1, ptr1});
 }
 
 t_texture *get_wall_texture(t_chunk *chunk, t_coord_f64 inter)

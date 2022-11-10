@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:49:27 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/10 11:38:26 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/10 13:47:13 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int main(void)
 			{1, 0, 0, 0, 0, 0, 0, 0, 1},
 			{1, 1, 1, 1, 1, 1, 1, 1, 1},
 		}, 8, 9},
-		{{3.5f, 3.5f}, 0.5f, 0.0f, {cos(0), sin(0)}},
+		{{3.5f, 3.5f}, 0.5, 0.0f, {cos(0), sin(0)}},
 		{0, NULL, 0},
 		{0, NULL, 0},
 		{0, NULL, 0}
@@ -112,8 +112,8 @@ int main(void)
 	game.param.img = mlx_new_image(game.param.mlx, game.param.width, game.param.height);
 	if (!game.param.img)
 		return (EXIT_FAILURE);
-	mlx_loop_hook(game.param.mlx, &hook, &game);
 	mlx_image_to_window(game.param.mlx, game.param.img, 0, 0);
+	mlx_loop_hook(game.param.mlx, &hook, &game);
 	mlx_loop(game.param.mlx);
 
 	if (game.temp.image)
