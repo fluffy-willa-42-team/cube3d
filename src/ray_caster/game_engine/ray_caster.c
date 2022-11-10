@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 10:01:39 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/10 11:42:03 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/10 11:54:40 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,17 +70,22 @@ void draw_floor(t_game *game, int x, double alpha, int heigth_drawn)
 		);
 		//draw Floors
 		t_chunk chunk = get_chunk(game, set_i32(pos.x, pos.y));
-
-		if (chunk.ceiling->type == IMAGE)
+			
+		if (chunk.ceiling && chunk.ceiling->type == IMAGE)
 		{
-			t_coord_i32 test = set_i32(
-				(pos.x - (int) pos.x) * chunk.ceiling->image->width,
-				(pos.y - (int) pos.y) * chunk.ceiling->image->height
+			put_pixel(&game->param, x, WIN_HEIGHT - j,
+				get_pixel_image(chunk.ceiling,
+					(pos.x - (int) pos.x) * chunk.ceiling->image->width,
+					(pos.y - (int) pos.y) * chunk.ceiling->image->height,
+					set_f64(1, 1)
+				)
 			);
-			get_pixel_image(chunk.ceiling, test.x, test.y, set_f64(1, 1));
 		}
+		// else if (chunk.ceiling && chunk.ceiling->type == COLOR)
+		// {
+			
+		// }
 		
-		put_pixel(&game->param, x, WIN_HEIGHT - j, 0xFF00FFFF);
 	}
 }
 
@@ -103,7 +108,7 @@ void ray_caster(t_game *game)
 		if (heigth_drawn >= WIN_HEIGHT - 1)
 			continue ;
 		
-		// draw_floor(game, i, angle, heigth_drawn);
+		draw_floor(game, i, angle, heigth_drawn);
 		
 		
 	}
