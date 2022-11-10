@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:33:07 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/08 17:20:26 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/10 18:34:10 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,10 +117,11 @@ typedef struct s_entity {
 
 typedef struct s_map
 {
-	int32_t height;
-	int32_t width;
-	t_vec	tex_list;
-	t_vec	map;
+	int32_t		height;
+	int32_t		width;
+	t_coord_i32	size;
+	t_vec		tex_list;
+	t_vec		map;
 }				t_map;
 
 /* ************************************************************************** */

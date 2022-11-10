@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 17:09:25 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/10 13:59:41 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/10 18:51:26 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,9 @@ int	store_tex(t_parser *data, char *tex)
 		return (ret_print(EXIT_FAILURE, ERR_TEX_FORMAT));
 	tmp.type = find_tex_type(tex);
 	tmp.path = &*tex;
-	ft_memcpy(get_tex_ptr(&data->tex_list, tmp.token), &tmp, sizeof(t_texture));
+	if (!ft_memcpy(get_tex_ptr(&data->tex_list, tmp.token),
+			&tmp, sizeof(t_texture)))
+		return (ret_print(EXIT_FAILURE, ERR_MEMCPY));
 	return (EXIT_SUCCESS);
 }
 
@@ -87,7 +89,7 @@ int	which_escape_seq(char *line)
 	len = 0;
 	if (*line != SEQ[0])
 		return (SEQ_NO);
-	while(line[len] && line[len] == SEQ[0])
+	while (line[len] && line[len] == SEQ[0])
 		len++;
 	if (len == 1)
 		return (SEQ_COMM);
@@ -125,10 +127,10 @@ int	store_texture(t_parser *data, char *tex)
 			else if (which_escape_seq(tex) == SEQ_ENDOFTEX)
 				break ;
 			else if (which_escape_seq(tex) == SEQ_ERR)
-				return(ret_print(EXIT_FAILURE, ERR_SEQ_BAD));
+				return (ret_print(EXIT_FAILURE, ERR_SEQ_BAD));
 		}
 		else if (store_tex(data, tex))
-			return(EXIT_FAILURE);
+			return (EXIT_FAILURE);
 		while (*tex && *tex != '\n')
 			tex++;
 	}

@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:56:12 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/02 11:26:38 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/10 18:36:49 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@
 
 int	run(char *file)
 {
-	if (parser(file))
+	t_map map;
+	if (parser(file, &map))
 		return (EXIT_FAILURE);
 	if (CUBE3D_UNITEST_PARSER)
 		return (EXIT_SUCCESS);

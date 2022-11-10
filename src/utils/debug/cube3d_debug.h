@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:54:56 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/09 17:23:26 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/10 18:41:14 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,11 @@ int	ret_print(int ret, const char *msg);
 # define ERR_TEX_DUP     "Error\nDuplicate texture !\n"
 # define ERR_NO_MAP_AFTER_TEX "Error\nNo map after texture !\n"
 # define ERR_BAD_CUB_CHAR "Error\nUnauthorized character in the map !\n"
-# define ERR_CUB_CONV_FUNC "Error\nf_{floor_level}_{char_type} fail !"
-# define ERR_SEQ_BAD     "Error\nBad cube sequence"
+# define ERR_CUB_CONV_FUNC "Error\nf_{floor_level}_{char_type} fail !\n"
+# define ERR_SEQ_BAD     "Error\nBad cube sequence\n"
+# define ERR_CHUNK_W     "Error\nBad chunk line width\n"
+# define ERR_CHUNK_H     "Error\nBad chunk line heigth\n"
+# define ERR_MEMCPY      "Error\nmemcpy faild !\n"
 
 # define UNAUTHORIZED_SPACE "\t\v\f\r"
 # define WHITE_SPACE "\t\v\f\r \n"
