@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:53:43 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/09 17:08:33 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/10 15:31:54 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define PARSER_H
 
 # include "vector_lib.h"
+
+# include "cube3d.h"
 
 # define CUB_FILE 1
 # define CUBE_FILE 2
@@ -87,6 +89,7 @@ typedef struct s_parser
 	int				index;
 	char			tex[DEFAUT_CUB_TEX_NB];
 	t_vec			tex_list;
+	t_coord_i32		map_size;
 }				t_parser;
 
 typedef int	(*t_conv_fct)(t_parser *data, char c);

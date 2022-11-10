@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 16:12:15 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/09 18:15:23 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/10 16:10:23 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,20 +86,152 @@ int	tex_debug(t_parser *data)
 }
 
 /**
- * @brief 
+ * @brief Return the current character pointed by the index `data->index`.
  * 
- * @param data 
- * @param map Pointer to the cube separator sequence the map.
+ * @warning The function dont check if the `data->index` is out of the memory
+ *          scope !
+ * 
+ * @param data Parser structure.
+ */
+char	mapchar(t_parser *data)
+{
+	return (data->cube_map[data->index]);
+}
+
+/**
+ * @brief Return the current addess pointed by the index `data->index`.
+ * 
+ * @warning The function dont check if the `data->index` is out of the memory
+ *          scope !
+ * 
+ * @param data Parser structure.
+ */
+char	*mapptr(t_parser *data)
+{
+	return (&data->cube_map[data->index]);
+}
+
+/**
+ * @brief Get the width of the current line.
+ *        We consider `width`, all the `' '` only if there is at the beginning
+ *        of the line and all non `' '` character.
+ * 
+ * @param data Parser structure.
  * @return int 
  */
-int	store_map(t_parser *data, char *map)
+int	get_line_width(t_parser *data)
+{
+	int	tmp;
+
+	tmp = data->index;
+	while (mapchar(data) == ' ')
+		data->index++;
+	while (mapchar(data) && mapchar(data) != ' ' && mapchar(data) != '\n')
+		data->index++;
+	tmp = data->index - tmp;
+	while (mapchar(data) && mapchar(data) != '\n')
+		data->index++;
+	if (mapchar(data) == '\n')
+		data->index++;
+	return (tmp);
+}
+
+/**
+ * @brief Get the width of the current chunk line.
+ *        Check each three line of a chunk line. If the three line dont have the
+ *        same width return a error.
+ *        We check three line by three, each line need to have the same `width`
+ *        (a chunk is 3x3).
+ *        We consider `chunk_width`, all the `' '` only if there is at the
+ *        beginning of the line and all non `' '` character.
+ * 
+ * @param data Parser structure.
+ * @return int 
+ */
+int	get_chunk_line_width(t_parser *data)
+{
+	const int	first_chunk_width = get_line_width(data);
+	int			chunk_heigth;
+	int			chunk_width;
+
+	chunk_heigth = 1;
+	chunk_width = 0;
+	while (mapchar(data) && chunk_heigth < 3)
+	{
+		chunk_width = get_line_width(data);
+		if (first_chunk_width != chunk_width)
+			return (ret_print(-1, "err no same width"));
+		chunk_heigth++;
+	}
+	if (chunk_heigth == 3)
+		return (first_chunk_width);
+	return (ret_print(-1, "err chunk no 3 floor"));
+}
+
+/**
+ * @brief Check if the size of each chunk line is correct and set
+ *        `data.map_size.{x, y}`.
+ *
+ *        We use mapchar() and mapptr() to get the current index char or ptr
+ *        from the map. Is the equivalent of `data->cube_map[data->index]`.
+ *        To increment the index we set `data->index`.
+ * 
+ *        We check three line by three, each line need to have the same `width`
+ *        (a chunk is 3x3).
+ *        We consider `chunk_width`, all the `' '` only if there is at the
+ *        beginning of the line and all non `' '` character.
+ *        We check if `width` modulo 3 goes not give remainder.
+ * 
+ * @param data Parser structure.
+ * @return int 
+ */
+int	set_map_size(t_parser *data)
+{
+	int	biggest_width;
+	int	width;
+	int	heigth;
+
+	biggest_width = 0;
+	width = 0;
+	heigth = 0;
+	while (mapchar(data))
+	{
+		width = get_chunk_line_width(data);
+		if (width == -1)
+			return (EXIT_FAILURE);
+		if (width%3)
+			return (ret_print(EXIT_FAILURE, "err bad chunk width"));
+		if (width > biggest_width)
+			biggest_width = width;
+		heigth++;
+	}
+	data->map_size.x = biggest_width;
+	data->map_size.y = heigth;
+	return (EXIT_SUCCESS);
+}
+
+/**
+ * @brief 
+ * 
+ * @param data Parser structure.
+ * @return int 
+ */
+int	store_map(t_parser *data)
 {
 	(void)data;
-	while (*map && (*map == '~' || *map == '\n'))
-		map++;
+	data->index = 0;
+	while (mapchar(data) && (mapchar(data) == '~' || mapchar(data) == '\n'))
+		data->index++;
 	printf(
-		"{{\n%s}}",
-		map
+		"{{\n%s\n}}\n",
+		mapptr(data)
+	);
+	if (set_map_size(data))
+		return (EXIT_FAILURE);
+	printf(
+		"map size [%dx%d]\n",
+		data->map_size.x,
+		data->map_size.y
 	);
 	return (EXIT_SUCCESS);
 }
@@ -107,13 +239,13 @@ int	store_map(t_parser *data, char *map)
 /**
  * @brief 
  * 
- * @param data 
+ * @param data Parser structure.
  * @return int 
  */
 int	cube_to_t_map(t_parser *data)
 {
 	if (store_texture(data, data->cube.buffer) /*TODO REMOVE*/|| tex_debug(data)/*TODO REMOVE*/
-		|| store_map(data, data->cube_map))
+		|| store_map(data))
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
