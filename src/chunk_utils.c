@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 10:56:11 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/10 13:01:01 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/10 20:14:38 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,20 @@ t_chunk get_chunk(t_game *game, t_coord_i32 coord)
 {
 	t_texture *ptr = &game->temp;
 	t_texture *ptr1 = &game->temp1;
+	t_texture *ptr2 = &game->temp2;
 	
 	if (!(0 <= coord.x && coord.x < (int) game->map.width
 		&& 0 <= coord.y && coord.y < (int) game->map.height))
 		return ((t_chunk) {-1, coord, NULL, NULL, NULL, NULL, NULL, NULL});
 	if (game->map.array[coord.y][coord.x] == 1)
-		return ((t_chunk) {1, coord, ptr, ptr, ptr, ptr, ptr, ptr});
+		return ((t_chunk) {1, coord, ptr, ptr, ptr, ptr, ptr1, ptr1});
 	if (game->map.array[coord.y][coord.x] == 2)
-		return ((t_chunk) {1, coord, NULL, NULL, ptr1, ptr1, ptr, ptr});
+		return ((t_chunk) {1, coord, NULL, NULL, ptr1, ptr1, ptr1, ptr1});
 	if (game->map.array[coord.y][coord.x] == 3)
-		return ((t_chunk) {1, coord, ptr1, ptr1, NULL, NULL, ptr, ptr});
+		return ((t_chunk) {1, coord, ptr1, ptr1, NULL, NULL, ptr1, ptr1});
 	if (game->map.array[coord.y][coord.x] == 4)
-		return ((t_chunk) {1, coord, NULL, NULL, ptr1, NULL, ptr, ptr});
-	return ((t_chunk) {0, coord, NULL, NULL, NULL, NULL, ptr1, ptr1});
+		return ((t_chunk) {1, coord, NULL, NULL, ptr1, NULL, ptr1, ptr1});
+	return ((t_chunk) {0, coord, NULL, NULL, NULL, NULL, ptr2, ptr2});
 }
 
 t_texture *get_wall_texture(t_chunk *chunk, t_coord_f64 inter)

@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:49:27 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/10 13:59:00 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/10 20:13:22 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ int main(void)
 		{{3.5f, 3.5f}, 0.5, 0.0f, {cos(0), sin(0)}},
 		{0, NULL, 0},
 		{0, NULL, 0},
+		{0, NULL, 0},
 		{0, NULL, 0}
 	};
 
@@ -119,6 +120,10 @@ int main(void)
 	// 	return (EXIT_FAILURE);
 	init_color(&game.skybox, 0x000000FF);
 
+	if (!init_image(&game.temp2, "./texture/mc/grass_top.xpm42"))
+		return (EXIT_FAILURE);
+	// init_color(&game.temp1, 0xFF00FFFF);
+
 	game.param.mlx = mlx_init(game.param.width, game.param.height, "MLX42", true);
 	if (!game.param.mlx)
 		return (EXIT_FAILURE);
@@ -132,8 +137,10 @@ int main(void)
 
 	if (game.temp.image)
 		mlx_delete_texture(game.temp.image);
-	if (game.temp.image)
+	if (game.temp1.image)
 		mlx_delete_texture(game.temp1.image);
+	if (game.temp2.image)
+		mlx_delete_texture(game.temp2.image);
 	if (game.skybox.image)
 		mlx_delete_texture(game.skybox.image);
 	mlx_delete_image(game.param.mlx, game.param.img);
