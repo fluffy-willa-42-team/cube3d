@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 17:09:25 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/09 17:11:28 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/10 13:59:41 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,6 @@ int	store_tex(t_parser *data, char *tex)
 	tmp.type = find_tex_type(tex);
 	tmp.path = &*tex;
 	ft_memcpy(get_tex_ptr(&data->tex_list, tmp.token), &tmp, sizeof(t_texture));
-	// if (!v_add(&data->tex_list, DEFAULT, &tmp))
-		// return (ret_print(EXIT_FAILURE, ERR_VEC_ADD));
 	return (EXIT_SUCCESS);
 }
 
@@ -131,16 +129,8 @@ int	store_texture(t_parser *data, char *tex)
 		}
 		else if (store_tex(data, tex))
 			return(EXIT_FAILURE);
-		//TODO//WIP skip the current line to the next
 		while (*tex && *tex != '\n')
 			tex++;
-		// break;//TODO #6 REMOVE Find a break condition when we find all texture
-		//WIP
-		/**
-		 * - [x] cub conv add `~~~` to separate the end of the game texture from the map.
-		 * 
-		 * 
-		 */
 	}
 	data->cube_map = tex;
 	return (EXIT_SUCCESS);
