@@ -50,15 +50,9 @@ int draw_minimap(t_game *game)
 			if (map->array[y][x] == 1)
 				draw_rectangle(param, (t_coord_f64){x * si, y * si},
 					(t_coord_i32){si, si}, 0x770000FF);
-			else if (map->array[y][x] == 2)
+			else if (map->array[y][x] > 1)
 				draw_rectangle(param, (t_coord_f64){x * si, y * si},
 					(t_coord_i32){si, si}, 0x21634cFF);
-			else if (map->array[y][x] == 3)
-				draw_rectangle(param, (t_coord_f64){x * si, y * si},
-					(t_coord_i32){si, si}, 0x5c1d4bFF);
-			else if (map->array[y][x] == 4)
-				draw_rectangle(param, (t_coord_f64){x * si, y * si},
-					(t_coord_i32){si, si}, 0x222361FF);
 			else
 				draw_rectangle(param, (t_coord_f64){x * si, y * si},
 					(t_coord_i32){si, si}, 0x222222FF);
