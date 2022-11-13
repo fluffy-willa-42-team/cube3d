@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 20:08:12 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/10 20:09:10 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/13 12:20:55 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,16 @@ void draw_floor(t_game *game, int x, double alpha, int heigth_drawn)
 {
 	double dist;
 	
-	double proj_dist = WIN_WIDTH / 2 / tan(FOV_ANGLE / 2);
+	double proj_dist = (double) WIN_WIDTH / 2 / tan(FOV_ANGLE / 2);
 
 
 	int rest_to_draw = MDDL_SCRN_HGTH - heigth_drawn + 1;
 	for (int32_t y = 0; y < rest_to_draw; y++)
 	{
-		// dist = 0.5 * proj_dist / (game->player.z - y) * WIN_WIDTH / WIN_HEIGHT;
-		
-		dist = 0.5 * proj_dist / (game->player.z * WIN_HEIGHT - y);
-		// dist = dist * cos(alpha - game->player.alpha);
+		dist = proj_dist / (y - game->player.z * WIN_HEIGHT) / cos(game->player.alpha - alpha);
 		t_coord_f64 pos = set_f64(
-			game->player.coord.x + cos(alpha) * dist,
-			game->player.coord.y + sin(alpha) * dist
+			game->player.coord.x - cos(alpha) * dist,
+			game->player.coord.y - sin(alpha) * dist
 		);
 
 		t_chunk chunk = get_chunk(game, set_i32(pos.x, pos.y));

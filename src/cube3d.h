@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:33:07 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/10 20:12:33 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/13 12:16:07 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@
 
 # define MINIMAP_SIZE		20
 # define COLUMN_WIDTH		1
-# define HEIGTH_OF_BLOCK	WIN_HEIGHT / 2
+# define HEIGTH_OF_BLOCK	525
 # define FOV_ANGLE			PI / 3
 
 /* ************************************************************************** */
