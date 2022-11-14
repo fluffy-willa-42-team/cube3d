@@ -6,7 +6,7 @@
 #    By: awillems <awillems@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/05 10:47:56 by awillems          #+#    #+#              #
-#    Updated: 2022/10/25 13:01:57 by awillems         ###   ########.fr        #
+#    Updated: 2022/11/14 09:58:41 by awillems         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ CC			= gcc
 OBJ_EXT		= .o
 CODE_EXT	= .c
 HEAD_EXT	= .h
-INC			= -I include -I lib/MLX42/include/ -I lib/MLX42/ -Ilib/vector-lib/include -Ilib/libft/include
+INC			= -I include -I lib/MLX42/include/ -I lib/MLX42/ -I lib/vector-lib/include -I lib/libft/include
 FLAGS		= -Wall -Wextra -Werror
 FLAGS_COMP	= 
 
