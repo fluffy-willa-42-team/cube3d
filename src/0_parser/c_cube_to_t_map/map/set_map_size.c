@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 17:33:11 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/10 17:46:38 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/14 16:32:16 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,27 +45,17 @@ char	*mapptr(t_parser *data)
 
 /**
  * @brief Get the width of the current line.
- *        We consider `width`, all the `' '` only if there is at the beginning
- *        of the line and all non `' '` character.
  * 
  * @param data Parser structure.
  * @return int 
  */
-static int	get_line_width(t_parser *data)
+int	get_line_width(t_parser *data)
 {
-	int	tmp;
+	const int	tmp = data->index;
 
-	tmp = data->index;
-	while (mapchar(data) == ' ')
-		data->index++;
-	while (mapchar(data) && mapchar(data) != ' ' && mapchar(data) != '\n')
-		data->index++;
-	tmp = data->index - tmp;
 	while (mapchar(data) && mapchar(data) != '\n')
 		data->index++;
-	if (mapchar(data) == '\n')
-		data->index++;
-	return (tmp);
+	return (data->index - tmp);
 }
 
 /**
@@ -88,12 +78,14 @@ static int	get_chunk_line_width(t_parser *data)
 
 	chunk_heigth = 1;
 	chunk_width = 0;
+	data->index++;
 	while (mapchar(data) && chunk_heigth < 3)
 	{
 		chunk_width = get_line_width(data);
 		if (first_chunk_width != chunk_width)
 			return (ret_print(-1, ERR_CHUNK_W));
 		chunk_heigth++;
+		data->index++;
 	}
 	if (chunk_heigth == 3)
 		return (first_chunk_width);
@@ -123,6 +115,7 @@ int	set_map_size(t_parser *data)
 	int	width;
 	int	heigth;
 
+	data->index = 0;
 	biggest_width = 0;
 	width = 0;
 	heigth = 0;
@@ -137,7 +130,7 @@ int	set_map_size(t_parser *data)
 			biggest_width = width;
 		heigth++;
 	}
-	data->map_size.x = biggest_width;
+	data->map_size.x = biggest_width / 3;
 	data->map_size.y = heigth;
 	return (EXIT_SUCCESS);
 }

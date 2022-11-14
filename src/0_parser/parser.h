@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:53:43 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/10 19:03:34 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/14 18:04:13 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,8 @@ int		store_texture(t_parser *data, char *tex);
 int		store_map(t_parser *data);
 
 int		set_map_size(t_parser *data);
+int		get_line_width(t_parser *data);
+
 char	mapchar(t_parser *data);
 char	*mapptr(t_parser *data);
 

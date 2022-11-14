@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 17:09:25 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/10 18:51:26 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/14 16:23:07 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,10 @@
 /**
  * @brief Will set a tmp `t_texture` struct and push it in the
  *        `t_data `data.tex_list array vector. Check if the texture has not
- *        already been initiated.
+ *        already been initiated. `data.path` will point the first character
+ *        address in `data.cube`.
  * 
- * @warning Texture `token` is only on char, if there is more than one return
+ * @warning Texture `token` is only one char, if there is more than one return
  *          error. `token` and `path` texture need to be separated only by space
  *          and only one texture definition by line !
  * 

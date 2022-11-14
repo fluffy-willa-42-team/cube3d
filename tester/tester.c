@@ -167,7 +167,7 @@ void	test(const char *file, int ret, const char *comm)
 {
 	test_no++;
 
-	init_file(file);
+	init_file();
 	
 	fd_init();
 
