@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 10:01:39 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/14 10:35:49 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/14 10:50:53 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void ray_caster(t_game *game)
 	
 	draw_skybox(game);
 	angle = game->player.alpha - FOV_ANGLE1_2 - FOV_INCRE;
-	for (uint32_t i = 0; i < FOV_WIDTH; i++)
+	for (uint32_t i = 0; i < WIN_WIDTH; i++)
 	{
 		angle += FOV_INCRE;
 		//draw Walls

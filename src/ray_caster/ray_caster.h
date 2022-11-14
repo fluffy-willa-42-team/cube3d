@@ -21,10 +21,9 @@
 // DONT TOUCH
 
 # define FOV_ANGLE1_2		(double) (FOV_ANGLE) / 2
-# define FOV_WIDTH			(double) (WIN_WIDTH)
 # define FOV_INCRE			(double) (FOV_ANGLE) / WIN_WIDTH
 # define MAX_DIST			(double) (HEIGTH_OF_BLOCK) / WIN_WIDTH
-# define PROJ_DIST			(double) (WIN_WIDTH) / 2 / tan(FOV_ANGLE / 2)
+# define PROJ_DIST			(double) WIN_HEIGHT / tan(FOV_ANGLE1_2) / DIVIDER
 # define MDDL_SCRN_HGTH		WIN_HEIGHT / 2 
 
 /* ************************************************************************** */

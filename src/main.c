@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:49:27 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/14 10:40:17 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/14 12:19:24 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,14 +63,29 @@ void	hook(void *param)
 		game->player.z += 0.02;
 		// if (game->player.z >= 1)
 		// 	game->player.z -= 1;
-		printf("%f\n", game->player.z);
+		double test = (double) (WIN_WIDTH - HEIGTH_OF_BLOCK) / WIN_HEIGHT * 2;
+		printf("\n%f %f %f %f %f %f %f %f\n",
+			test,
+			(double) WIN_HEIGHT / WIN_WIDTH,
+			(double) WIN_WIDTH / WIN_HEIGHT,
+			(double) (WIN_WIDTH - HEIGTH_OF_BLOCK) / WIN_HEIGHT,
+			(double) (WIN_HEIGHT - HEIGTH_OF_BLOCK) / WIN_WIDTH,
+			(double) (WIN_WIDTH + HEIGTH_OF_BLOCK) / WIN_HEIGHT,
+			(double) (WIN_HEIGHT + HEIGTH_OF_BLOCK) / WIN_WIDTH,
+			(double) WIN_WIDTH / test
+		);
+		printf("res: %f %f %f %f\n\n", 
+			(double) (HEIGTH_OF_BLOCK) / WIN_HEIGHT,
+			(double) (HEIGTH_OF_BLOCK) / WIN_WIDTH,
+			(double) (WIN_HEIGHT) / HEIGTH_OF_BLOCK,
+			(double) (WIN_WIDTH) / HEIGTH_OF_BLOCK
+		);
 	}
 	if (mlx_is_key_down(game->param.mlx, MLX_KEY_S))
 	{
 		game->player.z -= 0.02;
 		// if (game->player.z <= 0)
 		// 	game->player.z += 1;
-		printf("%f\n", game->player.z);
 	}
 	if (mlx_is_key_down(game->param.mlx, MLX_KEY_A))
 		angle_hook(game, -0.03);
