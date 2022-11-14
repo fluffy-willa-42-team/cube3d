@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:33:07 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/14 12:15:57 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/14 14:43:41 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ typedef struct s_player {
 	double		z;
 	double		alpha;
 	t_coord_f64 cosin;
+	t_coord_f64 plane;
 }	t_player;
 
 typedef struct s_game {

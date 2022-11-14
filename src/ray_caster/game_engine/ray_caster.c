@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 10:01:39 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/14 13:22:59 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/14 14:20:37 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,10 @@ void ray_caster(t_game *game)
 	
 	draw_skybox(game);
 	angle = game->player.alpha - FOV_ANGLE1_2 - FOV_INCRE;
-	for (uint32_t j = 0; j < MDDL_SCRN_HGTH; j++)
+	
+	for (int y = MDDL_SCRN_HGTH; y < WIN_HEIGHT; y++)
 	{
-		draw_floor(game, j);
+		draw_floor(game, y);
 	}
 	for (uint32_t i = 0; i < WIN_WIDTH; i++)
 	{
