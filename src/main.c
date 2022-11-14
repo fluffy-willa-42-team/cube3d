@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:49:27 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/14 10:08:29 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/14 10:18:06 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,12 @@ int main(void)
 		{0, NULL, 0},
 		{0, NULL, 0},
 		{0, NULL, 0},
-		{0, NULL, 0}
+		{0, NULL, 0},
+		{0, {0, 0}, NULL, NULL, NULL, NULL, &game.temp2, &game.temp2},
+		{1, {0, 0}, &game.temp, &game.temp, &game.temp, &game.temp, &game.temp1, &game.temp1},
+		{1, {0, 0}, NULL, NULL, &game.temp1, &game.temp1, &game.temp1, &game.temp1},
+		{1, {0, 0}, &game.temp1, &game.temp1, NULL, NULL, &game.temp1, &game.temp1},
+		{1, {0, 0}, NULL, NULL, &game.temp1, NULL, &game.temp1, &game.temp1}
 	};
 
 	if (!init_image(&game.temp, "./texture/mc/grass_side.xpm42"))

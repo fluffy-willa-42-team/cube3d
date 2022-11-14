@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:31:46 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/10 12:09:49 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/14 10:21:01 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@
 
 int is_equal(double a, double b);
 
-t_chunk get_chunk(t_game *game, t_coord_i32 coord);
+t_chunk *get_chunk(t_game *game, t_coord_i32 coord);
 t_texture *get_wall_texture(t_chunk *chunk, t_coord_f64 inter);
 
 t_texture *get_texture(t_game *game, t_inter inter)
 {
-	t_chunk chunk = get_chunk(game, inter.wall);
-	return (get_wall_texture(&chunk, inter.point));
+	t_chunk *chunk = get_chunk(game, inter.wall);
+	return (get_wall_texture(chunk, inter.point));
 }
 
 t_coord_f64 get_texture_inter(t_inter inter)

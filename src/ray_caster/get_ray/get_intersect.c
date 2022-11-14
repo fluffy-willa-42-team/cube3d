@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 13:23:03 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/07 14:06:59 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/14 10:23:58 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 #include "mlx_utils.h"
 
-t_chunk get_chunk(t_game *game, t_coord_i32 coord);
+t_chunk *get_chunk(t_game *game, t_coord_i32 coord);
 t_texture *get_wall_texture(t_chunk *chunk, t_coord_f64 inter);
 
 t_intersect	get_init_x(t_coord_f64 player, t_coord_f64 delta, double alpha, double tan_a);
@@ -43,17 +43,17 @@ double prot_tan(double alpha)
  */
 int is_wall(t_game *game, t_intersect *inter)
 {
-	t_chunk next = get_chunk(game, inter->wall);
-	t_chunk prev = get_chunk(game, inter->prev_wall);
+	t_chunk *next = get_chunk(game, inter->wall);
+	t_chunk *prev = get_chunk(game, inter->prev_wall);
 	
-	if (prev.type < 0 && next.type < 0)
+	if (!prev && !next)
 		return (-1);
-	if (get_wall_texture(&prev, inter->point))
+	if (get_wall_texture(prev, inter->point))
 	{
 		inter->wall = inter->prev_wall;
 		return (1);
 	}
-	else if (get_wall_texture(&next, inter->point))
+	else if (get_wall_texture(next, inter->point))
 		return (1);
 	return (0);
 }
