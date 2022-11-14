@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 10:01:39 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/14 10:50:53 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/14 13:22:59 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ double loop_len(double n, double len);
 t_inter get_intersect(t_game *game, t_coord_f64 player, double alpha);
 
 void	draw_skybox(t_game *game);
-void	draw_floor(t_game *game, int x, double alpha, int heigth_drawn);
+void	 draw_floor(t_game *game, int y);
 int32_t draw_wall(t_game *game, t_inter inter, uint32_t x, int32_t height);
 
 static double distance(t_game *game, t_inter inter)
@@ -37,15 +37,19 @@ void ray_caster(t_game *game)
 	
 	draw_skybox(game);
 	angle = game->player.alpha - FOV_ANGLE1_2 - FOV_INCRE;
+	for (uint32_t j = 0; j < MDDL_SCRN_HGTH; j++)
+	{
+		draw_floor(game, j);
+	}
 	for (uint32_t i = 0; i < WIN_WIDTH; i++)
 	{
 		angle += FOV_INCRE;
 		//draw Walls
 		inter = get_intersect(game, game->player.coord, loop_len(angle, PI2));
 		dist = distance(game, inter);
-		int heigth_drawn = draw_wall(game, inter, i, HEIGTH_OF_BLOCK / dist);
-		if (heigth_drawn >= WIN_HEIGHT - 1)
-			continue ;
-		draw_floor(game, i, angle, heigth_drawn);
+		// int heigth_drawn = 
+		draw_wall(game, inter, i, HEIGTH_OF_BLOCK / dist);
+		// if (heigth_drawn >= WIN_HEIGHT - 1)
+		// 	continue ;
 	}
 }
