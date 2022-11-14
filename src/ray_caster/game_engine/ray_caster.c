@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 10:01:39 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/10 20:09:08 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/14 10:35:49 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ int32_t draw_wall(t_game *game, t_inter inter, uint32_t x, int32_t height);
 
 static double distance(t_game *game, t_inter inter)
 {
-	return ((inter.point.x - game->player.coord.x) * game->player.delta.x
-		+ (inter.point.y - game->player.coord.y) * game->player.delta.y);
+	return ((inter.point.x - game->player.coord.x) * game->player.cosin.x
+		+ (inter.point.y - game->player.coord.y) * game->player.cosin.y);
 }
 
 

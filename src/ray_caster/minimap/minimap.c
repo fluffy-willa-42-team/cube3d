@@ -70,6 +70,6 @@ int draw_minimap(t_game *game)
 		draw_ray(game, loop_len(game->player.alpha + i,	PI2));
 		i += 0.001;
 	}
-	draw_line_s(&game->param, game->player.coord, add_f64(game->player.coord, game->player.delta), 0xFF00FFFF);
+	draw_line_s(&game->param, game->player.coord, add_f64(game->player.coord, game->player.cosin), 0xFF00FFFF);
 	return (1);
 }

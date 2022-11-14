@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:31:46 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/14 10:21:01 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/14 10:46:31 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,19 +68,16 @@ int32_t draw_wall(t_game *game, t_inter inter, uint32_t x, int32_t height)
 	(void) ratio;
 	(void) x;
 	
-	for (int i = 0; i < COLUMN_WIDTH; i++)
+	for (int i = 0; i < parse_heigth * 2; i++)
 	{
-		for (int j = 0; j < parse_heigth * 2; j++)
-		{
-			if (texture->type == COLOR)
-				put_pixel(&game->param, x + i, WIN_HEIGHT / 2 - height + j,
-					texture->color
-				);
-			else
-				put_pixel(&game->param, x + i, WIN_HEIGHT / 2 - height + j,
-					get_pixel_image(texture, i + offset, j, ratio)
-				);
-		}
+		if (texture->type == COLOR)
+			put_pixel(&game->param, x, WIN_HEIGHT / 2 - height + i,
+				texture->color
+			);
+		else
+			put_pixel(&game->param, x, WIN_HEIGHT / 2 - height + i,
+				get_pixel_image(texture, offset, i, ratio)
+			);
 	}
 	return (parse_heigth);
 }

@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:33:07 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/14 10:14:58 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/14 10:48:32 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,7 @@
 /* #####=====----------		Ray Caster Config Var		 ----------=====##### */
 
 # define MINIMAP_SIZE		20
-# define COLUMN_WIDTH		1
-# define HEIGTH_OF_BLOCK	WIN_WIDTH / 2
+# define HEIGTH_OF_BLOCK	WIN_HEIGHT
 # define FOV_ANGLE			PI / 3
 
 /* ************************************************************************** */
@@ -93,7 +92,7 @@ typedef struct s_player {
 	t_coord_f64 coord;
 	double		z;
 	double		alpha;
-	t_coord_f64 delta;
+	t_coord_f64 cosin;
 }	t_player;
 
 typedef struct s_game {
