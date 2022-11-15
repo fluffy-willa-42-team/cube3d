@@ -21,13 +21,12 @@
 // DONT TOUCH
 
 // VALEUR MAGIQUE /!\ DO NOT TOUCH
-# define HEIGTH_OF_BLOCK	176.5
+# define HEIGTH_OF_BLOCK	100
 
 # define FOV_ANGLE1_2		(double) (FOV_ANGLE) / 2
 # define FOV_INCRE			(double) (FOV_ANGLE) / WIN_WIDTH
-# define PROJ_DIST_DIV		(double) (WIN_HEIGHT / 100)
-# define PROJ_DIST			(double) WIN_HEIGHT / tan(FOV_ANGLE1_2) / PROJ_DIST_DIV
-# define MDDL_SCRN_HGTH		WIN_HEIGHT / 2 
+# define PROJ_DIST			(double) (HEIGTH_OF_BLOCK) / tan(FOV_ANGLE1_2)
+# define MDDL_SCRN_HGTH		WIN_HEIGHT / 2
 
 /* ************************************************************************** */
 

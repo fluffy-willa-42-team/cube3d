@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 20:08:12 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/15 13:37:07 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/15 14:18:50 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,15 @@ void draw_floor(t_game *game, int x, double alpha, int heigth_drawn)
 		cos(alpha),
 		sin(alpha)
 	);
-	//            PROJ_DIST / cos(player.alpha - alpha)
-	const double test = PROJ_DIST / (game->player.cosin.x * cosin.x + game->player.cosin.y * cosin.y) * game->param.hob_mult;
+	//            PROJ_DIST / cos(player.alpha - alpha) * game->param.hob_mult;
+	const double proj_dist = PROJ_DIST / cos(alpha - game->player.alpha) * game->param.hob_mult / 1.77;
+	//  PROJ_DIST / (game->player.cosin.x * cosin.x + game->player.cosin.y * cosin.y) * game->param.hob_mult;
 	double dist;
 
 	int rest_to_draw = MDDL_SCRN_HGTH - heigth_drawn + 1;
 	for (int32_t y = 0; y < rest_to_draw; y++)
 	{
-		dist = test / (y - game->player.z * WIN_HEIGHT);
+		dist = proj_dist / (y - game->player.z * WIN_HEIGHT);
 		t_coord_f64 pos = set_f64(
 			game->player.coord.x - cosin.x * dist,
 			game->player.coord.y - cosin.y * dist

@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:49:27 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/15 12:33:47 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/15 14:17:21 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ t_texture *init_color(t_texture *ptr, uint32_t color);
 
 int main(void)
 {
-	t_game game = {{NULL, NULL, 2, 10, WIN_HEIGHT, WIN_WIDTH},
+	t_game game = {{NULL, NULL, 7, 7, WIN_HEIGHT, WIN_WIDTH},
 		{{
 			{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
 			{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
@@ -143,21 +143,21 @@ int main(void)
 		{1, {0, 0}, NULL, NULL, &game.temp1, NULL, &game.temp1, &game.temp1}
 	};
 
-	if (!init_image(&game.temp, "./texture/mc/grass_side.xpm42"))
-		return (EXIT_FAILURE);
-	// init_color(&game.temp, 0x0000FFFF);
+	init_color(&game.temp, 0x0000FFFF);
+	init_color(&game.temp1, 0xFFFF00FF);
+	init_color(&game.temp2, 0x2596BEFF);
 
-	if (!init_image(&game.temp1, "./texture/mc/stone.xpm42"))
-		return (EXIT_FAILURE);
-	// init_color(&game.temp1, 0xFFFF00FF);
+	// if (!init_image(&game.temp, "./texture/mc/grass_side.xpm42"))
+	// 	return (EXIT_FAILURE);
+	// if (!init_image(&game.temp1, "./texture/mc/stone.xpm42"))
+	// 	return (EXIT_FAILURE);
+	// if (!init_image(&game.temp2, "./texture/mc/grass_top.xpm42"))
+	// 	return (EXIT_FAILURE);
+	
 	
 	// if (!init_image(&game.skybox, "./texture/sky.xpm42"))
 	// 	return (EXIT_FAILURE);
-	init_color(&game.skybox, 0x000000FF);
-
-	if (!init_image(&game.temp2, "./texture/mc/grass_top.xpm42"))
-		return (EXIT_FAILURE);
-	// init_color(&game.temp2, 0x2596BEFF);
+	init_color(&game.skybox, 0xf7d79aFF);
 
 	game.param.mlx = mlx_init(game.param.width, game.param.height, "MLX42", true);
 	if (!game.param.mlx)
