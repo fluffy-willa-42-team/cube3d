@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 17:33:11 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/14 16:32:16 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/15 12:23:39 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,12 @@ char	*mapptr(t_parser *data)
  */
 int	get_line_width(t_parser *data)
 {
-	const int	tmp = data->index;
+	int	tmp;
 
-	while (mapchar(data) && mapchar(data) != '\n')
-		data->index++;
-	return (data->index - tmp);
+	tmp = data->index;
+	while (data->cube_map[tmp] && data->cube_map[tmp] != '\n')
+		tmp++;
+	return (tmp - data->index);
 }
 
 /**
@@ -78,14 +79,14 @@ static int	get_chunk_line_width(t_parser *data)
 
 	chunk_heigth = 1;
 	chunk_width = 0;
-	data->index++;
+	data->index += first_chunk_width + 1;
 	while (mapchar(data) && chunk_heigth < 3)
 	{
 		chunk_width = get_line_width(data);
 		if (first_chunk_width != chunk_width)
 			return (ret_print(-1, ERR_CHUNK_W));
 		chunk_heigth++;
-		data->index++;
+		data->index += chunk_width + 1;
 	}
 	if (chunk_heigth == 3)
 		return (first_chunk_width);
