@@ -21,8 +21,8 @@ t_inter get_intersect(t_game *game, t_coord_f64 player, double alpha);
 void draw_line_s(t_mlx_param *param, t_coord_f64 a, t_coord_f64 b, int32_t color)
 {
 	return (draw_line(param,
-		set_f64(a.x * MINIMAP_SIZE, a.y * MINIMAP_SIZE),
-		set_f64(b.x * MINIMAP_SIZE, b.y * MINIMAP_SIZE),
+		set_f64(a.x * param->minimap_size, a.y * param->minimap_size),
+		set_f64(b.x * param->minimap_size, b.y * param->minimap_size),
 		color
 	));
 }
@@ -32,8 +32,8 @@ void draw_ray(t_game *game, double alpha)
 	t_inter test = get_intersect(game, game->player.coord, alpha);
 	draw_line_s(&game->param, game->player.coord, test.point, 0xfcba03AA);
 	// draw_rectangle(&game->param,
-	// 	set_f64(test.wall.x * MINIMAP_SIZE, test.wall.y * MINIMAP_SIZE),
-	// 	set_i32(MINIMAP_SIZE, MINIMAP_SIZE), 0xaF2278FF
+	// 	set_f64(test.wall.x * param->minimap_size, test.wall.y * param->minimap_size),
+	// 	set_i32(param->minimap_size, param->minimap_size), 0xaF2278FF
 	// );
 }
 
@@ -41,7 +41,7 @@ int draw_minimap(t_game *game)
 {
 	t_mlx_param *param	= &game->param;
 	t_map *map			= &game->map;
-	int si = MINIMAP_SIZE;
+	int si = param->minimap_size;
 
 	for (uint32_t y = 0; y < map->height; y++)
 	{

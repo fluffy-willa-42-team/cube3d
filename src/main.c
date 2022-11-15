@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:49:27 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/15 10:32:42 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/15 10:42:33 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,20 +70,25 @@ void	hook(void *param)
 	// 	// if (game->player.z <= 0)
 	// 	// 	game->player.z += 1;
 	// }
-	if (mlx_is_key_down(game->param.mlx, MLX_KEY_Z))
+	if (mlx_is_key_down(game->param.mlx, MLX_KEY_I))
 	{
-		game->param.hob_mult += 1;
-		printf("%d\n", game->param.hob_mult);
-		// if (game->player.z >= 1)
-		// 	game->player.z -= 1;
+		if (game->param.hob_mult < 100)
+			game->param.hob_mult += 1;
 	}
-	if (mlx_is_key_down(game->param.mlx, MLX_KEY_C))
+	if (mlx_is_key_down(game->param.mlx, MLX_KEY_K))
 	{
 		if (game->param.hob_mult > 1)
 			game->param.hob_mult -= 1;
-		printf("%d\n", game->param.hob_mult);
-		// if (game->player.z <= 0)
-		// 	game->player.z += 1;
+	}
+	if (mlx_is_key_down(game->param.mlx, MLX_KEY_O))
+	{
+		if (game->param.minimap_size < 100)
+			game->param.minimap_size += 1;
+	}
+	if (mlx_is_key_down(game->param.mlx, MLX_KEY_L))
+	{
+		if (game->param.minimap_size > 1)
+			game->param.minimap_size -= 1;
 	}
 	if (mlx_is_key_down(game->param.mlx, MLX_KEY_A))
 		angle_hook(game, -0.03);
@@ -103,17 +108,29 @@ t_texture *init_color(t_texture *ptr, uint32_t color);
 
 int main(void)
 {
-	t_game game = {{NULL, NULL, 2, WIN_HEIGHT, WIN_WIDTH},
+	t_game game = {{NULL, NULL, 2, 10, WIN_HEIGHT, WIN_WIDTH},
 		{{
-			{1, 1, 1, 1, 1, 1, 1, 1, 1},
-			{1, 0, 3, 0, 0, 0, 0, 0, 1},
-			{1, 0, 2, 0, 1, 0, 1, 0, 1},
-			{1, 0, 4, 3, 3, 0, 0, 0, 1},
-			{1, 0, 2, 1, 1, 0, 0, 0, 1},
-			{1, 0, 0, 0, 0, 0, 1, 0, 1},
-			{1, 0, 0, 0, 0, 0, 0, 0, 1},
-			{1, 1, 1, 1, 1, 1, 1, 1, 1},
-		}, 8, 9},
+			{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+			{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+			{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+			{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+			{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+			{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+			{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+			{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+			{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+			{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+			{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+			{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+			{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+			{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+			{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+			{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+			{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+			{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+			{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+			{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
+		}, 20, 20},
 		{{3.5f, 3.5f}, 0.5, 0.0f, {cos(0), sin(0)}},
 		{0, NULL, 0},
 		{0, NULL, 0},
@@ -165,3 +182,4 @@ int main(void)
 	mlx_terminate(game.param.mlx);
 	return (EXIT_SUCCESS);
 }
+
