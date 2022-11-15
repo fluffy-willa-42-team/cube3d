@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 20:08:12 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/15 12:29:23 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/15 13:37:07 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,41 @@
 
 t_chunk *get_chunk(t_game *game, t_coord_i32 coord);
 
+static void	draw_top_or_bottom(
+	t_game *game,
+	t_texture *texture,
+	t_coord_f64 floor_pos,
+	t_coord_i32 pixel_pos
+)
+{
+	if (texture)
+	{
+		if (texture->type & IMAGE)
+		{
+			put_pixel(&game->param, pixel_pos.x, pixel_pos.y,
+				get_pixel_image(texture,
+					(floor_pos.x - (int) floor_pos.x) * texture->image->width,
+					(floor_pos.y - (int) floor_pos.y) * texture->image->height,
+					set_f64(1, 1)
+				)
+			);
+		}
+		else
+		{
+			put_pixel(&game->param, pixel_pos.x, pixel_pos.y, texture->color);
+		}
+	}
+}
+
 void draw_floor(t_game *game, int x, double alpha, int heigth_drawn)
 {
-	double dist;
-	
-	t_coord_f64 cosin = set_f64(
+	const t_coord_f64 cosin = set_f64(
 		cos(alpha),
 		sin(alpha)
 	);
 	//            PROJ_DIST / cos(player.alpha - alpha)
-	double test = PROJ_DIST / (game->player.cosin.x * cosin.x + game->player.cosin.y * cosin.y) * game->param.hob_mult;
+	const double test = PROJ_DIST / (game->player.cosin.x * cosin.x + game->player.cosin.y * cosin.y) * game->param.hob_mult;
+	double dist;
 
 	int rest_to_draw = MDDL_SCRN_HGTH - heigth_drawn + 1;
 	for (int32_t y = 0; y < rest_to_draw; y++)
@@ -38,41 +63,9 @@ void draw_floor(t_game *game, int x, double alpha, int heigth_drawn)
 		);
 
 		t_chunk *chunk = get_chunk(game, set_i32(pos.x, pos.y));
-			
-		if (chunk && chunk->floor)
-		{
-			if (chunk->floor->type & IMAGE)
-			{
-				put_pixel(&game->param, x, WIN_HEIGHT - y,
-					get_pixel_image(chunk->floor,
-						(pos.x - (int) pos.x) * chunk->floor->image->width,
-						(pos.y - (int) pos.y) * chunk->floor->image->height,
-						set_f64(1, 1)
-					)
-				);
-			}
-			else
-			{
-				put_pixel(&game->param, x, WIN_HEIGHT - y, chunk->floor->color);
-			}
-		}
-		if (chunk && chunk->ceiling)
-		{
-			if (chunk->ceiling->type & IMAGE)
-			{
-				put_pixel(&game->param, x, y,
-					get_pixel_image(chunk->ceiling,
-						(pos.x - (int) pos.x) * chunk->ceiling->image->width,
-						(pos.y - (int) pos.y) * chunk->ceiling->image->height,
-						set_f64(1, 1)
-					)
-				);
-			}
-			else
-			{
-				put_pixel(&game->param, x, y, chunk->ceiling->color);
-			}
-		}
-		
+		if (!chunk)
+			continue ;
+		draw_top_or_bottom(game, chunk->floor,		pos, set_i32(x, WIN_HEIGHT - y));
+		draw_top_or_bottom(game, chunk->ceiling,	pos, set_i32(x, y));
 	}
 }
