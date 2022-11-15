@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:33:07 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/15 10:40:30 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/15 10:53:59 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,6 @@
 /* #####=====----------		Ray Caster Config Var		 ----------=====##### */
 
 # define MINIMAP_SIZE			20
-# define HEIGTH_OF_BLOCK		176.5
-# define HOB_MULT				2
 # define FOV_ANGLE				PI / 3
 
 /* ************************************************************************** */
@@ -85,7 +83,7 @@ typedef struct s_map {
 typedef struct s_mlx_param {
 	mlx_t 		*mlx;
 	mlx_image_t *img;
-	int32_t		hob_mult;
+	double		hob_mult;
 	int32_t		minimap_size;
 	int32_t 	height;
 	int32_t 	width;
