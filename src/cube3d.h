@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:33:07 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/15 10:53:59 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/15 12:04:04 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,16 @@
 
 /* #####=====----------		Ray Caster Config Var		 ----------=====##### */
 
-# define MINIMAP_SIZE			20
 # define FOV_ANGLE				PI / 3
 
 /* ************************************************************************** */
 
 typedef enum s_texture_type {
-	UNDEFINED	= 0,
-	COLOR		= 1,
-	IMAGE		= 2,
+	UNDEFINED	= 0b000,
+	VALID		= 0b001,
+	COLOR		= 0b000,
+	IMAGE		= 0b010,
+	SKYBOX		= 0b100,
 }	t_texture_type;
 
 typedef struct s_texture {

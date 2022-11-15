@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:31:46 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/14 10:46:31 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/15 12:10:26 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ int32_t draw_wall(t_game *game, t_inter inter, uint32_t x, int32_t height)
 	t_coord_f64 ratio;
 	double 		offset;
 	
-	if (!texture)
+	if (!texture || !(texture->type & VALID))
 		return (parse_heigth);
-	if (texture->type == IMAGE && texture->image)
+	if (texture->type & IMAGE && texture->image)
 	{
 		ratio = set_f64(1,
 			(double) texture->image->height /( (double) height * 2)
@@ -68,15 +68,17 @@ int32_t draw_wall(t_game *game, t_inter inter, uint32_t x, int32_t height)
 	(void) ratio;
 	(void) x;
 	
+	if (!(texture->type & VALID))
+		return (parse_heigth);
 	for (int i = 0; i < parse_heigth * 2; i++)
 	{
-		if (texture->type == COLOR)
+		if (texture->type & IMAGE)
 			put_pixel(&game->param, x, WIN_HEIGHT / 2 - height + i,
-				texture->color
+				get_pixel_image(texture, offset, i, ratio)
 			);
 		else
 			put_pixel(&game->param, x, WIN_HEIGHT / 2 - height + i,
-				get_pixel_image(texture, offset, i, ratio)
+				texture->color
 			);
 	}
 	return (parse_heigth);

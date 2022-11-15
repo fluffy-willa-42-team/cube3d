@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 10:01:39 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/15 10:29:58 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/15 12:25:50 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void ray_caster(t_game *game)
 	t_inter	inter;
 	double	dist;
 	
-	draw_skybox(game);
+	draw_rectangle(&game->param, set_f64(0, 0), set_i32(WIN_WIDTH, WIN_HEIGHT), 0x000000FF);
 	angle = game->player.alpha - FOV_ANGLE1_2 - FOV_INCRE;
 	for (uint32_t i = 0; i < WIN_WIDTH; i++)
 	{

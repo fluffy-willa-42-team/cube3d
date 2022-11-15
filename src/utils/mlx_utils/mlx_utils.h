@@ -24,7 +24,7 @@ void draw_rectangle(t_mlx_param *param, t_coord_f64 point, t_coord_i32 size, uin
 void draw_line(t_mlx_param *param, t_coord_f64 a, t_coord_f64 b, int32_t color);
 
 uint32_t	get_pixel_image(t_texture *texture, uint32_t x, uint32_t y, t_coord_f64 ratio);
-void draw_image(t_game *game, t_texture texture, t_coord_i32 pos, t_coord_i32 size);
+void draw_image(t_game *game, t_texture *texture, t_coord_i32 pos, t_coord_i32 size);
 
 /* ************************************************************************** */
 

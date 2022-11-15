@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:49:27 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/15 10:56:25 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/15 12:33:47 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,11 +145,11 @@ int main(void)
 
 	if (!init_image(&game.temp, "./texture/mc/grass_side.xpm42"))
 		return (EXIT_FAILURE);
-	// init_color(&game.temp, 0xFF00FFFF);
+	// init_color(&game.temp, 0x0000FFFF);
 
 	if (!init_image(&game.temp1, "./texture/mc/stone.xpm42"))
 		return (EXIT_FAILURE);
-	// init_color(&game.temp1, 0xFF00FFFF);
+	// init_color(&game.temp1, 0xFFFF00FF);
 	
 	// if (!init_image(&game.skybox, "./texture/sky.xpm42"))
 	// 	return (EXIT_FAILURE);
@@ -157,7 +157,7 @@ int main(void)
 
 	if (!init_image(&game.temp2, "./texture/mc/grass_top.xpm42"))
 		return (EXIT_FAILURE);
-	// init_color(&game.temp1, 0xFF00FFFF);
+	// init_color(&game.temp2, 0x2596BEFF);
 
 	game.param.mlx = mlx_init(game.param.width, game.param.height, "MLX42", true);
 	if (!game.param.mlx)
