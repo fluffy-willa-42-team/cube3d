@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 20:08:12 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/14 10:40:08 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/15 10:29:50 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void draw_floor(t_game *game, int x, double alpha, int heigth_drawn)
 		sin(alpha)
 	);
 	//            PROJ_DIST / cos(player.alpha - alpha)
-	double test = PROJ_DIST / (game->player.cosin.x * cosin.x + game->player.cosin.y * cosin.y);
+	double test = PROJ_DIST / (game->player.cosin.x * cosin.x + game->player.cosin.y * cosin.y) * game->param.hob_mult;
 
 	int rest_to_draw = MDDL_SCRN_HGTH - heigth_drawn + 1;
 	for (int32_t y = 0; y < rest_to_draw; y++)

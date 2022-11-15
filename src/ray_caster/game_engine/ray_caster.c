@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 10:01:39 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/14 10:50:53 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/15 10:29:58 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void ray_caster(t_game *game)
 		//draw Walls
 		inter = get_intersect(game, game->player.coord, loop_len(angle, PI2));
 		dist = distance(game, inter);
-		int heigth_drawn = draw_wall(game, inter, i, HEIGTH_OF_BLOCK / dist);
+		int heigth_drawn = draw_wall(game, inter, i, HEIGTH_OF_BLOCK * game->param.hob_mult / dist);
 		if (heigth_drawn >= WIN_HEIGHT - 1)
 			continue ;
 		draw_floor(game, i, angle, heigth_drawn);

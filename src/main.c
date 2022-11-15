@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:49:27 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/14 12:19:24 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/15 10:32:42 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,32 +58,30 @@ void	hook(void *param)
 		pos2_hook(&game->player, 0.02 * game->player.cosin.y, -0.02 * game->player.cosin.x, game->map.width);
 	if (mlx_is_key_down(game->param.mlx, MLX_KEY_RIGHT))
 		pos2_hook(&game->player, -0.02 * game->player.cosin.y, 0.02 * game->player.cosin.x, game->map.width);
-	if (mlx_is_key_down(game->param.mlx, MLX_KEY_W))
+	// if (mlx_is_key_down(game->param.mlx, MLX_KEY_W))
+	// {
+	// 	game->player.z += 0.02;
+	// 	// if (game->player.z >= 1)
+	// 	// 	game->player.z -= 1;
+	// }
+	// if (mlx_is_key_down(game->param.mlx, MLX_KEY_S))
+	// {
+	// 	game->player.z -= 0.02;
+	// 	// if (game->player.z <= 0)
+	// 	// 	game->player.z += 1;
+	// }
+	if (mlx_is_key_down(game->param.mlx, MLX_KEY_Z))
 	{
-		game->player.z += 0.02;
+		game->param.hob_mult += 1;
+		printf("%d\n", game->param.hob_mult);
 		// if (game->player.z >= 1)
 		// 	game->player.z -= 1;
-		double test = (double) (WIN_WIDTH - HEIGTH_OF_BLOCK) / WIN_HEIGHT * 2;
-		printf("\n%f %f %f %f %f %f %f %f\n",
-			test,
-			(double) WIN_HEIGHT / WIN_WIDTH,
-			(double) WIN_WIDTH / WIN_HEIGHT,
-			(double) (WIN_WIDTH - HEIGTH_OF_BLOCK) / WIN_HEIGHT,
-			(double) (WIN_HEIGHT - HEIGTH_OF_BLOCK) / WIN_WIDTH,
-			(double) (WIN_WIDTH + HEIGTH_OF_BLOCK) / WIN_HEIGHT,
-			(double) (WIN_HEIGHT + HEIGTH_OF_BLOCK) / WIN_WIDTH,
-			(double) WIN_WIDTH / test
-		);
-		printf("res: %f %f %f %f\n\n", 
-			(double) (HEIGTH_OF_BLOCK) / WIN_HEIGHT,
-			(double) (HEIGTH_OF_BLOCK) / WIN_WIDTH,
-			(double) (WIN_HEIGHT) / HEIGTH_OF_BLOCK,
-			(double) (WIN_WIDTH) / HEIGTH_OF_BLOCK
-		);
 	}
-	if (mlx_is_key_down(game->param.mlx, MLX_KEY_S))
+	if (mlx_is_key_down(game->param.mlx, MLX_KEY_C))
 	{
-		game->player.z -= 0.02;
+		if (game->param.hob_mult > 1)
+			game->param.hob_mult -= 1;
+		printf("%d\n", game->param.hob_mult);
 		// if (game->player.z <= 0)
 		// 	game->player.z += 1;
 	}
@@ -105,7 +103,7 @@ t_texture *init_color(t_texture *ptr, uint32_t color);
 
 int main(void)
 {
-	t_game game = {{NULL, NULL, WIN_HEIGHT, WIN_WIDTH},
+	t_game game = {{NULL, NULL, 2, WIN_HEIGHT, WIN_WIDTH},
 		{{
 			{1, 1, 1, 1, 1, 1, 1, 1, 1},
 			{1, 0, 3, 0, 0, 0, 0, 0, 1},
