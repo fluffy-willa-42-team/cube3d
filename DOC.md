@@ -5,9 +5,11 @@
 Cube3d need only one argument, the map file path.
 The argument must contain only the path, if the string contains white space before or after cube3d will return an error
 
+------
+
 ## cub format
 
-cub format have two part, first the texture definition and then the map.
+The cub format have two part, first the texture definition and then the map.
 
 ```
 NO ./path_to_the_north_texture
@@ -25,11 +27,8 @@ C 225,30,0
 
 **The texture format:**
 
-`[token] ./[relative_path_to_texture_file]`
-
-or
-
-`[token] [R,G,B]`
+- `[token]` `./[relative_path_to_texture_file]`
+- `[token]` `[R,G,B]`
 
 For the `cub` format only these token is allowed:
 
@@ -65,36 +64,120 @@ The map can only be compose with these character `{'1', '0', 'N', 'S', 'E', 'W'}
 `{'N', 'S', 'E', 'W'}` is use to place the player position on the map and his view direction (North, South, East, West).
 > It must have only one player, no more, no less.
 
+------
+
 ## cube format
 
-//TODO
-text  
-esc char: sep & comm  
-map: chunk
+The cube format have two part, first the texture definition and then the map.
+
+**The texture format**
+
+- `[token]` `./[relative_path_to_texture_file]`
+- `[token]` `./[relative_path_to/enemy_folder]`
+- `[token]` `[R,G,B]`
+
+**Cube sequence string**
+
+There is two sequence:
+- `~`   Is use to create a comment line in the texture definition part.
+- `~~~` Is use to separate the texture definition and map part.
+
+> The sequence must be used only at the beginning of a new line.
+> If there is another character before the sequence in the line it is an undefined behavior.
+
+**Reserved texture token**
+
+There is some reserved `token` :
+- `'.'` to set empty texture {`NORTH`, `SOUTH`, `WEST`, `EAST`, `TOP`, `BOTTOM`} or empty texture and settings for entity's and collectible {`ENITY`, `TEX`, `OPT`}. **This token can not be use to define a texture !**
+-  `'*'` is for the sky box texture or color. **It can only be use for face texture.**
 
 ```
-0 ./path_to_the_north_texture
-1 ./path_to_the_south_texture
-2 ./path_to_the_west_texture
-3 ./path_to_the_east_texture
-4 220,100,0
-5 225,30,0
+~ North face texture
+N ./path_to_the_north_texture
+
+~ South face texture
+S ./path_to_the_south_texture
+
+~ West face texture
+W ./path_to_the_west_texture
+
+~ East face texture
+E ./path_to_the_east_texture
+
+~ Ceiling face texture
+C 220,100,0
+
+~ Floor face texture
+F 225,30,0
+
+~ Skybox face texture
+* ./path_to_the_skybox_texture
+
+~ The end of the texture definition part
 ~~~
-         50.50.50.50.50.50.50.50.
-         23.23.23.23.23.23.23.23.
-         41.41.41.41.41.41.41.41.
-         50.5..5..5..5..5..5..50.
-         23...................23.
-         41.4..4..4..4..4..4..41.
-50.50.50.50.5..5..5..5..5.P5..50.50.50.50.50.
-23.23.23.23...................23.23.23.23.23.
-41.41.41.41.4..4..4..4..4.N4..41.41.41.41.41.
-50.5..5..5..5..5..5..5..5..5..5..5..5..5..50.
-23........................................23.
-41.4..4..4..4..4..4..4..4..4..4..4..4..4..41.
-50.50.50.50.50.50.50.50.50.50.50.50.50.50.50.
-23.23.23.23.23.23.23.23.23.23.23.23.23.23.23.
-41.41.41.41.41.41.41.41.41.41.41.41.41.41.41.
+```
+
+> A texture token must be defined only once !
+
+**The chunk format**
+
+A chunk store the texture of each face, player or entity data. So, one chunk is a 3x3 character set.
+
+`TOP`, `BOTTOM` is the ceiling and floor color or texture use for the top and bottom face of our chunk.
+
+`NORTH`, `WEST`, `EAST`, `SOUTH` will be the texture of each chunk face.
+
+`ENTITY`, `TEX`, `OPT` will store player info or other entity.
+
+```
+   TOP    | NORTH | ENTITY
+   -------0-------0-------
+   WEST   | EAST  | TEX
+   -------0-------0-------
+   BOTTOM | SOUTH | OPT
+```
+
+
+
+```
+~ North face texture
+N ./path_to_the_north_texture
+
+~ South face texture
+S ./path_to_the_south_texture
+
+~ West face texture
+W ./path_to_the_west_texture
+
+~ East face texture
+E ./path_to_the_east_texture
+
+~ Ceiling face texture
+C 220,100,0
+
+~ Floor face texture
+F 225,30,0
+
+~ Skybox face texture
+* ./path_to_the_skybox_texture
+
+~ The end of the texture definition part
+~~~
+         FN.FN.FN.FN.FN.FN.FN.FN.
+         WE.WE.WE.WE.WE.WE.WE.WE.
+         CS.CS.CS.CS.CS.CS.CS.CS.
+         FN.F..F..F..F..F..F..FN.
+         WE...................WE.
+         CS.C..C..C..C..C..C..CS.
+FN.FN.FN.FN.F..F..F..F..F.PF..FN.FN.FN.FN.FN.
+WE.WE.WE.WE...................WE.WE.WE.WE.WE.
+CS.CS.CS.CS.C..C..C..C..C.NC..CS.CS.CS.CS.CS.
+FN.*..*..*..*..*..*..*..*..*..*..*..*..*..FN.
+WE........................................WE.
+CS.*..*..*..*..*..*..*..*..*..*..*..*..*..CS.
+FN.FN.FN.FN.FN.FN.FN.FN.FN.FN.FN.FN.FN.FN.FN.
+WE.WE.WE.WE.WE.WE.WE.WE.WE.WE.WE.WE.WE.WE.WE.
+CS.CS.CS.CS.CS.CS.CS.CS.CS.CS.CS.CS.CS.CS.CS.
 ```
 
 ## mob file structure
