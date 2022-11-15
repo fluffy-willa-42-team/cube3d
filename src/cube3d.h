@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:33:07 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/10 18:34:10 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/15 11:48:57 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,10 @@
 /* ************************************************************************** */
 
 typedef enum s_texture_type {
-	UNDEFINED	= 0,
-	COLOR		= 1,
-	IMAGE		= 2,
+	UNDEFINED	= 0b000,
+	COLOR		= 0b001,
+	IMAGE		= 0b011,
+	SKYBOX		= 0b100,
 }	t_texture_type;
 
 typedef struct s_texture {
@@ -62,12 +63,12 @@ typedef struct s_coord_f32 {
 typedef struct s_chunk {
 	int32_t		type;
 	t_coord_i32	coord;
-	t_texture	north;
-	t_texture	east;
-	t_texture	west;
-	t_texture	south;
-	t_texture	ceiling;
-	t_texture	floor;
+	t_texture	*north;
+	t_texture	*east;
+	t_texture	*west;
+	t_texture	*south;
+	t_texture	*ceiling;
+	t_texture	*floor;
 }	t_chunk;
 
 typedef struct s_entity {

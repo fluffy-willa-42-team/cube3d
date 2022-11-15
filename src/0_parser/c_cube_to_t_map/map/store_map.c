@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 17:48:29 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/14 18:03:33 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/15 12:35:12 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@ static int	set_floor_1(t_parser *data, t_chunk *chunk)
 static int	set_floor_2(t_parser *data, t_chunk *chunk)
 {
 	(void)chunk;
-	printf("[%d] ", (get_line_width(data)) + (data->index + 1) + 1);
-	printf("[%.3s]\n",  &data->cube_map[(get_line_width(data)) + (data->index + 1) + 1]);
+	printf("[%.3s]\n", (mapptr(data) + data->index + get_line_width(data) + 1));
+
 	return (EXIT_SUCCESS);
 }
 
@@ -78,18 +78,19 @@ static int	set_floor_2(t_parser *data, t_chunk *chunk)
 static int	set_floor_3(t_parser *data, t_chunk *chunk)
 {
 	(void)chunk;
-	printf("[%d] ", (get_line_width(data)) + ((data->index + 1) * 2) + 1);
-	printf("[%.3s]\n", &data->cube_map[(get_line_width(data)) + ((data->index + 1) * 2) + 1]);
+	printf("[%.3s]\n", (mapptr(data) + data->index + 2 * (get_line_width(data) + 1)));
+
 	return (EXIT_SUCCESS);
 }
 
 int	set_next_chunk_index(t_parser *data)
 {
-		data->cube_map += data->index;
-		data->index = 0;
-		data->cube_map += (get_line_width(data) + 1) * 2;
-		if (!mapchar(data))
-			return (-1);
+	data->index++;
+	data->cube_map += data->index;
+	data->index = 0;
+	data->cube_map += (get_line_width(data) + 1) * 2;
+	if (!mapchar(data))
+		return (-1);
 	return (EXIT_SUCCESS);
 }
 
@@ -125,7 +126,7 @@ int	set_next_chunk_index(t_parser *data)
  * @param chunk 
  * @return int 
  */
-int	set_chunk(t_parser *data, t_chunk *chunk)
+int	get_next_chunk(t_parser *data, t_chunk *chunk)
 {
 	(void)chunk;
 	if (mapchar(data) == '\n')
@@ -152,7 +153,7 @@ int	init_map(t_parser *data)
 	err = EXIT_SUCCESS ;
 	while (err == EXIT_SUCCESS)
 	{
-		err = set_chunk(data, &tmp);
+		err = get_next_chunk(data, &tmp);
 		if (err == EXIT_SUCCESS)
 		{
 			if (!v_add(&data->map, DEFAULT, &tmp))
