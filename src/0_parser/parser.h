@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:53:43 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/14 18:04:13 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/15 14:33:10 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@
  * @param cube     (t_vec)   Buffer to write the `.cube` file
  * @param cube_map (char *)  Pointer to the beginning of the `.cube` map
  * @param index    (int)     Temporary index
+ * @param tmp_width (int)     Temporary width
  * @param tex      (char []) Character array to check duplication `.cub` texture
  * @param tex_list (t_vec)   Structure array with all texture info
  * @param map_size (t_coord_i32) Store the map size, width .x, heigth .y
@@ -93,6 +94,7 @@ typedef struct s_parser
 	t_vec			cube;
 	char			*cube_map;
 	int				index;
+	int				tmp_width;
 	char			tex[DEFAUT_CUB_TEX_NB];
 	t_vec			tex_list;
 	t_coord_i32		map_size;

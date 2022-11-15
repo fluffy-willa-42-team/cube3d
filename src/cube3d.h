@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:33:07 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/15 11:48:57 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/15 14:23:00 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,13 @@ typedef enum s_texture_type {
 	SKYBOX		= 0b100,
 }	t_texture_type;
 
+/**
+ * @param type   (t_texture_type)
+ * @param token  (char)
+ * @param path   (char)
+ * @param image  (void)
+ * @param color  (unit32_t)
+ */
 typedef struct s_texture {
 	t_texture_type	type;
 	char			token;
@@ -60,6 +67,24 @@ typedef struct s_coord_f32 {
  *     -------0-------0-------
  *     BOTTOM | SOUTH | OPT
  */
+
+typedef struct s_entity {
+	int32_t		type;
+	t_coord_f64	coord;
+	int 		nb_texture;
+	t_texture	*texture;
+}	t_entity;
+
+/**
+ * @param type     (int32_t)
+ * @param coord    (t_coord_i32)
+ * @param north    (t_texture *)
+ * @param east     (t_texture *)
+ * @param west     (t_texture *)
+ * @param south    (t_texture *)
+ * @param ceiling  (t_texture *)
+ * @param floor    (t_texture *)
+ */
 typedef struct s_chunk {
 	int32_t		type;
 	t_coord_i32	coord;
@@ -70,13 +95,6 @@ typedef struct s_chunk {
 	t_texture	*ceiling;
 	t_texture	*floor;
 }	t_chunk;
-
-typedef struct s_entity {
-	int32_t		type;
-	t_coord_f64	coord;
-	int 		nb_texture;
-	t_texture	*texture;
-}	t_entity;
 
 # define E_EMPTY '.'
 

@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 16:12:15 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/10 17:48:37 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/15 16:59:14 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,30 @@ int	tex_debug(t_parser *data)
 }
 
 /**
+ * @brief Check if all character used in the map is authorize and if there
+ *        `token` texture exist in the texture liste (aka `data.tex_list).
+ * 
+ * @note Check of all character if there in the autorized `.cube` char.
+ *       We skip all `' '` and `'\n'` character.
+ * 
+ * @return int If all the character in the map is good return `0` otherwise `1`
+ */
+int	sani_map(t_parser *data)
+{
+	int	tmp;
+
+	tmp = 0;
+	while (data->cube_map[tmp])
+	{
+		if (data->cube_map[tmp] != ' ' && data->cube_map[tmp] != '\n')
+			if (!authzed_chunk_char(data->cube_map[tmp]))
+				return (ret_print(EXIT_FAILURE, ERR_BAD_CUB_CHAR));
+		tmp++;
+	}
+	return (EXIT_SUCCESS);
+}
+
+/**
  * @brief 
  * 
  * @param data Parser structure.
@@ -93,8 +117,11 @@ int	tex_debug(t_parser *data)
  */
 int	cube_to_t_map(t_parser *data)
 {
-	if (store_texture(data, data->cube.buffer) /*TODO REMOVE*/|| tex_debug(data)/*TODO REMOVE*/
-		|| store_map(data))
+	if (store_texture(data, data->cube.buffer) /*TODO REMOVE*/|| tex_debug(data)/*TODO REMOVE*/)
+		return (EXIT_FAILURE);
+	while (*data->cube_map && (*data->cube_map == '~' || *data->cube_map == '\n'))
+		data->cube_map++;
+	if (sani_map(data) || store_map(data))
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
