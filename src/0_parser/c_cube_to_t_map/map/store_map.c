@@ -6,13 +6,15 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 17:48:29 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/15 12:35:12 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/15 17:14:19 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
 #include "cube3d.h"
+
+#include "cube3d_utils.h"
 
 #include "cube3d_debug.h"
 
@@ -32,6 +34,9 @@
  * 
  * @details floor 1 : TOP | NORTH | ENTITY
  * 
+ * @note We check if the `TOP` and `NORTH` texture was define.
+ *       We store the address from the `data.tex_list` in the chunk texture
+ *       pointer.
  * 
  * @param data 
  * @param index 
@@ -40,8 +45,16 @@
  */
 static int	set_floor_1(t_parser *data, t_chunk *chunk)
 {
-	(void)chunk;
-	printf("[%.3s]\n", mapptr(data));
+	const char *floor = mapptr(data);
+	
+	printf("[%.3s]", floor);
+
+	if (!get_tex_ptr(&data->tex_list, floor[0])
+		|| !get_tex_ptr(&data->tex_list, floor[1]))
+		return (ret_print(EXIT_FAILURE, ERR_NO_TEX));
+	chunk->ceiling = get_tex_ptr(&data->tex_list, floor[0]);
+	chunk->north = get_tex_ptr(&data->tex_list, floor[1]);
+	//TODO create the entity list !
 	return (EXIT_SUCCESS);
 }
 
@@ -50,6 +63,9 @@ static int	set_floor_1(t_parser *data, t_chunk *chunk)
  * 
  * @details floor 2 : WEST | EAST | TEX
  * 
+ * @note We check if the `WEST` and `EAST` texture was define.
+ *       We store the address from the `data.tex_list` in the chunk texture
+ *       pointer.
  * 
  * @param data 
  * @param index 
@@ -58,9 +74,19 @@ static int	set_floor_1(t_parser *data, t_chunk *chunk)
  */
 static int	set_floor_2(t_parser *data, t_chunk *chunk)
 {
-	(void)chunk;
-	printf("[%.3s]\n", (mapptr(data) + data->index + get_line_width(data) + 1));
+	const char *floor = mapptr(data) + data->index + data->tmp_width + 1;
 
+(void)chunk;
+
+	printf("[%.3s]", floor);
+
+	if (!get_tex_ptr(&data->tex_list, floor[0])
+		|| !get_tex_ptr(&data->tex_list, floor[1])
+		/*|| ! get_text_ptr(&data->tex_list, floor[2])*/)
+		return (ret_print(EXIT_FAILURE, ERR_NO_TEX));
+	chunk->west = get_tex_ptr(&data->tex_list, floor[0]);
+	chunk->east = get_tex_ptr(&data->tex_list, floor[1]);
+	//TODO set the entity texture !
 	return (EXIT_SUCCESS);
 }
 
@@ -77,9 +103,18 @@ static int	set_floor_2(t_parser *data, t_chunk *chunk)
  */
 static int	set_floor_3(t_parser *data, t_chunk *chunk)
 {
-	(void)chunk;
-	printf("[%.3s]\n", (mapptr(data) + data->index + 2 * (get_line_width(data) + 1)));
+	const char *floor = mapptr(data) + data->index + 2 * (data->tmp_width + 1);
+(void)chunk;
+	printf("[%.3s]\n", floor);
 
+	if (!get_tex_ptr(&data->tex_list, floor[0])
+		|| !get_tex_ptr(&data->tex_list, floor[1]))
+		return (ret_print(EXIT_FAILURE, ERR_NO_TEX));
+
+	chunk->floor = get_tex_ptr(&data->tex_list, floor[0]);
+	chunk->south = get_tex_ptr(&data->tex_list, floor[1]);
+
+	//TODO set the entity option !
 	return (EXIT_SUCCESS);
 }
 
@@ -128,10 +163,10 @@ int	set_next_chunk_index(t_parser *data)
  */
 int	get_next_chunk(t_parser *data, t_chunk *chunk)
 {
-	(void)chunk;
 	if (mapchar(data) == '\n')
 		if (set_next_chunk_index(data) == -1)
 			return (-1);
+	data->tmp_width = get_line_width(data);
 	if (set_floor_1(data, chunk)
 		|| set_floor_2(data, chunk)
 		|| set_floor_3(data, chunk))
@@ -165,6 +200,74 @@ int	init_map(t_parser *data)
 	return (EXIT_SUCCESS);
 }
 
+t_chunk *get_chunk(t_parser *data, int x, int y)
+{
+	const int index = (y * data->map_size.x) + x;
+
+	return (v_get(&data->map, index));
+}
+
+void	set_chunk_coord(t_parser *data)
+{
+	const int	max = data->map_size.x * data->map_size.y;
+	int			index;
+	t_coord_i32	coor;
+	t_chunk	*tmp;
+
+	index = 0;
+	struct_set(&coor, sizeof(coor));
+	while (index < max)
+	{
+		if (coor.x >= data->map_size.x)
+		{
+			coor.x = 0;
+			coor.y++;
+		}
+		printf("[%d]x[%d]\n", coor.x, coor.y);
+		tmp = get_chunk(data, coor.x, coor.y);
+		tmp->coord.x = coor.x;
+		tmp->coord.y = coor.y;
+		coor.x++;
+		index++;
+	}
+}
+
+void	t_map_debug(t_parser *data)
+{
+	const int	max = data->map_size.x * data->map_size.y;
+	int			index;
+	t_coord_i32	coor;
+	t_chunk	*tmp;
+
+	index = 0;
+	struct_set(&coor, sizeof(coor));
+	while (index < max)
+	{
+		if (coor.x >= data->map_size.x)
+		{
+			coor.x = 0;
+			coor.y++;
+		}
+		printf("(%d)x(%d)\n", coor.x, coor.y);
+		tmp = get_chunk(data, coor.x, coor.y);
+		printf("[%c,%c,.]\n[%c,%c,.]\n[%c,%c,.]\n[ %d, %d]\n\n",
+		tmp->ceiling->token ? tmp->ceiling->token : '.' ,
+		tmp->north->token ? tmp->north->token : '.' ,
+
+		tmp->west->token ? tmp->west->token : '.' ,
+		tmp->east->token ? tmp->east->token : '.' ,
+		
+		tmp->floor->token ? tmp->floor->token : '.' ,
+		tmp->south->token ? tmp->south->token : '.',
+
+		tmp->coord.x,
+		tmp->coord.y
+		);
+		coor.x++;
+		index++;
+	}
+}
+
 /**
  * @brief 
  * 
@@ -176,11 +279,11 @@ int	init_map(t_parser *data)
  */
 int	store_map(t_parser *data)
 {
-	(void)data;
-	while (*data->cube_map && (*data->cube_map == '~' || *data->cube_map == '\n'))
-		data->cube_map++;
 	if (set_map_size(data) || init_map(data))
 		return (EXIT_FAILURE);
+	set_chunk_coord(data);
+	t_map_debug(data);//TODO REMOVE
+	
 	// printf("{{\n%s\n}}\n",data->cube_map);printf("map size [%dx%d]\n", data->map_size.x,data->map_size.y);
 	return (EXIT_SUCCESS);
 }

@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   authzed_chunk_char.c                                :+:      :+:    :+:   */
+/*   authzed_cube_tex.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 17:14:21 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/15 15:56:58 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/15 14:44:06 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /**
  * @brief Check if the character is a authorized characters for a `.cube`
- *        chunk format.
+ *        texture.
  * 
  * @example
  *          33  '!'   34  '"'   35  '#'   36  '$'   37  '%'
  *          38  '&'   39  '''   40  '('   41  ')'   42  '*'
- *          43  '+'   44  ','   45  '-'   46  '.'   47  '/'
+ *          43  '+'   44  ','   45  '-'             47  '/'
  *          48  '0'   49  '1'   50  '2'   51  '3'   52  '4'
  *          53  '5'   54  '6'   55  '7'   56  '8'   57  '9'
  *          58  ':'   59  ';'   60  '<'   61  '='   62  '>'
@@ -39,7 +39,7 @@
  * @return int Return `1` if the character is in the authorized char, otherwise
  *             return `0`.
  */
-int	authzed_chunk_char(int c)
+int	authzed_cube_tex(int c)
 {
-	return ((c >= '!') && (c <= '}'));
+	return (((c >= '!') && (c <= '-')) || ((c >= '/') && (c <= '}')));
 }

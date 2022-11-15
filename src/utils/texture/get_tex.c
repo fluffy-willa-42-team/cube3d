@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 17:12:59 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/08 17:21:48 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/15 15:57:02 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
  * 
  * @warning The function calculate only the token index, it dont check if the
  *          element exist !
- *          If the token is out of range from the `authzed_cube_char()`
+ *          If the token is out of range from the `authzed_chunk_char()`
  *          will return `-1`.
  * 
  * @return int Return the index of the texture slot. Or `-1` if the token is
@@ -29,7 +29,7 @@
  */
 int	get_tex_index(char token)
 {
-	if (!authzed_cube_char(token))
+	if (!authzed_chunk_char(token))
 		return (-1);
 	return (token - '!');
 }
@@ -39,7 +39,7 @@ int	get_tex_index(char token)
  * 
  * @warning The function calculate only the pointer index, it dont check if the
  *          element exist !
- *          If the token is out of range from the `authzed_cube_char()`
+ *          If the token is out of range from the `authzed_chunk_char()`
  *          will return `NULL`.
  * 
  * @return int Return a pointer of the texture slot. Or `-1` if the token is

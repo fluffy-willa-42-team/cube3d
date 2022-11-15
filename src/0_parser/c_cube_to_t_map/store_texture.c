@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 17:09:25 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/14 16:23:07 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/15 14:47:18 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ int	store_tex(t_parser *data, char *tex)
 	t_texture	tmp;
 
 	struct_set(&tmp, sizeof(t_texture));
-	if (!authzed_cube_char(*tex))
-		return (ret_print(EXIT_FAILURE, ERR_TEX_FORMAT));
+	if (!authzed_cube_tex(*tex))
+		return (ret_print(EXIT_FAILURE, ERR_TEX_RESERVED));
 	tmp.token = *tex;
 	if (get_tex_ptr(&data->tex_list, tmp.token)->token != '\0')
 		return (ret_print(EXIT_FAILURE, ERR_TEX_DUP));
