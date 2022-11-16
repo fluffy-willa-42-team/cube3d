@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:49:27 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/16 14:22:09 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/16 15:21:44 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,19 @@ void angle_hook(t_game *game, double incrementation)
 	game->player.cosin.y = sin(game->player.alpha);
 }
 
+void	scale_hook(t_game *game, double incrementation)
+{
+	if (game->param.hob_mult + incrementation <= 100 && game->param.hob_mult + incrementation >= 0.5)
+			game->param.hob_mult += incrementation;
+	printf("%f\n", game->param.hob_mult);
+}
+
+void	map_hook(t_game *game, int32_t incrementation)
+{
+	if (game->param.minimap_size + incrementation <= 100 && game->param.minimap_size + incrementation >= 1)
+		game->param.minimap_size += incrementation;
+}
+
 void	hook(void *param)
 {
 	t_game	*game = param;
@@ -58,64 +71,22 @@ void	hook(void *param)
 		pos2_hook(&game->player, 0.02 * game->player.cosin.y, -0.02 * game->player.cosin.x, game->map.width);
 	if (mlx_is_key_down(game->param.mlx, MLX_KEY_RIGHT))
 		pos2_hook(&game->player, -0.02 * game->player.cosin.y, 0.02 * game->player.cosin.x, game->map.width);
-	// if (mlx_is_key_down(game->param.mlx, MLX_KEY_W))
-	// {
-	// 	game->player.z += 0.02;
-	// 	// if (game->player.z >= 1)
-	// 	// 	game->player.z -= 1;
-	// }
-	// if (mlx_is_key_down(game->param.mlx, MLX_KEY_S))
-	// {
-	// 	game->player.z -= 0.02;
-	// 	// if (game->player.z <= 0)
-	// 	// 	game->player.z += 1;
-	// }
 	if (mlx_is_key_down(game->param.mlx, MLX_KEY_Y))
-	{
-		if (game->param.hob_mult < 100)
-			game->param.hob_mult += 0.001;
-		printf("%f\n", game->param.hob_mult);
-	}
+		scale_hook(game, 0.1);
 	if (mlx_is_key_down(game->param.mlx, MLX_KEY_H))
-	{
-		if (game->param.hob_mult > 1)
-			game->param.hob_mult -= 0.001;
-		printf("%f\n", game->param.hob_mult);
-	}
+		scale_hook(game, -0.1);
 	if (mlx_is_key_down(game->param.mlx, MLX_KEY_U))
-	{
-		if (game->param.hob_mult < 100)
-			game->param.hob_mult += 0.2;
-		printf("%f\n", game->param.hob_mult);
-	}
+		scale_hook(game, 0.01);
 	if (mlx_is_key_down(game->param.mlx, MLX_KEY_J))
-	{
-		if (game->param.hob_mult > 1)
-			game->param.hob_mult -= 0.2;
-		printf("%f\n", game->param.hob_mult);
-	}
+		scale_hook(game, -0.01);
 	if (mlx_is_key_down(game->param.mlx, MLX_KEY_I))
-	{
-		if (game->param.hob_mult < 100)
-			game->param.hob_mult += 0.01;
-		printf("%f\n", game->param.hob_mult);
-	}
+		scale_hook(game, 0.001);
 	if (mlx_is_key_down(game->param.mlx, MLX_KEY_K))
-	{
-		if (game->param.hob_mult > 1)
-			game->param.hob_mult -= 0.01;
-		printf("%f\n", game->param.hob_mult);
-	}
+		scale_hook(game, -0.001);
 	if (mlx_is_key_down(game->param.mlx, MLX_KEY_O))
-	{
-		if (game->param.minimap_size < 100)
-			game->param.minimap_size += 1;
-	}
+		map_hook(game, 1);
 	if (mlx_is_key_down(game->param.mlx, MLX_KEY_L))
-	{
-		if (game->param.minimap_size > 1)
-			game->param.minimap_size -= 1;
-	}
+		map_hook(game, -1);
 	if (mlx_is_key_down(game->param.mlx, MLX_KEY_A))
 		angle_hook(game, -0.03);
 	if (mlx_is_key_down(game->param.mlx, MLX_KEY_D))
@@ -149,7 +120,7 @@ int main(void)
 			{1, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
 			{1, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
 			{1, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-			{1, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+			{1, 0, 0, 2, 0, 0, 0, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
 			{1, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
 			{1, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
 			{1, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
