@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 15:04:49 by mahadad           #+#    #+#             */
-/*   Updated: 2022/10/30 17:58:55 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/16 14:30:34 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@
 int	f_1_p(t_parser *data, char c)
 {
 	(void)c;
-	if (push_chunk_part(data, get_tex("C"), '.', E_PLAYER))
+	if (push_chunk_part(data, get_tex("C"), E_EMPTY, E_PLAYER))
 		return (ret_print(EXIT_FAILURE, ERR_VEC_ADD));
 	return (EXIT_SUCCESS);
 }
@@ -80,7 +80,7 @@ int	f_2_p(t_parser *data, char c)
 int	f_3_p(t_parser *data, char c)
 {
 	(void)c;
-	if (push_chunk_part(data, get_tex("F"), '.', c))
+	if (push_chunk_part(data, get_tex("F"), E_EMPTY, c))
 		return (ret_print(EXIT_FAILURE, ERR_VEC_ADD));
 	return (EXIT_SUCCESS);
 }

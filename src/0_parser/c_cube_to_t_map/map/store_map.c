@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 17:48:29 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/15 17:14:19 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/16 15:30:29 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,38 @@
  */
 
 /**
+ * @brief Check if the floor token have data or if is a white space chunk.
+ * 
+ * @note We check the tree token of the `floor` and count the number of white
+ *       space find. A white space chunk can only be set with the `' '` token.
+ *       If there is one `' '` token, the other need to be to, if is not the
+ *       case it a error.
+ *       If there is no `' '` find, the floor have data.
+ * 
+ * @param floor 
+ * @return int 
+ */
+int	floor_type(const char *floor)
+{
+	int	i;
+	int	count;
+
+	count = 0;
+	i = 0;
+	while (i < 3)
+	{
+		if (floor[i] == ' ')
+			count++;
+		i++;
+	}
+	if (!count)
+		return (USED_CHUNK);
+	if (count == 3)
+		return (WHITE_SPACE_CHUNK);
+	return (BAD_CHUNK);
+}
+
+/**
  * @brief Set the floor 1 object
  * 
  * @details floor 1 : TOP | NORTH | ENTITY
@@ -37,6 +69,8 @@
  * @note We check if the `TOP` and `NORTH` texture was define.
  *       We store the address from the `data.tex_list` in the chunk texture
  *       pointer.
+ *       If is a valid white space floor we skip the texture check,
+ *       `get_tex_ptr` will set the texture pointer to `NULL`.
  * 
  * @param data 
  * @param index 
@@ -45,12 +79,15 @@
  */
 static int	set_floor_1(t_parser *data, t_chunk *chunk)
 {
-	const char *floor = mapptr(data);
-	
-	printf("[%.3s]", floor);
+	const	char *floor = mapptr(data);
+	const	int	type = floor_type(floor);
 
-	if (!get_tex_ptr(&data->tex_list, floor[0])
-		|| !get_tex_ptr(&data->tex_list, floor[1]))
+	if (type == BAD_CHUNK)
+		return (ret_print(EXIT_FAILURE, ERR_BAD_CHUNK_FLOOR));
+	chunk->type = type;
+	if (type == USED_CHUNK)
+		if (!get_tex_ptr(&data->tex_list, floor[0])
+			|| !get_tex_ptr(&data->tex_list, floor[1]))
 		return (ret_print(EXIT_FAILURE, ERR_NO_TEX));
 	chunk->ceiling = get_tex_ptr(&data->tex_list, floor[0]);
 	chunk->north = get_tex_ptr(&data->tex_list, floor[1]);
@@ -66,6 +103,9 @@ static int	set_floor_1(t_parser *data, t_chunk *chunk)
  * @note We check if the `WEST` and `EAST` texture was define.
  *       We store the address from the `data.tex_list` in the chunk texture
  *       pointer.
+ *       If is a valid white space floor we skip the texture check,
+ *       `get_tex_ptr` will set the texture pointer to `NULL`.
+ *       We check if the type of the first floor is the same.
  * 
  * @param data 
  * @param index 
@@ -75,15 +115,15 @@ static int	set_floor_1(t_parser *data, t_chunk *chunk)
 static int	set_floor_2(t_parser *data, t_chunk *chunk)
 {
 	const char *floor = mapptr(data) + data->index + data->tmp_width + 1;
+	const	int	type = floor_type(floor);
 
-(void)chunk;
-
-	printf("[%.3s]", floor);
-
-	if (!get_tex_ptr(&data->tex_list, floor[0])
-		|| !get_tex_ptr(&data->tex_list, floor[1])
-		/*|| ! get_text_ptr(&data->tex_list, floor[2])*/)
-		return (ret_print(EXIT_FAILURE, ERR_NO_TEX));
+	if (chunk->type != type)
+		return (ret_print(EXIT_FAILURE, ERR_BAD_CHUNK_FLOOR));
+	if (type == USED_CHUNK)
+		if (!get_tex_ptr(&data->tex_list, floor[0])
+			|| !get_tex_ptr(&data->tex_list, floor[1])
+			/*|| ! get_text_ptr(&data->tex_list, floor[2])*/)
+			return (ret_print(EXIT_FAILURE, ERR_NO_TEX));
 	chunk->west = get_tex_ptr(&data->tex_list, floor[0]);
 	chunk->east = get_tex_ptr(&data->tex_list, floor[1]);
 	//TODO set the entity texture !
@@ -95,6 +135,11 @@ static int	set_floor_2(t_parser *data, t_chunk *chunk)
  * 
  * @details floor 3 : BOTTOM | SOUTH | OPT
  * 
+ * @note
+ * 
+ *       If is a valid white space floor we skip the texture check,
+ *       `get_tex_ptr` will set the texture pointer to `NULL`.
+ *       We check if the type of the first floor is the same.
  * 
  * @param data 
  * @param index 
@@ -104,12 +149,14 @@ static int	set_floor_2(t_parser *data, t_chunk *chunk)
 static int	set_floor_3(t_parser *data, t_chunk *chunk)
 {
 	const char *floor = mapptr(data) + data->index + 2 * (data->tmp_width + 1);
-(void)chunk;
-	printf("[%.3s]\n", floor);
+	const	int	type = floor_type(floor);
 
-	if (!get_tex_ptr(&data->tex_list, floor[0])
-		|| !get_tex_ptr(&data->tex_list, floor[1]))
-		return (ret_print(EXIT_FAILURE, ERR_NO_TEX));
+	if (chunk->type != type)
+		return (ret_print(EXIT_FAILURE, ERR_BAD_CHUNK_FLOOR));
+	if (type == USED_CHUNK)
+		if (!get_tex_ptr(&data->tex_list, floor[0])
+			|| !get_tex_ptr(&data->tex_list, floor[1]))
+			return (ret_print(EXIT_FAILURE, ERR_NO_TEX));
 
 	chunk->floor = get_tex_ptr(&data->tex_list, floor[0]);
 	chunk->south = get_tex_ptr(&data->tex_list, floor[1]);
@@ -154,8 +201,12 @@ int	set_next_chunk_index(t_parser *data)
  *       and 3 by incrementing the `data.cube` pointer with `data.index` and two
  *       time the width of the floor 2. (we have already verified that the 3
  *       floor have the same width).
+ * 
  *       If after this skip the current `mapchar(data)` is null, we reach the
  *       end of the map.
+ * 
+ *       After set the chunk data we check if the chunk have data or if is a
+ *       white space chunk (3x3 `' '` chunk).
  * 
  * @param data 
  * @param chunk 
@@ -170,7 +221,7 @@ int	get_next_chunk(t_parser *data, t_chunk *chunk)
 	if (set_floor_1(data, chunk)
 		|| set_floor_2(data, chunk)
 		|| set_floor_3(data, chunk))
-		return (EXIT_FAILURE)/* //TODO check if we return the message error here or in the function */;
+		return (EXIT_FAILURE);
 	data->index += 3;
 	return (EXIT_SUCCESS);
 }
@@ -250,19 +301,26 @@ void	t_map_debug(t_parser *data)
 		}
 		printf("(%d)x(%d)\n", coor.x, coor.y);
 		tmp = get_chunk(data, coor.x, coor.y);
-		printf("[%c,%c,.]\n[%c,%c,.]\n[%c,%c,.]\n[ %d, %d]\n\n",
-		tmp->ceiling->token ? tmp->ceiling->token : '.' ,
-		tmp->north->token ? tmp->north->token : '.' ,
+		if (tmp->type == WHITE_SPACE_CHUNK)
+		{
+			printf("[ , , ,]\n[ , , ,]\n[ , , ,]\n[ , , ,]\n");
+		}
+		else
+		{
+			printf("[%c,%c,.]\n[%c,%c,.]\n[%c,%c,.]\n[ %d, %d]\n\n",
+			tmp->ceiling ? tmp->ceiling->token : '.' ,
+			tmp->north ? tmp->north->token : '.' ,
 
-		tmp->west->token ? tmp->west->token : '.' ,
-		tmp->east->token ? tmp->east->token : '.' ,
-		
-		tmp->floor->token ? tmp->floor->token : '.' ,
-		tmp->south->token ? tmp->south->token : '.',
+			tmp->west ? tmp->west->token : '.' ,
+			tmp->east ? tmp->east->token : '.' ,
+			
+			tmp->floor ? tmp->floor->token : '.' ,
+			tmp->south ? tmp->south->token : '.',
 
-		tmp->coord.x,
-		tmp->coord.y
-		);
+			tmp->coord.x,
+			tmp->coord.y
+			);
+		}
 		coor.x++;
 		index++;
 	}

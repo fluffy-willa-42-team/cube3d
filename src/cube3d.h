@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:33:07 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/15 14:23:00 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/16 15:28:09 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 /* ************************************************************************** */
 
-typedef enum s_texture_type {
+typedef enum e_texture_type {
 	UNDEFINED	= 0b000,
 	COLOR		= 0b001,
 	IMAGE		= 0b011,
@@ -74,6 +74,17 @@ typedef struct s_entity {
 	int 		nb_texture;
 	t_texture	*texture;
 }	t_entity;
+
+/**
+ * @param WHITE_SPACE_CHUNK For the white space chunk, so no data
+ * @param USED_CHUNK        For the chunk with data
+ * @param BAD_CHUNK         For the chunk that have white space and data
+ */
+typedef enum e_chunk_type {
+	WHITE_SPACE_CHUNK,
+	USED_CHUNK,
+	BAD_CHUNK
+}				t_chunk_type;
 
 /**
  * @param type     (int32_t)
