@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:33:07 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/16 15:28:09 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/16 17:27:11 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,12 +77,12 @@ typedef struct s_entity {
 
 /**
  * @param WHITE_SPACE_CHUNK For the white space chunk, so no data
- * @param USED_CHUNK        For the chunk with data
+ * @param GOOD_CHUNK        For the chunk with data
  * @param BAD_CHUNK         For the chunk that have white space and data
  */
 typedef enum e_chunk_type {
 	WHITE_SPACE_CHUNK,
-	USED_CHUNK,
+	GOOD_CHUNK,
 	BAD_CHUNK
 }				t_chunk_type;
 

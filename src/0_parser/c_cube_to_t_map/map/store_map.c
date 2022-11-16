@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 17:48:29 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/16 15:30:29 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/16 17:27:11 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,143 +29,206 @@
  * Faire les math pour pouvoir lire les trois etage d'un chunk
  */
 
+// /**
+//  * @brief Check if the floor token have data or if is a white space chunk.
+//  * 
+//  * @note We check the tree token of the `floor` and count the number of white
+//  *       space find. A white space chunk can only be set with the `' '` token.
+//  *       If there is one `' '` token, the other need to be to, if is not the
+//  *       case it a error.
+//  *       If there is no `' '` find, the floor have data.
+//  * 
+//  * @param floor 
+//  * @return int 
+//  */
+// int	floor_type(const char *floor)
+// {
+// 	int	i;
+// 	int	count;
+
+// 	count = 0;
+// 	i = 0;
+// 	while (i < 3)
+// 	{
+// 		if (floor[i] == ' ')
+// 			count++;
+// 		i++;
+// 	}
+// 	if (!count)
+// 		return (GOOD_CHUNK);
+// 	if (count == 3)
+// 		return (WHITE_SPACE_CHUNK);
+// 	return (BAD_CHUNK);
+// }
+
+// /**
+//  * @brief Set the floor 1 object
+//  * 
+//  * @details floor 1 : TOP | NORTH | ENTITY
+//  * 
+//  * @note We check if the `TOP` and `NORTH` texture was define.
+//  *       We store the address from the `data.tex_list` in the chunk texture
+//  *       pointer.
+//  *       If is a valid white space floor we skip the texture check,
+//  *       `get_tex_ptr` will set the texture pointer to `NULL`.
+//  * 
+//  * @param data 
+//  * @param index 
+//  * @param c 
+//  * @return int 
+//  */
+// static int	set_floor_1(t_parser *data, t_chunk *chunk)
+// {
+// 	const	char *floor = mapptr(data);
+// 	const	int	type = floor_type(floor);
+
+// 	if (type == BAD_CHUNK)
+// 		return (ret_print(EXIT_FAILURE, ERR_BAD_CHUNK_FLOOR));
+// 	chunk->type = type;
+// 	if (type == GOOD_CHUNK)
+// 		if (!get_tex_ptr(&data->tex_list, floor[0])
+// 			|| !get_tex_ptr(&data->tex_list, floor[1]))
+// 		return (ret_print(EXIT_FAILURE, ERR_NO_TEX));
+// 	chunk->ceiling = get_tex_ptr(&data->tex_list, floor[0]);
+// 	chunk->north = get_tex_ptr(&data->tex_list, floor[1]);
+// 	//TODO create the entity list !
+// 	return (EXIT_SUCCESS);
+// }
+
+// /**
+//  * @brief Set the floor 2 object
+//  * 
+//  * @details floor 2 : WEST | EAST | TEX
+//  * 
+//  * @note We check if the `WEST` and `EAST` texture was define.
+//  *       We store the address from the `data.tex_list` in the chunk texture
+//  *       pointer.
+//  *       If is a valid white space floor we skip the texture check,
+//  *       `get_tex_ptr` will set the texture pointer to `NULL`.
+//  *       We check if the type of the first floor is the same.
+//  * 
+//  * @param data 
+//  * @param index 
+//  * @param c 
+//  * @return int 
+//  */
+// static int	set_floor_2(t_parser *data, t_chunk *chunk)
+// {
+// 	const char *floor = mapptr(data) + data->index + data->tmp_width + 1;
+// 	const	int	type = floor_type(floor);
+
+// 	if (chunk->type != type)
+// 		return (ret_print(EXIT_FAILURE, ERR_BAD_CHUNK_FLOOR));
+// 	if (type == GOOD_CHUNK)
+// 		if (!get_tex_ptr(&data->tex_list, floor[0])
+// 			|| !get_tex_ptr(&data->tex_list, floor[1])
+// 			/*|| ! get_text_ptr(&data->tex_list, floor[2])*/)
+// 			return (ret_print(EXIT_FAILURE, ERR_NO_TEX));
+// 	chunk->west = get_tex_ptr(&data->tex_list, floor[0]);
+// 	chunk->east = get_tex_ptr(&data->tex_list, floor[1]);
+// 	//TODO set the entity texture !
+// 	return (EXIT_SUCCESS);
+// }
+
+// /**
+//  * @brief Set the floor 3 object
+//  * 
+//  * @details floor 3 : BOTTOM | SOUTH | OPT
+//  * 
+//  * @note
+//  * 
+//  *       If is a valid white space floor we skip the texture check,
+//  *       `get_tex_ptr` will set the texture pointer to `NULL`.
+//  *       We check if the type of the first floor is the same.
+//  * 
+//  * @param data 
+//  * @param index 
+//  * @param c 
+//  * @return int 
+//  */
+// static int	set_floor_3(t_parser *data, t_chunk *chunk)
+// {
+// 	const char *floor = mapptr(data) + data->index + 2 * (data->tmp_width + 1);
+// 	const	int	type = floor_type(floor);
+
+// 	if (chunk->type != type)
+// 		return (ret_print(EXIT_FAILURE, ERR_BAD_CHUNK_FLOOR));
+// 	if (type == GOOD_CHUNK)
+// 		if (!get_tex_ptr(&data->tex_list, floor[0])
+// 			|| !get_tex_ptr(&data->tex_list, floor[1]))
+// 			return (ret_print(EXIT_FAILURE, ERR_NO_TEX));
+
+// 	chunk->floor = get_tex_ptr(&data->tex_list, floor[0]);
+// 	chunk->south = get_tex_ptr(&data->tex_list, floor[1]);
+
+// 	//TODO set the entity option !
+// 	return (EXIT_SUCCESS);
+// }
+
 /**
- * @brief Check if the floor token have data or if is a white space chunk.
- * 
- * @note We check the tree token of the `floor` and count the number of white
- *       space find. A white space chunk can only be set with the `' '` token.
- *       If there is one `' '` token, the other need to be to, if is not the
- *       case it a error.
- *       If there is no `' '` find, the floor have data.
- * 
- * @param floor 
- * @return int 
- */
-int	floor_type(const char *floor)
-{
-	int	i;
-	int	count;
-
-	count = 0;
-	i = 0;
-	while (i < 3)
-	{
-		if (floor[i] == ' ')
-			count++;
-		i++;
-	}
-	if (!count)
-		return (USED_CHUNK);
-	if (count == 3)
-		return (WHITE_SPACE_CHUNK);
-	return (BAD_CHUNK);
-}
-
-/**
- * @brief Set the floor 1 object
- * 
- * @details floor 1 : TOP | NORTH | ENTITY
- * 
- * @note We check if the `TOP` and `NORTH` texture was define.
- *       We store the address from the `data.tex_list` in the chunk texture
- *       pointer.
- *       If is a valid white space floor we skip the texture check,
- *       `get_tex_ptr` will set the texture pointer to `NULL`.
- * 
- * @param data 
- * @param index 
- * @param c 
- * @return int 
- */
-static int	set_floor_1(t_parser *data, t_chunk *chunk)
-{
-	const	char *floor = mapptr(data);
-	const	int	type = floor_type(floor);
-
-	if (type == BAD_CHUNK)
-		return (ret_print(EXIT_FAILURE, ERR_BAD_CHUNK_FLOOR));
-	chunk->type = type;
-	if (type == USED_CHUNK)
-		if (!get_tex_ptr(&data->tex_list, floor[0])
-			|| !get_tex_ptr(&data->tex_list, floor[1]))
-		return (ret_print(EXIT_FAILURE, ERR_NO_TEX));
-	chunk->ceiling = get_tex_ptr(&data->tex_list, floor[0]);
-	chunk->north = get_tex_ptr(&data->tex_list, floor[1]);
-	//TODO create the entity list !
-	return (EXIT_SUCCESS);
-}
-
-/**
- * @brief Set the floor 2 object
- * 
- * @details floor 2 : WEST | EAST | TEX
- * 
- * @note We check if the `WEST` and `EAST` texture was define.
- *       We store the address from the `data.tex_list` in the chunk texture
- *       pointer.
- *       If is a valid white space floor we skip the texture check,
- *       `get_tex_ptr` will set the texture pointer to `NULL`.
- *       We check if the type of the first floor is the same.
- * 
- * @param data 
- * @param index 
- * @param c 
- * @return int 
- */
-static int	set_floor_2(t_parser *data, t_chunk *chunk)
-{
-	const char *floor = mapptr(data) + data->index + data->tmp_width + 1;
-	const	int	type = floor_type(floor);
-
-	if (chunk->type != type)
-		return (ret_print(EXIT_FAILURE, ERR_BAD_CHUNK_FLOOR));
-	if (type == USED_CHUNK)
-		if (!get_tex_ptr(&data->tex_list, floor[0])
-			|| !get_tex_ptr(&data->tex_list, floor[1])
-			/*|| ! get_text_ptr(&data->tex_list, floor[2])*/)
-			return (ret_print(EXIT_FAILURE, ERR_NO_TEX));
-	chunk->west = get_tex_ptr(&data->tex_list, floor[0]);
-	chunk->east = get_tex_ptr(&data->tex_list, floor[1]);
-	//TODO set the entity texture !
-	return (EXIT_SUCCESS);
-}
-
-/**
- * @brief Set the floor 3 object
- * 
- * @details floor 3 : BOTTOM | SOUTH | OPT
+ * @brief Store all the chunk token in the `t_chunk_token` structure.
  * 
  * @note
+ *        floor 1 : TOP    | NORTH | ENTITY
+ *                  -------0-------0-------
+ *        floor 2 : WEST   | EAST  | TEX
+ *                  -------0-------0-------
+ *        floor 3 : BOTTOM | SOUTH | OPT
  * 
- *       If is a valid white space floor we skip the texture check,
- *       `get_tex_ptr` will set the texture pointer to `NULL`.
- *       We check if the type of the first floor is the same.
- * 
- * @param data 
- * @param index 
- * @param c 
- * @return int 
  */
-static int	set_floor_3(t_parser *data, t_chunk *chunk)
+void	get_chunk_token(t_parser *data, t_chunk_token *tmp)
 {
-	const char *floor = mapptr(data) + data->index + 2 * (data->tmp_width + 1);
-	const	int	type = floor_type(floor);
+	const	char *f1 = mapptr(data);
+	const	char *f2 = mapptr(data) + data->index + data->tmp_width + 1;
+	const	char *f3 = mapptr(data) + data->index + 2 * (data->tmp_width + 1);
 
-	if (chunk->type != type)
-		return (ret_print(EXIT_FAILURE, ERR_BAD_CHUNK_FLOOR));
-	if (type == USED_CHUNK)
-		if (!get_tex_ptr(&data->tex_list, floor[0])
-			|| !get_tex_ptr(&data->tex_list, floor[1]))
-			return (ret_print(EXIT_FAILURE, ERR_NO_TEX));
+	struct_set(tmp, sizeof(tmp));
+	tmp->ceiling = f1[0];
+	tmp->north = f1[1];
+	tmp->entity = f1[2];
+	tmp->west = f2[0];
+	tmp->east = f2[1];
+	tmp->tex = f2[2];
+	tmp->floor = f3[0];
+	tmp->south = f3[1];
+	tmp->opt = f3[2];
+}
 
-	chunk->floor = get_tex_ptr(&data->tex_list, floor[0]);
-	chunk->south = get_tex_ptr(&data->tex_list, floor[1]);
-
-	//TODO set the entity option !
+int	store_entity_data(t_parser *data, t_chunk *chunk, t_chunk_token *tmp)
+{
+	(void)data;
+	(void)chunk;
+	(void)tmp;
 	return (EXIT_SUCCESS);
 }
 
-int	set_next_chunk_index(t_parser *data)
+int	check_chunk_type(t_parser *data, t_chunk_token *tokens)
+{
+	//TODO check if is a white space chunk or with data, return error if there is data and withe space !
+	(void)data;
+	(void)tokens;
+	return (GOOD_CHUNK);
+}
+
+int	set_chunk(t_parser *data, t_chunk *chunk)
+{
+	t_chunk_token	tokens;
+
+	get_chunk_token(data, &tokens);
+	if (check_chunk_type(data, &tokens) == BAD_CHUNK)
+		return(ret_print(EXIT_FAILURE, "//TODO bad chunk type\n"));
+	chunk->ceiling = get_tex_ptr(&chunk->ceiling, tokens.ceiling);
+	chunk->north = get_tex_ptr(&data->tex_list, tokens.north);
+	chunk->west = get_tex_ptr(&data->tex_list, tokens.west);
+	chunk->east = get_tex_ptr(&data->tex_list, tokens.east);
+	chunk->floor = get_tex_ptr(&data->tex_list, tokens.floor);
+	chunk->south = get_tex_ptr(&data->tex_list, tokens.south);
+	if (store_entity_data(data, &chunk, &tokens))
+		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
+}
+
+static int	set_next_chunk_index(t_parser *data)
 {
 	data->index++;
 	data->cube_map += data->index;
@@ -218,9 +281,11 @@ int	get_next_chunk(t_parser *data, t_chunk *chunk)
 		if (set_next_chunk_index(data) == -1)
 			return (-1);
 	data->tmp_width = get_line_width(data);
-	if (set_floor_1(data, chunk)
-		|| set_floor_2(data, chunk)
-		|| set_floor_3(data, chunk))
+	// if (set_floor_1(data, chunk)
+	// 	|| set_floor_2(data, chunk)
+	// 	|| set_floor_3(data, chunk))
+	// 	return (EXIT_FAILURE);
+	if (set_chunk(data, chunk));
 		return (EXIT_FAILURE);
 	data->index += 3;
 	return (EXIT_SUCCESS);
