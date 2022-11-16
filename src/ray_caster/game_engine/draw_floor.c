@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 20:08:12 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/16 14:47:35 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/16 15:08:39 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,18 +43,17 @@ static void	draw_top_or_bottom(
 	}
 }
 
-void draw_floor(t_game *game, int x, double alpha, int heigth_drawn, double dist)
+void draw_floor(t_game *game, int x, double alpha, double heigth_drawn, double dist)
 {
 	const t_coord_f64 cosin = set_f64(
 		cos(alpha),
 		sin(alpha)
 	);
 	const double cos_a_minus_pa = game->player.cosin.x * cosin.x + game->player.cosin.y * cosin.y;
-
-	uint32_t rest_to_draw = MDDL_SCRN_HGTH - heigth_drawn + 1;
-	for (uint32_t y = 0; y < rest_to_draw; y++)
+	double rest_to_draw = MDDL_SCRN_HGTH - heigth_drawn + 1;
+	for (uint32_t y = 0; y < (uint32_t) rest_to_draw; y++)
 	{
-		double ratio = (1.0 + (((double) rest_to_draw - y) / heigth_drawn));
+		double ratio = (1.0 + ((double) (rest_to_draw - y) / heigth_drawn));
 		double floor_dist = dist / cos_a_minus_pa / ratio;
 		t_coord_f64 pos = set_f64(
 			game->player.coord.x + cosin.x * floor_dist,
