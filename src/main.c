@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:49:27 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/15 14:17:21 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/16 10:09:28 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,15 +70,41 @@ void	hook(void *param)
 	// 	// if (game->player.z <= 0)
 	// 	// 	game->player.z += 1;
 	// }
-	if (mlx_is_key_down(game->param.mlx, MLX_KEY_I))
+	if (mlx_is_key_down(game->param.mlx, MLX_KEY_Y))
+	{
+		if (game->param.hob_mult < 100)
+			game->param.hob_mult += 0.001;
+		printf("%f\n", game->param.hob_mult);
+	}
+	if (mlx_is_key_down(game->param.mlx, MLX_KEY_H))
+	{
+		if (game->param.hob_mult > 1)
+			game->param.hob_mult -= 0.001;
+		printf("%f\n", game->param.hob_mult);
+	}
+	if (mlx_is_key_down(game->param.mlx, MLX_KEY_U))
 	{
 		if (game->param.hob_mult < 100)
 			game->param.hob_mult += 0.2;
+		printf("%f\n", game->param.hob_mult);
+	}
+	if (mlx_is_key_down(game->param.mlx, MLX_KEY_J))
+	{
+		if (game->param.hob_mult > 1)
+			game->param.hob_mult -= 0.2;
+		printf("%f\n", game->param.hob_mult);
+	}
+	if (mlx_is_key_down(game->param.mlx, MLX_KEY_I))
+	{
+		if (game->param.hob_mult < 100)
+			game->param.hob_mult += 0.01;
+		printf("%f\n", game->param.hob_mult);
 	}
 	if (mlx_is_key_down(game->param.mlx, MLX_KEY_K))
 	{
 		if (game->param.hob_mult > 1)
-			game->param.hob_mult -= 0.2;
+			game->param.hob_mult -= 0.01;
+		printf("%f\n", game->param.hob_mult);
 	}
 	if (mlx_is_key_down(game->param.mlx, MLX_KEY_O))
 	{
@@ -112,7 +138,7 @@ int main(void)
 		{{
 			{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
 			{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-			{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+			{1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
 			{1, 0, 0, 0, 0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 1},
 			{1, 0, 0, 0, 0, 0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 0, 0, 0, 0, 1},
 			{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
@@ -143,16 +169,16 @@ int main(void)
 		{1, {0, 0}, NULL, NULL, &game.temp1, NULL, &game.temp1, &game.temp1}
 	};
 
-	init_color(&game.temp, 0x0000FFFF);
-	init_color(&game.temp1, 0xFFFF00FF);
-	init_color(&game.temp2, 0x2596BEFF);
+	// init_color(&game.temp, 0x0000FFFF);
+	// init_color(&game.temp1, 0xFFFF00FF);
+	// init_color(&game.temp2, 0x2596BEFF);
 
-	// if (!init_image(&game.temp, "./texture/mc/grass_side.xpm42"))
-	// 	return (EXIT_FAILURE);
-	// if (!init_image(&game.temp1, "./texture/mc/stone.xpm42"))
-	// 	return (EXIT_FAILURE);
-	// if (!init_image(&game.temp2, "./texture/mc/grass_top.xpm42"))
-	// 	return (EXIT_FAILURE);
+	if (!init_image(&game.temp, "./texture/mc/grass_side.xpm42"))
+		return (EXIT_FAILURE);
+	if (!init_image(&game.temp1, "./texture/mc/stone.xpm42"))
+		return (EXIT_FAILURE);
+	if (!init_image(&game.temp2, "./texture/mc/grass_top.xpm42"))
+		return (EXIT_FAILURE);
 	
 	
 	// if (!init_image(&game.skybox, "./texture/sky.xpm42"))

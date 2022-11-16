@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 20:08:12 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/15 14:18:50 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/16 10:09:11 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@ void draw_floor(t_game *game, int x, double alpha, int heigth_drawn)
 	{
 		dist = proj_dist / (y - game->player.z * WIN_HEIGHT);
 		t_coord_f64 pos = set_f64(
-			game->player.coord.x - cosin.x * dist,
-			game->player.coord.y - cosin.y * dist
+			game->player.coord.x + cosin.x * dist,
+			game->player.coord.y + cosin.y * dist
 		);
 
 		t_chunk *chunk = get_chunk(game, set_i32(pos.x, pos.y));
