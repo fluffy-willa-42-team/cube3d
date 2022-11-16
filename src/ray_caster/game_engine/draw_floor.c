@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 20:08:12 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/16 10:55:16 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/16 14:47:35 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,26 +43,23 @@ static void	draw_top_or_bottom(
 	}
 }
 
-void draw_floor(t_game *game, int x, double alpha, int heigth_drawn)
+void draw_floor(t_game *game, int x, double alpha, int heigth_drawn, double dist)
 {
 	const t_coord_f64 cosin = set_f64(
 		cos(alpha),
 		sin(alpha)
 	);
-	//            PROJ_DIST / cos(player.alpha - alpha) * game->param.hob_mult;
-	const double proj_dist = PROJ_DIST / cos(alpha - game->player.alpha) * game->param.hob_mult / 1.77;
-	//  PROJ_DIST / (game->player.cosin.x * cosin.x + game->player.cosin.y * cosin.y) * game->param.hob_mult;
-	double dist;
+	const double cos_a_minus_pa = game->player.cosin.x * cosin.x + game->player.cosin.y * cosin.y;
 
-	int rest_to_draw = MDDL_SCRN_HGTH - heigth_drawn + 1;
-	for (int32_t y = 0; y < rest_to_draw; y++)
+	uint32_t rest_to_draw = MDDL_SCRN_HGTH - heigth_drawn + 1;
+	for (uint32_t y = 0; y < rest_to_draw; y++)
 	{
-		dist = proj_dist / (y - game->player.z * WIN_HEIGHT);
+		double ratio = (1.0 + (((double) rest_to_draw - y) / heigth_drawn));
+		double floor_dist = dist / cos_a_minus_pa / ratio;
 		t_coord_f64 pos = set_f64(
-			game->player.coord.x + cosin.x * dist,
-			game->player.coord.y + cosin.y * dist
+			game->player.coord.x + cosin.x * floor_dist,
+			game->player.coord.y + cosin.y * floor_dist
 		);
-
 		t_chunk *chunk = get_chunk(game, set_i32(pos.x, pos.y));
 		if (!chunk)
 			continue ;
