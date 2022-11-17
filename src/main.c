@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:49:27 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/17 13:30:16 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/17 14:36:53 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,43 +19,10 @@
 #include "MLX42/MLX42.h"
 #include "mlx_utils.h"
 
-void pos2_hook(t_player *player, double incr_x, double incr_y, double size)
-{
-	player->coord.x += incr_x;
-	if (player->coord.x < 0)
-		player->coord.x += size;
-	else if (player->coord.x >= size)
-		player->coord.x -= size;
-	player->coord.y += incr_y;
-	if (player->coord.y < 0)
-		player->coord.y += size;
-	else if (player->coord.y > size)
-		player->coord.y -= size;
-}
-
-void angle_hook(t_game *game, double incrementation)
-{
-	game->player.alpha += incrementation;
-	if (game->player.alpha < 0)
-		game->player.alpha += PI2;
-	else if (game->player.alpha > PI2)
-		game->player.alpha -= PI2;
-	game->player.cosin.x = cos(game->player.alpha);
-	game->player.cosin.y = sin(game->player.alpha);
-}
-
-void	scale_hook(t_game *game, double incrementation)
-{
-	if (game->param.hob_mult + incrementation <= 100 && game->param.hob_mult + incrementation >= 0.5)
-			game->param.hob_mult += incrementation;
-	printf("%f\n", game->param.hob_mult);
-}
-
-void	map_hook(t_game *game, int32_t incrementation)
-{
-	if (game->param.minimap_size + incrementation <= 100 && game->param.minimap_size + incrementation >= 1)
-		game->param.minimap_size += incrementation;
-}
+void	pos2_hook(t_player *player, double incr_x, double incr_y, double size);
+void	angle_hook(t_game *game, double incrementation);
+void	scale_hook(t_game *game, double incrementation);
+void	map_hook(t_game *game, int32_t incrementation);
 
 void	hook(void *param)
 {
@@ -102,7 +69,6 @@ void	hook(void *param)
 
 t_texture *init_image(t_texture *ptr, char *path);
 t_texture *init_color(t_texture *ptr, uint32_t color);
-
 
 int main(void)
 {
@@ -152,7 +118,7 @@ int main(void)
 	if (!init_image(&game.temp2, "./texture/mc/grass_top.xpm42"))
 		return (EXIT_FAILURE);
 	
-	if (!init_image(&game.skybox, "./texture/sky.xpm42"))
+	if (!init_image(&game.skybox, "./texture/skybox.xpm42"))
 		return (EXIT_FAILURE);
 	// init_color(&game.skybox, 0xf7d79aFF);
 	game.skybox.type |= SKYBOX;

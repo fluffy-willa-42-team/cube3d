@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 15:54:48 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/15 12:06:48 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/17 13:34:25 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int get_rgba(int r, int g, int b, int a)
     return (r << 24 | g << 16 | b << 8 | a);
 }
 
-uint32_t	get_pixel_image(t_texture *texture, uint32_t x, uint32_t y, t_coord_f64 ratio)
+uint32_t	get_pixel_image(const t_texture *texture, uint32_t x, uint32_t y, t_coord_f64 ratio)
 {
 	if (!texture || !texture->image)
 		return (0);
@@ -33,7 +33,7 @@ uint32_t	get_pixel_image(t_texture *texture, uint32_t x, uint32_t y, t_coord_f64
 	return (get_rgba(*ptr, *(ptr + 1), *(ptr + 2), *(ptr + 3)));
 }
 
-void draw_image(t_game *game, t_texture *texture, t_coord_i32 pos, t_coord_i32 size)
+void draw_image(t_game *game, const t_texture *texture, t_coord_i32 pos, t_coord_i32 size)
 {
 	if (!texture || (texture->type & 0b1))
 		return ;

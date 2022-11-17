@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:31:46 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/15 12:10:26 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/17 13:35:07 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,9 @@
 int is_equal(double a, double b);
 
 t_chunk *get_chunk(t_game *game, t_coord_i32 coord);
-t_texture *get_wall_texture(t_chunk *chunk, t_coord_f64 inter);
+t_texture *get_wall_texture(const t_chunk *chunk, t_coord_f64 inter);
 
-t_texture *get_texture(t_game *game, t_inter inter)
-{
-	t_chunk *chunk = get_chunk(game, inter.wall);
-	return (get_wall_texture(chunk, inter.point));
-}
+void draw_skybox(t_game *game, t_coord_i32 pixel_pos);
 
 t_coord_f64 get_texture_inter(t_inter inter)
 {
@@ -47,9 +43,10 @@ t_coord_f64 get_texture_inter(t_inter inter)
  */
 int32_t draw_wall(t_game *game, t_inter inter, uint32_t x, int32_t height)
 {
-	t_texture *texture = get_texture(game, inter);
-	const t_coord_f64 texture_inter = get_texture_inter(inter);
-	const int32_t	parse_heigth = (int32_t []){height, WIN_HEIGHT}[height > WIN_HEIGHT];
+	const t_chunk		*chunk			= get_chunk(game, inter.wall);
+	const t_texture		*texture		= get_wall_texture(chunk, inter.point);
+	const t_coord_f64	texture_inter	= get_texture_inter(inter);
+	const int32_t		parse_heigth	= (int32_t []){height, WIN_HEIGHT}[height > WIN_HEIGHT];
 	t_coord_f64 ratio;
 	double 		offset;
 	

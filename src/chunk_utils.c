@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 10:56:11 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/16 15:10:36 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/17 13:35:01 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ t_chunk *get_chunk(t_game *game, t_coord_i32 coord)
 	return (&game->chunk0);
 }
 
-t_texture *get_wall_texture(t_chunk *chunk, t_coord_f64 inter)
+t_texture *get_wall_texture(const t_chunk *chunk, t_coord_f64 inter)
 {
 	if (!chunk)
 		return (NULL);
