@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 10:27:25 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/17 14:49:05 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/17 14:53:38 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ uint32_t get_skybox_pixel(t_game *game, t_coord_i32 pixel_pos)
 	));
 }
 
-void draw_skybox(t_game *game, t_coord_i32 pixel_pos)
+void draw_pixel_skybox(t_game *game, t_coord_i32 pixel_pos)
 {
 	if (game->skybox.type & IMAGE)
 		put_pixel(&game->param, pixel_pos.x, pixel_pos.y, 

@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:31:46 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/17 14:49:49 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/17 15:06:31 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,20 @@ int is_equal(double a, double b);
 t_chunk *get_chunk(t_game *game, t_coord_i32 coord);
 t_texture *get_wall_texture(const t_chunk *chunk, t_coord_f64 inter);
 
-void draw_skybox(t_game *game, t_coord_i32 pixel_pos);
+void	draw_pixel_skybox(t_game *game, t_coord_i32 pixel_pos);
+
+void	draw_pixel_wall(t_game *game, const t_texture *texture, t_coord_i32 pixel_pos, t_inter image_data)
+{
+	
+	if (texture->type & SKYBOX)
+		draw_pixel_skybox(game, set_i32(pixel_pos.x, pixel_pos.y));
+	else if (texture->type & IMAGE)
+		put_pixel(&game->param, pixel_pos.x, pixel_pos.y,
+			get_pixel_image(texture, image_data.wall.x, image_data.wall.y, image_data.point)
+		);
+	else
+		put_pixel(&game->param, pixel_pos.x, pixel_pos.y, texture->color);
+}
 
 t_coord_f64 get_texture_inter(t_inter inter)
 {
@@ -61,24 +74,14 @@ int32_t draw_wall(t_game *game, t_inter inter, uint32_t x, int32_t height)
 				+ texture_inter.y * texture->image->height;
 	}
 
-	(void) offset;
-	(void) ratio;
-	(void) x;
-	
 	if (!(texture->type & VALID))
 		return (parse_heigth);
-	for (int i = 0; i < parse_heigth * 2; i++)
+	for (int32_t i = 0; i < parse_heigth * 2; i++)
 	{
-		if (texture->type & SKYBOX)
-			draw_skybox(game, set_i32(x, WIN_HEIGHT / 2 - height + i));
-		else if (texture->type & IMAGE)
-			put_pixel(&game->param, x, WIN_HEIGHT / 2 - height + i,
-				get_pixel_image(texture, offset, i, ratio)
-			);
-		else
-			put_pixel(&game->param, x, WIN_HEIGHT / 2 - height + i,
-				texture->color
-			);
+		draw_pixel_wall(game, texture,
+			set_i32(x, WIN_HEIGHT / 2 - height + i),
+			(t_inter){ratio, {(int32_t) offset, i}}
+		);
 	}
 	return (parse_heigth);
 }
