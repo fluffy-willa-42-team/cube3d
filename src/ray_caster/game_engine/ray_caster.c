@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 10:01:39 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/17 16:14:53 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/17 16:46:50 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_inter get_intersect(t_game *game, t_coord_f64 player, double alpha);
 
 void	draw_skybox(t_game *game);
 void	draw_floor(t_game *game, int x, double alpha, double heigth_drawn, double dist);
-int32_t draw_wall(t_game *game, t_inter inter, uint32_t x, int32_t height);
+void	draw_wall(t_game *game, t_inter inter, uint32_t x, uint32_t height);
 
 static double distance(t_game *game, t_inter inter)
 {
@@ -46,7 +46,6 @@ Ray Casting can be subdivised in 3 step :
 
 All of these steps are done on a column but column basis.
 
- * @bug When too close to a wall, the wall starts to disappear
  */
 void ray_caster(t_game *game)
 {
@@ -66,7 +65,7 @@ void ray_caster(t_game *game)
 		dist = distance(game, inter);
 		height_to_draw = HEIGTH_OF_BLOCK * game->param.hob_mult / dist;
 		draw_wall(game, inter, i, height_to_draw);
-		if (height_to_draw >= game->stat.middle_screen_y)
+		if (height_to_draw >= game->stat.middle_screen_y - 1)
 			continue ;
 		draw_floor(game, i, alpha, height_to_draw - 1, dist);
 	}

@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:31:46 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/17 16:10:07 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/17 16:45:50 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,33 +63,39 @@ t_coord_f64 get_texture_inter(t_inter inter)
  * @param x 		pos x on screen
  * @param height 	Line Height
  */
-int32_t draw_wall(t_game *game, t_inter inter, uint32_t x, int32_t height)
+void	draw_wall(t_game *game, t_inter inter, uint32_t x, uint32_t height)
 {
 	const t_texture		*texture		= get_wall_texture(get_chunk(game, inter.wall), inter.point);
 	const t_coord_f64	texture_inter	= get_texture_inter(inter);
-	const int32_t		parse_heigth	= (int32_t []){height, WIN_HEIGHT}[height > WIN_HEIGHT];
-	t_coord_f64 ratio;
-	double 		offset;
+	uint32_t			parse_heigth;
+	t_coord_f64			ratio;
+	double 				offset;
 	
 	if (!texture || !(texture->type & VALID))
-		return (parse_heigth);
+		return ;
 	if (texture->type & IMAGE && texture->image)
 	{
 		ratio = set_f64(1,
-			(double) texture->image->height /( (double) height * 2)
+			(double) texture->image->height /((double) height * 2)
 		);
 		offset = texture_inter.x * texture->image->width
 				+ texture_inter.y * texture->image->height;
 	}
 
 	if (!(texture->type & VALID))
-		return (parse_heigth);
-	for (int32_t i = 0; i < parse_heigth * 2; i++)
+		return ;
+	parse_heigth = height;
+	if (parse_heigth >= game->stat.middle_screen_y)
+	{
+		parse_heigth = game->stat.middle_screen_y;
+		height = game->stat.middle_screen_y;
+	}
+	for (uint32_t i = 0; i < parse_heigth * 2; i++)
 	{
 		draw_pixel_wall(game, texture,
 			set_i32(x, game->stat.middle_screen_y - height + i),
 			(t_inter){ratio, {(int32_t) offset, i}}
 		);
 	}
-	return (parse_heigth);
+	return ;
 }
