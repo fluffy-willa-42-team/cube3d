@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 10:01:39 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/17 16:09:16 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/17 16:14:53 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,7 @@ Ray Casting can be subdivised in 3 step :
 
 All of these steps are done on a column but column basis.
 
- * @bug 1 When too close to a wall, the wall starts to disappear
- * @bug 2 Floor and ceiling casting calculates the distance wrong.
- * A offset to more further away you are seems to happens
+ * @bug When too close to a wall, the wall starts to disappear
  */
 void ray_caster(t_game *game)
 {
