@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 20:08:12 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/16 15:09:51 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/17 13:30:30 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 
 t_chunk *get_chunk(t_game *game, t_coord_i32 coord);
 
+void draw_skybox_floor(t_game *game, t_coord_i32 pixel_pos);
+
 static void	draw_top_or_bottom(
 	t_game *game,
 	t_texture *texture,
@@ -26,7 +28,9 @@ static void	draw_top_or_bottom(
 {
 	if (texture)
 	{
-		if (texture->type & IMAGE)
+		if (texture->type & SKYBOX && texture->type & IMAGE)
+			draw_skybox_floor(game, pixel_pos);
+		else if (texture->type & IMAGE)
 		{
 			put_pixel(&game->param, pixel_pos.x, pixel_pos.y,
 				get_pixel_image(texture,

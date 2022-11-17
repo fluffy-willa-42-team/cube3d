@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:49:27 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/16 15:21:44 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/17 13:30:16 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ void	hook(void *param)
 		angle_hook(game, -0.001);
 	if (mlx_is_key_down(game->param.mlx, MLX_KEY_E))
 		angle_hook(game, 0.001);
+	draw_rectangle(&game->param, set_f64(0, 0), set_i32(WIN_WIDTH, WIN_HEIGHT), 0x000000FF);
 	ray_caster(game);
 	draw_minimap(game);
 }
@@ -133,7 +134,7 @@ int main(void)
 		{0, NULL, 0},
 		{0, NULL, 0},
 		{0, NULL, 0},
-		{0, {0, 0}, NULL, NULL, NULL, NULL, &game.temp2, &game.temp2},
+		{0, {0, 0}, NULL, NULL, NULL, NULL, &game.skybox, &game.skybox},
 		{1, {0, 0}, &game.temp, &game.temp, &game.temp, &game.temp, &game.temp1, &game.temp1},
 		{1, {0, 0}, NULL, NULL, &game.temp1, &game.temp1, &game.temp1, &game.temp1},
 		{1, {0, 0}, &game.temp1, &game.temp1, NULL, NULL, &game.temp1, &game.temp1},
@@ -151,10 +152,10 @@ int main(void)
 	if (!init_image(&game.temp2, "./texture/mc/grass_top.xpm42"))
 		return (EXIT_FAILURE);
 	
-	
-	// if (!init_image(&game.skybox, "./texture/sky.xpm42"))
-	// 	return (EXIT_FAILURE);
-	init_color(&game.skybox, 0xf7d79aFF);
+	if (!init_image(&game.skybox, "./texture/sky.xpm42"))
+		return (EXIT_FAILURE);
+	// init_color(&game.skybox, 0xf7d79aFF);
+	game.skybox.type |= SKYBOX;
 
 	game.param.mlx = mlx_init(game.param.width, game.param.height, "MLX42", true);
 	if (!game.param.mlx)
