@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 17:48:29 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/17 11:06:08 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/17 11:45:48 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,7 +180,7 @@ void	get_chunk_token(t_parser *data, t_chunk_token *tmp)
 {
 	const	char *f1 = mapptr(data);
 	const	char *f2 = mapptr(data) + data->index + data->tmp_width + 1;
-	const	char *f3 = mapptr(data) + data->index + 2 * (data->tmp_width + 1);
+	const	char *f3 = mapptr(data) + 2 * (data->index + data->tmp_width + 1);
 
 	struct_set(tmp, sizeof(tmp));
 	tmp->ceiling = f1[0];
@@ -219,7 +219,6 @@ int	is_all_white_space_tokens(t_chunk_token *tokens)
 		&& tokens->opt == ' '
 		&& tokens->south == ' '
 		&& tokens->tex == ' '
-		&& tokens->type == ' '
 		&& tokens->west == ' ');
 }
 
@@ -232,23 +231,29 @@ int	is_all_valid_tokens(t_chunk_token *tokens)
 {
 	return (authzed_chunk_char(tokens->ceiling)
 		&& authzed_chunk_char(tokens->east)
-		&& authzed_chunk_char(tokens->entity)
 		&& authzed_chunk_char(tokens->floor)
 		&& authzed_chunk_char(tokens->floor)
 		&& authzed_chunk_char(tokens->north)
-		&& authzed_chunk_char(tokens->opt)
 		&& authzed_chunk_char(tokens->south)
+		&& authzed_chunk_char(tokens->entity)
 		&& authzed_chunk_char(tokens->tex)
-		&& authzed_chunk_char(tokens->type)
+		&& authzed_chunk_char(tokens->opt)
 		&& authzed_chunk_char(tokens->west));
 }
 
 int	check_chunk_type(t_chunk_token *tokens)
 {
 	if (is_all_white_space_tokens(tokens))
+	{
+		tokens->type = WHITE_SPACE_CHUNK;
 		return (WHITE_SPACE_CHUNK);
+	}
 	if (is_all_valid_tokens(tokens))
+	{
+		tokens->type = GOOD_CHUNK;
 		return (GOOD_CHUNK);
+	}
+	tokens->type = BAD_CHUNK;
 	return (BAD_CHUNK);
 }
 
@@ -265,6 +270,9 @@ int	set_chunk(t_parser *data, t_chunk *chunk)
 	chunk->east = get_tex_ptr(&data->tex_list, tokens.east);
 	chunk->floor = get_tex_ptr(&data->tex_list, tokens.floor);
 	chunk->south = get_tex_ptr(&data->tex_list, tokens.south);
+	// chunk.entity = get_tex_ptr(&data->tex_list, tokens.entity);
+	// chunk->tex = get_tex_ptr(&data->tex_list, tokens.tex);
+	// chunk->opt = get_tex_ptr(&data->tex_list, tokens.opt);
 	if (store_entity_data(data, chunk, &tokens))
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
@@ -415,14 +423,14 @@ void	t_map_debug(t_parser *data)
 		else
 		{
 			printf("[%c,%c,.]\n[%c,%c,.]\n[%c,%c,.]\n[ %d, %d]\n\n",
-			tmp->ceiling ? tmp->ceiling->token : '.' ,
-			tmp->north ? tmp->north->token : '.' ,
+			tmp->ceiling ? (tmp->ceiling->token ? tmp->ceiling->token : '.') : '.' ,
+			tmp->north ? (tmp->north->token ? tmp->north->token : '.') : '.' ,
 
-			tmp->west ? tmp->west->token : '.' ,
-			tmp->east ? tmp->east->token : '.' ,
+			tmp->west ? (tmp->west->token ? tmp->west->token : '.') : '.' ,
+			tmp->east ? (tmp->east->token ? tmp->east->token : '.') : '.' ,
 			
-			tmp->floor ? tmp->floor->token : '.' ,
-			tmp->south ? tmp->south->token : '.',
+			tmp->floor ? (tmp->floor->token ? tmp->floor->token : '.') : '.' ,
+			tmp->south ? (tmp->south->token ? tmp->south->token : '.') : '.',
 
 			tmp->coord.x,
 			tmp->coord.y
