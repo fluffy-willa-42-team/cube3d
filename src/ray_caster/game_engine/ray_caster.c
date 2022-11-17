@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 10:01:39 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/16 15:07:02 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/17 15:21:42 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,15 @@ void ray_caster(t_game *game)
 	double	height_to_draw = HEIGTH_OF_BLOCK * game->param.hob_mult;
 	
 	draw_rectangle(&game->param, set_f64(0, 0), set_i32(WIN_WIDTH, WIN_HEIGHT), 0x000000FF);
-	alpha = game->player.alpha - FOV_ANGLE1_2 - FOV_INCRE;
+	alpha = game->player.alpha - game->stat.fov_angle_1_2 - game->stat.fov_incre;
 	for (uint32_t i = 0; i < WIN_WIDTH; i++)
 	{
-		alpha += FOV_INCRE;
+		alpha += game->stat.fov_incre;
 		inter = get_intersect(game, game->player.coord, loop_len(alpha, PI2));
 		dist = distance(game, inter);
 		height_to_draw = HEIGTH_OF_BLOCK * game->param.hob_mult / dist;
 		draw_wall(game, inter, i, height_to_draw);
-		if (height_to_draw >= MDDL_SCRN_HGTH)
+		if (height_to_draw >= game->stat.middle_screen_y)
 			continue ;
 		draw_floor(game, i, alpha, height_to_draw - 1, dist);
 	}

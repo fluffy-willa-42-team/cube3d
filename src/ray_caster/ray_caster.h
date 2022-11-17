@@ -18,15 +18,8 @@
 #include "cube3d.h"
 
 /* #####=====----------		Ray Caster In Program Var	 ----------=====##### */
-// DONT TOUCH
 
-// VALEUR MAGIQUE /!\ DO NOT TOUCH
-# define HEIGTH_OF_BLOCK	100
 
-# define FOV_ANGLE1_2		(double) (FOV_ANGLE) / 2
-# define FOV_INCRE			(double) (FOV_ANGLE) / WIN_WIDTH
-# define PROJ_DIST			(double) (HEIGTH_OF_BLOCK) / -tan(FOV_ANGLE1_2)
-# define MDDL_SCRN_HGTH		WIN_HEIGHT / 2
 
 /* ************************************************************************** */
 

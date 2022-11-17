@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:33:07 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/16 14:26:04 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/17 15:23:03 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,9 @@
 
 /* #####=====----------		Ray Caster Config Var		 ----------=====##### */
 
-# define FOV_ANGLE				PI / 3
+// FOV = PI / 3
+# define FOV_ANGLE			1.0471975512
+# define HEIGTH_OF_BLOCK	100
 
 /* ************************************************************************** */
 
@@ -97,19 +99,26 @@ typedef struct s_player {
 	t_coord_f64 cosin;
 }	t_player;
 
+typedef struct s_static_data {
+	double		fov_angle_1_2;
+	double		fov_incre;
+	uint32_t	middle_screen_y;	
+}	t_static_data;
+
 typedef struct s_game {
-	t_mlx_param param;
-	t_map 		map;
-	t_player	player;
-	t_texture	skybox;
-	t_texture	temp;
-	t_texture	temp1;
-	t_texture	temp2;
-	t_chunk		chunk0;
-	t_chunk		chunk1;
-	t_chunk		chunk2;
-	t_chunk		chunk3;
-	t_chunk		chunk4;
+	t_mlx_param 	param;
+	t_static_data	stat;
+	t_map 			map;
+	t_player		player;
+	t_texture		skybox;
+	t_texture		temp;
+	t_texture		temp1;
+	t_texture		temp2;
+	t_chunk			chunk0;
+	t_chunk			chunk1;
+	t_chunk			chunk2;
+	t_chunk			chunk3;
+	t_chunk			chunk4;
 }	t_game;
 
 

@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:31:46 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/17 15:06:31 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/17 15:22:39 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,15 @@ t_texture *get_wall_texture(const t_chunk *chunk, t_coord_f64 inter);
 
 void	draw_pixel_skybox(t_game *game, t_coord_i32 pixel_pos);
 
+/**
+ * @brief 
+ * 
+ * @param game 
+ * @param texture 
+ * @param pixel_pos P
+ * @param image_data Is not an intersection but random data for get_pixel_image
+ * but the norms doesn't let me get more than 4 params...
+ */
 void	draw_pixel_wall(t_game *game, const t_texture *texture, t_coord_i32 pixel_pos, t_inter image_data)
 {
 	
@@ -79,7 +88,7 @@ int32_t draw_wall(t_game *game, t_inter inter, uint32_t x, int32_t height)
 	for (int32_t i = 0; i < parse_heigth * 2; i++)
 	{
 		draw_pixel_wall(game, texture,
-			set_i32(x, WIN_HEIGHT / 2 - height + i),
+			set_i32(x, game->stat.middle_screen_y - height + i),
 			(t_inter){ratio, {(int32_t) offset, i}}
 		);
 	}

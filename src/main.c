@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:49:27 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/17 14:41:02 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/17 15:19:26 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,13 @@ t_texture *init_color(t_texture *ptr, uint32_t color);
 
 int main(void)
 {
-	t_game game = {{NULL, NULL, 7, 7, WIN_HEIGHT, WIN_WIDTH},
+	t_game game = {
+		{NULL, NULL, 7, 7, WIN_HEIGHT, WIN_WIDTH},
+		{
+			(double) (FOV_ANGLE) / 2,
+			(double) (FOV_ANGLE) / WIN_WIDTH,
+			WIN_HEIGHT / 2
+		},
 		{{
 			{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
 			{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
