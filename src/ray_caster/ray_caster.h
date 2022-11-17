@@ -17,14 +17,12 @@
 
 #include "cube3d.h"
 
-/* #####=====----------		Ray Caster In Program Var	 ----------=====##### */
-
-
-
 /* ************************************************************************** */
 
 int draw_minimap(t_game *game);
 void ray_caster(t_game *game);
+
+/* ************************************************************************** */
 
 typedef struct s_inter {
 	t_coord_f64 point;

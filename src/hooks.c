@@ -6,25 +6,19 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 14:35:07 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/17 14:36:17 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/17 19:50:24 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 #include <math.h>
 
-void pos2_hook(t_player *player, double incr_x, double incr_y, double size)
+void	move_player(t_game *game, double x_incr, double y_incr);
+double	prot_tan(double alpha);
+
+void pos_hook(t_game *game, double incr_x, double incr_y)
 {
-	player->coord.x += incr_x;
-	if (player->coord.x < 0)
-		player->coord.x += size;
-	else if (player->coord.x >= size)
-		player->coord.x -= size;
-	player->coord.y += incr_y;
-	if (player->coord.y < 0)
-		player->coord.y += size;
-	else if (player->coord.y > size)
-		player->coord.y -= size;
+	move_player(game, incr_x, incr_y);
 }
 
 void angle_hook(t_game *game, double incrementation)
@@ -36,6 +30,7 @@ void angle_hook(t_game *game, double incrementation)
 		game->player.alpha -= PI2;
 	game->player.cosin.x = cos(game->player.alpha);
 	game->player.cosin.y = sin(game->player.alpha);
+	game->player.tan = prot_tan(game->player.alpha);
 }
 
 void	scale_hook(t_game *game, double incrementation)

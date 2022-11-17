@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:49:27 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/17 18:09:25 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/17 19:56:30 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,33 +19,34 @@
 #include "MLX42/MLX42.h"
 #include "mlx_utils.h"
 
-void	pos2_hook(t_player *player, double incr_x, double incr_y, double size);
+void	pos_hook(t_game *game, double incr_x, double incr_y);
 void	angle_hook(t_game *game, double incrementation);
 void	scale_hook(t_game *game, double incrementation);
 void	map_hook(t_game *game, int32_t incrementation);
 
 void	hook(void *param)
 {
-	t_game	*game = param;
+	t_game		*game = param;
+	t_coord_f64	*cosin = &game->player.cosin;
 
 	if (mlx_is_key_down(game->param.mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(game->param.mlx);
 	if (mlx_is_key_down(game->param.mlx, MLX_KEY_UP))
-		pos2_hook(&game->player, 0.02 * game->player.cosin.x, 0.02 * game->player.cosin.y, game->map.height);
+		pos_hook(game, 0.02 * cosin->x, 0.02 * cosin->y);
 	if (mlx_is_key_down(game->param.mlx, MLX_KEY_DOWN))
-		pos2_hook(&game->player, -0.02 * game->player.cosin.x, -0.02 * game->player.cosin.y, game->map.height);
+		pos_hook(game, -0.02 * cosin->x, -0.02 * cosin->y);
 	if (mlx_is_key_down(game->param.mlx, MLX_KEY_LEFT))
-		pos2_hook(&game->player, 0.02 * game->player.cosin.y, -0.02 * game->player.cosin.x, game->map.width);
+		pos_hook(game, 0.02 * cosin->y, -0.02 * cosin->x);
 	if (mlx_is_key_down(game->param.mlx, MLX_KEY_RIGHT))
-		pos2_hook(&game->player, -0.02 * game->player.cosin.y, 0.02 * game->player.cosin.x, game->map.width);
+		pos_hook(game, -0.02 * cosin->y, 0.02 * cosin->x);
 	if (mlx_is_key_down(game->param.mlx, MLX_KEY_KP_5))
-		pos2_hook(&game->player, 0.1 * game->player.cosin.x, 0.1 * game->player.cosin.y, game->map.height);
+		pos_hook(game, 0.1 * cosin->x, 0.1 * cosin->y);
 	if (mlx_is_key_down(game->param.mlx, MLX_KEY_KP_2))
-		pos2_hook(&game->player, -0.1 * game->player.cosin.x, -0.1 * game->player.cosin.y, game->map.height);
+		pos_hook(game, -0.1 * cosin->x, -0.1 * cosin->y);
 	if (mlx_is_key_down(game->param.mlx, MLX_KEY_KP_1))
-		pos2_hook(&game->player, 0.1 * game->player.cosin.y, -0.1 * game->player.cosin.x, game->map.width);
+		pos_hook(game, 0.1 * cosin->y, -0.1 * cosin->x);
 	if (mlx_is_key_down(game->param.mlx, MLX_KEY_KP_3))
-		pos2_hook(&game->player, -0.1 * game->player.cosin.y, 0.1 * game->player.cosin.x, game->map.width);
+		pos_hook(game, -0.1 * cosin->y, 0.1 * cosin->x);
 	if (mlx_is_key_down(game->param.mlx, MLX_KEY_Y))
 		scale_hook(game, 0.1);
 	if (mlx_is_key_down(game->param.mlx, MLX_KEY_H))
@@ -108,7 +109,7 @@ int main(void)
 			{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
 			{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
 		}, 20, 20},
-		{{3.5f, 3.5f}, 0.5, 0.0f, {cos(0), sin(0)}},
+		{{3.5f, 3.5f}, 0.5, 0.0f, {cos(0), sin(0)}, tan(0)},
 		{0, NULL, 0},
 		{0, NULL, 0},
 		{0, NULL, 0},

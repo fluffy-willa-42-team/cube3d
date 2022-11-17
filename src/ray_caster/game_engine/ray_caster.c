@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 10:01:39 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/17 16:46:50 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/17 18:14:19 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,6 @@ void ray_caster(t_game *game)
 	double	dist;
 	double	height_to_draw;
 	
-	draw_rectangle(&game->param, set_f64(0, 0),
-		set_i32(WIN_WIDTH, WIN_HEIGHT), 0x000000FF
-	);
 	alpha = game->player.alpha - game->stat.fov_angle_1_2 - game->stat.fov_incre;
 	for (uint32_t i = 0; i < WIN_WIDTH; i++)
 	{
