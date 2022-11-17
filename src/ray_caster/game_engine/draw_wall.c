@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:31:46 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/17 16:45:50 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/17 17:38:01 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,27 +75,20 @@ void	draw_wall(t_game *game, t_inter inter, uint32_t x, uint32_t height)
 		return ;
 	if (texture->type & IMAGE && texture->image)
 	{
-		ratio = set_f64(1,
-			(double) texture->image->height /((double) height * 2)
-		);
+		ratio = set_f64(1, (double) texture->image->height / (height * 2));
 		offset = texture_inter.x * texture->image->width
 				+ texture_inter.y * texture->image->height;
 	}
-
 	if (!(texture->type & VALID))
 		return ;
 	parse_heigth = height;
 	if (parse_heigth >= game->stat.middle_screen_y)
-	{
 		parse_heigth = game->stat.middle_screen_y;
-		height = game->stat.middle_screen_y;
-	}
-	for (uint32_t i = 0; i < parse_heigth * 2; i++)
+	for (uint32_t i = height - parse_heigth; i < height + parse_heigth ; i++)
 	{
 		draw_pixel_wall(game, texture,
 			set_i32(x, game->stat.middle_screen_y - height + i),
 			(t_inter){ratio, {(int32_t) offset, i}}
 		);
 	}
-	return ;
 }
