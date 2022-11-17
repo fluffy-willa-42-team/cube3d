@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:49:27 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/17 14:36:53 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/17 14:41:02 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int main(void)
 		{{
 			{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
 			{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-			{1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+			{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
 			{1, 0, 0, 0, 0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 1},
 			{1, 0, 0, 0, 0, 0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 0, 0, 0, 0, 1},
 			{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
@@ -100,8 +100,8 @@ int main(void)
 		{0, NULL, 0},
 		{0, NULL, 0},
 		{0, NULL, 0},
-		{0, {0, 0}, NULL, NULL, NULL, NULL, &game.skybox, &game.skybox},
-		{1, {0, 0}, &game.temp, &game.temp, &game.temp, &game.temp, &game.temp1, &game.temp1},
+		{0, {0, 0}, NULL, NULL, NULL, NULL, &game.skybox, &game.temp2},
+		{1, {0, 0}, &game.skybox, &game.temp, &game.temp, &game.temp, &game.temp1, &game.temp1},
 		{1, {0, 0}, NULL, NULL, &game.temp1, &game.temp1, &game.temp1, &game.temp1},
 		{1, {0, 0}, &game.temp1, &game.temp1, NULL, NULL, &game.temp1, &game.temp1},
 		{1, {0, 0}, NULL, NULL, &game.temp1, NULL, &game.temp1, &game.temp1}

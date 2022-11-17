@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:31:46 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/17 13:35:07 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/17 14:49:49 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,9 @@ int32_t draw_wall(t_game *game, t_inter inter, uint32_t x, int32_t height)
 		return (parse_heigth);
 	for (int i = 0; i < parse_heigth * 2; i++)
 	{
-		if (texture->type & IMAGE)
+		if (texture->type & SKYBOX)
+			draw_skybox(game, set_i32(x, WIN_HEIGHT / 2 - height + i));
+		else if (texture->type & IMAGE)
 			put_pixel(&game->param, x, WIN_HEIGHT / 2 - height + i,
 				get_pixel_image(texture, offset, i, ratio)
 			);
