@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:31:46 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/17 15:22:39 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/17 16:10:07 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,7 @@ t_coord_f64 get_texture_inter(t_inter inter)
  */
 int32_t draw_wall(t_game *game, t_inter inter, uint32_t x, int32_t height)
 {
-	const t_chunk		*chunk			= get_chunk(game, inter.wall);
-	const t_texture		*texture		= get_wall_texture(chunk, inter.point);
+	const t_texture		*texture		= get_wall_texture(get_chunk(game, inter.wall), inter.point);
 	const t_coord_f64	texture_inter	= get_texture_inter(inter);
 	const int32_t		parse_heigth	= (int32_t []){height, WIN_HEIGHT}[height > WIN_HEIGHT];
 	t_coord_f64 ratio;
