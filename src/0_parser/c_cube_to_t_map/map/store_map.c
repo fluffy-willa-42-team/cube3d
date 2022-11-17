@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 17:48:29 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/16 17:27:11 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/17 11:06:08 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,12 +202,54 @@ int	store_entity_data(t_parser *data, t_chunk *chunk, t_chunk_token *tmp)
 	return (EXIT_SUCCESS);
 }
 
-int	check_chunk_type(t_parser *data, t_chunk_token *tokens)
+
+/**
+ * @brief Check if all the token of the current is only white space `' '`.
+ * 
+ * @warning A chunk with white space `' '` can not have data !
+ */
+int	is_all_white_space_tokens(t_chunk_token *tokens)
 {
-	//TODO check if is a white space chunk or with data, return error if there is data and withe space !
-	(void)data;
-	(void)tokens;
-	return (GOOD_CHUNK);
+	return (tokens->ceiling == ' '
+		&& tokens->east == ' '
+		&& tokens->entity == ' '
+		&& tokens->floor == ' '
+		&& tokens->floor == ' '
+		&& tokens->north == ' '
+		&& tokens->opt == ' '
+		&& tokens->south == ' '
+		&& tokens->tex == ' '
+		&& tokens->type == ' '
+		&& tokens->west == ' ');
+}
+
+/**
+ * @brief Check if all the token of the current chunk is valid.
+ * 
+ * @warning A chunk with data can not have white space token `' '` !
+ */
+int	is_all_valid_tokens(t_chunk_token *tokens)
+{
+	return (authzed_chunk_char(tokens->ceiling)
+		&& authzed_chunk_char(tokens->east)
+		&& authzed_chunk_char(tokens->entity)
+		&& authzed_chunk_char(tokens->floor)
+		&& authzed_chunk_char(tokens->floor)
+		&& authzed_chunk_char(tokens->north)
+		&& authzed_chunk_char(tokens->opt)
+		&& authzed_chunk_char(tokens->south)
+		&& authzed_chunk_char(tokens->tex)
+		&& authzed_chunk_char(tokens->type)
+		&& authzed_chunk_char(tokens->west));
+}
+
+int	check_chunk_type(t_chunk_token *tokens)
+{
+	if (is_all_white_space_tokens(tokens))
+		return (WHITE_SPACE_CHUNK);
+	if (is_all_valid_tokens(tokens))
+		return (GOOD_CHUNK);
+	return (BAD_CHUNK);
 }
 
 int	set_chunk(t_parser *data, t_chunk *chunk)
@@ -215,15 +257,15 @@ int	set_chunk(t_parser *data, t_chunk *chunk)
 	t_chunk_token	tokens;
 
 	get_chunk_token(data, &tokens);
-	if (check_chunk_type(data, &tokens) == BAD_CHUNK)
+	if (check_chunk_type(&tokens) == BAD_CHUNK)
 		return(ret_print(EXIT_FAILURE, "//TODO bad chunk type\n"));
-	chunk->ceiling = get_tex_ptr(&chunk->ceiling, tokens.ceiling);
+	chunk->ceiling = get_tex_ptr(&data->tex_list, tokens.ceiling);
 	chunk->north = get_tex_ptr(&data->tex_list, tokens.north);
 	chunk->west = get_tex_ptr(&data->tex_list, tokens.west);
 	chunk->east = get_tex_ptr(&data->tex_list, tokens.east);
 	chunk->floor = get_tex_ptr(&data->tex_list, tokens.floor);
 	chunk->south = get_tex_ptr(&data->tex_list, tokens.south);
-	if (store_entity_data(data, &chunk, &tokens))
+	if (store_entity_data(data, chunk, &tokens))
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
@@ -285,7 +327,7 @@ int	get_next_chunk(t_parser *data, t_chunk *chunk)
 	// 	|| set_floor_2(data, chunk)
 	// 	|| set_floor_3(data, chunk))
 	// 	return (EXIT_FAILURE);
-	if (set_chunk(data, chunk));
+	if (set_chunk(data, chunk))
 		return (EXIT_FAILURE);
 	data->index += 3;
 	return (EXIT_SUCCESS);
