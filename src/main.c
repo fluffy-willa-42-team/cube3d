@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:49:27 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/17 16:45:14 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/17 18:09:25 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,14 @@ void	hook(void *param)
 		pos2_hook(&game->player, 0.02 * game->player.cosin.y, -0.02 * game->player.cosin.x, game->map.width);
 	if (mlx_is_key_down(game->param.mlx, MLX_KEY_RIGHT))
 		pos2_hook(&game->player, -0.02 * game->player.cosin.y, 0.02 * game->player.cosin.x, game->map.width);
+	if (mlx_is_key_down(game->param.mlx, MLX_KEY_KP_5))
+		pos2_hook(&game->player, 0.1 * game->player.cosin.x, 0.1 * game->player.cosin.y, game->map.height);
+	if (mlx_is_key_down(game->param.mlx, MLX_KEY_KP_2))
+		pos2_hook(&game->player, -0.1 * game->player.cosin.x, -0.1 * game->player.cosin.y, game->map.height);
+	if (mlx_is_key_down(game->param.mlx, MLX_KEY_KP_1))
+		pos2_hook(&game->player, 0.1 * game->player.cosin.y, -0.1 * game->player.cosin.x, game->map.width);
+	if (mlx_is_key_down(game->param.mlx, MLX_KEY_KP_3))
+		pos2_hook(&game->player, -0.1 * game->player.cosin.y, 0.1 * game->player.cosin.x, game->map.width);
 	if (mlx_is_key_down(game->param.mlx, MLX_KEY_Y))
 		scale_hook(game, 0.1);
 	if (mlx_is_key_down(game->param.mlx, MLX_KEY_H))
