@@ -31,10 +31,6 @@ void draw_ray(t_game *game, double alpha)
 {
 	t_inter test = get_intersect(game, game->player.coord, alpha);
 	draw_line_s(&game->param, game->player.coord, test.point, 0xfcba03AA);
-	// draw_rectangle(&game->param,
-	// 	set_f64(test.wall.x * param->minimap_size, test.wall.y * param->minimap_size),
-	// 	set_i32(param->minimap_size, param->minimap_size), 0xaF2278FF
-	// );
 }
 
 int draw_minimap(t_game *game)
