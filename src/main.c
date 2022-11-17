@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:49:27 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/17 16:13:07 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/17 16:25:08 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ int main(void)
 	if (!init_image(&game.temp2, "./texture/mc/grass_top.xpm42"))
 		return (EXIT_FAILURE);
 	
-	if (!init_image(&game.skybox, "./texture/skybox2.xpm42"))
+	if (!init_image(&game.skybox, "./texture/sky/skybox2.xpm42"))
 		return (EXIT_FAILURE);
 	// init_color(&game.skybox, 0xf7d79aFF);
 	game.skybox.type |= SKYBOX;
