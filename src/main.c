@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:49:27 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/18 14:06:17 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/18 14:45:23 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,27 +93,30 @@ int main(void)
 		},
 		{{
 			"ssssssssssssssssssss",
+			"s_______   ________s",
+			"s_______   ________s",
+			"s_______   ________s",
+			"s_______   ________s",
+			"s_______   ________s",
 			"s                  s",
 			"s                  s",
-			"s      hhhhhhhhhh  s",
-			"s       hhhhhhh    s",
 			"s                  s",
 			"s                  s",
-			"s  v               s",
-			"s  v               s",
-			"s  v bv            s",
-			"s  v  vb           s",
-			"s  v  ahhhhhh      s",
-			"s  v               s",
+			"sv                 s",
+			"sv                 s",
+			"sv   bv            s",
+			"sv    vb           s",
+			"sv    ahhhhhh      s",
+			"sv                 s",
 			"s                  s",
 			"s          cde     s",
-			"ssss     f         s",
+			"s        f         s",
 			"s                  s",
-			"s                  s",
-			"s         s        s",
+			"s      hhhhh       s",
+			"s   hhhhhhhhhhhh   s",
 			"ssssssssssssssssssss"
-		}, 20, 20},
-		{{3.5f, 3.5f}, 0.5, 0.0f, {cos(0), sin(0)}, tan(0)},
+		}, 23, 20},
+		{{15.5f, 15.5f}, 0.5, ANGLE_START, {cos(ANGLE_START), sin(ANGLE_START)}, tan(ANGLE_START)},
 		{0, NULL, 0},
 		{0, NULL, 0},
 		{0, NULL, 0},
@@ -123,16 +126,18 @@ int main(void)
 		{0, NULL, 0},
 		{0, NULL, 0},
 		{0, NULL, 0},
-		{0, {0, 0}, NULL, NULL, NULL, NULL, &game.skybox, &game.temp2},
-		{1, {0, 0}, &game.skybox, &game.skybox, &game.skybox, &game.skybox, NULL, NULL},
-		{1, {0, 0}, NULL, NULL, &game.temp1, &game.temp2, &game.temp1, &game.temp1},
-		{1, {0, 0}, &game.temp1, &game.temp1, NULL, NULL, &game.temp1, &game.temp1},
-		{1, {0, 0}, &game.temp1, NULL, &game.temp1, NULL, &game.temp1, &game.temp1},
-		{1, {0, 0}, &game.temp, &game.temp, &game.temp, &game.temp, &game.temp, &game.temp},
-		{1, {0, 0}, &game.t_cont1, &game.t_cont2, NULL, &game.t_cont5, NULL, NULL},
-		{1, {0, 0}, &game.t_cont3, &game.t_cont3, &game.t_cont3, &game.t_cont3, NULL, NULL},
-		{1, {0, 0}, &game.t_cont2, &game.t_cont1, &game.t_cont4, NULL, NULL, NULL},
-		{1, {0, 0}, &game.t_cont4, &game.t_cont5, &game.t_cont4, &game.t_cont4, NULL, NULL}
+		{0, NULL, 0},
+		{0, {0, 0}, NULL, NULL, NULL, NULL, &game.skybox, &game.temp2},							// chunk0	' '
+		{1, {0, 0}, &game.skybox, &game.skybox, &game.skybox, &game.skybox, NULL, NULL},		// chunk1	's'
+		{1, {0, 0}, NULL, NULL, &game.temp1, &game.temp2, &game.temp1, &game.temp1},			// chunk2	'v'
+		{1, {0, 0}, &game.temp1, &game.temp1, NULL, NULL, &game.temp1, &game.temp1},			// chunk3	'h'
+		{1, {0, 0}, &game.temp1, NULL, &game.temp1, NULL, &game.temp1, &game.temp1},			// chunk4	' '
+		{1, {0, 0}, &game.temp, &game.temp, &game.temp, &game.temp, &game.temp, &game.temp},	// chunk5	' '
+		{1, {0, 0}, &game.t_cont2, &game.t_cont1, &game.t_cont4, NULL, NULL, NULL},				// cont1	'c'
+		{1, {0, 0}, &game.t_cont3, &game.t_cont3, NULL, NULL, NULL, NULL},						// cont2	'd'
+		{1, {0, 0}, &game.t_cont1, &game.t_cont2, NULL, &game.t_cont5, NULL, NULL},				// cont3	'e'
+		{1, {0, 0}, &game.t_cont4, &game.t_cont5, &game.t_cont4, &game.t_cont4, NULL, NULL},	// cont4	'f'
+		{1, {0, 0}, NULL, NULL, NULL, NULL, &game.skybox, &game.skybox}							// chunk6	'_'
 	};
 
 	// init_color(&game.temp, 0x0000FFFF);
@@ -160,6 +165,8 @@ int main(void)
 	if (!init_image(&game.t_cont4, "./texture/cont/container_small_side.xpm42"))
 		return (EXIT_FAILURE);
 	if (!init_image(&game.t_cont5, "./texture/cont/container_open.xpm42"))
+		return (EXIT_FAILURE);
+	if (!init_image(&game.temp3, "./texture/bars.xpm42"))
 		return (EXIT_FAILURE);
 
 
@@ -192,6 +199,8 @@ int main(void)
 		mlx_delete_texture(game.t_cont4.image);
 	if (game.t_cont5.image)
 		mlx_delete_texture(game.t_cont5.image);
+	if (game.temp3.image)
+		mlx_delete_texture(game.temp3.image);
 	mlx_delete_image(game.param.mlx, game.param.img);
 	mlx_terminate(game.param.mlx);
 	return (EXIT_SUCCESS);

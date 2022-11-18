@@ -43,10 +43,10 @@ int draw_minimap(t_game *game)
 	{
 		for (uint32_t x = 0; x < map->width; x++)
 		{
-			if (map->array[y][x] == 1)
+			if (map->array[y][x] == 's')
 				draw_rectangle(param, (t_coord_f64){x * si, y * si},
 					(t_coord_i32){si, si}, 0x770000FF);
-			else if (map->array[y][x] > 1)
+			else if (map->array[y][x] != ' ')
 				draw_rectangle(param, (t_coord_f64){x * si, y * si},
 					(t_coord_i32){si, si}, 0x21634cFF);
 			else

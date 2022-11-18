@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 10:56:11 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/18 14:15:17 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/18 14:40:05 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 int is_equal(double a, double b);
 
-# define NB_CHAR 9
+# define NB_CHAR 11
 
 t_chunk *get_chunk(t_game *game, t_coord_i32 coord)
 {
@@ -24,11 +24,11 @@ t_chunk *get_chunk(t_game *game, t_coord_i32 coord)
 		&& 0 <= coord.y && coord.y < (int) game->map.height))
 		return (NULL);
 	
-	const char		character[NB_CHAR] = "svhabcdef";
+	const char		character[NB_CHAR] = " svhabcdef_";
 	t_chunk	*ptr[NB_CHAR] = {
-		&game->chunk1, &game->chunk2, &game->chunk3, &game->chunk4, 
-		&game->chunk5, &game->cont4, &game->cont3, &game->cont2, 
-		&game->cont1
+		&game->chunk0, &game->chunk1, &game->chunk2, &game->chunk3, &game->chunk4, &game->chunk5,
+		&game->cont1, &game->cont2, &game->cont3, &game->cont4, 
+		&game->chunk6
 	};
 	
 	for (int i = 0; i < NB_CHAR; i++)

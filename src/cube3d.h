@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:33:07 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/18 14:08:13 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/18 14:43:32 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,10 @@
 
 /* #####=====----------			Mlx Config Var			 ----------=====##### */
 
-# define WIN_WIDTH	800
+# define WIN_WIDTH	1200
 # define WIN_HEIGHT	800
+
+# define ANGLE_START	PI
 
 /* #####=====----------		Ray Caster Config Var		 ----------=====##### */
 
@@ -81,7 +83,7 @@ typedef struct s_entity {
 /* ************************************************************************** */
 
 typedef struct s_map {
-	char	 array[20][20];
+	char	 array[23][20];
 	uint32_t height;
 	uint32_t width;
 }	t_map;
@@ -123,6 +125,7 @@ typedef struct s_game {
 	t_texture		t_cont3;
 	t_texture		t_cont4;
 	t_texture		t_cont5;
+	t_texture		temp3;
 	t_chunk			chunk0;
 	t_chunk			chunk1;
 	t_chunk			chunk2;
@@ -133,6 +136,7 @@ typedef struct s_game {
 	t_chunk			cont2;
 	t_chunk			cont3;
 	t_chunk			cont4;
+	t_chunk			chunk6;
 }	t_game;
 
 
