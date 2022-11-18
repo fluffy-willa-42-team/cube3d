@@ -6,43 +6,79 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:18:47 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/17 19:57:05 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/18 10:27:13 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ray_caster.h"
+#include <stdio.h>
 
-t_intersect	get_init_x(t_coord_f64 player, t_coord_f64 delta, double alpha, double tan_a);
-t_intersect	get_init_y(t_coord_f64 player, t_coord_f64 delta, double alpha, double tan_a);
-int			is_wall(t_game *game, t_intersect *inter);
+t_chunk *get_chunk(t_game *game, t_coord_i32 coord);
 
-void	move_player(t_game *game, double x_incr, double y_incr)
+typedef struct s_mv_data {
+	t_coord_i32	out_coord;
+	t_texture	*in_texture;
+	t_texture	*out_texture;
+}	t_mv_data;
+
+t_mv_data	get_move_data_x(t_game *game, t_coord_f64 player, t_chunk *in_chunk, double incr)
 {
-	t_coord_f64 delta	= set_f64(
-		game->player.coord.x - (int) game->player.coord.x,
-		game->player.coord.y - (int) game->player.coord.y
-	);
-	t_intersect xIntersect = get_init_x(game->player.coord, delta, game->player.alpha, game->player.tan);
-	t_intersect yIntersect = get_init_y(game->player.coord, delta, game->player.alpha, game->player.tan);
-	
-	if (!is_wall(game, &yIntersect))
-		game->player.coord.x += x_incr;
-	if (!is_wall(game, &xIntersect))
-		game->player.coord.y += y_incr;
+	t_mv_data		res;
+	t_chunk			*out_chunk;
+
+	if (incr < 0) // EAST
+	{
+		out_chunk = get_chunk(game, set_i32((int) player.x - 1, (int) player.y));
+		res.in_texture = in_chunk->east;
+		res.out_texture = out_chunk->west;
+	}
+	else // WEST
+	{
+		out_chunk = get_chunk(game, set_i32((int) player.x + 1, (int) player.y));
+		res.in_texture = in_chunk->west;
+		res.out_texture = out_chunk->east;
+	}
+	res.out_coord = out_chunk->coord;
+	res.out_coord = out_chunk->coord;
+	return (res);
 }
 
+t_mv_data	get_move_data_y(t_game *game, t_coord_f64 player, t_chunk *in_chunk, double incr)
+{
+	t_mv_data		res;
+	t_chunk			*out_chunk;
 
-// t_coord_f64	backup = game->player.coord;
-// if (new_pos.x >= game->map.width)
-// 	new_pos.x -= game->map.width;
-// else if (new_pos.x < 0)
-// 	new_pos.x += game->map.width;
-// if (new_pos.y >= game->map.height)
-// 	new_pos.y -= game->map.height;
-// else if (new_pos.y < 0)
-// 	new_pos.y += game->map.height;
-// (void) new_pos;
-// if (game->map.array[(int) backup.y][(int) new_pos.x] != 1)
-// 	game->player.coord.x = new_pos.x;
-// if (game->map.array[(int) new_pos.y][(int) backup.x] != 1)
-// 	game->player.coord.y = new_pos.y;
+	if (incr < 0) // NORTH
+	{
+		out_chunk = get_chunk(game, set_i32((int) player.x, (int) player.y - 1));
+		res.in_texture = in_chunk->south;
+		res.out_texture = out_chunk->north;
+	}
+	else // SOUTH
+	{
+		out_chunk = get_chunk(game, set_i32((int) player.x, (int) player.y + 1));
+		res.in_texture = in_chunk->north;
+		res.out_texture = out_chunk->south;
+		res.out_coord = out_chunk->coord;
+	}
+	res.out_coord = out_chunk->coord;
+	res.out_coord = out_chunk->coord;
+	return (res);
+}
+
+void	move_player(t_game *game, t_coord_f64 player, double x_incr, double y_incr)
+{
+	t_chunk			*in_chunk = get_chunk(game, set_i32((int) player.x, (int) player.y));
+
+	t_mv_data		data_x = get_move_data_x(game, player, in_chunk, x_incr);
+	t_mv_data		data_y = get_move_data_y(game, player, in_chunk, y_incr);
+
+	(void) data_x;
+	(void) data_y;
+	
+	if (!data_x.in_texture && !data_x.out_texture)
+		game->player.coord.x += x_incr;
+	if (!data_y.in_texture && !data_y.out_texture)
+		game->player.coord.y += y_incr;
+
+}

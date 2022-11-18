@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 10:56:11 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/17 13:35:01 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/18 08:49:54 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,6 @@ t_chunk *get_chunk(t_game *game, t_coord_i32 coord)
 	{
 		game->chunk4.coord = coord;
 		return (&game->chunk4);
-	}
-	if (game->map.array[coord.y][coord.x] == 9)
-	{
-		return (NULL);
 	}
 	game->chunk0.coord = coord;
 	return (&game->chunk0);

@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:33:07 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/17 19:49:42 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/18 09:04:51 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,22 +22,23 @@
 /* #####=====----------			Common Math Var			 ----------=====##### */
 
 # define PI    3.14159265359
-# define PI1_6 0.52359877559
-# define PI1_3 1.0471975512
 # define PI1_2 1.57079632679
+# define PI1_3 1.0471975512
+# define PI1_4 0.78539816339
+# define PI1_6 0.52359877559
 # define PI3_2 4.71238898038
 # define PI2   6.28318530718
 
 /* #####=====----------			Mlx Config Var			 ----------=====##### */
 
 # define WIN_WIDTH	800
-# define WIN_HEIGHT	600
+# define WIN_HEIGHT	800
 
 /* #####=====----------		Ray Caster Config Var		 ----------=====##### */
 
 // FOV = PI / 3
 # define FOV_ANGLE			1.0471975512
-# define HEIGTH_OF_BLOCK	100
+# define HEIGTH_OF_BLOCK	WIN_HEIGHT / 10
 
 /* ************************************************************************** */
 
