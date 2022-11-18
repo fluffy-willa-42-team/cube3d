@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 17:09:25 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/15 14:47:18 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/18 12:58:58 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ int	store_tex(t_parser *data, char *tex)
 		tex++;
 	if (!*tex)
 		return (ret_print(EXIT_FAILURE, ERR_TEX_FORMAT));
+	//TODO check flag {v,x}{v,x} for transparency and clip texture
 	tmp.type = find_tex_type(tex);
 	tmp.path = &*tex;
 	if (!ft_memcpy(get_tex_ptr(&data->tex_list, tmp.token),

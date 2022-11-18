@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:33:07 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/16 17:27:11 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/18 12:57:02 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,13 @@
 /* ************************************************************************** */
 
 typedef enum e_texture_type {
-	UNDEFINED	= 0b000,
-	COLOR		= 0b001,
-	IMAGE		= 0b011,
-	SKYBOX		= 0b100,
+	UNDEFINED		= 0b00000,
+	VALID			= 0b00100,
+	COLOR			= 0b00000,
+	IMAGE			= 0b01000,
+	SKYBOX			= 0b00100,
+	ALLOW_CLIP		= 0b01000,
+	TRANSPARENCY	= 0b10000
 }	t_texture_type;
 
 /**
