@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:49:27 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/18 11:58:08 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/18 12:14:50 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,14 +101,14 @@ int main(void)
 			{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
 			{1, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
 			{1, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-			{1, 0, 0, 2, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 0, 1},
-			{1, 0, 0, 2, 0, 0, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-			{1, 0, 0, 2, 0, 0, 4, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+			{1, 0, 0, 2, 0, 5, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+			{1, 0, 0, 2, 0, 0, 2, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+			{1, 0, 0, 2, 0, 0, 4, 3, 3, 3, 3, 3, 3, 0, 0, 0, 0, 0, 0, 1},
 			{1, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-			{1, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-			{1, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 9, 8, 7, 0, 0, 0, 0, 0, 1},
-			{1, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-			{1, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+			{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+			{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 8, 7, 0, 0, 0, 0, 0, 1},
+			{1, 1, 1, 1, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+			{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
 			{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
 			{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
 			{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
@@ -124,13 +124,14 @@ int main(void)
 		{0, NULL, 0},
 		{0, NULL, 0},
 		{0, {0, 0}, NULL, NULL, NULL, NULL, &game.skybox, &game.temp2},
-		{1, {0, 0}, &game.skybox, &game.temp, &game.temp, &game.temp, &game.temp1, &game.temp1},
+		{1, {0, 0}, &game.skybox, &game.skybox, &game.skybox, &game.skybox, NULL, NULL},
 		{1, {0, 0}, NULL, NULL, &game.temp1, &game.temp2, &game.temp1, &game.temp1},
 		{1, {0, 0}, &game.temp1, &game.temp1, NULL, NULL, &game.temp1, &game.temp1},
 		{1, {0, 0}, &game.temp1, NULL, &game.temp1, NULL, &game.temp1, &game.temp1},
-		{1, {0, 0}, &game.t_cont2, &game.t_cont2, NULL, &game.t_cont5, NULL, NULL},
+		{1, {0, 0}, &game.temp, &game.temp, &game.temp, &game.temp, &game.temp, &game.temp},
+		{1, {0, 0}, &game.t_cont1, &game.t_cont2, NULL, &game.t_cont5, NULL, NULL},
 		{1, {0, 0}, &game.t_cont3, &game.t_cont3, &game.t_cont3, &game.t_cont3, NULL, NULL},
-		{1, {0, 0}, &game.t_cont1, &game.t_cont1, &game.t_cont4, NULL, NULL, NULL},
+		{1, {0, 0}, &game.t_cont2, &game.t_cont1, &game.t_cont4, NULL, NULL, NULL},
 		{1, {0, 0}, &game.t_cont4, &game.t_cont5, &game.t_cont4, &game.t_cont4, NULL, NULL}
 	};
 
@@ -145,7 +146,7 @@ int main(void)
 	if (!init_image(&game.temp2, "./texture/mc/grass_top.xpm42"))
 		return (EXIT_FAILURE);
 	
-	if (!init_image(&game.skybox, "./texture/sky/skybox2.xpm42"))
+	if (!init_image(&game.skybox, "./texture/sky/skybox.xpm42"))
 		return (EXIT_FAILURE);
 	// init_color(&game.skybox, 0xf7d79aFF);
 	game.skybox.type |= SKYBOX;
