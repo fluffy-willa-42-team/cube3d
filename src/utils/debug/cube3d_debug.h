@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:54:56 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/16 15:31:16 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/18 16:30:47 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,10 @@ int	ret_print(int ret, const char *msg);
 # define ERR_VEC_ALLOC   "Error\nv_alloc fail !\n"
 # define ERR_SANI_FILE   "Error\nUnauthorized withe space, only ' ' and '\\n'!\n"
 # define ERR_EMPTY_FILE  "Error\nEmpty map file !\n"
+# define ERR_TEX_PARAM   "Error\nBad texture param !\n"
 # define ERR_TEX_FORMAT  "Error\nBad texture format !\n"
+# define ERR_TEX_TYPE    "Error\nBad texture type !\n"
+# define ERR_TEX_TOKEN_FORMAT  "Error\nBad texture token format !\n"
 # define ERR_TEX_RESERVED  "Error\nBad or reserved texture token used !\n"
 # define ERR_TEX_DUP     "Error\nDuplicate texture !\n"
 # define ERR_NO_MAP_AFTER_TEX "Error\nNo map after texture !\n"

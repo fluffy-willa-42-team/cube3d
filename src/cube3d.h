@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:33:07 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/18 12:57:02 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/18 16:22:39 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,26 +19,37 @@
 
 /* ************************************************************************** */
 
+/**
+ * @param UNDEFINED
+ * @param VALID
+ * @param COLOR
+ * @param IMAGE
+ * @param SKYBOX
+ * @param ALLOW_CLIP
+ * @param TRANSPARENCY
+ */
 typedef enum e_texture_type {
-	UNDEFINED		= 0b00000,
-	VALID			= 0b00100,
-	COLOR			= 0b00000,
-	IMAGE			= 0b01000,
-	SKYBOX			= 0b00100,
-	ALLOW_CLIP		= 0b01000,
-	TRANSPARENCY	= 0b10000
+	UNDEFINED		= 0b0000001,
+	VALID			= 0b0000010,
+	COLOR			= 0b0000100,
+	IMAGE			= 0b0001000,
+	SKYBOX			= 0b0010000,
+	ALLOW_CLIP		= 0b0100000,
+	TRANSPARENCY	= 0b1000000
 }	t_texture_type;
 
 /**
- * @param type   (t_texture_type)
- * @param token  (char)
- * @param path   (char)
- * @param image  (void)
- * @param color  (unit32_t)
+ * @param type           (t_texture_type)
+ * @param token          (char)
+ * @param sky_box_token  (char)
+ * @param path           (char*)
+ * @param image          (void*)
+ * @param color          (unit32_t)
  */
 typedef struct s_texture {
 	t_texture_type	type;
 	char			token;
+	char			sky_box_token;
 	char			*path;
 	void			*image;
 	uint32_t		color;
@@ -98,6 +109,7 @@ typedef enum e_chunk_type {
  * @param south    (t_texture *)
  * @param ceiling  (t_texture *)
  * @param floor    (t_texture *)
+ * @param skybox   (t_texture *)
  */
 typedef struct s_chunk {
 	int32_t		type;
@@ -108,6 +120,7 @@ typedef struct s_chunk {
 	t_texture	*south;
 	t_texture	*ceiling;
 	t_texture	*floor;
+	t_texture	*skybox;
 }	t_chunk;
 
 # define E_EMPTY '.'
