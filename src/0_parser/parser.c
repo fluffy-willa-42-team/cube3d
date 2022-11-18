@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:53:32 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/10 18:41:20 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/16 15:28:43 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,9 @@ int	parser(char *av, t_map *map)
 		return (EXIT_FAILURE);
 	if (!v_delete(&data.cube))/* //TODO change check after the lib update ! *///TODO REMOVE, free only in main
 		return(EXIT_FAILURE);//TODO REMOVE, no safe
-	if (!ft_memcpy(map, &data.map, sizeof(t_map)))
-		return (ret_print(EXIT_FAILURE, ERR_MEMCPY));
+	map->map = data.map;
+	map->size = data.map_size;
+	map->width = data.map_size.x;
+	map->height = data.map_size.y;
 	return (EXIT_SUCCESS);
 }

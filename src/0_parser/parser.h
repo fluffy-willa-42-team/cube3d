@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:53:43 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/15 14:33:10 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/17 11:27:24 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,20 @@ typedef struct s_parser
 	t_coord_i32		map_size;
 	t_vec			map;
 }				t_parser;
+
+typedef struct s_chunk_token
+{
+	char			north;
+	char			east;
+	char			west;
+	char			south;
+	char			ceiling;
+	char			floor;
+	char			entity;
+	char			tex;
+	char			opt;
+	t_chunk_type	type;
+}				t_chunk_token;
 
 typedef int	(*t_conv_fct)(t_parser *data, char c);
 

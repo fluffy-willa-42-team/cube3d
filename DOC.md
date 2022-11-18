@@ -25,7 +25,7 @@ C 225,30,0
 111111111111111
 ```
 
-**The texture format:**
+**The texture format:**//TODO Rework the .cube texture format doc
 
 - `[token]` `./[relative_path_to_texture_file]`
 - `[token]` `[R,G,B]`

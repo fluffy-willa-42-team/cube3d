@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 16:12:15 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/15 16:59:14 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/18 16:50:13 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,44 @@ int	tex_debug(t_parser *data)
 	{
 		tmp = get_tex_ptr(&data->tex_list, i)->type;
 		if (tmp > 0)
-			printf("[%c] {\n    type :   %d,\n    token :  \'%c\',\n    *path :  \"%.10s\",\n    *image : [%p],\n    color :  [%d, %d, %d, %d]\n    }\n", (char)i, get_tex_ptr(&data->tex_list, i)->type, get_tex_ptr(&data->tex_list, i)->token, get_tex_ptr(&data->tex_list, i)->path, get_tex_ptr(&data->tex_list, i)->image, get_r(get_tex_ptr(&data->tex_list, i)->color), get_g(get_tex_ptr(&data->tex_list, i)->color), get_b(get_tex_ptr(&data->tex_list, i)->color), get_a(get_tex_ptr(&data->tex_list, i)->color));
+			printf(
+			"[%c] {\n"
+			"       type          :  {\n"
+			"                          UNDEFINED     [%d]\n"
+			"                          VALID         [%d]\n"
+			"                          COLOR         [%d]\n"
+			"                          IMAGE         [%d]\n"
+			"                          SKYBOX        [%d]\n"
+			"                          ALLOW_CLIP    [%d]\n"
+			"                          TRANSPARENCY  [%d]\n"
+			"                        },\n"
+			"       token         :  \'%c\',\n"
+			"       sky_box_token :  \'%c\',\n"
+			"       *path         :  \"%.5s\",\n"
+			"       *image        : [%p],\n"
+			"       color         :  [%d, %d, %d, %d]\n"
+			"     }\n",
+			(char)i,
+			(get_tex_ptr(&data->tex_list, i)->type & UNDEFINED) != 0,
+			(get_tex_ptr(&data->tex_list, i)->type & VALID) != 0,
+			(get_tex_ptr(&data->tex_list, i)->type & COLOR) != 0,
+			(get_tex_ptr(&data->tex_list, i)->type & IMAGE) != 0,
+			(get_tex_ptr(&data->tex_list, i)->type & SKYBOX) != 0,
+			(get_tex_ptr(&data->tex_list, i)->type & ALLOW_CLIP) != 0,
+			(get_tex_ptr(&data->tex_list, i)->type & TRANSPARENCY) != 0,
+			
+			get_tex_ptr(&data->tex_list, i)->token,
+
+			get_tex_ptr(&data->tex_list, i)->sky_box_token,
+			
+			get_tex_ptr(&data->tex_list, i)->path,
+			
+			get_tex_ptr(&data->tex_list, i)->image,
+
+			get_r(get_tex_ptr(&data->tex_list, i)->color),
+			get_g(get_tex_ptr(&data->tex_list, i)->color),
+			get_b(get_tex_ptr(&data->tex_list, i)->color),
+			get_a(get_tex_ptr(&data->tex_list, i)->color));
 	}
 	return (EXIT_SUCCESS);
 }

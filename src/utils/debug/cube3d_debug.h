@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:54:56 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/15 15:43:04 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/18 16:30:47 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,10 @@ int	ret_print(int ret, const char *msg);
 # define ERR_VEC_ALLOC   "Error\nv_alloc fail !\n"
 # define ERR_SANI_FILE   "Error\nUnauthorized withe space, only ' ' and '\\n'!\n"
 # define ERR_EMPTY_FILE  "Error\nEmpty map file !\n"
+# define ERR_TEX_PARAM   "Error\nBad texture param !\n"
 # define ERR_TEX_FORMAT  "Error\nBad texture format !\n"
+# define ERR_TEX_TYPE    "Error\nBad texture type !\n"
+# define ERR_TEX_TOKEN_FORMAT  "Error\nBad texture token format !\n"
 # define ERR_TEX_RESERVED  "Error\nBad or reserved texture token used !\n"
 # define ERR_TEX_DUP     "Error\nDuplicate texture !\n"
 # define ERR_NO_MAP_AFTER_TEX "Error\nNo map after texture !\n"
@@ -39,8 +42,27 @@ int	ret_print(int ret, const char *msg);
 # define ERR_CHUNK_H     "Error\nBad chunk line heigth\n"
 # define ERR_MEMCPY      "Error\nmemcpy faild !\n"
 # define ERR_NO_TEX      "Error\nTexture in chunk was not define !\n"
+# define ERR_BAD_CHUNK_FLOOR  "Error\nBad chunk floor !\n"
 
 # define UNAUTHORIZED_SPACE "\t\v\f\r"
 # define WHITE_SPACE "\t\v\f\r \n"
+
+# ifdef DEBUG_PRINT
+
+#  include <stdio.h>
+
+static inline int	ret_print_debug(int ret, const char *msg, const char *file, const char *func, int line)
+{
+		printf ("%s[INFO] ret_print[%d] %s() %s:%d\n", msg, ret, func, file, line);
+		return (ret);
+}
+
+
+#  ifdef ret_print
+#   undef ret_print
+#  endif
+
+#  define ret_print(x, y) ret_print_debug(x, y,__FILE__, __FUNCTION__, __LINE__)
+# endif /* DEBUG_PRINT */
 
 #endif /* CUBE3D_DEBUG_H */

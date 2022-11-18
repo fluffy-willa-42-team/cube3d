@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 15:04:15 by mahadad           #+#    #+#             */
-/*   Updated: 2022/10/30 15:28:15 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/16 14:30:18 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@
 int	f_1_one(t_parser *data, char c)
 {
 	(void)c;
-	if (push_chunk_part(data, get_tex("C"), get_tex("NO"), '.'))
+	if (push_chunk_part(data, get_tex("C"), get_tex("NO"), E_EMPTY))
 		return (ret_print(EXIT_FAILURE, ERR_VEC_ADD));
 	return (EXIT_SUCCESS);
 }
@@ -57,7 +57,7 @@ int	f_1_one(t_parser *data, char c)
 int	f_2_one(t_parser *data, char c)
 {
 	(void)c;
-	if (push_chunk_part(data, get_tex("WE"), get_tex("EA"), '.'))
+	if (push_chunk_part(data, get_tex("WE"), get_tex("EA"), E_EMPTY))
 		return (ret_print(EXIT_FAILURE, ERR_VEC_ADD));
 	return (EXIT_SUCCESS);
 }
@@ -79,7 +79,7 @@ int	f_2_one(t_parser *data, char c)
 int	f_3_one(t_parser *data, char c)
 {
 	(void)c;
-	if (push_chunk_part(data, get_tex("F"), get_tex("SO"), '.'))
+	if (push_chunk_part(data, get_tex("F"), get_tex("SO"), E_EMPTY))
 		return (ret_print(EXIT_FAILURE, ERR_VEC_ADD));
 	return (EXIT_SUCCESS);
 }
