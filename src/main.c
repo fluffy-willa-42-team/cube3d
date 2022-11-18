@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:49:27 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/18 10:58:16 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/18 11:58:08 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,12 +101,12 @@ int main(void)
 			{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
 			{1, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
 			{1, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-			{1, 0, 0, 2, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+			{1, 0, 0, 2, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 0, 1},
 			{1, 0, 0, 2, 0, 0, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
 			{1, 0, 0, 2, 0, 0, 4, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
 			{1, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
 			{1, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-			{1, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+			{1, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 9, 8, 7, 0, 0, 0, 0, 0, 1},
 			{1, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
 			{1, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
 			{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
@@ -118,11 +118,20 @@ int main(void)
 		{0, NULL, 0},
 		{0, NULL, 0},
 		{0, NULL, 0},
+		{0, NULL, 0},
+		{0, NULL, 0},
+		{0, NULL, 0},
+		{0, NULL, 0},
+		{0, NULL, 0},
 		{0, {0, 0}, NULL, NULL, NULL, NULL, &game.skybox, &game.temp2},
 		{1, {0, 0}, &game.skybox, &game.temp, &game.temp, &game.temp, &game.temp1, &game.temp1},
 		{1, {0, 0}, NULL, NULL, &game.temp1, &game.temp2, &game.temp1, &game.temp1},
 		{1, {0, 0}, &game.temp1, &game.temp1, NULL, NULL, &game.temp1, &game.temp1},
-		{1, {0, 0}, &game.temp1, NULL, &game.temp1, NULL, &game.temp1, &game.temp1}
+		{1, {0, 0}, &game.temp1, NULL, &game.temp1, NULL, &game.temp1, &game.temp1},
+		{1, {0, 0}, &game.t_cont2, &game.t_cont2, NULL, &game.t_cont5, NULL, NULL},
+		{1, {0, 0}, &game.t_cont3, &game.t_cont3, &game.t_cont3, &game.t_cont3, NULL, NULL},
+		{1, {0, 0}, &game.t_cont1, &game.t_cont1, &game.t_cont4, NULL, NULL, NULL},
+		{1, {0, 0}, &game.t_cont4, &game.t_cont5, &game.t_cont4, &game.t_cont4, NULL, NULL}
 	};
 
 	// init_color(&game.temp, 0x0000FFFF);
@@ -140,6 +149,18 @@ int main(void)
 		return (EXIT_FAILURE);
 	// init_color(&game.skybox, 0xf7d79aFF);
 	game.skybox.type |= SKYBOX;
+
+	if (!init_image(&game.t_cont1, "./texture/cont/container_big_side_l.xpm42"))
+		return (EXIT_FAILURE);
+	if (!init_image(&game.t_cont2, "./texture/cont/container_big_side_r.xpm42"))
+		return (EXIT_FAILURE);
+	if (!init_image(&game.t_cont3, "./texture/cont/container_big_side_m.xpm42"))
+		return (EXIT_FAILURE);
+	if (!init_image(&game.t_cont4, "./texture/cont/container_small_side.xpm42"))
+		return (EXIT_FAILURE);
+	if (!init_image(&game.t_cont5, "./texture/cont/container_open.xpm42"))
+		return (EXIT_FAILURE);
+
 
 	game.param.mlx = mlx_init(game.param.width, game.param.height, "MLX42", true);
 	if (!game.param.mlx)
@@ -160,6 +181,16 @@ int main(void)
 		mlx_delete_texture(game.temp2.image);
 	if (game.skybox.image)
 		mlx_delete_texture(game.skybox.image);
+	if (game.t_cont1.image)
+		mlx_delete_texture(game.t_cont1.image);
+	if (game.t_cont2.image)
+		mlx_delete_texture(game.t_cont2.image);
+	if (game.t_cont3.image)
+		mlx_delete_texture(game.t_cont3.image);
+	if (game.t_cont4.image)
+		mlx_delete_texture(game.t_cont4.image);
+	if (game.t_cont5.image)
+		mlx_delete_texture(game.t_cont5.image);
 	mlx_delete_image(game.param.mlx, game.param.img);
 	mlx_terminate(game.param.mlx);
 	return (EXIT_SUCCESS);
