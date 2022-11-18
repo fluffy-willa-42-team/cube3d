@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:33:07 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/18 14:43:32 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/18 14:50:56 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,7 @@ typedef struct s_game {
 	t_chunk			cont3;
 	t_chunk			cont4;
 	t_chunk			chunk6;
+	t_chunk			chunk7;
 }	t_game;
 
 
