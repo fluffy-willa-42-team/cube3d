@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:18:47 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/18 10:59:28 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/18 11:09:45 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 t_chunk *get_chunk(t_game *game, t_coord_i32 coord);
 
 typedef struct s_mv_data {
-	t_coord_i32	out_coord;
 	t_texture	*in_texture;
 	t_texture	*out_texture;
 }	t_mv_data;
@@ -38,8 +37,6 @@ t_mv_data	get_move_data_x(t_game *game, t_coord_f64 player, t_chunk *in_chunk, d
 		res.in_texture = in_chunk->west;
 		res.out_texture = out_chunk->east;
 	}
-	res.out_coord = out_chunk->coord;
-	res.out_coord = out_chunk->coord;
 	return (res);
 }
 
@@ -59,10 +56,7 @@ t_mv_data	get_move_data_y(t_game *game, t_coord_f64 player, t_chunk *in_chunk, d
 		out_chunk = get_chunk(game, set_i32((int) player.x, (int) player.y + 1));
 		res.in_texture = in_chunk->north;
 		res.out_texture = out_chunk->south;
-		res.out_coord = out_chunk->coord;
 	}
-	res.out_coord = out_chunk->coord;
-	res.out_coord = out_chunk->coord;
 	return (res);
 }
 
