@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:49:27 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/18 09:55:16 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/18 10:58:16 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@
 #include "MLX42/MLX42.h"
 #include "mlx_utils.h"
 
-void	pos_hook(t_game *game, double incr_x, double incr_y);
+void	move_player(t_game *game, t_coord_f64 player, t_coord_f64 incr);
+void	pos_hook(double incr_x, double incr_y, t_coord_f64 *move_vec);
 void	angle_hook(t_game *game, double incrementation);
 void	scale_hook(t_game *game, double incrementation);
 void	map_hook(t_game *game, int32_t incrementation);
@@ -28,25 +29,26 @@ void	hook(void *param)
 {
 	t_game		*game = param;
 	t_coord_f64	*cosin = &game->player.cosin;
+	t_coord_f64	move_vec = set_f64(0, 0);
 
 	if (mlx_is_key_down(game->param.mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(game->param.mlx);
 	if (mlx_is_key_down(game->param.mlx, MLX_KEY_UP))
-		pos_hook(game, 0.02 * cosin->x, 0.02 * cosin->y);
+		pos_hook(0.02 * cosin->x, 0.02 * cosin->y, &move_vec);
 	if (mlx_is_key_down(game->param.mlx, MLX_KEY_DOWN))
-		pos_hook(game, -0.02 * cosin->x, -0.02 * cosin->y);
+		pos_hook(-0.02 * cosin->x, -0.02 * cosin->y, &move_vec);
 	if (mlx_is_key_down(game->param.mlx, MLX_KEY_LEFT))
-		pos_hook(game, 0.02 * cosin->y, -0.02 * cosin->x);
+		pos_hook(0.02 * cosin->y, -0.02 * cosin->x, &move_vec);
 	if (mlx_is_key_down(game->param.mlx, MLX_KEY_RIGHT))
-		pos_hook(game, -0.02 * cosin->y, 0.02 * cosin->x);
+		pos_hook(-0.02 * cosin->y, 0.02 * cosin->x, &move_vec);
 	if (mlx_is_key_down(game->param.mlx, MLX_KEY_KP_5))
-		pos_hook(game, 0.1 * cosin->x, 0.1 * cosin->y);
+		pos_hook(0.1 * cosin->x, 0.1 * cosin->y, &move_vec);
 	if (mlx_is_key_down(game->param.mlx, MLX_KEY_KP_2))
-		pos_hook(game, -0.1 * cosin->x, -0.1 * cosin->y);
+		pos_hook(-0.1 * cosin->x, -0.1 * cosin->y, &move_vec);
 	if (mlx_is_key_down(game->param.mlx, MLX_KEY_KP_1))
-		pos_hook(game, 0.1 * cosin->y, -0.1 * cosin->x);
+		pos_hook(0.1 * cosin->y, -0.1 * cosin->x, &move_vec);
 	if (mlx_is_key_down(game->param.mlx, MLX_KEY_KP_3))
-		pos_hook(game, -0.1 * cosin->y, 0.1 * cosin->x);
+		pos_hook(-0.1 * cosin->y, 0.1 * cosin->x, &move_vec);
 	if (mlx_is_key_down(game->param.mlx, MLX_KEY_Y))
 		scale_hook(game, 0.1);
 	if (mlx_is_key_down(game->param.mlx, MLX_KEY_H))
@@ -71,6 +73,8 @@ void	hook(void *param)
 		angle_hook(game, -0.001);
 	if (mlx_is_key_down(game->param.mlx, MLX_KEY_E))
 		angle_hook(game, 0.001);
+	if (move_vec.x != 0 || move_vec.y != 0)
+		move_player(game, game->player.coord, move_vec);
 	ray_caster(game);
 	draw_minimap(game);
 }
@@ -97,9 +101,9 @@ int main(void)
 			{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
 			{1, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
 			{1, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-			{1, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-			{1, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-			{1, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+			{1, 0, 0, 2, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+			{1, 0, 0, 2, 0, 0, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+			{1, 0, 0, 2, 0, 0, 4, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
 			{1, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
 			{1, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
 			{1, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
@@ -118,7 +122,7 @@ int main(void)
 		{1, {0, 0}, &game.skybox, &game.temp, &game.temp, &game.temp, &game.temp1, &game.temp1},
 		{1, {0, 0}, NULL, NULL, &game.temp1, &game.temp2, &game.temp1, &game.temp1},
 		{1, {0, 0}, &game.temp1, &game.temp1, NULL, NULL, &game.temp1, &game.temp1},
-		{1, {0, 0}, NULL, NULL, &game.temp1, NULL, &game.temp1, &game.temp1}
+		{1, {0, 0}, &game.temp1, NULL, &game.temp1, NULL, &game.temp1, &game.temp1}
 	};
 
 	// init_color(&game.temp, 0x0000FFFF);

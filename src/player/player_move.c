@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:18:47 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/18 10:31:13 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/18 10:54:26 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,21 +66,21 @@ t_mv_data	get_move_data_y(t_game *game, t_coord_f64 player, t_chunk *in_chunk, d
 	return (res);
 }
 
-void	move_player(t_game *game, t_coord_f64 player, double x_incr, double y_incr)
+void	move_player(t_game *game, t_coord_f64 player, t_coord_f64 incr)
 {
 	t_chunk			*in_chunk = get_chunk(game, set_i32((int) player.x, (int) player.y));
 
-	t_mv_data		data_x = get_move_data_x(game, player, in_chunk, x_incr);
-	t_mv_data		data_y = get_move_data_y(game, player, in_chunk, y_incr);
+	t_mv_data		data_x = get_move_data_x(game, player, in_chunk, incr.x);
+	t_mv_data		data_y = get_move_data_y(game, player, in_chunk, incr.y);
 
 	(void) data_x;
 	(void) data_y;
 	
-	if ((int) player.x == (int) (player.x + x_incr)
+	if ((int) player.x == (int) (player.x + incr.x)
 		|| (!data_x.in_texture && !data_x.out_texture))
-		game->player.coord.x += x_incr;
-	if ((int) player.y == (int) (player.y + y_incr)
+		game->player.coord.x += incr.x;
+	if ((int) player.y == (int) (player.y + incr.y)
 		|| (!data_y.in_texture && !data_y.out_texture))
-		game->player.coord.y += y_incr;
+		game->player.coord.y += incr.y;
 
 }

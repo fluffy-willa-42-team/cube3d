@@ -6,19 +6,19 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 14:35:07 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/18 10:11:25 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/18 10:57:08 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 #include <math.h>
 
-void	move_player(t_game *game, t_coord_f64 player, double x_incr, double y_incr);
 double	prot_tan(double alpha);
 
-void pos_hook(t_game *game, double incr_x, double incr_y)
+void pos_hook(double incr_x, double incr_y, t_coord_f64 *move_vec)
 {
-	move_player(game, game->player.coord, incr_x, incr_y);
+	move_vec->x += incr_x;
+	move_vec->y += incr_y;
 }
 
 void angle_hook(t_game *game, double incrementation)
