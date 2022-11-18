@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:33:07 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/18 12:05:33 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/18 12:58:43 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,15 @@
 
 /* ************************************************************************** */
 
-typedef enum s_texture_type {
-	UNDEFINED	= 0b000,
-	VALID		= 0b001,
-	COLOR		= 0b000,
-	IMAGE		= 0b010,
-	SKYBOX		= 0b100,
-}	t_texture_type;
+typedef enum e_texture_type {
+	UNDEFINED		= 0b00000,
+	VALID			= 0b00001,
+	COLOR			= 0b00000,
+	IMAGE			= 0b00010,
+    SKYBOX			= 0b00100,
+    ALLOW_CLIP		= 0b01000,
+    TRANSPARENCY	= 0b10000
+}    t_texture_type;
 
 typedef struct s_texture {
 	t_texture_type	type;
