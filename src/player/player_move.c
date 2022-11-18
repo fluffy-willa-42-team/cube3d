@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:18:47 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/18 10:54:26 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/18 10:59:28 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,6 @@ void	move_player(t_game *game, t_coord_f64 player, t_coord_f64 incr)
 	t_mv_data		data_x = get_move_data_x(game, player, in_chunk, incr.x);
 	t_mv_data		data_y = get_move_data_y(game, player, in_chunk, incr.y);
 
-	(void) data_x;
-	(void) data_y;
-	
 	if ((int) player.x == (int) (player.x + incr.x)
 		|| (!data_x.in_texture && !data_x.out_texture))
 		game->player.coord.x += incr.x;
