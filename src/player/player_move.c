@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:18:47 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/18 10:27:13 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/18 10:31:13 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,11 @@ void	move_player(t_game *game, t_coord_f64 player, double x_incr, double y_incr)
 	(void) data_x;
 	(void) data_y;
 	
-	if (!data_x.in_texture && !data_x.out_texture)
+	if ((int) player.x == (int) (player.x + x_incr)
+		|| (!data_x.in_texture && !data_x.out_texture))
 		game->player.coord.x += x_incr;
-	if (!data_y.in_texture && !data_y.out_texture)
+	if ((int) player.y == (int) (player.y + y_incr)
+		|| (!data_y.in_texture && !data_y.out_texture))
 		game->player.coord.y += y_incr;
 
 }
