@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 20:08:12 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/18 10:47:00 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/19 13:28:44 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_chunk *get_chunk(t_game *game, t_coord_i32 coord);
 
 void draw_pixel_skybox(t_game *game, t_coord_i32 pixel_pos);
 
-static void	draw_top_or_bottom(
+void	draw_top_or_bottom(
 	t_game *game,
 	t_texture *texture,
 	t_coord_f64 floor_pos,
@@ -54,10 +54,10 @@ void draw_floor(t_game *game, int x, double alpha, double heigth_drawn, double d
 		sin(alpha)
 	);
 	const double cos_a_minus_pa = game->player.cosin.x * cosin.x + game->player.cosin.y * cosin.y;
-	double rest_to_draw = game->stat.middle_screen_y - heigth_drawn + 1;
+	double rest_to_draw = game->stat.middle_screen_y - heigth_drawn + 2;
 	for (uint32_t y = 0; y < (uint32_t) rest_to_draw; y++)
 	{
-		double ratio = (1.0 + ((rest_to_draw - y) / (heigth_drawn + 1)));
+		double ratio = (1.0 + ((rest_to_draw - y) / heigth_drawn));
 		double floor_dist = dist / cos_a_minus_pa / ratio;
 		t_coord_f64 pos = set_f64(
 			game->player.coord.x + cosin.x * floor_dist,

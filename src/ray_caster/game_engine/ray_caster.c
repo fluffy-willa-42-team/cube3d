@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 10:01:39 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/19 12:57:26 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/19 13:28:23 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void draw_column(t_game *game, uint32_t x, double alpha, double tan_a)
 	height_to_draw = HEIGTH_OF_BLOCK * game->param.hob_mult / dist;
 	draw_wall(game, inter, x, height_to_draw);
 	if (height_to_draw < game->stat.middle_screen_y - 1)
-		draw_floor(game, x, alpha, height_to_draw - 1, dist);
+		draw_floor(game, x, alpha, height_to_draw, dist);
 	// draw_transparent_wall(game, );
 }
 
