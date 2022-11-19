@@ -6,11 +6,24 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 10:30:13 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/07 11:24:02 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/19 12:51:47 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
+#include <math.h>
+
+double prot_tan(double alpha)
+{
+	double res;
+
+	res = tan(alpha);
+	if (res >= 0 && res < 0.0001)
+		res = 0.0001;
+	else if (res <= -0 && res > -0.0001)
+		res = -0.0001;
+	return (res);
+}
 
 /**
  * @brief Loops a number so it fits between 0 and the given len
