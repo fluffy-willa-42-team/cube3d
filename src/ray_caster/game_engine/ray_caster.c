@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 10:01:39 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/19 11:38:20 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/19 12:20:53 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,23 @@
 #include <stdio.h>
 
 double loop_len(double n, double len);
-t_inter get_intersect(t_game *game, t_coord_f64 player, double alpha);
+t_inter get_intersect(t_game *game, t_coord_f64 player, double alpha, double tan_a);
 
 void	draw_skybox(t_game *game);
 void	draw_floor(t_game *game, int x, double alpha, double heigth_drawn, double dist);
 void	draw_wall(t_game *game, t_inter inter, uint32_t x, uint32_t height);
+
+double prot_tan(double alpha)
+{
+	double res;
+
+	res = tan(alpha);
+	if (res >= 0 && res < 0.0001)
+		res = 0.0001;
+	else if (res <= -0 && res > -0.0001)
+		res = -0.0001;
+	return (res);
+}
 
 static double distance(t_game *game, t_inter inter)
 {
@@ -53,16 +65,19 @@ void ray_caster(t_game *game)
 	t_inter	inter;
 	double	dist;
 	double	height_to_draw;
-	
+	double	tan_a;
+
 	alpha = game->player.alpha - game->stat.fov_angle_1_2 - game->stat.fov_incre;
 	for (uint32_t i = 0; i < WIN_WIDTH; i++)
 	{
 		alpha += game->stat.fov_incre;
-		inter = get_intersect(game, game->player.coord, loop_len(alpha, PI2));
+		tan_a = prot_tan(alpha);
+		inter = get_intersect(game, game->player.coord, loop_len(alpha, PI2), tan_a);
 		dist = distance(game, inter);
 		height_to_draw = HEIGTH_OF_BLOCK * game->param.hob_mult / dist;
 		draw_wall(game, inter, i, height_to_draw);
 		if (height_to_draw < game->stat.middle_screen_y - 1)
 			draw_floor(game, i, alpha, height_to_draw - 1, dist);
+		// draw_transparent_wall(game, );
 	}
 }

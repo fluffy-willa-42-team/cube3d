@@ -16,7 +16,8 @@
 #include <stdio.h>
 
 double loop_len(double n, double len);
-t_inter get_intersect(t_game *game, t_coord_f64 player, double alpha);
+t_inter get_intersect(t_game *game, t_coord_f64 player, double alpha, double tan_a);
+double 	prot_tan(double alpha);
 
 void draw_line_s(t_mlx_param *param, t_coord_f64 a, t_coord_f64 b, int32_t color)
 {
@@ -29,7 +30,7 @@ void draw_line_s(t_mlx_param *param, t_coord_f64 a, t_coord_f64 b, int32_t color
 
 void draw_ray(t_game *game, double alpha)
 {
-	t_inter test = get_intersect(game, game->player.coord, alpha);
+	t_inter test = get_intersect(game, game->player.coord, alpha, prot_tan(alpha));
 	draw_line_s(&game->param, game->player.coord, test.point, 0xfcba03AA);
 }
 
