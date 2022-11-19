@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 10:01:39 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/17 18:14:19 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/19 11:38:20 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,7 @@ void ray_caster(t_game *game)
 		dist = distance(game, inter);
 		height_to_draw = HEIGTH_OF_BLOCK * game->param.hob_mult / dist;
 		draw_wall(game, inter, i, height_to_draw);
-		if (height_to_draw >= game->stat.middle_screen_y - 1)
-			continue ;
-		draw_floor(game, i, alpha, height_to_draw - 1, dist);
+		if (height_to_draw < game->stat.middle_screen_y - 1)
+			draw_floor(game, i, alpha, height_to_draw - 1, dist);
 	}
 }

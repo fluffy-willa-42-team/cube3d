@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:33:07 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/18 14:50:56 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/19 11:50:12 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 /* #####=====----------			Mlx Config Var			 ----------=====##### */
 
 # define WIN_WIDTH	1200
-# define WIN_HEIGHT	800
+# define WIN_HEIGHT	600
 
 # define ANGLE_START	PI
 
