@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 10:01:39 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/19 12:41:48 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/19 12:50:10 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,21 @@ static double distance(t_game *game, t_inter inter)
 		+ (inter.point.y - game->player.coord.y) * game->player.cosin.y);
 }
 
+void draw_column(t_game *game, uint32_t x, double alpha, double tan_a)
+{
+	t_inter	inter;
+	double	dist;
+	double	height_to_draw;
+	
+	inter = get_intersect(game, game->player.coord, loop_len(alpha, PI2), tan_a);
+	dist = distance(game, inter);
+	height_to_draw = HEIGTH_OF_BLOCK * game->param.hob_mult / dist;
+	draw_wall(game, inter, x, height_to_draw);
+	if (height_to_draw < game->stat.middle_screen_y - 1)
+		draw_floor(game, x, alpha, height_to_draw - 1, dist);
+	// draw_transparent_wall(game, );
+}
+
 /**
  * @brief Will draw onto the image (game.param.image) and preform a simple 2.5d
  * algorythm called ray casting to determine every pixel on the screen
@@ -59,23 +74,16 @@ Ray Casting can be subdivised in 3 step :
 All of these steps are done on a column but column basis.
 
  */
-void ray_caster(t_game *game, double alpha)
+void ray_caster(t_game *game)
 {
-	t_inter	inter;
-	double	dist;
-	double	height_to_draw;
 	double	tan_a;
-
+	double	alpha;
+	
+	alpha = game->player.alpha - game->stat.fov_angle_1_2 - game->stat.fov_incre;
 	for (uint32_t i = 0; i < WIN_WIDTH; i++)
 	{
 		alpha += game->stat.fov_incre;
 		tan_a = prot_tan(alpha);
-		inter = get_intersect(game, game->player.coord, loop_len(alpha, PI2), tan_a);
-		dist = distance(game, inter);
-		height_to_draw = HEIGTH_OF_BLOCK * game->param.hob_mult / dist;
-		draw_wall(game, inter, i, height_to_draw);
-		if (height_to_draw < game->stat.middle_screen_y - 1)
-			draw_floor(game, i, alpha, height_to_draw - 1, dist);
-		// draw_transparent_wall(game, );
+		draw_column(game, i, alpha, tan_a);
 	}
 }

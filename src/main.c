@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:49:27 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/19 12:42:25 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/19 12:49:49 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	hook(void *param)
 		angle_hook(game, 0.001);
 	if (move_vec.x != 0 || move_vec.y != 0)
 		move_player(game, game->player.coord, move_vec);
-	ray_caster(game, game->player.alpha - game->stat.fov_angle_1_2 - game->stat.fov_incre);
+	ray_caster(game);
 	draw_minimap(game);
 }
 
