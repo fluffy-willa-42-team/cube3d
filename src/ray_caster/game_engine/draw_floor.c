@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 20:08:12 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/19 13:28:44 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/19 13:30:37 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void draw_floor(t_game *game, int x, double alpha, double heigth_drawn, double d
 	);
 	const double cos_a_minus_pa = game->player.cosin.x * cosin.x + game->player.cosin.y * cosin.y;
 	double rest_to_draw = game->stat.middle_screen_y - heigth_drawn + 2;
-	for (uint32_t y = 0; y < (uint32_t) rest_to_draw; y++)
+	for (int32_t y = 0; y < (int32_t) rest_to_draw; y++)
 	{
 		double ratio = (1.0 + ((rest_to_draw - y) / heigth_drawn));
 		double floor_dist = dist / cos_a_minus_pa / ratio;
