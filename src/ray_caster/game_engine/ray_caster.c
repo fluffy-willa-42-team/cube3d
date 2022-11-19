@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 10:01:39 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/19 12:20:53 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/19 12:41:48 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,15 +59,13 @@ Ray Casting can be subdivised in 3 step :
 All of these steps are done on a column but column basis.
 
  */
-void ray_caster(t_game *game)
+void ray_caster(t_game *game, double alpha)
 {
-	double	alpha;
 	t_inter	inter;
 	double	dist;
 	double	height_to_draw;
 	double	tan_a;
 
-	alpha = game->player.alpha - game->stat.fov_angle_1_2 - game->stat.fov_incre;
 	for (uint32_t i = 0; i < WIN_WIDTH; i++)
 	{
 		alpha += game->stat.fov_incre;
