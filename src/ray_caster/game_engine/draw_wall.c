@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:31:46 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/17 17:38:01 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/19 11:58:55 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,8 @@ void	draw_pixel_skybox(t_game *game, t_coord_i32 pixel_pos);
 /**
  * @brief 
  * 
- * @param game 
- * @param texture 
- * @param pixel_pos P
+ * @param texture The given texture we want to show
+ * @param pixel_pos Position of the pixel we ask for
  * @param image_data Is not an intersection but random data for get_pixel_image
  * but the norms doesn't let me get more than 4 params...
  */

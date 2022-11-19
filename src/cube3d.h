@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:33:07 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/19 11:50:12 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/19 11:51:32 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@
 typedef enum e_texture_type {
 	UNDEFINED		= 0b00000,
 	VALID			= 0b00001,
-	COLOR			= 0b00000,
 	IMAGE			= 0b00010,
     SKYBOX			= 0b00100,
     ALLOW_CLIP		= 0b01000,

@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 13:23:03 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/14 10:23:58 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/19 11:55:15 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,13 @@ double prot_tan(double alpha)
 	return (res);
 }
 
+int check_validity_text(t_chunk *chunk, t_coord_f64 inter)
+{
+	t_texture *text = get_wall_texture(chunk, inter);
+
+	return (text && !(text->type & TRANSPARENCY));
+}
+
 /**
  * @brief Checks if point given is at a wall
  * 
@@ -48,12 +55,12 @@ int is_wall(t_game *game, t_intersect *inter)
 	
 	if (!prev && !next)
 		return (-1);
-	if (get_wall_texture(prev, inter->point))
+	if (check_validity_text(prev, inter->point))
 	{
 		inter->wall = inter->prev_wall;
 		return (1);
 	}
-	else if (get_wall_texture(next, inter->point))
+	else if (check_validity_text(next, inter->point))
 		return (1);
 	return (0);
 }

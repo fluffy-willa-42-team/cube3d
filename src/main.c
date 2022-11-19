@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:49:27 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/18 14:50:29 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/19 11:55:43 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,6 +169,7 @@ int main(void)
 		return (EXIT_FAILURE);
 	if (!init_image(&game.temp3, "./texture/bars.xpm42"))
 		return (EXIT_FAILURE);
+	game.temp3.type |= TRANSPARENCY;
 
 
 	game.param.mlx = mlx_init(game.param.width, game.param.height, "MLX42", true);
