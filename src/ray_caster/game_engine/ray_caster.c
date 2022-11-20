@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 10:01:39 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/20 12:34:17 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/20 12:47:19 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,22 +17,13 @@
 
 double	prot_tan(double alpha);
 double	loop_len(double n, double len);
+double	get_distance(t_game *game, t_inter *inter);
 t_inter	get_intersect(t_game *game, t_coord_f64 player, double alpha, double tan_a);
 
 void	draw_skybox(t_game *game);
 void	draw_floor(t_game *game, int x, double alpha, double heigth_drawn, double dist);
 void	draw_wall(t_game *game, t_inter *inter, uint32_t x, uint32_t height);
 void	draw_transparent_wall(t_game *game, t_inter *inter, double alpha, double tan_a);
-
-/* ==========----------									 ----------========== */
-
-static double distance(t_game *game, t_inter inter)
-{
-	return ((inter.point.x - game->player.coord.x) * game->player.cosin.x
-		+ (inter.point.y - game->player.coord.y) * game->player.cosin.y);
-}
-
-/* ==========----------									 ----------========== */
 
 /**
  * @brief Will calculate the wall intersection draw the wall then the ground and
@@ -50,7 +41,7 @@ void draw_column(t_game *game, uint32_t x, double alpha, double tan_a)
 	double	height_to_draw;
 	
 	inter = get_intersect(game, game->player.coord, loop_len(alpha, PI2), tan_a);
-	dist = distance(game, inter);
+	dist = get_distance(game, &inter);
 	height_to_draw = HEIGTH_OF_BLOCK * game->param.hob_mult / dist;
 	draw_wall(game, &inter, x, height_to_draw);
 	if (height_to_draw < game->stat.middle_screen_y - 1)
