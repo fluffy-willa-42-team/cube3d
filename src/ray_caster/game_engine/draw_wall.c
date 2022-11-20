@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:31:46 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/20 12:27:54 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/20 12:33:47 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,16 +45,16 @@ void	draw_pixel_wall(t_game *game, const t_texture *texture, t_coord_i32 pixel_p
 		put_pixel(&game->param, pixel_pos.x, pixel_pos.y, texture->color);
 }
 
-t_coord_f64 get_texture_inter(t_inter inter)
+t_coord_f64 get_texture_inter(t_inter *inter)
 {
-	if (is_equal(inter.point.x, inter.wall.x))
-		return (set_f64(0, inter.point.y - inter.wall.y));
-	if (is_equal(inter.point.x, inter.wall.x + 1))
-		return (set_f64(0, 1 - (inter.point.y - inter.wall.y)));
-	if (is_equal(inter.point.y, inter.wall.y))
-		return (set_f64(1 - (inter.point.x - inter.wall.x), 0));
-	if (is_equal(inter.point.y, inter.wall.y + 1))
-		return (set_f64(inter.point.x - inter.wall.x, 0));
+	if (is_equal(inter->point.x, inter->wall.x))
+		return (set_f64(0, inter->point.y - inter->wall.y));
+	if (is_equal(inter->point.x, inter->wall.x + 1))
+		return (set_f64(0, 1 - (inter->point.y - inter->wall.y)));
+	if (is_equal(inter->point.y, inter->wall.y))
+		return (set_f64(1 - (inter->point.x - inter->wall.x), 0));
+	if (is_equal(inter->point.y, inter->wall.y + 1))
+		return (set_f64(inter->point.x - inter->wall.x, 0));
 	return (set_f64(0, 0));
 }
 
@@ -62,9 +62,9 @@ t_coord_f64 get_texture_inter(t_inter inter)
  * @param x 		pos x on screen
  * @param height 	Line Height
  */
-void	draw_wall(t_game *game, t_inter inter, uint32_t x, uint32_t height)
+void	draw_wall(t_game *game, t_inter *inter, uint32_t x, uint32_t height)
 {
-	const t_texture		*texture		= get_wall_texture(get_chunk(game, inter.wall), inter.point);
+	const t_texture		*texture		= get_wall_texture(get_chunk(game, inter->wall), inter->point);
 	const t_coord_f64	texture_inter	= get_texture_inter(inter);
 	uint32_t			parse_heigth;
 	t_coord_f64			ratio;
