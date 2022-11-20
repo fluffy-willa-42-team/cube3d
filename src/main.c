@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:49:27 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/19 12:49:49 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/20 13:09:04 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	hook(void *param)
 		angle_hook(game, 0.001);
 	if (move_vec.x != 0 || move_vec.y != 0)
 		move_player(game, game->player.coord, move_vec);
-	ray_caster(game);
+	// ray_caster(game);
 	draw_minimap(game);
 }
 
@@ -85,7 +85,7 @@ t_texture *init_color(t_texture *ptr, uint32_t color);
 int main(void)
 {
 	t_game game = {
-		{NULL, NULL, 7, 7, WIN_HEIGHT, WIN_WIDTH},
+		{NULL, NULL, 7, 32, WIN_HEIGHT, WIN_WIDTH},
 		{
 			(double) (FOV_ANGLE) / 2,
 			(double) (FOV_ANGLE) / WIN_WIDTH,

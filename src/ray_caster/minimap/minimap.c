@@ -19,6 +19,8 @@ double loop_len(double n, double len);
 t_inter get_intersect(t_game *game, t_coord_f64 player, double alpha, double tan_a);
 double 	prot_tan(double alpha);
 
+void draw_test(t_game *game, double alpha);
+
 void draw_line_s(t_mlx_param *param, t_coord_f64 a, t_coord_f64 b, int32_t color)
 {
 	return (draw_line(param,
@@ -55,18 +57,19 @@ int draw_minimap(t_game *game)
 					(t_coord_i32){si, si}, 0x222222FF);
 		}
 	}
+	draw_test(game, game->player.alpha);
 	draw_rectangle(param,
 		set_f64(game->player.coord.x * si - 2, game->player.coord.y * si - 2),
 		set_i32(4, 4), 0xFF00FFFF
 	);
 	draw_ray(game, loop_len(game->player.alpha, PI2));
-	float i = 0.001;
-	while (i < game->stat.fov_angle_1_2)
-	{
-		draw_ray(game, loop_len(game->player.alpha - i,	PI2));
-		draw_ray(game, loop_len(game->player.alpha + i,	PI2));
-		i += 0.001;
-	}
+	// float i = 0.001;
+	// while (i < game->stat.fov_angle_1_2)
+	// {
+	// 	draw_ray(game, loop_len(game->player.alpha - i,	PI2));
+	// 	draw_ray(game, loop_len(game->player.alpha + i,	PI2));
+	// 	i += 0.001;
+	// }
 	draw_line_s(&game->param, game->player.coord, add_f64(game->player.coord, game->player.cosin), 0xFF00FFFF);
 	return (1);
 }
