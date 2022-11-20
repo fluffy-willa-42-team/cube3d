@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 11:48:14 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/19 11:49:11 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/20 12:22:25 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ t_intersect get_step_x(t_intersect prev, double alpha, double tan_a)
 		res.wall.x,
 		res.wall.y + (int []){1, -1}[0 <= alpha && alpha < PI]
 	);
+	res.nb_step = prev.nb_step + 1;
 	return (res);
 }
 
@@ -46,5 +47,6 @@ t_intersect get_step_y(t_intersect prev, double alpha, double tan_a)
 		res.wall.x + (int []){-1, 1}[PI1_2 <= alpha && alpha < PI3_2],
 		res.wall.y
 	);
+	res.nb_step = prev.nb_step + 1;
 	return (res);
 }

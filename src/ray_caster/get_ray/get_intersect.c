@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 13:23:03 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/19 12:17:53 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/20 12:29:00 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,6 @@ t_inter get_intersect(t_game *game, t_coord_f64 player, double alpha, double tan
 		y_is_wall = is_wall(game, &yIntersect);
 	}
 	if (dist(player, xIntersect.point) < dist(player, yIntersect.point))
-		return ((t_inter){xIntersect.point, xIntersect.wall});
-	return ((t_inter){yIntersect.point, yIntersect.wall});
+		return ((t_inter){xIntersect.point, xIntersect.wall, xIntersect.nb_step, yIntersect.nb_step});
+	return ((t_inter){yIntersect.point, yIntersect.wall, xIntersect.nb_step, yIntersect.nb_step});
 }

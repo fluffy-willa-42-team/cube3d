@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_init_or_step.c                                 :+:      :+:    :+:   */
+/*   get_inter_init.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 10:14:48 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/19 11:48:32 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/20 12:22:08 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ t_intersect	get_init_x(t_coord_f64 player, t_coord_f64 delta, double alpha, doub
 		res.wall.x,
 		res.wall.y + (int []){1, -1}[0 <= alpha && alpha < PI]
 	);
+	res.nb_step = 1;
 	return (res);
 }
 
@@ -46,5 +47,6 @@ t_intersect	get_init_y(t_coord_f64 player, t_coord_f64 delta, double alpha, doub
 		res.wall.x + (int []){-1, 1}[PI1_2 <= alpha && alpha < PI3_2],
 		res.wall.y
 	);
+	res.nb_step = 1;
 	return (res);
 }
