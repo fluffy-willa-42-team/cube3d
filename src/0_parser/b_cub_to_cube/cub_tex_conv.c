@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:01:25 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/08 16:20:14 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/21 14:35:39 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int	is_all_tex(t_parser *data)
 	int	x;
 
 	x = 0;
-	while (x < DEFAUT_CUB_TEX_NB)
+	while (x < DEFAULT_CUB_TEX_NB)
 	{
 		if (!data->tex[x])
 			return (0);

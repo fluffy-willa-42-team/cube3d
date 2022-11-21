@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:53:32 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/16 15:28:43 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/21 17:39:28 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,15 @@
 #include "lib_mem.h" /* ft_memcpy */
 
 #include "cube3d_debug.h"
+
+#include "MLX42.h"
+
+int	destroy_data(t_parser *data)
+{
+	//TODO #11 Free all allocated memory and open file/image.
+	(void)data;
+	return (EXIT_FAILURE);
+}
 
 /**
  * @author Matthew-Dreemurr
@@ -44,7 +53,7 @@ int	parser(char *av, t_map *map)
 		|| file_sani(&data)
 		|| file_conv(&data)
 		|| cube_to_t_map(&data))
-		return (EXIT_FAILURE);
+		return (destroy_data(&data));
 	if (!v_delete(&data.cube))/* //TODO change check after the lib update ! *///TODO REMOVE, free only in main
 		return(EXIT_FAILURE);//TODO REMOVE, no safe
 	map->map = data.map;

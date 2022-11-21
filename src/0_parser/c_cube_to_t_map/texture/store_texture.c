@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 17:09:25 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/18 16:52:54 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/21 17:38:56 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -227,7 +227,7 @@ int	which_escape_seq(char *line)
 int	store_texture(t_parser *data, char *tex)
 {
 	data->tex_list = v_init(sizeof(t_texture), NULL, NULL);
-	if (!v_alloc(&data->tex_list, SET, DEFAUT_CUBE_TEX_NB))
+	if (!v_alloc(&data->tex_list, SET, DEFAULT_CUBE_TEX_NB))
 		return (ret_print(EXIT_FAILURE, ERR_VEC_ALLOC));
 	while (*tex)
 	{

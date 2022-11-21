@@ -1,10 +1,10 @@
-* vx. 0,0,0
-0 vx* ./path_to_the_north_texture
-1 xv* ./path_to_the_south_texture
-2 xv* ./path_to_the_west_texture
-3 xv* ./path_to_the_east_texture
-4 xx* 220,100,0
-5 xv* 225,30,0
+* vx. 1,222,33,44
+0 vx* ./texture/cool.xpm42
+1 xv* ./texture/cool.xpm42
+2 xv* ./texture/cool.xpm42
+3 xv* ./texture/cool.xpm42
+4 xx* 220,100,0,255
+5 xv* 225,30,0,255
 ~~~
                                                                         50.50.50.50.50.50.
                                                                         23.23.23.23.23.23.
