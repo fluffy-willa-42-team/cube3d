@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 13:23:03 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/22 12:55:58 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/22 13:10:37 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,9 @@ t_intersect get_intersect(t_game *game, t_coord_f64 player, double alpha, double
 	// xIntersect = get_step_x(xIntersect, alpha, tan_a);
 	// yIntersect = get_step_y(yIntersect, alpha, tan_a);
 	(void) game;
+	(void) xIntersect;
 	(void) yIntersect;
-	t_wall_inter inter = get_wall(game, xIntersect.point);
+	t_wall_inter inter = get_wall(game, yIntersect.point);
 	if (is_a_wall(inter))
 	{
 		if (inter.chunk1)

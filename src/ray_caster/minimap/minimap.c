@@ -34,10 +34,10 @@ void	draw_elem(t_game *game, int32_t x, int32_t y)
 	if (game->map.array[y][x] != 's')
 	{
 		t_chunk	*chunk = get_chunk(game, set_i32(x, y));
-		if (chunk->south) draw_line_s(game, set_f64(x, y), 		set_f64(x + 1, y),	 	0x21634cFF);
-		if (chunk->north) draw_line_s(game, set_f64(x, y + 1), 	set_f64(x + 1, y + 1),	0x21634cFF);
-		if (chunk->east)  draw_line_s(game, set_f64(x, y),		set_f64(x, y + 1), 		0x21634cFF);
-		if (chunk->west)  draw_line_s(game, set_f64(x + 1, y), 	set_f64(x + 1, y + 1), 	0x21634cFF);
+		if (chunk->north) draw_line_s(game, set_f64(x, y), 		set_f64(x + 1, y),	 	0x21634cFF);
+		if (chunk->south) draw_line_s(game, set_f64(x, y + 1), 	set_f64(x + 1, y + 1),	0x21634cFF);
+		if (chunk->east)  draw_line_s(game, set_f64(x + 1, y), 	set_f64(x + 1, y + 1), 	0x21634cFF);
+		if (chunk->west)  draw_line_s(game, set_f64(x, y),		set_f64(x, y + 1), 		0x21634cFF);
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:18:47 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/19 13:44:26 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/22 13:15:00 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,15 @@ t_mv_data	get_move_data_x(t_game *game, t_coord_f64 player, t_chunk *in_chunk, d
 
 	if (incr < 0) // EAST
 	{
-		out_chunk = get_chunk(game, set_i32((int) player.x - 1, (int) player.y));
-		res.in_texture = in_chunk->east;
-		res.out_texture = out_chunk->west;
-	}
-	else // WEST
-	{
 		out_chunk = get_chunk(game, set_i32((int) player.x + 1, (int) player.y));
 		res.in_texture = in_chunk->west;
 		res.out_texture = out_chunk->east;
+	}
+	else // WEST
+	{
+		out_chunk = get_chunk(game, set_i32((int) player.x - 1, (int) player.y));
+		res.in_texture = in_chunk->east;
+		res.out_texture = out_chunk->west;
 	}
 	res.out_coord = out_chunk->coord;
 	res.out_coord = out_chunk->coord;
@@ -51,15 +51,15 @@ t_mv_data	get_move_data_y(t_game *game, t_coord_f64 player, t_chunk *in_chunk, d
 
 	if (incr < 0) // NORTH
 	{
-		out_chunk = get_chunk(game, set_i32((int) player.x, (int) player.y - 1));
-		res.in_texture = in_chunk->south;
-		res.out_texture = out_chunk->north;
-	}
-	else // SOUTH
-	{
 		out_chunk = get_chunk(game, set_i32((int) player.x, (int) player.y + 1));
 		res.in_texture = in_chunk->north;
 		res.out_texture = out_chunk->south;
+	}
+	else // SOUTH
+	{
+		out_chunk = get_chunk(game, set_i32((int) player.x, (int) player.y - 1));
+		res.in_texture = in_chunk->south;
+		res.out_texture = out_chunk->north;
 		res.out_coord = out_chunk->coord;
 	}
 	res.out_coord = out_chunk->coord;
