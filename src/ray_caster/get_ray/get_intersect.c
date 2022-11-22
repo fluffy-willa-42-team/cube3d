@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 13:23:03 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/22 13:10:37 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/22 16:59:25 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,13 @@ double dist(t_coord_f64 a, t_coord_f64 b)
 	return (fabs(a.x - b.x) + fabs(a.y - b.y));
 }
 
+double get_distance2(t_game *game, t_coord_f64 pos)
+{
+	return ((pos.x - game->player.coord.x) * game->player.cosin.x
+		+ (pos.y - game->player.coord.y) * game->player.cosin.y);
+}
+
+
 t_wall_inter	get_wall(t_game *game, t_coord_f64 inter);
 void draw_rectangle_s(t_game *game, t_coord_f64 pos, uint32_t color);
 
@@ -48,19 +55,29 @@ t_intersect get_intersect(t_game *game, t_coord_f64 player, double alpha, double
 	t_intersect xIntersect = get_init_x(player, delta, alpha, tan_a);
 	t_intersect yIntersect = get_init_y(player, delta, alpha, tan_a);
 
-	// xIntersect = get_step_x(xIntersect, alpha, tan_a);
-	// yIntersect = get_step_y(yIntersect, alpha, tan_a);
-	(void) game;
-	(void) xIntersect;
-	(void) yIntersect;
-	t_wall_inter inter = get_wall(game, yIntersect.point);
-	if (is_a_wall(inter))
+	for (int i = 0; i < 10; i++)
 	{
-		if (inter.chunk1)
-			draw_rectangle_s(game, set_f64(inter.chunk1->coord.x, inter.chunk1->coord.y), 0x00ff00ff);
-		if (inter.chunk2)
-			draw_rectangle_s(game, set_f64(inter.chunk2->coord.x, inter.chunk2->coord.y), 0x00ffffff);
+		double xDist = get_distance2(game, xIntersect.point);
+		double yDist = get_distance2(game, yIntersect.point);
+		if (xDist < yDist)
+		{
+			if (is_a_wall(get_wall(game, xIntersect.point)))
+			{
+				printf("xWall found\n");
+				return (xIntersect);
+			}
+			xIntersect = get_step_x(xIntersect, alpha, tan_a);
+		}
+		else
+		{
+			if (is_a_wall(get_wall(game, yIntersect.point)))
+			{
+				printf("yWall found\n");
+				return (yIntersect);
+			}
+			yIntersect = get_step_x(yIntersect, alpha, tan_a);
+		}
 	}
-	
+	printf("None Found\n");
 	return (xIntersect);
 }
