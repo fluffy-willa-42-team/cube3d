@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:18:47 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/22 16:01:35 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/22 16:03:24 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,15 +42,11 @@ t_intersect		get_init_x(t_coord_f64 player, t_coord_f64 delta, double alpha, dou
 
 void	move_player(t_game *game, t_coord_f64 player, t_coord_f64 incre)
 {
-
-	t_wall_inter xWall = get_wall(game, get_pos_x(player, incre.x));
-	t_wall_inter yWall = get_wall(game, get_pos_y(player, incre.y));
-
 	if ((int) player.x == (int) (player.x + incre.x)
-		|| !is_a_wall(xWall))
+		|| !is_a_wall(get_wall(game, get_pos_x(player, incre.x))))
 		game->player.coord.x += incre.x;
 	if ((int) player.y == (int) (player.y + incre.y)
-		|| !is_a_wall(yWall))
+		|| !is_a_wall(get_wall(game, get_pos_y(player, incre.y))))
 		game->player.coord.y += incre.y;
 
 }
