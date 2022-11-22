@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 14:35:07 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/18 10:57:08 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/22 10:13:59 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void angle_hook(t_game *game, double incrementation)
 		game->player.alpha -= PI2;
 	game->player.cosin.x = cos(game->player.alpha);
 	game->player.cosin.y = sin(game->player.alpha);
-	game->player.tan = prot_tan(game->player.alpha);
 }
 
 void	scale_hook(t_game *game, double incrementation)
