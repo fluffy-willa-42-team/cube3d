@@ -24,12 +24,6 @@ void ray_caster(t_game *game);
 
 /* ************************************************************************** */
 
-typedef struct s_gpiximg {
-	t_coord_f64	ratio;
-	int32_t		offset;
-	int32_t		i;
-}	t_gpiximg;
-
 typedef struct s_inter {
 	t_coord_f64 point;
 	t_coord_i32 wall;

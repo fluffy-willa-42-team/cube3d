@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 13:23:03 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/22 12:53:15 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/22 12:55:58 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 #include "mlx_utils.h"
 
 t_chunk *get_chunk(t_game *game, t_coord_i32 coord);
-t_texture *get_wall_texture(t_chunk *chunk, t_coord_f64 inter);
 
 t_intersect	get_init_x(t_coord_f64 player, t_coord_f64 delta, double alpha, double tan_a);
 t_intersect	get_init_y(t_coord_f64 player, t_coord_f64 delta, double alpha, double tan_a);
@@ -38,6 +37,8 @@ int is_a_wall(t_wall_inter inter)
 		return (1);
 	return (0);
 }
+
+double get_distance(t_game *game, t_inter *inter);
 
 t_intersect get_intersect(t_game *game, t_coord_f64 player, double alpha, double tan_a)
 {

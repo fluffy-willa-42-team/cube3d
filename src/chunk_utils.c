@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 10:56:11 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/22 12:53:05 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/22 13:06:18 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@ t_chunk *get_chunk(t_game *game, t_coord_i32 pos)
 {
 	if (!(0 <= pos.x && pos.x < (int) game->map.width
 		&& 0 <= pos.y && pos.y < (int) game->map.height))
+	{
+		printf("oob\n");
 		return (NULL);
+	}
 	return (&game->map.map[pos.y * game->map.width + pos.x]);
 }
 
@@ -66,42 +69,27 @@ void init_map(t_game *game)
 t_wall_inter	get_wall(t_game *game, t_coord_f64 inter)
 {
 	t_wall_inter wall_inter;
-	
+	t_coord_i32 pos = set_i32((float) inter.x, (float) inter.y);
+
 	wall_inter.text1 = NULL;
 	wall_inter.text2 = NULL;
 	wall_inter.chunk2 = NULL;
 	wall_inter.chunk1 = get_chunk(game, set_i32(inter.x, inter.y));
-	if (is_equal(inter.y - (int) inter.y, 0)) // NORTH-SOUTH
+	if (is_equal(inter.y - pos.y, 0)) // NORTH-SOUTH
 	{
-		wall_inter.chunk2 = get_chunk(game, set_i32((int) inter.x, ((int) inter.y) - 1));
+		wall_inter.chunk2 = get_chunk(game, set_i32(pos.x, pos.y - 1));
 		if (wall_inter.chunk1)
 			wall_inter.text1 = wall_inter.chunk1->north;
 		if (wall_inter.chunk2)
 			wall_inter.text2 = wall_inter.chunk2->south;
 	}
-	else if (is_equal(inter.x - (int) inter.x, 0)) // EAST-WEST
+	else if (is_equal(inter.x - pos.x, 0)) // EAST-WEST
 	{
-		wall_inter.chunk2 = get_chunk(game, set_i32(((int) inter.x) - 1, (int) inter.y));
+		wall_inter.chunk2 = get_chunk(game, set_i32(pos.x - 1, pos.y));
 		if (wall_inter.chunk1)
 			wall_inter.text1 = wall_inter.chunk1->west;
 		if (wall_inter.chunk2)
 			wall_inter.text2 = wall_inter.chunk2->east;
 	}
-	printf("%p %p %p %p\n", wall_inter.chunk1, wall_inter.chunk2, wall_inter.text1, wall_inter.text2);
 	return (wall_inter);
-}
-
-t_texture *get_wall_texture(const t_chunk *chunk, t_coord_f64 inter)
-{
-	if (!chunk)
-		return (NULL);
-	if (is_equal(chunk->coord.x, inter.x))
-		return (chunk->east);
-	if (is_equal(chunk->coord.x + 1, inter.x))
-		return (chunk->west);
-	if (is_equal(chunk->coord.y, inter.y))
-		return (chunk->south);
-	if (is_equal(chunk->coord.y + 1, inter.y))
-		return (chunk->north);
-	return (NULL);
 }
