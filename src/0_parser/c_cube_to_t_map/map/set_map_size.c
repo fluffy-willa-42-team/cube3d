@@ -6,58 +6,19 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 17:33:11 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/15 12:23:39 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/22 14:47:16 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
+/* struct_set() */
+#include "cube3d_utils.h"
+
 #include "cube3d_debug.h"
 
 /* EXIT_SUCCESS, EXIT_FAILURE*/
 #include <stdlib.h>
-
-/**
- * @brief Return the current character pointed by the index `data->index`.
- * 
- * @warning The function dont check if the `data->index` is out of the memory
- *          scope !
- * 
- * @param data Parser structure.
- */
-char	mapchar(t_parser *data)
-{
-	return (data->cube_map[data->index]);
-}
-
-/**
- * @brief Return the current addess pointed by the index `data->index`.
- * 
- * @warning The function dont check if the `data->index` is out of the memory
- *          scope !
- * 
- * @param data Parser structure.
- */
-char	*mapptr(t_parser *data)
-{
-	return (&data->cube_map[data->index]);
-}
-
-/**
- * @brief Get the width of the current line.
- * 
- * @param data Parser structure.
- * @return int 
- */
-int	get_line_width(t_parser *data)
-{
-	int	tmp;
-
-	tmp = data->index;
-	while (data->cube_map[tmp] && data->cube_map[tmp] != '\n')
-		tmp++;
-	return (tmp - data->index);
-}
 
 /**
  * @brief Get the width of the current chunk line.

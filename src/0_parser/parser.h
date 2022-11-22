@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:53:43 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/21 17:24:20 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/22 14:53:32 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,6 +145,7 @@ int		texture_conv(t_parser *data);
 int		map_conv(t_parser *data);
 
 int		get_tex(char *str);
+t_chunk	*get_chunk(t_parser *data, int x, int y);
 int		check_texture(char *str, t_parser *data);
 
 int		push_chunk_part(t_parser *data, int a, int b, int c);
@@ -165,11 +166,19 @@ int		f_3_p(t_parser *data, char c);
 
 int		cube_to_t_map(t_parser *data);
 
-int		store_texture(t_parser *data, char *tex);
+int		set_texture_path(t_parser *data, char *tex, t_texture *tmp);
+int		set_texture_param(t_parser *data, char *tex, t_texture *tmp);
+
+int		set_color_texture(t_texture *tex);
+int		set_current_tex_config(t_parser *data, char *tex);
+
+int		load_texture_config(t_parser *data, char *tex);
 int		init_texture(t_parser *data);
 
 int		store_map(t_parser *data);
 
+int		check_chunk_type(t_chunk_token *tokens);
+int		get_next_chunk(t_parser *data, t_chunk *chunk);
 int		set_map_size(t_parser *data);
 int		get_line_width(t_parser *data);
 

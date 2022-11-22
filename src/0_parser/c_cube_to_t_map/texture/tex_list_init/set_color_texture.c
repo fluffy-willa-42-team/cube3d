@@ -1,52 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_texture.c                                     :+:      :+:    :+:   */
+/*   set_color_texture.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/21 14:27:58 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/21 18:46:32 by mahadad          ###   ########.fr       */
+/*   Created: 2022/11/22 14:20:21 by mahadad           #+#    #+#             */
+/*   Updated: 2022/11/22 14:22:27 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-/* EXIT_SUCCESS, EXIT_FAILURE*/
-#include <stdlib.h>
-
-/* open */
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-
-# include "MLX42.h"
-
 #include "cube3d_debug.h"
 
-#include "lib_is_check.h" /* ft_isdigit */
+/* ft_isdigit */
+#include "lib_is_check.h"
 
-#include <stdio.h>//TODO REMOVE
-
-static void	null_terminate_line(char *line)
-{
-	while (*line && *line != ' ' && *line != '\n')
-		line++;
-	*line = '\0';
-}
-
-static int	open_file_texture(t_texture *tex)
-{
-	char	*path;
-
-	path = tex->path;
-	null_terminate_line(path);
-	printf("Open [%s]\n", path);//TODO REMOVE
-	tex->image = mlx_load_xpm42(path);
-	if (!tex->image)
-		return (ret_print(EXIT_FAILURE, ERR_BAD_XPM));
-	return (EXIT_SUCCESS);
-}
+/* EXIT_SUCCESS, EXIT_FAILURE*/
+#include <stdlib.h>
 
 /**
  * @brief Set the value of the current channel. And check if the value is good.
@@ -55,7 +27,7 @@ static int	open_file_texture(t_texture *tex)
  * @param channel 
  * @return int 
  */
-static int	set_channel(char *color, int *channel)
+static int	set_channel(int *channel, char *color)
 {
 	int	val;
 
@@ -111,7 +83,7 @@ static char	*get_next_channel(char *channel)
 	return (channel);
 }
 
-static int get_rgba(int r, int g, int b, int a)
+static int	get_rgba(int r, int g, int b, int a)
 {
 	return (r << 24 | g << 16 | b << 8 | a);
 }
@@ -123,62 +95,31 @@ static int get_rgba(int r, int g, int b, int a)
  * @param channel 
  * @return int 
  */
-static int	set_channel(t_texture *tex, t_color *channel)
+static int	set_rgba_channel(t_texture *tex, t_color *channel)
 {
 	char	*color;
 
 	color = tex->path;
 
-	if (set_channel(color, &(channel->r)))
+	if (set_channel(&(channel->r), color))
 		return (ret_print(EXIT_FAILURE, ERR_COLOR_R));
 	color = get_next_channel(color);
-	if (set_channel(color, &(channel->g)))
+	if (set_channel(&(channel->g), color))
 		return (ret_print(EXIT_FAILURE, ERR_COLOR_G));
 	color = get_next_channel(color);
-	if (set_channel(color, &(channel->b)))
+	if (set_channel(&(channel->b), color))
 		return (ret_print(EXIT_FAILURE, ERR_COLOR_B));
 	color = get_next_channel(color);
-	if (set_channel(color, &(channel->a)))
+	if (set_channel(&(channel->a), color))
 		return (ret_print(EXIT_FAILURE, ERR_COLOR_A));
 	return (EXIT_SUCCESS);
 }
 
-static int	set_color_texture(t_texture *tex)
+int	set_color_texture(t_texture *tex)
 {
 	t_color	channel;
 
-	printf("Set [%.15s]\n", tex->path);//TODO REMOVE
-	set_channel(tex, &channel);
+	set_rgba_channel(tex, &channel);
 	tex->color = get_rgba(channel.r, channel.g, channel.b, channel.a);
-	return (EXIT_SUCCESS);
-}
-
-int	init_texture(t_parser *data)
-{
-	int			i;
-	t_texture *tmp;
-
-	i = 0;
-	tmp = data->tex_list.buffer;
-	while (i < DEFAULT_CUBE_TEX_NB)
-	{
-		if (tmp[i].token)
-		{
-			printf("init tex [%c]\n", tmp[i].token);
-			if (tmp[i].type & IMAGE)
-			{
-				printf("Image\n");
-				if (open_file_texture(&tmp[i]))
-					return (EXIT_FAILURE);
-			}
-			else if (tmp[i].type & COLOR)
-			{
-				printf("Color\n");
-				if (set_color_texture(&tmp[i]))
-					return (EXIT_FAILURE);
-			}
-		}
-		i++;
-	}
 	return (EXIT_SUCCESS);
 }

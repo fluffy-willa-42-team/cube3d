@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:54:56 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/21 18:34:43 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/22 14:26:45 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,11 @@ int	ret_print(int ret, const char *msg);
 # define ERR_NO_TEX      "Error\nTexture in chunk was not define !\n"
 # define ERR_BAD_CHUNK_FLOOR  "Error\nBad chunk floor !\n"
 # define ERR_BAD_XPM  "Error\nXPM file is invalid or corrupted !\n"
-# define ERR_COLOR_R      "Error\n Bad color channel R\n"
-# define ERR_COLOR_G      "Error\n Bad color channel G\n"
-# define ERR_COLOR_B      "Error\n Bad color channel B\n"
-# define ERR_COLOR_A      "Error\n Bad color channel A\n"
+# define ERR_NULL_TEX   "Error\nt_texture *NULL !\n"
+# define ERR_COLOR_R     "Error\n Bad color channel R\n"
+# define ERR_COLOR_G     "Error\n Bad color channel G\n"
+# define ERR_COLOR_B     "Error\n Bad color channel B\n"
+# define ERR_COLOR_A     "Error\n Bad color channel A\n"
 
 # define UNAUTHORIZED_SPACE "\t\v\f\r"
 # define WHITE_SPACE "\t\v\f\r \n"

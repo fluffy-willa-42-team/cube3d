@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:53:32 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/21 17:39:28 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/22 14:37:24 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
 /* EXIT_SUCCESS, EXIT_FAILURE*/
 #include <stdlib.h>
 
-#include "lib_mem.h" /* ft_memcpy */
+/* ft_memcpy */
+#include "lib_mem.h"
 
 #include "cube3d_debug.h"
 
