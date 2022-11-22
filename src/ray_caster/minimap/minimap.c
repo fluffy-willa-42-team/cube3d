@@ -52,7 +52,9 @@ void draw_rectangle_s(t_game *game, t_coord_f64 pos, uint32_t color)
 		set_i32(
 			game->param.minimap_size,
 			game->param.minimap_size
-		), color);
+		),
+		color
+	);
 }
 
 int draw_minimap(t_game *game)

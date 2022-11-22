@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 10:56:11 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/22 13:06:18 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/22 13:16:48 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,7 @@ t_chunk *get_chunk(t_game *game, t_coord_i32 pos)
 {
 	if (!(0 <= pos.x && pos.x < (int) game->map.width
 		&& 0 <= pos.y && pos.y < (int) game->map.height))
-	{
-		printf("oob\n");
 		return (NULL);
-	}
 	return (&game->map.map[pos.y * game->map.width + pos.x]);
 }
 
