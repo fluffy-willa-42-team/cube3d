@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 10:56:11 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/18 14:50:44 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/22 12:32:09 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,34 @@ t_chunk *get_chunk(t_game *game, t_coord_i32 coord)
 		}
 	}
 	return (&game->chunk0);
+}
+
+t_wall_inter	get_wall(t_game *game, t_coord_f64 inter)
+{
+	t_wall_inter wall_inter;
+	
+	wall_inter.text1 = NULL;
+	wall_inter.text2 = NULL;
+	wall_inter.chunk2 = NULL;
+	wall_inter.chunk1 = get_chunk(game, set_i32(inter.x, inter.y));
+	if (is_equal(inter.y - (int) inter.y, 0)) // NORTH-SOUTH
+	{
+		wall_inter.chunk2 = get_chunk(game, set_i32((int) inter.x, ((int) inter.y) - 1));
+		if (wall_inter.chunk1)
+			wall_inter.text1 = wall_inter.chunk1->north;
+		if (wall_inter.chunk2)
+			wall_inter.text2 = wall_inter.chunk2->south;
+	}
+	else if (is_equal(inter.x - (int) inter.x, 0)) // EAST-WEST
+	{
+		wall_inter.chunk2 = get_chunk(game, set_i32(((int) inter.x) - 1, (int) inter.y));
+		if (wall_inter.chunk1)
+			wall_inter.text1 = wall_inter.chunk1->west;
+		if (wall_inter.chunk2)
+			wall_inter.text2 = wall_inter.chunk2->east;
+	}
+	printf("%p %p %p %p\n", wall_inter.chunk1, wall_inter.chunk2, wall_inter.text1, wall_inter.text2);
+	return (wall_inter);
 }
 
 t_texture *get_wall_texture(const t_chunk *chunk, t_coord_f64 inter)

@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:33:07 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/22 10:14:21 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/22 11:12:58 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,15 @@ typedef struct s_entity {
 	int 		nb_texture;
 	t_texture	*texture;
 }	t_entity;
+
+typedef struct s_wall_inter
+{
+	t_chunk		*chunk1;
+	t_chunk		*chunk2;
+	t_texture	*text1;
+	t_texture	*text2;
+}	t_wall_inter;
+
 
 /* ************************************************************************** */
 

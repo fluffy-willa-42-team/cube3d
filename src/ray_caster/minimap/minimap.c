@@ -16,7 +16,6 @@
 #include <stdio.h>
 
 double loop_len(double n, double len);
-t_inter get_intersect(t_game *game, t_coord_f64 player, double alpha, double tan_a);
 double 	prot_tan(double alpha);
 
 void draw_line_s(t_game *game, t_coord_f64 a, t_coord_f64 b, int32_t color)
@@ -26,12 +25,6 @@ void draw_line_s(t_game *game, t_coord_f64 a, t_coord_f64 b, int32_t color)
 		set_f64(b.x * game->param.minimap_size, b.y * game->param.minimap_size),
 		color
 	));
-}
-
-void draw_ray(t_game *game, double alpha)
-{
-	t_inter test = get_intersect(game, game->player.coord, alpha, prot_tan(alpha));
-	draw_line_s(game, game->player.coord, test.point, 0xfcba03AA);
 }
 
 t_chunk *get_chunk(t_game *game, t_coord_i32 coord);
@@ -48,6 +41,20 @@ void	draw_elem(t_game *game, int32_t x, int32_t y)
 	}
 }
 
+t_intersect get_intersect(t_game *game, t_coord_f64 player, double alpha, double tan_a);
+
+void draw_rectangle_s(t_game *game, t_coord_f64 pos, uint32_t color)
+{
+	draw_rectangle(game, set_f64(
+			pos.x * game->param.minimap_size,
+			pos.y * game->param.minimap_size
+		),
+		set_i32(
+			game->param.minimap_size,
+			game->param.minimap_size
+		), color);
+}
+
 int draw_minimap(t_game *game)
 {
 	t_map *map	= &game->map;
@@ -58,9 +65,9 @@ int draw_minimap(t_game *game)
 		for (uint32_t x = 0; x < map->width; x++)
 		{
 			if (game->map.array[y][x] == 's')
-				draw_rectangle(game, set_f64(x * si, y * si), set_i32(si, si), 0x770000FF);
+				draw_rectangle_s(game, set_f64(x, y), 0x770000FF);
 			else
-				draw_rectangle(game, set_f64(x * si, y * si), set_i32(si, si), 0x222222FF);
+				draw_rectangle_s(game, set_f64(x, y), 0x222222FF);
 		}
 	}
 	for (uint32_t y = 0; y < map->height; y++)
@@ -70,7 +77,7 @@ int draw_minimap(t_game *game)
 		set_f64(game->player.coord.x * si - 2, game->player.coord.y * si - 2),
 		set_i32(4, 4), 0xFF00FFFF
 	);
-	draw_ray(game, loop_len(game->player.alpha, PI2));
 	draw_line_s(game, game->player.coord, add_f64(game->player.coord, game->player.cosin), 0xFF00FFFF);
+	get_intersect(game, game->player.coord, game->player.alpha, prot_tan(game->player.alpha));
 	return (1);
 }
