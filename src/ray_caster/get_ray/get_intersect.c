@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 13:23:03 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/22 17:23:12 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/22 17:34:39 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,33 +58,22 @@ t_intersect get_intersect(t_game *game, t_coord_f64 player, double alpha, double
 
 	double xDist = get_distance2(game, xIntersect.point);
 	double yDist = get_distance2(game, yIntersect.point);
-	while (true)
+	while (1)
 	{
-		draw_point(game, xIntersect.point, 4, 0x00ffffff);
-		draw_point(game, yIntersect.point, 4, 0xFF0000ff);
 		if (xDist < yDist)
 		{
-			printf("xStep\n");
 			if (is_a_wall(get_wall(game, xIntersect.point)))
-			{
-				printf("xWall found\n");
 				return (xIntersect);
-			}
 			xIntersect = get_step_x(xIntersect, alpha, tan_a);
+			xDist = get_distance2(game, xIntersect.point);
 		}
 		else
 		{
-			printf("yStep\n");
 			if (is_a_wall(get_wall(game, yIntersect.point)))
-			{
-				printf("yWall found\n");
 				return (yIntersect);
-			}
 			yIntersect = get_step_y(yIntersect, alpha, tan_a);
+			yDist = get_distance2(game, yIntersect.point);
 		}
-		xDist = get_distance2(game, xIntersect.point);
-		yDist = get_distance2(game, yIntersect.point);
 	}
-	printf("None Found\n");
 	return (xIntersect);
 }
