@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:33:07 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/22 11:12:58 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/22 12:34:34 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,9 +95,10 @@ typedef struct s_wall_inter
 /* ************************************************************************** */
 
 typedef struct s_map {
-	char	 array[23][20];
-	uint32_t height;
-	uint32_t width;
+	char	 	array[23][20];
+	t_chunk		*map;
+	uint32_t	height;
+	uint32_t	width;
 }	t_map;
 
 typedef struct s_mlx_param {

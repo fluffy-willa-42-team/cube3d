@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 10:56:11 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/22 12:32:09 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/22 12:41:32 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,12 @@ int is_equal(double a, double b);
 
 # define NB_CHAR 12
 
-t_chunk *get_chunk(t_game *game, t_coord_i32 coord)
+t_chunk *get_chunk(t_game *game, t_coord_i32 pos)
+{
+	return (&game->map.map[pos.y * game->map.width + pos.x]);
+}
+
+t_chunk *get_chunk_tmp(t_game *game, t_coord_i32 coord)
 {
 	if (!(0 <= coord.x && coord.x < (int) game->map.width
 		&& 0 <= coord.y && coord.y < (int) game->map.height))
@@ -40,6 +45,19 @@ t_chunk *get_chunk(t_game *game, t_coord_i32 coord)
 		}
 	}
 	return (&game->chunk0);
+}
+
+void init_map(t_game *game)
+{
+	t_chunk *tmp;
+	for (uint32_t y = 0; y < game->map.height; y++)
+	{
+		for (uint32_t x = 0; x < game->map.width; x++)
+		{
+			tmp = get_chunk_tmp(game, set_i32(x, y));
+			game->map.map[y * game->map.width + x] = *tmp;
+		}
+	}
 }
 
 t_wall_inter	get_wall(t_game *game, t_coord_f64 inter)

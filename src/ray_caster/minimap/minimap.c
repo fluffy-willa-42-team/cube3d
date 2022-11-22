@@ -78,6 +78,6 @@ int draw_minimap(t_game *game)
 		set_i32(4, 4), 0xFF00FFFF
 	);
 	draw_line_s(game, game->player.coord, add_f64(game->player.coord, game->player.cosin), 0xFF00FFFF);
-	get_intersect(game, game->player.coord, game->player.alpha, prot_tan(game->player.alpha));
+	// get_intersect(game, game->player.coord, game->player.alpha, prot_tan(game->player.alpha));
 	return (1);
 }

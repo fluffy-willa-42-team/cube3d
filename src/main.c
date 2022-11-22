@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:49:27 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/22 10:27:33 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/22 12:40:02 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ t_texture *init_image(t_texture *ptr, char *path);
 t_texture *init_color(t_texture *ptr, uint32_t color);
 
 t_texture *init_texture(t_texture *ptr, int type, char *path, uint32_t color);
+void init_map(t_game *game);
 
 int main(void)
 {
@@ -111,7 +112,7 @@ int main(void)
 			"s      hhhhhu      s",
 			"s   hhhhhhhhhhhh   s",
 			"ssssssssssssssssssss"
-		}, 23, 20},
+		}, NULL, 23, 20},
 		{{15.5f, 15.5f}, ANGLE_START, {cos(ANGLE_START), sin(ANGLE_START)}},
 		{0, NULL, 0},
 		{0, NULL, 0},
@@ -150,6 +151,11 @@ int main(void)
 		)
 		return (EXIT_FAILURE);
 
+	game.map.map = malloc(sizeof(t_chunk) * game.map.width * game.map.height);
+	if (!game.map.map)
+		return (EXIT_FAILURE);
+	init_map(&game);
+
 	game.param.mlx = mlx_init(game.param.width, game.param.height, "MLX42", true);
 	if (!game.param.mlx)
 		return (EXIT_FAILURE);
@@ -180,6 +186,7 @@ int main(void)
 		mlx_delete_texture(game.t_cont5.image);
 	if (game.temp3.image)
 		mlx_delete_texture(game.temp3.image);
+	free(game.map.map);
 	mlx_delete_image(game.param.mlx, game.param.img);
 	mlx_terminate(game.param.mlx);
 	return (EXIT_SUCCESS);
