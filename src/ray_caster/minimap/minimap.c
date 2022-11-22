@@ -64,7 +64,7 @@ int draw_minimap(t_game *game)
 	);
 	draw_ray(game, loop_len(game->player.alpha, PI2));
 	// float i = 0.001;
-	// while (i < game->stat.fov_angle_1_2)
+	// while (i < FOV_ANG_1_2)
 	// {
 	// 	draw_ray(game, loop_len(game->player.alpha - i,	PI2));
 	// 	draw_ray(game, loop_len(game->player.alpha + i,	PI2));

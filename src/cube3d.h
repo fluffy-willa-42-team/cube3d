@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:33:07 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/19 12:42:45 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/22 10:11:02 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,10 @@
 // FOV = PI / 3
 # define FOV_ANGLE			1.0471975512
 # define HEIGTH_OF_BLOCK	WIN_HEIGHT / 10
+
+# define MIDDLE_OF_SCREEN	WIN_HEIGHT / 2
+# define FOV_INCRE			(double) (FOV_ANGLE) / WIN_WIDTH
+# define FOV_ANG_1_2		(double) (FOV_ANGLE) / 2
 
 /* ************************************************************************** */
 
@@ -98,21 +102,13 @@ typedef struct s_mlx_param {
 
 typedef struct s_player {
 	t_coord_f64 coord;
-	double		z;
 	double		alpha;
 	t_coord_f64 cosin;
 	double		tan;
 }	t_player;
 
-typedef struct s_static_data {
-	double		fov_angle_1_2;
-	double		fov_incre;
-	uint32_t	middle_screen_y;	
-}	t_static_data;
-
 typedef struct s_game {
 	t_mlx_param 	param;
-	t_static_data	stat;
 	t_map 			map;
 	t_player		player;
 	t_texture		skybox;

@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 10:01:39 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/20 12:47:19 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/22 10:10:10 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void draw_column(t_game *game, uint32_t x, double alpha, double tan_a)
 	dist = get_distance(game, &inter);
 	height_to_draw = HEIGTH_OF_BLOCK * game->param.hob_mult / dist;
 	draw_wall(game, &inter, x, height_to_draw);
-	if (height_to_draw < game->stat.middle_screen_y - 1)
+	if (height_to_draw < MIDDLE_OF_SCREEN - 1)
 		draw_floor(game, x, alpha, height_to_draw, dist);
 	draw_transparent_wall(game, &inter, alpha, tan_a);
 }
@@ -75,10 +75,10 @@ void ray_caster(t_game *game)
 	double	tan_a;
 	double	alpha;
 	
-	alpha = game->player.alpha - game->stat.fov_angle_1_2 - game->stat.fov_incre;
+	alpha = game->player.alpha - FOV_ANG_1_2 - FOV_INCRE;
 	for (uint32_t i = 0; i < WIN_WIDTH; i++)
 	{
-		alpha += game->stat.fov_incre;
+		alpha += FOV_INCRE;
 		tan_a = prot_tan(alpha);
 		draw_column(game, i, alpha, tan_a);
 	}

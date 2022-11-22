@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:49:27 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/22 10:04:25 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/22 10:11:09 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,11 +88,6 @@ int main(void)
 {
 	t_game game = {
 		{NULL, NULL, 7, 8, WIN_HEIGHT, WIN_WIDTH},
-		{
-			(double) (FOV_ANGLE) / 2,
-			(double) (FOV_ANGLE) / WIN_WIDTH,
-			WIN_HEIGHT / 2
-		},
 		{{
 			"ssssssssssssssssssss",
 			"s_______   ________s",
@@ -118,7 +113,7 @@ int main(void)
 			"s   hhhhhhhhhhhh   s",
 			"ssssssssssssssssssss"
 		}, 23, 20},
-		{{15.5f, 15.5f}, 0.5, ANGLE_START, {cos(ANGLE_START), sin(ANGLE_START)}, tan(ANGLE_START)},
+		{{15.5f, 15.5f}, ANGLE_START, {cos(ANGLE_START), sin(ANGLE_START)}, tan(ANGLE_START)},
 		{0, NULL, 0},
 		{0, NULL, 0},
 		{0, NULL, 0},

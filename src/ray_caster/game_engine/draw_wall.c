@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:31:46 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/20 12:33:47 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/22 10:09:37 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,12 +81,12 @@ void	draw_wall(t_game *game, t_inter *inter, uint32_t x, uint32_t height)
 	if (!(texture->type & VALID))
 		return ;
 	parse_heigth = height;
-	if (parse_heigth >= game->stat.middle_screen_y)
-		parse_heigth = game->stat.middle_screen_y;
+	if (parse_heigth >= MIDDLE_OF_SCREEN)
+		parse_heigth = MIDDLE_OF_SCREEN;
 	for (uint32_t i = height - parse_heigth; i < height + parse_heigth ; i++)
 	{
 		draw_pixel_wall(game, texture,
-			set_i32(x, game->stat.middle_screen_y - height + i),
+			set_i32(x, MIDDLE_OF_SCREEN - height + i),
 			(t_gpiximg){ratio, (int32_t) offset, i}
 		);
 	}
