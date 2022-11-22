@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 10:56:11 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/22 12:41:32 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/22 12:53:05 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@ int is_equal(double a, double b);
 
 t_chunk *get_chunk(t_game *game, t_coord_i32 pos)
 {
+	if (!(0 <= pos.x && pos.x < (int) game->map.width
+		&& 0 <= pos.y && pos.y < (int) game->map.height))
+		return (NULL);
 	return (&game->map.map[pos.y * game->map.width + pos.x]);
 }
 

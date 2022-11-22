@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 13:23:03 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/22 12:28:56 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/22 12:53:15 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,13 @@ double dist(t_coord_f64 a, t_coord_f64 b)
 t_wall_inter	get_wall(t_game *game, t_coord_f64 inter);
 void draw_rectangle_s(t_game *game, t_coord_f64 pos, uint32_t color);
 
+int is_a_wall(t_wall_inter inter)
+{
+	if (inter.text1 || inter.text2)
+		return (1);
+	return (0);
+}
+
 t_intersect get_intersect(t_game *game, t_coord_f64 player, double alpha, double tan_a)
 {
 	const t_coord_i32 pos	= set_i32(player.x, player.y);
@@ -45,12 +52,13 @@ t_intersect get_intersect(t_game *game, t_coord_f64 player, double alpha, double
 	(void) game;
 	(void) yIntersect;
 	t_wall_inter inter = get_wall(game, xIntersect.point);
-	if (inter.chunk1 && inter.chunk2)
-	printf("%d %d %d %d\n", inter.chunk1->coord.x, inter.chunk1->coord.y, inter.chunk2->coord.x, inter.chunk2->coord.y);
-	if (inter.chunk1)
-		draw_rectangle_s(game, set_f64(inter.chunk1->coord.x, inter.chunk1->coord.y), 0x00ff00ff);
-	if (inter.chunk2)
-		draw_rectangle_s(game, set_f64(inter.chunk2->coord.x, inter.chunk2->coord.y), 0x00ffffff);
+	if (is_a_wall(inter))
+	{
+		if (inter.chunk1)
+			draw_rectangle_s(game, set_f64(inter.chunk1->coord.x, inter.chunk1->coord.y), 0x00ff00ff);
+		if (inter.chunk2)
+			draw_rectangle_s(game, set_f64(inter.chunk2->coord.x, inter.chunk2->coord.y), 0x00ffffff);
+	}
 	
 	return (xIntersect);
 }
