@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:01:25 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/21 14:35:39 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/22 15:52:22 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static int	is_all_tex(t_parser *data)
 /**
  * @brief Convert the texture name with arbitrary index and the texture path.
  * 
- * @example `WE ./path_to_the_west_texture` -> `2 ./path_to_the_west_texture`
+ * @example `WE ./path_to_the_west_texture` -> `2 xx* ./path_to_the_west_texture`//TODO #14 Make the new tex struct
  * 
  * @param data Parser struct
  * @param tmp ptr to the `.cub` string
@@ -95,7 +95,7 @@ int	texture_conv(t_parser *data)
 			break ;
 		if (tmp[data->index] == '\n')
 			continue ;
-		index = check_texture(&tmp[data->index], data);//BUG #3 Duplication texture check behaviour.
+		index = check_texture(&tmp[data->index], data);
 		if (index == -1)
 			return (EXIT_FAILURE);
 		if (cub_tex_to_cube(data, tmp, index))
