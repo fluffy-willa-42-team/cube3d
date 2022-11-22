@@ -14,20 +14,20 @@
 #include "math.h"
 #include <stdio.h>
 
-void put_pixel(t_mlx_param *param, int32_t x, int32_t y, uint32_t color)
+void put_pixel(t_game *game, int32_t x, int32_t y, uint32_t color)
 {
-	if (0 <= x && x < param->width && 0 <= y && y < param->height)
-		mlx_put_pixel(param->img, x, y, color);
+	if (0 <= x && x < game->param.width && 0 <= y && y < game->param.height)
+		mlx_put_pixel(game->param.img, x, y, color);
 }
 
-void draw_rectangle(t_mlx_param *param, t_coord_f64 point, t_coord_i32 size, uint32_t color)
+void draw_rectangle(t_game *game, t_coord_f64 point, t_coord_i32 size, uint32_t color)
 {
 	for (int i = 0; i < size.x; i++)
 		for (int j = 0; j < size.y; j++)
-			put_pixel(param, point.x + i, point.y + j, color);
+			put_pixel(game, point.x + i, point.y + j, color);
 }
 
-void draw_line(t_mlx_param *param, t_coord_f64 a, t_coord_f64 b, int32_t color)
+void draw_line(t_game *game, t_coord_f64 a, t_coord_f64 b, int32_t color)
 {
 	float step;
 	float dx;
@@ -43,7 +43,7 @@ void draw_line(t_mlx_param *param, t_coord_f64 a, t_coord_f64 b, int32_t color)
 	dy /= step;
 	int i = 1;
 	while (i <= step) {
-		put_pixel(param, a.x, a.y, color);
+		put_pixel(game, a.x, a.y, color);
 		a.x = a.x + dx;
 		a.y = a.y + dy;
 		i = i + 1;
