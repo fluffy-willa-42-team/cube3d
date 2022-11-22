@@ -40,11 +40,11 @@ void draw_rectangle_s(t_game *game, t_coord_f64 pos, uint32_t color)
 
 void draw_line_s(t_game *game, t_coord_f64 a, t_coord_f64 b, int32_t color)
 {
-	return (draw_line(game,
+	draw_line(game,
 		set_f64(a.x * game->param.minimap_size, a.y * game->param.minimap_size),
 		set_f64(b.x * game->param.minimap_size, b.y * game->param.minimap_size),
 		color
-	));
+	);
 }
 
 void	draw_elem(t_game *game, int32_t x, int32_t y)
