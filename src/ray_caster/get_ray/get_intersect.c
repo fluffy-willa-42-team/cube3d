@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 13:23:03 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/22 16:59:25 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/22 17:23:12 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int is_a_wall(t_wall_inter inter)
 }
 
 double get_distance(t_game *game, t_inter *inter);
+void draw_point(t_game *game, t_coord_f64 pos, int size, uint32_t color);
 
 t_intersect get_intersect(t_game *game, t_coord_f64 player, double alpha, double tan_a)
 {
@@ -55,12 +56,15 @@ t_intersect get_intersect(t_game *game, t_coord_f64 player, double alpha, double
 	t_intersect xIntersect = get_init_x(player, delta, alpha, tan_a);
 	t_intersect yIntersect = get_init_y(player, delta, alpha, tan_a);
 
-	for (int i = 0; i < 10; i++)
+	double xDist = get_distance2(game, xIntersect.point);
+	double yDist = get_distance2(game, yIntersect.point);
+	while (true)
 	{
-		double xDist = get_distance2(game, xIntersect.point);
-		double yDist = get_distance2(game, yIntersect.point);
+		draw_point(game, xIntersect.point, 4, 0x00ffffff);
+		draw_point(game, yIntersect.point, 4, 0xFF0000ff);
 		if (xDist < yDist)
 		{
+			printf("xStep\n");
 			if (is_a_wall(get_wall(game, xIntersect.point)))
 			{
 				printf("xWall found\n");
@@ -70,13 +74,16 @@ t_intersect get_intersect(t_game *game, t_coord_f64 player, double alpha, double
 		}
 		else
 		{
+			printf("yStep\n");
 			if (is_a_wall(get_wall(game, yIntersect.point)))
 			{
 				printf("yWall found\n");
 				return (yIntersect);
 			}
-			yIntersect = get_step_x(yIntersect, alpha, tan_a);
+			yIntersect = get_step_y(yIntersect, alpha, tan_a);
 		}
+		xDist = get_distance2(game, xIntersect.point);
+		yDist = get_distance2(game, yIntersect.point);
 	}
 	printf("None Found\n");
 	return (xIntersect);
