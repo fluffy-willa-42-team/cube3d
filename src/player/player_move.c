@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:18:47 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/22 16:03:24 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/22 16:05:03 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,10 @@
 
 #include "mlx_utils.h"
 
-t_chunk *get_chunk(t_game *game, t_coord_i32 coord);
+int				is_a_wall(t_wall_inter inter);
+t_wall_inter	get_wall(t_game *game, t_coord_f64 inter);
 
-double 	prot_tan(double alpha);
-
-t_coord_f64 get_pos_x(t_coord_f64 pos, double incre)
+static t_coord_f64 get_pos_x(t_coord_f64 pos, double incre)
 {
 	return (set_f64(
 		(int) pos.x + (int []){0, 1}[incre > 0],
@@ -28,17 +27,13 @@ t_coord_f64 get_pos_x(t_coord_f64 pos, double incre)
 	));
 }
 
-t_coord_f64 get_pos_y(t_coord_f64 pos, double incre)
+static t_coord_f64 get_pos_y(t_coord_f64 pos, double incre)
 {
 	return (set_f64(
 		pos.x,
 		(int) pos.y + (int []){0, 1}[incre > 0]
 	));
 }
-
-int				is_a_wall(t_wall_inter inter);
-t_wall_inter	get_wall(t_game *game, t_coord_f64 inter);
-t_intersect		get_init_x(t_coord_f64 player, t_coord_f64 delta, double alpha, double tan_a);
 
 void	move_player(t_game *game, t_coord_f64 player, t_coord_f64 incre)
 {

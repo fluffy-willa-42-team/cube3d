@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:49:27 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/22 15:55:37 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/22 16:05:17 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,12 +73,9 @@ void	hook(void *param)
 		angle_hook(game, -0.001);
 	if (mlx_is_key_down(game->param.mlx, MLX_KEY_E))
 		angle_hook(game, 0.001);
-	draw_minimap(game);
 	if (move_vec.x != 0 || move_vec.y != 0)
-	{
 		move_player(game, game->player.coord, move_vec);
-
-	}
+	draw_minimap(game);
 }
 
 t_texture *init_image(t_texture *ptr, char *path);
