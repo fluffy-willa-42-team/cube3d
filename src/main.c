@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:49:27 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/22 13:13:44 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/22 15:55:37 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,12 @@ void	hook(void *param)
 		angle_hook(game, -0.001);
 	if (mlx_is_key_down(game->param.mlx, MLX_KEY_E))
 		angle_hook(game, 0.001);
-	if (move_vec.x != 0 || move_vec.y != 0)
-		move_player(game, game->player.coord, move_vec);
 	draw_minimap(game);
+	if (move_vec.x != 0 || move_vec.y != 0)
+	{
+		move_player(game, game->player.coord, move_vec);
+
+	}
 }
 
 t_texture *init_image(t_texture *ptr, char *path);
@@ -130,7 +133,7 @@ int main(void)
 		{1, {0, 0}, &game.temp1,	&game.temp1,	NULL,			NULL,			&game.temp1,	&game.temp1},	// chunk3	'h'
 		{1, {0, 0}, NULL,			&game.temp1,	NULL,			&game.temp1,	&game.temp1,	&game.temp1},	// chunk4	'a'
 		{1, {0, 0}, &game.temp,		&game.temp,		&game.temp,		&game.temp,		&game.temp,		&game.temp},	// chunk5	'b'
-		{1, {0, 0}, &game.t_cont2,	&game.t_cont1,	&game.t_cont4,	NULL,			NULL,			NULL},			// cont1	'c'
+		{1, {0, 0}, &game.t_cont2,	&game.t_cont1,	NULL,			&game.t_cont4,	NULL,			NULL},			// cont1	'c'
 		{1, {0, 0}, &game.t_cont3,	&game.t_cont3,	NULL,			NULL,			NULL,			NULL},			// cont2	'd'
 		{1, {0, 0}, &game.t_cont1,	&game.t_cont2,	&game.t_cont5,	NULL,			NULL,			NULL},			// cont3	'e'
 		{1, {0, 0}, &game.t_cont4,	&game.t_cont5,	&game.t_cont4,	&game.t_cont4,	NULL,			NULL},			// cont4	'f'
