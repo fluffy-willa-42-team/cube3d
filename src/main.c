@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:49:27 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/22 09:49:29 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/22 10:04:25 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,8 @@ void	hook(void *param)
 t_texture *init_image(t_texture *ptr, char *path);
 t_texture *init_color(t_texture *ptr, uint32_t color);
 
+t_texture *init_texture(t_texture *ptr, int type, char *path, uint32_t color);
+
 int main(void)
 {
 	t_game game = {
@@ -141,41 +143,22 @@ int main(void)
 		{1, {0, 0}, &game.temp3,	&game.temp3,	&game.temp3,	&game.temp3,	&game.skybox,	&game.skybox}	// chunk7	'u'
 	};
 
-	// init_color(&game.temp, 0x0000FFFF);
-	// init_color(&game.temp1, 0xFFFF00FF);
-	// init_color(&game.temp2, 0x2596BEFF);
-
-	if (!init_image(&game.temp, "./texture/mc/grass_side.xpm42"))
+	if (	!init_texture(&game.temp,		IMAGE,					"./texture/mc/grass_side.xpm42",					0x0000FFFF)
+		||	!init_texture(&game.temp1,		IMAGE,					"./texture/mc/stone.xpm42", 						0xFFFF00FF)
+		||	!init_texture(&game.temp2,		IMAGE,					"./texture/mc/grass_top.xpm42", 					0x2596BEFF)
+		||	!init_texture(&game.temp3,		IMAGE | TRANSPARENCY,	"./texture/bars.xpm42", 							0)
+		||	!init_texture(&game.t_cont1,	IMAGE,					"./texture/cont/container_big_side_l.xpm42", 		0)
+		||	!init_texture(&game.t_cont2,	IMAGE,					"./texture/cont/container_big_side_r.xpm42", 		0)
+		||	!init_texture(&game.t_cont3,	IMAGE,					"./texture/cont/container_big_side_m.xpm42", 		0)
+		||	!init_texture(&game.t_cont4,	IMAGE,					"./texture/cont/container_small_side.xpm42", 		0)
+		||	!init_texture(&game.t_cont5,	IMAGE,					"./texture/cont/container_open.xpm42", 				0)
+		||	!init_texture(&game.skybox,		IMAGE | SKYBOX,			"./texture/sky/skybox2.xpm42", 						0xf7d79aFF)
+		)
 		return (EXIT_FAILURE);
-	if (!init_image(&game.temp1, "./texture/mc/stone.xpm42"))
-		return (EXIT_FAILURE);
-	if (!init_image(&game.temp2, "./texture/mc/grass_top.xpm42"))
-		return (EXIT_FAILURE);
-	
-	if (!init_image(&game.skybox, "./texture/sky/skybox.xpm42"))
-		return (EXIT_FAILURE);
-	// init_color(&game.skybox, 0xf7d79aFF);
-	game.skybox.type |= SKYBOX;
-
-	if (!init_image(&game.t_cont1, "./texture/cont/container_big_side_l.xpm42"))
-		return (EXIT_FAILURE);
-	if (!init_image(&game.t_cont2, "./texture/cont/container_big_side_r.xpm42"))
-		return (EXIT_FAILURE);
-	if (!init_image(&game.t_cont3, "./texture/cont/container_big_side_m.xpm42"))
-		return (EXIT_FAILURE);
-	if (!init_image(&game.t_cont4, "./texture/cont/container_small_side.xpm42"))
-		return (EXIT_FAILURE);
-	if (!init_image(&game.t_cont5, "./texture/cont/container_open.xpm42"))
-		return (EXIT_FAILURE);
-	if (!init_image(&game.temp3, "./texture/bars.xpm42"))
-		return (EXIT_FAILURE);
-	game.temp3.type |= TRANSPARENCY;
-
 
 	game.param.mlx = mlx_init(game.param.width, game.param.height, "MLX42", true);
 	if (!game.param.mlx)
 		return (EXIT_FAILURE);
-
 	game.param.img = mlx_new_image(game.param.mlx, game.param.width, game.param.height);
 	if (!game.param.img)
 		return (EXIT_FAILURE);
