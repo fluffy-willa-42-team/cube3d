@@ -7,7 +7,7 @@
 			"type": "cppdbg",
 			"request": "launch",
 			"program": "${workspaceRoot}/cube3d",
-			"args": ["map.cub"],
+			"args": ["test.cube"],
 			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",
 			"environment": [],

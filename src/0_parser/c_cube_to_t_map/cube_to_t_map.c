@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 16:12:15 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/18 16:50:13 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/22 14:17:37 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int	tex_debug(t_parser *data)
 			"                        },\n"
 			"       token         :  \'%c\',\n"
 			"       sky_box_token :  \'%c\',\n"
-			"       *path         :  \"%.5s\",\n"
+			"       *path         :  \"%.15s\",\n"
 			"       *image        : [%p],\n"
 			"       color         :  [%d, %d, %d, %d]\n"
 			"     }\n",
@@ -154,11 +154,12 @@ int	sani_map(t_parser *data)
  */
 int	cube_to_t_map(t_parser *data)
 {
-	if (store_texture(data, data->cube.buffer) /*TODO REMOVE*/|| tex_debug(data)/*TODO REMOVE*/)
+	if (load_texture_config(data, data->cube.buffer) || init_texture(data))
 		return (EXIT_FAILURE);
 	while (*data->cube_map && (*data->cube_map == '~' || *data->cube_map == '\n'))
 		data->cube_map++;
 	if (sani_map(data) || store_map(data))
 		return (EXIT_FAILURE);
+		/*TODO REMOVE*/tex_debug(data);/*TODO REMOVE*/
 	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 #    By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/05 10:47:56 by awillems          #+#    #+#              #
-#    Updated: 2022/11/01 16:05:43 by mahadad          ###   ########.fr        #
+#    Updated: 2022/11/22 14:56:10 by mahadad          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ CC			= gcc
 OBJ_EXT		= .o
 CODE_EXT	= .c
 HEAD_EXT	= .h
-INC			= -I include -I lib/MLX42/include/ -I lib/MLX42/ -Ilib/vector-lib/include -Ilib/libft/include
+INC			= -I include -I lib/MLX42/include/MLX42 -I lib/MLX42/ -Ilib/vector-lib/include -Ilib/libft/include
 FLAGS		= -Wall -Wextra -Werror
 FLAGS_COMP	= 
 
@@ -156,6 +156,9 @@ clean:
 	fi; \
 done
 
+c:
+	@rm -rf $(OBJ)
+
 # **************************************************************************** #
 
 fclean:
@@ -165,6 +168,9 @@ fclean:
 		make -sC $$path fclean;\
 	fi; \
 done
+
+fc:
+	@rm -rf $(OBJ) $(INC_DIR)* $(NAME)
 
 # **************************************************************************** #
 
@@ -177,6 +183,7 @@ print_src:
 # **************************************************************************** #
 
 re: fclean all
+r:  fc all
 
 # **************************************************************************** #
 

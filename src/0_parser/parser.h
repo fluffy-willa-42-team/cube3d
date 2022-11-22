@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:53:43 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/17 11:27:24 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/22 14:53:32 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,17 @@
 # define CUB_FILE 1
 # define CUBE_FILE 2
 
-# define DEFAUT_CUB_TEX_NB 6
-# define DEFAUT_CUBE_TEX_NB 92
+/**
+ * @brief Default number of texture
+ *        `NO` `SO` `WE` `EA` `F` `C`
+ */
+# define DEFAULT_CUB_TEX_NB 6
+
+/**
+ * @brief Default number of texture
+ * 
+ */
+# define DEFAULT_CUBE_TEX_NB 92
 
 /**
  * @brief Cube separator sequence string
@@ -95,7 +104,7 @@ typedef struct s_parser
 	char			*cube_map;
 	int				index;
 	int				tmp_width;
-	char			tex[DEFAUT_CUB_TEX_NB];
+	char			tex[DEFAULT_CUB_TEX_NB];
 	t_vec			tex_list;
 	t_coord_i32		map_size;
 	t_vec			map;
@@ -115,6 +124,14 @@ typedef struct s_chunk_token
 	t_chunk_type	type;
 }				t_chunk_token;
 
+typedef struct s_color
+{
+	int	r;
+	int	g;
+	int	b;
+	int	a;
+}				t_color;
+
 typedef int	(*t_conv_fct)(t_parser *data, char c);
 
 int		parser(char *av, t_map *map);
@@ -128,6 +145,7 @@ int		texture_conv(t_parser *data);
 int		map_conv(t_parser *data);
 
 int		get_tex(char *str);
+t_chunk	*get_chunk(t_parser *data, int x, int y);
 int		check_texture(char *str, t_parser *data);
 
 int		push_chunk_part(t_parser *data, int a, int b, int c);
@@ -148,10 +166,19 @@ int		f_3_p(t_parser *data, char c);
 
 int		cube_to_t_map(t_parser *data);
 
-int		store_texture(t_parser *data, char *tex);
+int		set_texture_path(t_parser *data, char *tex, t_texture *tmp);
+int		set_texture_param(t_parser *data, char *tex, t_texture *tmp);
+
+int		set_color_texture(t_texture *tex);
+int		set_current_tex_config(t_parser *data, char *tex);
+
+int		load_texture_config(t_parser *data, char *tex);
+int		init_texture(t_parser *data);
 
 int		store_map(t_parser *data);
 
+int		check_chunk_type(t_chunk_token *tokens);
+int		get_next_chunk(t_parser *data, t_chunk *chunk);
 int		set_map_size(t_parser *data);
 int		get_line_width(t_parser *data);
 

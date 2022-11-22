@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 17:13:54 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/08 17:21:44 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/21 17:41:03 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,10 @@
 /**
  * @brief Check texture type. For a texture path that start with `./` return
  *        `IMAGE`, for a color type, is three set of three numbers separated by
- *        commas `rrr,ggg,bbb` we return `COLOR` otherwise if we dont not found
- *        the type, return `UNDEFINED type.
+ *        commas `rrr,ggg,bbb,aaa` we return `COLOR` otherwise if we dont not
+ *        found the type, return `UNDEFINED type.
+ * 
+ * @warning Dont check if the path or color is correct.
  * 
  * @example
  *          Color format
@@ -33,6 +35,10 @@
  *             [8 ] b
  *             [9 ] b
  *             [10] b
+ *             [11] ,
+ *             [12] a
+ *             [13] a
+ *             [14] a
  * 
  * @param tex 
  * @return int 
@@ -61,7 +67,7 @@ int	find_tex_type(char *tex)
 			return (UNDEFINED);
 		x++;
 	}
-	if (comma_nb == 2 && num_len)
+	if (comma_nb == 3 && num_len)
 		return (COLOR);
 	return (UNDEFINED);
 }
