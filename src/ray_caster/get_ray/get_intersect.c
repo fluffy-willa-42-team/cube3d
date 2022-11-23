@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 13:23:03 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/23 12:07:29 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/23 12:10:06 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,15 +47,6 @@ int is_a_wall_vue(t_wall_inter inter)
 	if (inter.text2 && !(inter.text2->type & TRANSPARENCY))
 		return (1);
 	return (0);
-}
-
-// 1 x
-// 0 y
-t_inter set_inter(int res, t_intersect xInter, t_intersect yInter)
-{
-	if (res)
-		return ((t_inter){xInter.point, xInter.nb_step, yInter.nb_step});
-	return ((t_inter){yInter.point, xInter.nb_step, yInter.nb_step});
 }
 
 t_inter get_intersect(t_game *game, double alpha, double tan_a)
