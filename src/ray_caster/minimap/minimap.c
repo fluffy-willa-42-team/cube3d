@@ -78,6 +78,7 @@ int draw_minimap(t_game *game)
 			draw_elem(game, x, y);
 	draw_point(game, game->player.coord, game->param.minimap_point_size, 0xFF00FFFF);
 	draw_line_s(game, game->player.coord, add_f64(game->player.coord, game->player.cosin), 0xFF00FFFF);
+	
 	t_intersect test = get_intersect(game, game->player.alpha, prot_tan(game->player.alpha));
 	draw_point(game, test.point, game->param.minimap_point_size, 0x00aa22FF);
 	draw_line_s(game, game->player.coord, test.point, 0xFFFF00FF);

@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 13:23:03 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/23 11:30:43 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/23 12:07:29 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 
 t_chunk *get_chunk(t_game *game, t_coord_i32 coord);
 
-t_intersect	get_init_x(t_game *game, t_coord_f64 delta, double alpha, double tan_a);
-t_intersect	get_init_y(t_game *game, t_coord_f64 delta, double alpha, double tan_a);
+t_intersect	get_init_x(t_game *game, double alpha, double tan_a);
+t_intersect	get_init_y(t_game *game, double alpha, double tan_a);
 t_intersect get_step_x(t_intersect prev, double alpha, double tan_a);
 t_intersect get_step_y(t_intersect prev, double alpha, double tan_a);
 
@@ -49,35 +49,37 @@ int is_a_wall_vue(t_wall_inter inter)
 	return (0);
 }
 
-
-t_intersect get_intersect(t_game *game, double alpha, double tan_a)
+// 1 x
+// 0 y
+t_inter set_inter(int res, t_intersect xInter, t_intersect yInter)
 {
-	const t_coord_f64 delta	= set_f64(
-		game->player.coord.x - (int) game->player.coord.x,
-		game->player.coord.y - (int) game->player.coord.y
-	);
+	if (res)
+		return ((t_inter){xInter.point, xInter.nb_step, yInter.nb_step});
+	return ((t_inter){yInter.point, xInter.nb_step, yInter.nb_step});
+}
 
-	t_intersect xIntersect = get_init_x(game, delta, alpha, tan_a);
-	t_intersect yIntersect = get_init_y(game, delta, alpha, tan_a);
+t_inter get_intersect(t_game *game, double alpha, double tan_a)
+{
+	t_intersect xInter = get_init_x(game, alpha, tan_a);
+	t_intersect yInter = get_init_y(game, alpha, tan_a);
 
-	double xDist = get_distance2(game, xIntersect.point);
-	double yDist = get_distance2(game, yIntersect.point);
+	double xDist = get_distance2(game, xInter.point);
+	double yDist = get_distance2(game, yInter.point);
 	while (1)
 	{
 		if (xDist < yDist)
 		{
-			if (is_a_wall_vue(get_wall(game, xIntersect.point)))
-				return (xIntersect);
-			xIntersect = get_step_x(xIntersect, alpha, tan_a);
-			xDist = get_distance2(game, xIntersect.point);
+			if (is_a_wall_vue(get_wall(game, xInter.point)))
+				return ((t_inter){xInter.point, xInter.nb_step, yInter.nb_step});
+			xInter = get_step_x(xInter, alpha, tan_a);
+			xDist = get_distance2(game, xInter.point);
 		}
 		else
 		{
-			if (is_a_wall_vue(get_wall(game, yIntersect.point)))
-				return (yIntersect);
-			yIntersect = get_step_y(yIntersect, alpha, tan_a);
-			yDist = get_distance2(game, yIntersect.point);
+			if (is_a_wall_vue(get_wall(game, yInter.point)))
+				return ((t_inter){yInter.point, xInter.nb_step, yInter.nb_step});
+			yInter = get_step_y(yInter, alpha, tan_a);
+			yDist = get_distance2(game, yInter.point);
 		}
 	}
-	return (xIntersect);
 }

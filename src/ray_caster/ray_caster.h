@@ -26,7 +26,6 @@ void ray_caster(t_game *game);
 
 typedef struct s_inter {
 	t_coord_f64 point;
-	t_coord_i32 wall;
 	int32_t		nb_step_x;
 	int32_t		nb_step_y;
 }	t_inter;
