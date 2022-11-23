@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:46:26 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/23 16:27:37 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/23 16:30:54 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,16 @@ void	exchange_textures(t_wall_inter *wall)
 	wall->text2 = tmp;
 }
 
+int is_transparent(t_texture *text)
+{
+	return (!text || text->type & TRANSPARENCY);
+}
+
+void	draw_pixel_wall(t_game *game, t_coord_i32 pos)
+{
+	put_pixel(game, pos.x, pos.y, 0xFF0000FF);
+}
+
 void	draw_wall_text(t_game *game, t_texture *text, uint32_t x, double height)
 {
 	(void) text;
@@ -38,14 +48,7 @@ void	draw_wall_text(t_game *game, t_texture *text, uint32_t x, double height)
 	if (parse_heigth >= MIDDLE_OF_SCREEN)
 		parse_heigth = MIDDLE_OF_SCREEN;
 	for (uint32_t i = height - parse_heigth; i < height + parse_heigth ; i++)
-	{
-		put_pixel(game, x, MIDDLE_OF_SCREEN - height + i, 0xFF0000FF);
-	}
-}
-
-int is_transparent(t_texture *text)
-{
-	return (!text || text->type & TRANSPARENCY);
+		draw_pixel_wall(game, set_i32(x, MIDDLE_OF_SCREEN - height + i));
 }
 
 // cas 1 : le mur devant est n'est pas transparent
