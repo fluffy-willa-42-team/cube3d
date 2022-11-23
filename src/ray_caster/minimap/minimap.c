@@ -49,14 +49,11 @@ void draw_line_s(t_game *game, t_coord_f64 a, t_coord_f64 b, int32_t color)
 
 void	draw_elem(t_game *game, int32_t x, int32_t y)
 {
-	if (game->map.array[y][x] != 's')
-	{
-		t_chunk	*chunk = get_chunk(game, set_i32(x, y));
-		if (chunk->north) draw_line_s(game, set_f64(x, y), 		set_f64(x + 1, y),	 	0x21634caa);
-		if (chunk->south) draw_line_s(game, set_f64(x, y + 1), 	set_f64(x + 1, y + 1),	0x21634caa);
-		if (chunk->east)  draw_line_s(game, set_f64(x + 1, y), 	set_f64(x + 1, y + 1), 	0x21634caa);
-		if (chunk->west)  draw_line_s(game, set_f64(x, y),		set_f64(x, y + 1), 		0x21634caa);
-	}
+	t_chunk	*chunk = get_chunk(game, set_i32(x, y));
+	if (chunk->north) draw_line_s(game, set_f64(x, y), 		set_f64(x + 1, y),	 	0x21634caa);
+	if (chunk->south) draw_line_s(game, set_f64(x, y + 1), 	set_f64(x + 1, y + 1),	0x21634caa);
+	if (chunk->east)  draw_line_s(game, set_f64(x + 1, y), 	set_f64(x + 1, y + 1), 	0x21634caa);
+	if (chunk->west)  draw_line_s(game, set_f64(x, y),		set_f64(x, y + 1), 		0x21634caa);
 }
 
 void	draw_transparency(t_game *game, t_inter inter, double alpha, double tan_a);
@@ -80,10 +77,12 @@ int draw_minimap(t_game *game)
 	{
 		for (uint32_t x = 0; x < map->width; x++)
 		{
-			if (game->map.array[y][x] == 's')
-				draw_rectangle_s(game, set_f64(x, y), 0x770000FF);
-			else
-				draw_rectangle_s(game, set_f64(x, y), 0x222222FF);
+			if (
+				get_chunk(game, set_i32(x, y))
+				&& get_chunk(game, set_i32(x, y))->floor
+				&& !(get_chunk(game, set_i32(x, y))->floor->type & SKYBOX)
+			)
+			draw_rectangle_s(game, set_f64(x, y), 0x222222FF);
 		}
 	}
 	draw_ray(game, 0xffff0022, game->player.alpha);

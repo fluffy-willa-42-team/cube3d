@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 10:01:39 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/23 14:41:11 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/23 14:48:32 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ double	prot_tan(double alpha);
 double	loop_len(double n, double len);
 double	get_distance(t_game *game, t_coord_f64 pos);
 t_inter get_intersect(t_game *game, double alpha, double tan_a);
+
+void	draw_wall(t_game *game, uint32_t x, t_coord_f64 inter, double heigth);
 
 /**
  * @brief Will calculate the wall intersection draw the wall then the ground and
@@ -38,7 +40,7 @@ void draw_column(t_game *game, uint32_t x, double alpha, double tan_a)
 	inter = get_intersect(game, loop_len(alpha, PI2), tan_a);
 	dist = get_distance(game, inter.point);
 	height_to_draw = HEIGTH_OF_BLOCK * game->param.hob_mult / dist;
-	// draw_wall(game, &inter, x, height_to_draw);
+	draw_wall(game, x, inter.point, height_to_draw);
 	// if (height_to_draw < MIDDLE_OF_SCREEN - 1)
 	// 	draw_floor(game, x, alpha, height_to_draw, dist);
 	// draw_transparent_wall(game, &inter, alpha, tan_a);
