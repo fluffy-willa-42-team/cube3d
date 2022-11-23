@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:49:27 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/23 17:09:26 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/23 17:20:10 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,11 +146,11 @@ int main(void)
 		||	!init_texture(&game.temp1,		0,					"./texture/mc/stone.xpm42", 						0xFFFF00FF)
 		||	!init_texture(&game.temp2,		0,					"./texture/mc/grass_top.xpm42", 					0x2596BEFF)
 		||	!init_texture(&game.temp3,		0 | TRANSPARENCY,	"./texture/bars.xpm42", 							0)
-		||	!init_texture(&game.t_cont1,	0,					"./texture/cont/container_big_side_l.xpm42", 		0xaaaaaaff)
-		||	!init_texture(&game.t_cont2,	0,					"./texture/cont/container_big_side_r.xpm42", 		0xaaaaaaff)
-		||	!init_texture(&game.t_cont3,	0,					"./texture/cont/container_big_side_m.xpm42", 		0xaaaaaaff)
-		||	!init_texture(&game.t_cont4,	0,					"./texture/cont/container_small_side.xpm42", 		0xaaaaaaff)
-		||	!init_texture(&game.t_cont5,	0,					"./texture/cont/container_open.xpm42", 				0xaaaaaaff)
+		||	!init_texture(&game.t_cont1,	IMAGE,				"./texture/cont/container_big_side_l.xpm42", 		0xaaaaaaff)
+		||	!init_texture(&game.t_cont2,	IMAGE,				"./texture/cont/container_big_side_r.xpm42", 		0xaaaaaaff)
+		||	!init_texture(&game.t_cont3,	IMAGE,				"./texture/cont/container_big_side_m.xpm42", 		0xaaaaaaff)
+		||	!init_texture(&game.t_cont4,	IMAGE,				"./texture/cont/container_small_side.xpm42", 		0xaaaaaaff)
+		||	!init_texture(&game.t_cont5,	IMAGE,				"./texture/cont/container_open.xpm42", 				0xaaaaaaff)
 		||	!init_texture(&game.skybox,		0 | SKYBOX,			"./texture/sky/skybox2.xpm42", 						0xf7d79aFF)
 		)
 		return (EXIT_FAILURE);
