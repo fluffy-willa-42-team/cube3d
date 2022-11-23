@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:46:26 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/23 15:21:31 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/23 15:43:31 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,28 @@
 #include "mlx_utils.h"
 
 t_wall_inter	get_wall(t_game *game, t_coord_f64 inter);
+int				is_equal(double a, double b);
+
+void	exchange_textures(t_wall_inter *wall)
+{
+	void *tmp;
+	
+	tmp = wall->chunk1;
+	wall->chunk1 = wall->chunk2;
+	wall->chunk2 = tmp;
+	tmp = wall->text1;
+	wall->text1 = wall->text2;
+	wall->text2 = tmp;
+}
 
 void	draw_wall(t_game *game, uint32_t x, t_coord_f64 inter, double height)
 {
 	t_wall_inter textures = get_wall(game, inter);
 	uint32_t	parse_heigth;
 	
+	if (is_equal(inter.y, (int) inter.y) && inter.x > game->player.pos.x
+		|| is_equal(inter.x, (int) inter.x) && inter.y > game->player.pos.y)
+		exchange_textures(&textures);
 	(void) game;
 	(void) x;
 	(void) inter;

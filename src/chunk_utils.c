@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 10:56:11 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/22 13:16:48 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/23 15:37:06 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ t_wall_inter	get_wall(t_game *game, t_coord_f64 inter)
 	wall_inter.text2 = NULL;
 	wall_inter.chunk2 = NULL;
 	wall_inter.chunk1 = get_chunk(game, set_i32(inter.x, inter.y));
-	if (is_equal(inter.y - pos.y, 0)) // NORTH-SOUTH
+	if (is_equal(inter.y, pos.y)) // NORTH-SOUTH
 	{
 		wall_inter.chunk2 = get_chunk(game, set_i32(pos.x, pos.y - 1));
 		if (wall_inter.chunk1)
@@ -80,7 +80,7 @@ t_wall_inter	get_wall(t_game *game, t_coord_f64 inter)
 		if (wall_inter.chunk2)
 			wall_inter.text2 = wall_inter.chunk2->south;
 	}
-	else if (is_equal(inter.x - pos.x, 0)) // EAST-WEST
+	else if (is_equal(inter.x, pos.x)) // EAST-WEST
 	{
 		wall_inter.chunk2 = get_chunk(game, set_i32(pos.x - 1, pos.y));
 		if (wall_inter.chunk1)

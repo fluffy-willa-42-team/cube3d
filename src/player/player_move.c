@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:18:47 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/23 11:32:20 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/23 15:39:10 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,9 @@ void	move_player(t_game *game, t_coord_f64 player, t_coord_f64 incre)
 {
 	if ((int) player.x == (int) (player.x + incre.x)
 		|| !is_a_wall_move(get_wall(game, get_pos_x(player, incre.x))))
-		game->player.coord.x += incre.x;
+		game->player.pos.x += incre.x;
 	if ((int) player.y == (int) (player.y + incre.y)
 		|| !is_a_wall_move(get_wall(game, get_pos_y(player, incre.y))))
-		game->player.coord.y += incre.y;
+		game->player.pos.y += incre.y;
 
 }

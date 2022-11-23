@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:49:27 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/23 14:54:46 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/23 15:39:10 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	hook(void *param)
 	if (mlx_is_key_down(game->param.mlx, MLX_KEY_E))
 		angle_hook(game, 0.001);
 	if (move_vec.x != 0 || move_vec.y != 0)
-		move_player(game, game->player.coord, move_vec);
+		move_player(game, game->player.pos, move_vec);
 	draw_rectangle(game, set_f64(0, 0), set_i32(WIN_WIDTH, WIN_HEIGHT), 0x000000ff);
 	ray_caster(game);
 	draw_minimap(game);
