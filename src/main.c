@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:49:27 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/22 17:38:58 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/22 18:05:11 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int main(void)
 	t_game game = {
 		{NULL, NULL, 7, 32, WIN_HEIGHT, WIN_WIDTH},
 		{{
-			"sssssssssassssssssss",
+			"ssssssssssssssssssss",
 			"s_______   ________s",
 			"s_______   ________s",
 			"s_______   ________s",
@@ -111,7 +111,7 @@ int main(void)
 			"s                  s",
 			"s      hhhhhu      s",
 			"s   hhhhhhhhhhhh   s",
-			"ssssssssssssssssssss"
+			"sssssssssssssssssass"
 		}, NULL, 23, 20},
 		{{15.5f, 15.5f}, ANGLE_START, {cos(ANGLE_START), sin(ANGLE_START)}},
 		{0, NULL, 0},
@@ -128,7 +128,7 @@ int main(void)
 		{1, {0, 0}, &game.skybox,	&game.skybox,	&game.skybox,	&game.skybox,	NULL,			NULL},			// chunk1	's'
 		{1, {0, 0}, NULL,			NULL,			&game.temp1,	&game.temp2,	&game.temp1,	&game.temp1},	// chunk2	'v'
 		{1, {0, 0}, &game.temp1,	&game.temp1,	NULL,			NULL,			&game.temp1,	&game.temp1},	// chunk3	'h'
-		{1, {0, 0}, NULL,			NULL,			NULL,			&game.temp1,	&game.temp1,	&game.temp1},	// chunk4	'a'
+		{1, {0, 0}, NULL,			&game.temp1,	NULL,			&game.temp1,	&game.temp1,	&game.temp1},	// chunk4	'a'
 		{1, {0, 0}, &game.temp,		&game.temp,		&game.temp,		&game.temp,		&game.temp,		&game.temp},	// chunk5	'b'
 		{1, {0, 0}, &game.t_cont2,	&game.t_cont1,	NULL,			&game.t_cont4,	NULL,			NULL},			// cont1	'c'
 		{1, {0, 0}, &game.t_cont3,	&game.t_cont3,	NULL,			NULL,			NULL,			NULL},			// cont2	'd'
