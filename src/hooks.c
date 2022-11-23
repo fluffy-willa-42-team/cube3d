@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 14:35:07 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/22 10:13:59 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/23 11:59:43 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,3 +44,9 @@ void	map_hook(t_game *game, int32_t incrementation)
 		game->param.minimap_size += incrementation;
 }
 
+void	map_point_hook(t_game *game, double incrementation)
+{
+	if (game->param.minimap_point_size + incrementation <= 100 && game->param.minimap_point_size + incrementation >= 1)
+		game->param.minimap_point_size += incrementation;
+	
+}

@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:33:07 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/23 11:48:58 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/23 11:59:35 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ typedef struct s_mlx_param {
 	mlx_image_t *img;
 	double		hob_mult;
 	int32_t		minimap_size;
+	double		minimap_point_size;
 	int32_t 	height;
 	int32_t 	width;
 }	t_mlx_param;

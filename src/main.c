@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:49:27 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/23 11:51:52 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/23 11:59:52 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	pos_hook(double incr_x, double incr_y, t_coord_f64 *move_vec);
 void	angle_hook(t_game *game, double incrementation);
 void	scale_hook(t_game *game, double incrementation);
 void	map_hook(t_game *game, int32_t incrementation);
+void	map_point_hook(t_game *game, double incrementation);
 
 void	hook(void *param)
 {
@@ -58,9 +59,9 @@ void	hook(void *param)
 	if (mlx_is_key_down(game->param.mlx, MLX_KEY_J))
 		scale_hook(game, -0.01);
 	if (mlx_is_key_down(game->param.mlx, MLX_KEY_I))
-		scale_hook(game, 0.001);
+		map_point_hook(game, 0.1);
 	if (mlx_is_key_down(game->param.mlx, MLX_KEY_K))
-		scale_hook(game, -0.001);
+		map_point_hook(game, -0.1);
 	if (mlx_is_key_down(game->param.mlx, MLX_KEY_O))
 		map_hook(game, 1);
 	if (mlx_is_key_down(game->param.mlx, MLX_KEY_L))
@@ -75,6 +76,7 @@ void	hook(void *param)
 		angle_hook(game, 0.001);
 	if (move_vec.x != 0 || move_vec.y != 0)
 		move_player(game, game->player.coord, move_vec);
+	draw_rectangle(game, set_f64(0, 0), set_i32(WIN_WIDTH, WIN_HEIGHT), 0x000000ff);
 	draw_minimap(game);
 }
 
@@ -87,7 +89,7 @@ void init_map(t_game *game);
 int main(void)
 {
 	t_game game = {
-		{NULL, NULL, 7, 32, WIN_HEIGHT, WIN_WIDTH},
+		{NULL, NULL, 7, 32, 2, WIN_HEIGHT, WIN_WIDTH},
 		{{
 			"ssssssssssssssssssss",
 			"s_______   ________s",
