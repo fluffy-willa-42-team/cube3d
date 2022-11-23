@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:49:27 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/22 18:05:11 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/23 11:51:52 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,7 @@ int main(void)
 		{0, NULL, 0},
 		{0, NULL, 0},
 		{0, NULL, 0},
+		{0, NULL, 0},
 		{0, {0, 0}, NULL,			NULL,			NULL,			NULL,			&game.skybox,	&game.temp2},	// chunk0	' '
 		{1, {0, 0}, &game.skybox,	&game.skybox,	&game.skybox,	&game.skybox,	NULL,			NULL},			// chunk1	's'
 		{1, {0, 0}, NULL,			NULL,			&game.temp1,	&game.temp2,	&game.temp1,	&game.temp1},	// chunk2	'v'
@@ -134,11 +135,11 @@ int main(void)
 		{1, {0, 0}, &game.t_cont3,	&game.t_cont3,	NULL,			NULL,			NULL,			NULL},			// cont2	'd'
 		{1, {0, 0}, &game.t_cont1,	&game.t_cont2,	&game.t_cont5,	NULL,			NULL,			NULL},			// cont3	'e'
 		{1, {0, 0}, &game.t_cont4,	&game.t_cont5,	&game.t_cont4,	&game.t_cont4,	NULL,			NULL},			// cont4	'f'
-		{1, {0, 0}, NULL,			NULL,			NULL,			NULL,			&game.skybox,	&game.skybox},	// chunk6	'_'
+		{1, {0, 0}, &game.clip,		&game.clip,		&game.clip,		&game.clip,		&game.skybox,	&game.skybox},	// chunk6	'_'
 		{1, {0, 0}, &game.temp3,	&game.temp3,	&game.temp3,	&game.temp3,	&game.skybox,	&game.skybox}	// chunk7	'u'
 	};
 
-	if (	!init_texture(&game.temp,		IMAGE,					"./texture/mc/grass_side.xpm42",					0x0000FFFF)
+	if (	!init_texture(&game.temp,		IMAGE | ALLOW_CLIP,		"./texture/mc/grass_side.xpm42",					0x0000FFFF)
 		||	!init_texture(&game.temp1,		IMAGE,					"./texture/mc/stone.xpm42", 						0xFFFF00FF)
 		||	!init_texture(&game.temp2,		IMAGE,					"./texture/mc/grass_top.xpm42", 					0x2596BEFF)
 		||	!init_texture(&game.temp3,		IMAGE | TRANSPARENCY,	"./texture/bars.xpm42", 							0)
@@ -150,6 +151,7 @@ int main(void)
 		||	!init_texture(&game.skybox,		IMAGE | SKYBOX,			"./texture/sky/skybox2.xpm42", 						0xf7d79aFF)
 		)
 		return (EXIT_FAILURE);
+	game.clip.type |= TRANSPARENCY;
 
 	game.map.map = malloc(sizeof(t_chunk) * game.map.width * game.map.height);
 	if (!game.map.map)

@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:18:47 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/23 11:28:44 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/23 11:32:20 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,9 @@ t_wall_inter	get_wall(t_game *game, t_coord_f64 inter);
 
 int is_a_wall_move(t_wall_inter inter)
 {
-	if (inter.text1 || inter.text2)
+	if (inter.text1 && !(inter.text1->type & ALLOW_CLIP))
+		return (1);
+	if (inter.text2 && !(inter.text2->type & ALLOW_CLIP))
 		return (1);
 	return (0);
 }

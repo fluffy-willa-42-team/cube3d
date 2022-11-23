@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:33:07 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/22 12:34:34 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/23 11:48:58 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,7 @@ typedef struct s_game {
 	t_texture		t_cont4;
 	t_texture		t_cont5;
 	t_texture		temp3;
+	t_texture		clip;
 	t_chunk			chunk0;
 	t_chunk			chunk1;
 	t_chunk			chunk2;
