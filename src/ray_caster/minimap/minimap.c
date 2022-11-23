@@ -59,9 +59,12 @@ void	draw_elem(t_game *game, int32_t x, int32_t y)
 	}
 }
 
-void draw_ray(t_game *game, uint32_t color)
+void draw_ray(t_game *game, uint32_t color, double alpha)
 {
-	t_inter test = get_intersect(game, game->player.alpha, prot_tan(game->player.alpha));
+	double tan_a = prot_tan(alpha);
+
+	t_inter test = get_intersect(game, alpha, tan_a);
+
 	draw_line_s(game, game->player.coord, test.point, color);
 }
 
@@ -85,7 +88,7 @@ int draw_minimap(t_game *game)
 	draw_point(game, game->player.coord, game->param.minimap_point_size, 0xFF00FFFF);
 	draw_line_s(game, game->player.coord, add_f64(game->player.coord, game->player.cosin), 0xFF00FFFF);
 
-	draw_ray(game, 0xffff00ff);
+	draw_ray(game, 0xffff00ff, game->player.alpha);
 
 	return (1);
 }

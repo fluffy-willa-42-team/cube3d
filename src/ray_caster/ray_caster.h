@@ -30,11 +30,6 @@ typedef struct s_inter {
 	int32_t		nb_step_y;
 }	t_inter;
 
-/**
- * @brief Structure for get Intersect
- * 
- * @param point Point of intersection
- */
 typedef struct s_intersect {
 	t_coord_f64 point;
 	int32_t		nb_step;

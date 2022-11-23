@@ -6,15 +6,11 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 13:23:03 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/23 12:10:06 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/23 12:51:36 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ray_caster.h"
-#include <math.h>
-#include <stdio.h>
-
-#include "mlx_utils.h"
 
 t_chunk *get_chunk(t_game *game, t_coord_i32 coord);
 
@@ -23,17 +19,11 @@ t_intersect	get_init_y(t_game *game, double alpha, double tan_a);
 t_intersect get_step_x(t_intersect prev, double alpha, double tan_a);
 t_intersect get_step_y(t_intersect prev, double alpha, double tan_a);
 
-double dist(t_coord_f64 a, t_coord_f64 b)
-{
-	return (fabs(a.x - b.x) + fabs(a.y - b.y));
-}
-
 double get_distance2(t_game *game, t_coord_f64 pos)
 {
 	return ((pos.x - game->player.coord.x) * game->player.cosin.x
 		+ (pos.y - game->player.coord.y) * game->player.cosin.y);
 }
-
 
 t_wall_inter	get_wall(t_game *game, t_coord_f64 inter);
 void			draw_rectangle_s(t_game *game, t_coord_f64 pos, uint32_t color);
