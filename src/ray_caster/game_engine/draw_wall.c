@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:46:26 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/23 17:27:28 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/23 17:38:00 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,4 +97,17 @@ void	draw_wall(t_game *game, uint32_t x, t_coord_f64 inter, double height)
 		draw_wall_text(game, inter, wall.text2, x, height);
 		draw_wall_text(game, inter, wall.text1, x, height);
 	}
+}
+
+void	draw_wall_trans(t_game *game, uint32_t x, t_coord_f64 inter, double height)
+{
+	t_wall_inter wall = get_wall(game, inter);
+	
+	if ((is_equal(inter.y, (int) (float) inter.y) && inter.y > game->player.pos.y)
+		|| (is_equal(inter.x, (int) (float) inter.x) && inter.x > game->player.pos.x))
+		exchange_textures(&wall);
+	if (wall.text2)
+		draw_wall_text(game, inter, wall.text2, x, HEIGTH_OF_BLOCK * game->param.hob_mult / height);
+	if (wall.text1)
+		draw_wall_text(game, inter, wall.text1, x, HEIGTH_OF_BLOCK * game->param.hob_mult / height);
 }

@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 12:46:00 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/23 14:36:18 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/23 17:37:31 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@ double		get_distance(t_game *game, t_coord_f64 pos);
 t_intersect get_r_step_x(t_intersect prev, double alpha, double tan_a);
 t_intersect get_r_step_y(t_intersect prev, double alpha, double tan_a);
 
-void	draw_transparency(t_game *game, t_inter inter, double alpha, double tan_a)
+void	draw_wall_trans(t_game *game, uint32_t x, t_coord_f64 inter, double height);
+
+void	draw_transparency(t_game *game, uint32_t x, t_inter inter, double alpha, double tan_a)
 {
 	double xDist = get_distance(game, inter.xInter.point);
 	double yDist = get_distance(game, inter.yInter.point);
@@ -32,7 +34,7 @@ void	draw_transparency(t_game *game, t_inter inter, double alpha, double tan_a)
 			}
 			inter.xInter = get_r_step_x(inter.xInter, alpha, tan_a);
 			xDist = get_distance(game, inter.xInter.point);
-			// draw wall
+			draw_wall_trans(game, x, inter.xInter.point, xDist);
 		}
 		else
 		{
@@ -43,7 +45,7 @@ void	draw_transparency(t_game *game, t_inter inter, double alpha, double tan_a)
 			}
 			inter.yInter = get_r_step_y(inter.yInter, alpha, tan_a);
 			yDist = get_distance(game, inter.yInter.point);
-			// draw wall
+			draw_wall_trans(game, x, inter.yInter.point, yDist);
 		}
 	}
 }
