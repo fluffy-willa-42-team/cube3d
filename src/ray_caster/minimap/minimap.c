@@ -18,7 +18,7 @@
 double		loop_len(double n, double len);
 double		prot_tan(double alpha);
 t_chunk		*get_chunk(t_game *game, t_coord_i32 coord);
-t_intersect	get_intersect(t_game *game, t_coord_f64 player, double alpha, double tan_a);
+t_intersect get_intersect(t_game *game, double alpha, double tan_a);
 
 void draw_point(t_game *game, t_coord_f64 pos, int size, uint32_t color)
 {
@@ -78,7 +78,7 @@ int draw_minimap(t_game *game)
 			draw_elem(game, x, y);
 	draw_point(game, game->player.coord, 4, 0xFF00FFFF);
 	draw_line_s(game, game->player.coord, add_f64(game->player.coord, game->player.cosin), 0xFF00FFFF);
-	t_intersect test = get_intersect(game, game->player.coord, game->player.alpha, prot_tan(game->player.alpha));
+	t_intersect test = get_intersect(game, game->player.alpha, prot_tan(game->player.alpha));
 	draw_point(game, test.point, 4, 0x00aa22FF);
 	draw_line_s(game, game->player.coord, test.point, 0xFFFF00FF);
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:18:47 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/22 16:05:03 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/23 11:28:44 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,14 @@
 
 #include "mlx_utils.h"
 
-int				is_a_wall(t_wall_inter inter);
 t_wall_inter	get_wall(t_game *game, t_coord_f64 inter);
+
+int is_a_wall_move(t_wall_inter inter)
+{
+	if (inter.text1 || inter.text2)
+		return (1);
+	return (0);
+}
 
 static t_coord_f64 get_pos_x(t_coord_f64 pos, double incre)
 {
@@ -38,10 +44,10 @@ static t_coord_f64 get_pos_y(t_coord_f64 pos, double incre)
 void	move_player(t_game *game, t_coord_f64 player, t_coord_f64 incre)
 {
 	if ((int) player.x == (int) (player.x + incre.x)
-		|| !is_a_wall(get_wall(game, get_pos_x(player, incre.x))))
+		|| !is_a_wall_move(get_wall(game, get_pos_x(player, incre.x))))
 		game->player.coord.x += incre.x;
 	if ((int) player.y == (int) (player.y + incre.y)
-		|| !is_a_wall(get_wall(game, get_pos_y(player, incre.y))))
+		|| !is_a_wall_move(get_wall(game, get_pos_y(player, incre.y))))
 		game->player.coord.y += incre.y;
 
 }
