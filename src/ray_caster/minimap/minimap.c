@@ -52,10 +52,10 @@ void	draw_elem(t_game *game, int32_t x, int32_t y)
 	if (game->map.array[y][x] != 's')
 	{
 		t_chunk	*chunk = get_chunk(game, set_i32(x, y));
-		if (chunk->north) draw_line_s(game, set_f64(x, y), 		set_f64(x + 1, y),	 	0x21634cFF);
-		if (chunk->south) draw_line_s(game, set_f64(x, y + 1), 	set_f64(x + 1, y + 1),	0x21634cFF);
-		if (chunk->east)  draw_line_s(game, set_f64(x + 1, y), 	set_f64(x + 1, y + 1), 	0x21634cFF);
-		if (chunk->west)  draw_line_s(game, set_f64(x, y),		set_f64(x, y + 1), 		0x21634cFF);
+		if (chunk->north) draw_line_s(game, set_f64(x, y), 		set_f64(x + 1, y),	 	0x21634caa);
+		if (chunk->south) draw_line_s(game, set_f64(x, y + 1), 	set_f64(x + 1, y + 1),	0x21634caa);
+		if (chunk->east)  draw_line_s(game, set_f64(x + 1, y), 	set_f64(x + 1, y + 1), 	0x21634caa);
+		if (chunk->west)  draw_line_s(game, set_f64(x, y),		set_f64(x, y + 1), 		0x21634caa);
 	}
 }
 
@@ -86,13 +86,20 @@ int draw_minimap(t_game *game)
 				draw_rectangle_s(game, set_f64(x, y), 0x222222FF);
 		}
 	}
+	draw_ray(game, 0xffff0022, game->player.alpha);
+	float i = 0.001;
+	while (i < FOV_ANG_1_2)
+	{
+		draw_ray(game, 0xffff0022, loop_len(game->player.alpha - i,	PI2));
+		draw_ray(game, 0xffff0022, loop_len(game->player.alpha + i,	PI2));
+		i += 0.001;
+	}
 	for (uint32_t y = 0; y < map->height; y++)
 		for (uint32_t x = 0; x < map->width; x++)
 			draw_elem(game, x, y);
-	// draw_point(game, game->player.coord, game->param.minimap_point_size, 0xFF00FFFF);
-	draw_line_s(game, game->player.coord, add_f64(game->player.coord, game->player.cosin), 0xFF00FFFF);
+	draw_point(game, game->player.coord, game->param.minimap_point_size, 0xFF00FFFF);
 
-	draw_ray(game, 0xffff00ff, game->player.alpha);
+
 
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:49:27 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/23 11:59:52 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/23 14:39:14 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	hook(void *param)
 		angle_hook(game, 0.001);
 	if (move_vec.x != 0 || move_vec.y != 0)
 		move_player(game, game->player.coord, move_vec);
-	draw_rectangle(game, set_f64(0, 0), set_i32(WIN_WIDTH, WIN_HEIGHT), 0x000000ff);
+	ray_caster(game);
 	draw_minimap(game);
 }
 
@@ -89,7 +89,7 @@ void init_map(t_game *game);
 int main(void)
 {
 	t_game game = {
-		{NULL, NULL, 7, 32, 2, WIN_HEIGHT, WIN_WIDTH},
+		{NULL, NULL, 7, 8, 2, WIN_HEIGHT, WIN_WIDTH},
 		{{
 			"ssssssssssssssssssss",
 			"s_______   ________s",
