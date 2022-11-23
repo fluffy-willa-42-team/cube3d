@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:46:26 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/23 17:19:56 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/23 17:27:28 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 
 t_wall_inter	get_wall(t_game *game, t_coord_f64 inter);
 int				is_equal(double a, double b);
+
+void draw_pixel_skybox(t_game *game, t_coord_i32 pixel_pos, t_texture *texture);
 
 void	exchange_textures(t_wall_inter *wall)
 {
@@ -34,11 +36,20 @@ int is_transparent(t_texture *text)
 	return (!text || text->type & TRANSPARENCY);
 }
 
-void	draw_pixel_wall(t_game *game, t_coord_i32 pos, t_texture *texture, t_coord_f64 ratio, double offset, uint32_t i)
+void	draw_pixel_wall(
+	t_game *game,
+	t_coord_i32 pos,
+	t_texture *texture,
+	t_coord_f64 ratio,
+	double offset,
+	uint32_t i
+)
 {
 	(void) offset;
 	(void) ratio;
-	if (texture->type & IMAGE)
+	if (texture->type & SKYBOX)
+		draw_pixel_skybox(game, pos, texture);
+	else if (texture->type & IMAGE)
 		put_pixel(game, pos.x, pos.y,
 			get_pixel_image(texture, offset, i, ratio)
 		);
@@ -46,7 +57,13 @@ void	draw_pixel_wall(t_game *game, t_coord_i32 pos, t_texture *texture, t_coord_
 		put_pixel(game, pos.x, pos.y, texture->color);
 }
 
-void	draw_wall_text(t_game *game, t_coord_f64 inter, t_texture *texture, uint32_t x, double height)
+void	draw_wall_text(
+	t_game *game,
+	t_coord_f64 inter,
+	t_texture *texture,
+	uint32_t x,
+	double height
+)
 {
 	if (!texture || !(texture->type & VALID))
 		return ;
@@ -56,8 +73,8 @@ void	draw_wall_text(t_game *game, t_coord_f64 inter, t_texture *texture, uint32_
 	if (texture->type & IMAGE)
 	{
 		ratio = set_f64(1, (double) texture->image->height / (height * 2));
-		offset = (inter.x - (int) inter.x) * texture->image->width
-				+ (inter.y - (int) inter.y) * texture->image->height;
+		offset = (inter.x - (int) (float) inter.x) * texture->image->width
+				+ (inter.y - (int) (float) inter.y) * texture->image->height;
 	}
 	uint32_t parse_heigth = height;
 	if (parse_heigth >= MIDDLE_OF_SCREEN)

@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:49:27 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/23 17:21:31 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/23 17:28:51 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,7 +151,7 @@ int main(void)
 		||	!init_texture(&game.t_cont3,	IMAGE,					"./texture/cont/container_big_side_m.xpm42", 		0xaaaaaaff)
 		||	!init_texture(&game.t_cont4,	IMAGE,					"./texture/cont/container_small_side.xpm42", 		0xaaaaaaff)
 		||	!init_texture(&game.t_cont5,	IMAGE,					"./texture/cont/container_open.xpm42", 				0xaaaaaaff)
-		||	!init_texture(&game.skybox,		0 | SKYBOX,				"./texture/sky/skybox2.xpm42", 						0xf7d79aFF)
+		||	!init_texture(&game.skybox,		IMAGE | SKYBOX,			"./texture/sky/skybox2.xpm42", 						0xf7d79aFF)
 		)
 		return (EXIT_FAILURE);
 	game.clip.type |= TRANSPARENCY;
