@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:46:26 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/23 16:35:25 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/23 16:51:43 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	draw_pixel_wall(t_game *game, t_coord_i32 pos, t_texture *texture)
 
 void	draw_wall_text(t_game *game, t_texture *texture, uint32_t x, double height)
 {
-	if (!texture)
+	if (!texture || !(texture->type & VALID))
 		return ;
 	uint32_t parse_heigth = height;
 	if (parse_heigth >= MIDDLE_OF_SCREEN)
