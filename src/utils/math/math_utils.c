@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 10:30:13 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/19 12:51:47 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/23 16:07:02 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,6 @@ double loop_len(double n, double len)
 
 int is_equal(double a, double b)
 {
-	return ((a > b - 0.000001 && a < b + 0.000001) ||
-		(b > a - 0.000001 && b < a + 0.000001));
+	return ((a > b - 0.0001 && a < b + 0.0001) ||
+		(b > a - 0.0001 && b < a + 0.0001));
 }
