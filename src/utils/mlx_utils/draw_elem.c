@@ -16,8 +16,7 @@
 
 void put_pixel(t_game *game, int32_t x, int32_t y, uint32_t color)
 {
-	if (0 <= x && x < game->param.width && 0 <= y && y < game->param.height
-		&& color != 0)
+	if (color != 0)
 		mlx_put_pixel(game->param.img, x, y, color);
 }
 
