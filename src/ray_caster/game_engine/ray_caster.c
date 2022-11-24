@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 10:01:39 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/23 17:32:25 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/24 10:25:36 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,6 @@ void draw_column(t_game *game, uint32_t x, double alpha, double tan_a)
 	// 	draw_floor(game, x, alpha, height_to_draw, dist);
 	// draw_transparent_wall(game, &inter, alpha, tan_a);
 	draw_transparency(game, x, inter, alpha, tan_a);
-	
-	(void) x;
-	(void) height_to_draw;
 }
 
 /**
@@ -80,7 +77,6 @@ void ray_caster(t_game *game)
 	alpha = game->player.alpha - FOV_ANG_1_2 - FOV_INCRE;
 	for (uint32_t i = 0; i < WIN_WIDTH; i++)
 	{
-		
 		alpha += FOV_INCRE;
 		tan_a = prot_tan(alpha);
 		draw_column(game, i, alpha, tan_a);
