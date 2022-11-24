@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 10:01:39 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/24 10:25:36 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/24 10:37:05 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ void draw_column(t_game *game, uint32_t x, double alpha, double tan_a)
 	draw_wall(game, x, inter.point, height_to_draw);
 	// if (height_to_draw < MIDDLE_OF_SCREEN - 1)
 	// 	draw_floor(game, x, alpha, height_to_draw, dist);
-	// draw_transparent_wall(game, &inter, alpha, tan_a);
 	draw_transparency(game, x, inter, alpha, tan_a);
 }
 

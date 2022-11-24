@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:46:26 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/23 17:40:45 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/24 10:58:02 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,6 @@ void	draw_pixel_wall(
 	uint32_t i
 )
 {
-	(void) offset;
-	(void) ratio;
 	if (texture->type & SKYBOX)
 		draw_pixel_skybox(game, pos, texture);
 	else if (texture->type & IMAGE)
