@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 14:09:15 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/22 14:57:39 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/24 13:32:32 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,10 @@ static int	set_texture_skybox(char param, t_texture *tmp)
 }
 
 /**
- * @brief 
+ * @brief Set the texture param and path/color.
  * 
- * [[allow_clip] [transparency],     [token_tex_skybox]]
+ * @note
+ * [[allow_clip] [transparency],     [token_tex_skybox]] 
  * [x,v]         [x,v]               [autohirize_token, `'.'`]
  *
  * @return int 
