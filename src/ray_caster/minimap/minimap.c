@@ -19,25 +19,34 @@ t_inter		get_intersect(t_game *game, double alpha, double tan_a);
 
 void	draw_elem(t_game *game, int32_t x, int32_t y)
 {
-	t_chunk	*chunk = get_chunk(game, set_i32(x, y));
-	if (chunk->north) draw_mini_line(game, set_f64(x, y), 		set_f64(x + 1, y),	 	0x21634caa);
-	if (chunk->south) draw_mini_line(game, set_f64(x, y + 1), 	set_f64(x + 1, y + 1),	0x21634caa);
-	if (chunk->east)  draw_mini_line(game, set_f64(x + 1, y), 	set_f64(x + 1, y + 1), 	0x21634caa);
-	if (chunk->west)  draw_mini_line(game, set_f64(x, y),		set_f64(x, y + 1), 		0x21634caa);
+	t_chunk	*chunk;
+
+	chunk = get_chunk(game, set_i32(x, y));
+	if (chunk->north)
+		draw_mini_line(game, set_f64(x, y), set_f64(x + 1, y), 0x21634caa);
+	if (chunk->south)
+		draw_mini_line(game, set_f64(x, y + 1), set_f64(x + 1, y + 1),
+			0x21634caa);
+	if (chunk->east)
+		draw_mini_line(game, set_f64(x + 1, y), set_f64(x + 1, y + 1),
+			0x21634caa);
+	if (chunk->west)
+		draw_mini_line(game, set_f64(x, y), set_f64(x, y + 1), 0x21634caa);
 }
 
-void draw_ray(t_game *game, uint32_t color, double alpha)
+void	draw_ray(t_game *game, uint32_t color, double alpha)
 {
-	double tan_a = prot_tan(alpha);
+	double	tan_a;
+	t_inter	test;
 
-	t_inter test = get_intersect(game, alpha, tan_a);
-
+	tan_a = prot_tan(alpha);
+	test = get_intersect(game, alpha, tan_a);
 	draw_mini_line(game, game->player.pos, test.point, color);
 }
 
-int draw_minimap(t_game *game)
+void	draw_minimap(t_game *game)
 {
-	t_map *map	= &game->map;
+	t_map	*map = &game->map;
 
 	for (uint32_t y = 0; y < map->height; y++)
 	{
@@ -62,9 +71,6 @@ int draw_minimap(t_game *game)
 	for (uint32_t y = 0; y < map->height; y++)
 		for (uint32_t x = 0; x < map->width; x++)
 			draw_elem(game, x, y);
-	draw_mini_point(game, game->player.pos, game->param.minimap_point_size, 0xFF00FFFF);
-
-
-
-	return (1);
+	draw_mini_point(game, game->player.pos, game->param.minimap_point_size,
+		0xFF00FFFF);
 }

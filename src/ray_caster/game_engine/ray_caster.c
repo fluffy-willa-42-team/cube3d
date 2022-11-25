@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 10:01:39 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/25 12:02:36 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/25 12:42:45 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,13 @@
 double	prot_tan(double alpha);
 double	loop_len(double n, double len);
 double	get_distance(t_game *game, t_coord_f64 pos);
-t_inter get_intersect(t_game *game, double alpha, double tan_a);
+t_inter	get_intersect(t_game *game, double alpha, double tan_a);
 
 void	draw_wall(t_game *game, uint32_t x, t_coord_f64 inter, double heigth);
-void	draw_floor(t_game *game, int x, double alpha, double heigth_drawn, double dist);
-void	draw_transparency(t_game *game, uint32_t x, t_inter inter, double alpha, double tan_a);
+void	draw_floor(t_game *game, int x, double alpha, double heigth_drawn,
+			double dist);
+void	draw_transparency(t_game *game, uint32_t x, t_inter inter, double alpha,
+			double tan_a);
 
 /**
  * @brief Will calculate the wall intersection draw the wall then the ground and
@@ -31,12 +33,12 @@ void	draw_transparency(t_game *game, uint32_t x, t_inter inter, double alpha, do
  * @param alpha The angle at which we are looking at that column
  * @param tan_a The tangent of alpha
  */
-void draw_column(t_game *game, uint32_t x, double alpha, double tan_a)
+void	draw_column(t_game *game, uint32_t x, double alpha, double tan_a)
 {
 	t_inter	inter;
 	double	dist;
 	double	height_to_draw;
-	
+
 	inter = get_intersect(game, loop_len(alpha, PI2), tan_a);
 	dist = get_distance(game, inter.point);
 	height_to_draw = HEIGTH_OF_BLOCK * game->param.hob_mult / dist;
@@ -67,16 +69,19 @@ Ray Casting can be subdivised in 4 step :
 All of these steps are done on a column but column basis.
 
  */
-void ray_caster(t_game *game)
+void	ray_caster(t_game *game)
 {
-	double	tan_a;
-	double	alpha;
-	
+	double		tan_a;
+	double		alpha;
+	uint32_t	i;
+
 	alpha = game->player.alpha - FOV_ANG_1_2 - FOV_INCRE;
-	for (uint32_t i = 0; i < WIN_WIDTH; i++)
+	i = 0;
+	while (i < WIN_WIDTH)
 	{
 		alpha += FOV_INCRE;
 		tan_a = prot_tan(alpha);
 		draw_column(game, i, alpha, tan_a);
+		i++;
 	}
 }

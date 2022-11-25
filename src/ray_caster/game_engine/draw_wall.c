@@ -6,22 +6,20 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:46:26 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/25 12:20:24 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/25 12:41:16 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ray_caster.h"
 #include "mlx_utils.h"
 
-
 int				is_equal(double a, double b);
-
-void draw_pixel_skybox(t_game *game, t_coord_i32 pixel_pos, t_texture *texture);
+void	draw_pixel_skybox(t_game *game, t_coord_i32 pixel_pos, t_texture *texture);
 
 void	exchange_textures(t_wall_inter *wall)
 {
-	void *tmp;
-	
+	void	*tmp;
+
 	tmp = wall->chunk1;
 	wall->chunk1 = wall->chunk2;
 	wall->chunk2 = tmp;
@@ -30,7 +28,7 @@ void	exchange_textures(t_wall_inter *wall)
 	wall->text2 = tmp;
 }
 
-int is_transparent(t_texture *text)
+int	is_transparent(t_texture *text)
 {
 	return (!text || text->type & TRANSPARENCY);
 }
@@ -49,7 +47,7 @@ void	draw_pixel_wall(
 	else if (texture->type & IMAGE)
 		put_pixel(game, pos.x, pos.y,
 			get_pixel_image(texture, offset, i, ratio)
-		);
+			);
 	else
 		put_pixel(game, pos.x, pos.y, texture->color);
 }
@@ -62,32 +60,37 @@ void	draw_wall_text(
 	double height
 )
 {
+	t_coord_f64			ratio;
+	double				offset;
+	uint32_t			parse_heigth;
+
 	if (!texture || !(texture->type & VALID))
 		return ;
-	t_coord_f64			ratio;
-	double 				offset;
-	
 	if (texture->type & IMAGE)
 	{
 		ratio = set_f64(1, (double) texture->image->height / (height * 2));
-		offset = (inter.x - (int) (float) inter.x) * texture->image->width
-				+ (inter.y - (int) (float) inter.y) * texture->image->height;
+		offset = (inter.x - (int)(float) inter.x) * texture->image->width
+			+ (inter.y - (int)(float) inter.y) * texture->image->height;
 	}
 	if (height > 400000000)
 		height = 400000000;
-	uint32_t parse_heigth = height;
+	parse_heigth = height;
 	if (parse_heigth >= MIDDLE_OF_SCREEN)
 		parse_heigth = MIDDLE_OF_SCREEN - 1;
 	for (uint32_t i = height - parse_heigth; i < height + parse_heigth + 1; i++)
-		draw_pixel_wall(game, set_i32(x, MIDDLE_OF_SCREEN - height + i), texture, ratio, offset, i);
+		draw_pixel_wall(game, set_i32(x, MIDDLE_OF_SCREEN - height + i),
+			texture, ratio, offset, i);
 }
 
 void	draw_wall(t_game *game, uint32_t x, t_coord_f64 inter, double height)
 {
-	t_wall_inter wall = get_wall(game, inter);
-	
-	if ((is_equal(inter.y, (int) (float) inter.y) && inter.y > game->player.pos.y)
-		|| (is_equal(inter.x, (int) (float) inter.x) && inter.x > game->player.pos.x))
+	t_wall_inter	wall;
+
+	wall = get_wall(game, inter);
+	if ((is_equal(inter.y, (int)(float) inter.y)
+		&& inter.y > game->player.pos.y)
+		|| (is_equal(inter.x, (int)(float) inter.x)
+		&& inter.x > game->player.pos.x))
 		exchange_textures(&wall);
 	if (!is_transparent(wall.text1))
 		draw_wall_text(game, inter, wall.text1, x, height);
@@ -98,12 +101,20 @@ void	draw_wall(t_game *game, uint32_t x, t_coord_f64 inter, double height)
 	}
 }
 
-void	draw_wall_trans(t_game *game, uint32_t x, t_coord_f64 inter, double height)
+void	draw_wall_trans(
+	t_game *game,
+	uint32_t x,
+	t_coord_f64 inter,
+	double height
+)
 {
-	t_wall_inter wall = get_wall(game, inter);
-	
-	if ((is_equal(inter.y, (int) (float) inter.y) && inter.y > game->player.pos.y)
-		|| (is_equal(inter.x, (int) (float) inter.x) && inter.x > game->player.pos.x))
+	t_wall_inter	wall;
+
+	wall = get_wall(game, inter);
+	if ((is_equal(inter.y, (int)(float) inter.y)
+		&& inter.y > game->player.pos.y)
+		|| (is_equal(inter.x, (int)(float) inter.x)
+		&& inter.x > game->player.pos.x))
 		exchange_textures(&wall);
 	if (wall.text1 || wall.text2)
 	{

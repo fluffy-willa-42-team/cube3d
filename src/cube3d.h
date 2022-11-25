@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:33:07 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/25 12:19:27 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/25 12:52:37 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,37 +78,37 @@ typedef struct s_chunk {
 typedef struct s_entity {
 	int32_t		type;
 	t_coord_f64	coord;
-	int 		nb_texture;
+	int			nb_texture;
 	t_texture	*texture;
 }	t_entity;
 
 /* ************************************************************************** */
 
 typedef struct s_map {
-	char	 	array[23][20];
+	char		array[23][20];
 	t_chunk		*map;
 	uint32_t	height;
 	uint32_t	width;
 }	t_map;
 
 typedef struct s_param {
-	mlx_t 		*mlx;
-	mlx_image_t *img;
+	mlx_t		*mlx;
+	mlx_image_t	*img;
 	double		hob_mult;
 	uint32_t	minimap_size;
 	double		minimap_point_size;
 }	t_param;
 
 typedef struct s_player {
-	t_coord_f64 pos;
+	t_coord_f64	pos;
 	double		alpha;
-	t_coord_f64 cosin;
+	t_coord_f64	cosin;
 }	t_player;
 
 typedef struct s_game {
-	t_param 		param;
+	t_param			param;
 	t_player		player;
-	t_map 			map;
+	t_map			map;
 	t_texture		skybox;
 	t_texture		temp;
 	t_texture		temp1;
