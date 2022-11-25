@@ -56,7 +56,7 @@ void	draw_elem(t_game *game, int32_t x, int32_t y)
 	if (chunk->west)  draw_line_s(game, set_f64(x, y),		set_f64(x, y + 1), 		0x21634caa);
 }
 
-void	draw_transparency(t_game *game, t_inter inter, double alpha, double tan_a);
+void	draw_transparency(t_game *game, uint32_t x, t_inter inter, double alpha, double tan_a);
 
 void draw_ray(t_game *game, uint32_t color, double alpha)
 {
