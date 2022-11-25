@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:33:07 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/25 14:36:17 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/25 15:43:35 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,36 @@
 # include "MLX42/MLX42.h"
 # include <stdint.h>
 # include <stddef.h>
+# include "vector_lib.h"
+
+# include "cube_types.h"
+
+/* #####=====----------			Common Math Var			 ----------=====##### */
+
+# define PI    3.14159265359
+# define PI1_2 1.57079632679
+# define PI1_3 1.0471975512
+# define PI1_4 0.78539816339
+# define PI1_6 0.52359877559
+# define PI3_2 4.71238898038
+# define PI2   6.28318530718
+
+/* #####=====----------			Mlx Config Var			 ----------=====##### */
+
+# define WIN_WIDTH	800
+# define WIN_HEIGHT	800
+
+# define ANGLE_START	PI
+
+/* #####=====----------		Ray Caster Config Var		 ----------=====##### */
+
+// FOV = PI / 3
+# define FOV_ANGLE			1.0471975512
+# define HEIGTH_OF_BLOCK	WIN_HEIGHT / 10
+
+# define MIDDLE_OF_SCREEN	WIN_HEIGHT / 2
+# define FOV_INCRE			(double) (FOV_ANGLE) / WIN_WIDTH
+# define FOV_ANG_1_2		(double) (FOV_ANGLE) / 2
 
 # include "cube_types.h"
 
@@ -48,32 +78,52 @@
 
 /* ************************************************************************** */
 
+/**
+ * @param UNDEFINED
+ * @param VALID
+ * @param COLOR
+ * @param IMAGE
+ * @param SKYBOX
+ * @param ALLOW_CLIP
+ * @param TRANSPARENCY
+ */
 typedef enum e_texture_type {
-	UNDEFINED		= 0b00000,
-	VALID			= 0b00001,
-	IMAGE			= 0b00010,
-	SKYBOX			= 0b00100,
-	ALLOW_CLIP		= 0b01000,
-	TRANSPARENCY	= 0b10000
+	UNDEFINED		= 0b0000001,
+	VALID			= 0b0000010,
+	COLOR			= 0b0000100,
+	IMAGE			= 0b0001000,
+	SKYBOX			= 0b0010000,
+	ALLOW_CLIP		= 0b0100000,
+	TRANSPARENCY	= 0b1000000
 }	t_texture_type;
 
+/**
+ * @param type           (t_texture_type)
+ * @param token          (char)
+ * @param sky_box_token  (char)
+ * @param path           (char*)
+ * @param image          (void*)
+ * @param color          (unit32_t)
+ */
 typedef struct s_texture {
-	t_texture_type	type;
-	mlx_texture_t	*image;
-	int				color;
+	t_texture_type			type;
+	char					token;
+	char					sky_box_token;
+	char					*path;
+	void					*image;
+	uint32_t				color;
+	struct s_texture		*skybox_tex;
 }	t_texture;
 
 /* ************************************************************************** */
 
-typedef struct s_chunk {
-	t_coord_i32	coord;
-	t_texture	*north;
-	t_texture	*south;
-	t_texture	*east;
-	t_texture	*west;
-	t_texture	*ceiling;
-	t_texture	*floor;
-}	t_chunk;
+/**
+ *     TOP    | NORTH | ENTITY
+ *     -------0-------0-------
+ *     WEST   | EAST  | TEX
+ *     -------0-------0-------
+ *     BOTTOM | SOUTH | OPT
+ */
 
 typedef struct s_entity {
 	int32_t		type;
@@ -82,14 +132,86 @@ typedef struct s_entity {
 	t_texture	*texture;
 }	t_entity;
 
-/* ************************************************************************** */
+/**
+ * @param WHITE_SPACE_CHUNK For the white space chunk, so no data
+ * @param GOOD_CHUNK        For the chunk with data
+ * @param BAD_CHUNK         For the chunk that have white space and data
+ */
+typedef enum e_chunk_type {
+	WHITE_SPACE_CHUNK,
+	GOOD_CHUNK,
+	BAD_CHUNK
+}				t_chunk_type;
 
-typedef struct s_map {
-	char		array[23][20];
-	t_chunk		*map;
-	uint32_t	height;
-	uint32_t	width;
-}	t_map;
+/**
+ * @param type     (int32_t)
+ * @param coord    (t_coord_i32)
+ * @param north    (t_texture *)
+ * @param east     (t_texture *)
+ * @param west     (t_texture *)
+ * @param south    (t_texture *)
+ * @param ceiling  (t_texture *)
+ * @param floor    (t_texture *)
+ * @param skybox   (t_texture *)
+ */
+typedef struct s_chunk {
+	int32_t		type;
+	t_coord_i32	coord;
+	t_texture	*north;
+	t_texture	*east;
+	t_texture	*west;
+	t_texture	*south;
+	t_texture	*ceiling;
+	t_texture	*floor;
+	t_texture	*skybox;
+}	t_chunk;
+
+# define E_EMPTY '.'
+
+/**
+ * Player macro
+ */
+
+# define E_PLAYER			'P'
+# define OPT_P_NORTH		'N'
+# define OPT_P_SOUTH		'S'
+# define OPT_P_EAST			'E'
+# define OPT_P_WEST			'W'
+
+/**
+ * Enemy macro
+ */
+# define E_ENEMY			'E'
+# define T_ENEMY_DEFAULT	'./TODO'
+# define OPT_E_DEFAULT	'.'
+
+/**
+ * Collectible macro
+ */
+# define E_COLLECTIBLE	'C'
+# define OPT_C_AMMO		'A'
+# define OPT_C_HEALTH	'H'
+
+/**
+ * Door macro
+ */
+# define E_DOOR			'D'
+# define OPT_D_N			'N'
+# define OPT_D_E			'E'
+
+/**
+ * Furniture macro
+ */
+# define E_FURNITURE		'F'
+
+typedef struct s_map
+{
+	int32_t		height;
+	int32_t		width;
+	t_coord_i32	size;
+	t_vec		tex_list;
+	t_vec		map;
+}				t_map;
 
 typedef struct s_param {
 	mlx_t		*mlx;

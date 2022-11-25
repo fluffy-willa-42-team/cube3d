@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: awillems <awillems@student.42.fr>          +#+  +:+       +#+         #
+#    By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/05 10:47:56 by awillems          #+#    #+#              #
-#    Updated: 2022/11/14 09:58:41 by awillems         ###   ########.fr        #
+#    Updated: 2022/11/25 15:40:42 by mahadad          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ CC			= gcc
 OBJ_EXT		= .o
 CODE_EXT	= .c
 HEAD_EXT	= .h
-INC			= -I include -I lib/MLX42/include/ -I lib/MLX42/ -I lib/vector-lib/include -I lib/libft/include
+INC			= -I include -I lib/MLX42/include/MLX42 -I lib/MLX42/ -Ilib/vector-lib/include -Ilib/libft/include
 FLAGS		= -Wall -Wextra -Werror
 FLAGS_COMP	= 
 
@@ -51,8 +51,15 @@ COLOR_GREEN	= \033[32;1m
 # **************************************************************************** #
 
 DEBUG		= 0
+TEST_UNIT	= 0
 SANI		= 0
 WRA			= 0
+
+ifeq ($(TEST_UNIT), 1)
+	SANI = 1
+	FLAGS += -D CUBE3D_UNITEST_PARSER=1
+	MAKE_FLAG += TEST_UNIT=1
+endif
 
 ifeq ($(SANI), 1)
 	FLAGS += -fsanitize=address
@@ -149,6 +156,9 @@ clean:
 	fi; \
 done
 
+c:
+	@rm -rf $(OBJ)
+
 # **************************************************************************** #
 
 fclean:
@@ -158,6 +168,9 @@ fclean:
 		make -sC $$path fclean;\
 	fi; \
 done
+
+fc:
+	@rm -rf $(OBJ) $(INC_DIR)* $(NAME)
 
 # **************************************************************************** #
 
@@ -170,6 +183,7 @@ print_src:
 # **************************************************************************** #
 
 re: fclean all
+r:  fc all
 
 # **************************************************************************** #
 
@@ -177,9 +191,8 @@ exe: all
 	@bash -c "./$(NAME)"
 
 test: clear_test
-	@make re SANI=1
+	@make re SANI=1 TEST_UNIT=1
 	@gcc -Wall -Wextra -Werror tester/tester.c -o tester/tester
-	@./tester/tester
 
 run_test:
 	@gcc -Wall -Wextra -Werror tester/tester.c -o tester/tester
@@ -189,6 +202,11 @@ clear_test:
 	@find . -type f -name "*.err" -prune -exec rm -rf {} \;
 	@find . -type f -name "*.out" -prune -exec rm -rf {} \;
 # **************************************************************************** #
+
+update_lib: fclean remove_stuff
+	git submodule init
+	git submodule update
+	git pull
 
 fluffy:
 	git config user.name "matthew-dreemurr"
