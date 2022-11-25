@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 12:46:00 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/25 12:44:40 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/25 13:16:29 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,13 @@ t_intersect	get_r_step_y(t_intersect prev, double alpha, double tan_a);
 void		draw_wall_trans(t_game *game, uint32_t x, t_coord_f64 inter,
 				double height);
 
-void	draw_transparency(t_game *game, uint32_t x, t_inter inter, double alpha,
-			double tan_a)
+void	draw_transparency(
+	t_game *game,
+	uint32_t x,
+	t_inter inter,
+	double alpha,
+	double tan_a
+)
 {
 	double	x_dist;
 	double	y_dist;

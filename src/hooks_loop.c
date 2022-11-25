@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 11:47:01 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/25 11:48:49 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/25 12:55:45 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,13 @@ void	map_point_hook(t_game *game, double incrementation);
 
 void	hook_loop(void *param)
 {
-	t_game		*game = param;
-	t_coord_f64	*cosin = &game->player.cosin;
-	t_coord_f64	move_vec = set_f64(0, 0);
+	t_game		*game;
+	t_coord_f64	*cosin;
+	t_coord_f64	move_vec;
 
+	game = param;
+	cosin = &game->player.cosin;
+	move_vec = set_f64(0, 0);
 	if (mlx_is_key_down(game->param.mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(game->param.mlx);
 	if (mlx_is_key_down(game->param.mlx, MLX_KEY_UP))
@@ -71,7 +74,8 @@ void	hook_loop(void *param)
 		angle_hook(game, 0.001);
 	if (move_vec.x != 0 || move_vec.y != 0)
 		move_player(game, game->player.pos, move_vec);
-	draw_rectangle(game, set_f64(0, 0), set_i32(WIN_WIDTH, WIN_HEIGHT), 0x000000ff);
+	draw_rectangle(game, set_f64(0, 0), set_i32(WIN_WIDTH, WIN_HEIGHT),
+		0x000000ff);
 	ray_caster(game);
 	draw_minimap(game);
 }

@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 14:35:07 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/25 12:24:39 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/25 12:56:18 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 
 double	prot_tan(double alpha);
 
-void pos_hook(double incr_x, double incr_y, t_coord_f64 *move_vec)
+void	pos_hook(double incr_x, double incr_y, t_coord_f64 *move_vec)
 {
 	move_vec->x += incr_x;
 	move_vec->y += incr_y;
 }
 
-void angle_hook(t_game *game, double incrementation)
+void	angle_hook(t_game *game, double incrementation)
 {
 	game->player.alpha += incrementation;
 	if (game->player.alpha < 0)
@@ -34,20 +34,25 @@ void angle_hook(t_game *game, double incrementation)
 
 void	scale_hook(t_game *game, double incrementation)
 {
-	if (game->param.hob_mult + incrementation <= 100 && game->param.hob_mult + incrementation >= 0.5)
+	if (game->param.hob_mult + incrementation <= 100
+		&& game->param.hob_mult + incrementation >= 0.5)
 			game->param.hob_mult += incrementation;
 }
 
 void	map_hook(t_game *game, int32_t incrementation)
 {
 	if (game->param.minimap_size + incrementation >= 1
-		&& game->param.minimap_size + incrementation <= WIN_WIDTH / game->map.width
-		&& game->param.minimap_size + incrementation <= WIN_HEIGHT / game->map.height)
+		&& game->param.minimap_size + incrementation <= WIN_WIDTH
+		/ game->map.width
+		&& game->param.minimap_size + incrementation <= WIN_HEIGHT
+		/ game->map.height
+	)
 		game->param.minimap_size += incrementation;
 }
 
 void	map_point_hook(t_game *game, double incrementation)
 {
-	if (game->param.minimap_point_size + incrementation <= 100 && game->param.minimap_point_size + incrementation >= 1)
+	if (game->param.minimap_point_size + incrementation <= 100
+		&& game->param.minimap_point_size + incrementation >= 1)
 		game->param.minimap_point_size += incrementation;
 }

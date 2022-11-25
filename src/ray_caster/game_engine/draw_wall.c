@@ -6,15 +6,16 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:46:26 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/25 12:41:16 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/25 13:16:45 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ray_caster.h"
 #include "mlx_utils.h"
 
-int				is_equal(double a, double b);
-void	draw_pixel_skybox(t_game *game, t_coord_i32 pixel_pos, t_texture *texture);
+int		is_equal(double a, double b);
+void	draw_pixel_skybox(t_game *game, t_coord_i32 pixel_pos,
+			t_texture *texture);
 
 void	exchange_textures(t_wall_inter *wall)
 {
@@ -63,6 +64,7 @@ void	draw_wall_text(
 	t_coord_f64			ratio;
 	double				offset;
 	uint32_t			parse_heigth;
+	uint32_t			i;
 
 	if (!texture || !(texture->type & VALID))
 		return ;
@@ -77,9 +79,13 @@ void	draw_wall_text(
 	parse_heigth = height;
 	if (parse_heigth >= MIDDLE_OF_SCREEN)
 		parse_heigth = MIDDLE_OF_SCREEN - 1;
-	for (uint32_t i = height - parse_heigth; i < height + parse_heigth + 1; i++)
+	i = height - parse_heigth;
+	while (i < height + parse_heigth)
+	{
 		draw_pixel_wall(game, set_i32(x, MIDDLE_OF_SCREEN - height + i),
 			texture, ratio, offset, i);
+		i++;
+	}
 }
 
 void	draw_wall(t_game *game, uint32_t x, t_coord_f64 inter, double height)
