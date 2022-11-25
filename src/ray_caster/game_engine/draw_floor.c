@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 20:08:12 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/25 13:15:57 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/25 13:23:59 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 #include "mlx_utils.h"
 #include <math.h>
 
-void	draw_pixel_skybox(t_game *game, t_coord_i32 pixel_pos, t_texture *texture);
+void	draw_pixel_skybox(t_game *game, t_coord_i32 pixel_pos,
+			t_texture *texture);
 
 void	draw_top_or_bottom(
 	t_game *game,

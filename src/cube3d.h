@@ -6,14 +6,14 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:33:07 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/25 12:52:37 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/25 13:31:28 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUBE3D_H
 # define CUBE3D_H
 
-#include "MLX42/MLX42.h"
+# include "MLX42/MLX42.h"
 # include <stdint.h>
 # include <stddef.h>
 
@@ -52,10 +52,10 @@ typedef enum e_texture_type {
 	UNDEFINED		= 0b00000,
 	VALID			= 0b00001,
 	IMAGE			= 0b00010,
-    SKYBOX			= 0b00100,
-    ALLOW_CLIP		= 0b01000,
-    TRANSPARENCY	= 0b10000
-}    t_texture_type;
+	SKYBOX			= 0b00100,
+	ALLOW_CLIP		= 0b01000,
+	TRANSPARENCY	= 0b10000
+}	t_texture_type;
 
 typedef struct s_texture {
 	t_texture_type	type;

@@ -6,15 +6,15 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 10:30:13 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/25 12:02:25 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/25 13:28:01 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
 
-double prot_tan(double alpha)
+double	prot_tan(double alpha)
 {
-	double res;
+	double	res;
 
 	res = tan(alpha);
 	if (res >= 0 && res < 0.0001)
@@ -31,7 +31,7 @@ double prot_tan(double alpha)
  * @param len 
  * @return double 
  */
-double loop_len(double n, double len)
+double	loop_len(double n, double len)
 {
 	if (len == 0)
 		return (n);
@@ -42,8 +42,8 @@ double loop_len(double n, double len)
 	return (n);
 }
 
-int is_equal(double a, double b)
+int	is_equal(double a, double b)
 {
-	return ((a > b - 0.0001 && a < b + 0.0001) ||
-		(b > a - 0.0001 && b < a + 0.0001));
+	return ((a > b - 0.0001 && a < b + 0.0001)
+		|| (b > a - 0.0001 && b < a + 0.0001));
 }
