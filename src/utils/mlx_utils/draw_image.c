@@ -6,13 +6,13 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 15:54:48 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/17 13:34:25 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/25 11:40:46 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 
-void put_pixel(t_mlx_param *param, int32_t x, int32_t y, uint32_t color);
+void put_pixel(t_param *param, int32_t x, int32_t y, uint32_t color);
 
 static int get_rgba(int r, int g, int b, int a)
 {

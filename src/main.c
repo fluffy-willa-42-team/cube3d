@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:49:27 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/25 10:43:46 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/25 11:44:33 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 #include "ray_caster.h"
 #include "MLX42/MLX42.h"
 #include "mlx_utils.h"
+
+#include "init_data.h"
 
 void	move_player(t_game *game, t_coord_f64 player, t_coord_f64 incr);
 void	pos_hook(double incr_x, double incr_y, t_coord_f64 *move_vec);
@@ -90,7 +92,7 @@ void init_map(t_game *game);
 int main(void)
 {
 	t_game game = {
-		{NULL, NULL, 7, 8, 2, WIN_HEIGHT, WIN_WIDTH},
+		init_params(),
 		{{
 			"ssssssssssssssssssss",
 			"s_______   ________s",
@@ -116,7 +118,7 @@ int main(void)
 			"s   hhhhhhhhhhhh   s",
 			"sssssssssssssssssass"
 		}, NULL, 23, 20},
-		{{15.5f, 15.5f}, ANGLE_START, {cos(ANGLE_START), sin(ANGLE_START)}},
+		init_player(NORTH, set_i32(15, 15)),
 		{0, NULL, 0},
 		{0, NULL, 0},
 		{0, NULL, 0},
@@ -161,10 +163,10 @@ int main(void)
 		return (EXIT_FAILURE);
 	init_map(&game);
 
-	game.param.mlx = mlx_init(game.param.width, game.param.height, "MLX42", true);
+	game.param.mlx = mlx_init(WIN_WIDTH, WIN_HEIGHT, "MLX42", true);
 	if (!game.param.mlx)
 		return (EXIT_FAILURE);
-	game.param.img = mlx_new_image(game.param.mlx, game.param.width, game.param.height);
+	game.param.img = mlx_new_image(game.param.mlx, WIN_WIDTH, WIN_HEIGHT);
 	if (!game.param.img)
 		return (EXIT_FAILURE);
 	mlx_image_to_window(game.param.mlx, game.param.img, 0, 0);

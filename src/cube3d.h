@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:33:07 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/25 11:21:49 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/25 11:42:19 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,15 +101,13 @@ typedef struct s_map {
 	uint32_t	width;
 }	t_map;
 
-typedef struct s_mlx_param {
+typedef struct s_param {
 	mlx_t 		*mlx;
 	mlx_image_t *img;
 	double		hob_mult;
 	uint32_t	minimap_size;
 	double		minimap_point_size;
-	int32_t 	height;
-	int32_t 	width;
-}	t_mlx_param;
+}	t_param;
 
 typedef struct s_player {
 	t_coord_f64 pos;
@@ -118,7 +116,7 @@ typedef struct s_player {
 }	t_player;
 
 typedef struct s_game {
-	t_mlx_param 	param;
+	t_param 	param;
 	t_map 			map;
 	t_player		player;
 	t_texture		skybox;
