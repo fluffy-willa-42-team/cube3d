@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 10:01:39 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/25 10:30:49 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/25 10:40:09 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ double	get_distance(t_game *game, t_coord_f64 pos);
 t_inter get_intersect(t_game *game, double alpha, double tan_a);
 
 void	draw_wall(t_game *game, uint32_t x, t_coord_f64 inter, double heigth);
+void	draw_floor(t_game *game, int x, double alpha, double heigth_drawn, double dist);
 void	draw_transparency(t_game *game, uint32_t x, t_inter inter, double alpha, double tan_a);
 
 /**
@@ -42,8 +43,8 @@ void draw_column(t_game *game, uint32_t x, double alpha, double tan_a)
 	dist = get_distance(game, inter.point);
 	height_to_draw = HEIGTH_OF_BLOCK * game->param.hob_mult / dist;
 	draw_wall(game, x, inter.point, height_to_draw);
-	// if (height_to_draw < MIDDLE_OF_SCREEN - 1)
-	// 	draw_floor(game, x, alpha, height_to_draw, dist);
+	if (height_to_draw < MIDDLE_OF_SCREEN - 1)
+		draw_floor(game, x, alpha, height_to_draw, dist);
 	draw_transparency(game, x, inter, loop_len(alpha, PI2), tan_a);
 }
 

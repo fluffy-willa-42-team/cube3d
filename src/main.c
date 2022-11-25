@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:49:27 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/23 17:28:51 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/25 10:43:46 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,7 @@ int main(void)
 		{1, {0, 0}, &game.t_cont1,	&game.t_cont2,	&game.t_cont5,	NULL,			NULL,			NULL},			// cont3	'e'
 		{1, {0, 0}, &game.t_cont4,	&game.t_cont5,	&game.t_cont4,	&game.t_cont4,	NULL,			NULL},			// cont4	'f'
 		{1, {0, 0}, &game.clip,		&game.clip,		&game.clip,		&game.clip,		&game.skybox,	&game.skybox},	// chunk6	'_'
-		{1, {0, 0}, &game.temp3,	&game.temp3,	&game.temp3,	&game.temp3,	&game.skybox,	&game.skybox}	// chunk7	'u'
+		{1, {0, 0}, &game.temp3,	&game.temp3,	&game.temp3,	&game.temp3,	&game.skybox,	&game.temp2}	// chunk7	'u'
 	};
 
 	if (	!init_texture(&game.temp,		IMAGE | ALLOW_CLIP,		"./texture/mc/grass_side.xpm42",					0x0000FFFF)
