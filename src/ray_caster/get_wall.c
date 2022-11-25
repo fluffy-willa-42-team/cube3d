@@ -6,11 +6,11 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 11:24:28 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/25 11:25:29 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/25 11:58:51 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cube3d.h"
+#include "ray_caster.h"
 
 t_chunk	*get_chunk(t_game *game, t_coord_i32 pos);
 int		is_equal(double a, double b);

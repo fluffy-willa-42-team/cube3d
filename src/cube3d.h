@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:33:07 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/25 11:52:13 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/25 12:00:37 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ typedef struct s_texture {
 /* ************************************************************************** */
 
 typedef struct s_chunk {
-	int32_t		type;
 	t_coord_i32	coord;
 	t_texture	*north;
 	t_texture	*south;
@@ -82,15 +81,6 @@ typedef struct s_entity {
 	int 		nb_texture;
 	t_texture	*texture;
 }	t_entity;
-
-typedef struct s_wall_inter
-{
-	t_chunk		*chunk1;
-	t_chunk		*chunk2;
-	t_texture	*text1;
-	t_texture	*text2;
-}	t_wall_inter;
-
 
 /* ************************************************************************** */
 

@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:49:27 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/25 11:52:17 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/25 12:00:53 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,18 +66,18 @@ int main(void)
 		{0, NULL, 0},
 		{0, NULL, 0},
 		{0, NULL, 0},
-		{0, {0, 0}, NULL,			NULL,			NULL,			NULL,			&game.skybox,	&game.temp2},	// chunk0	' '
-		{1, {0, 0}, &game.skybox,	&game.skybox,	&game.skybox,	&game.skybox,	NULL,			NULL},			// chunk1	's'
-		{1, {0, 0}, NULL,			NULL,			&game.temp1,	&game.temp2,	&game.temp1,	&game.temp1},	// chunk2	'v'
-		{1, {0, 0}, &game.temp1,	&game.temp1,	NULL,			NULL,			&game.temp1,	&game.temp1},	// chunk3	'h'
-		{1, {0, 0}, NULL,			&game.temp1,	NULL,			&game.temp1,	&game.temp1,	&game.temp1},	// chunk4	'a'
-		{1, {0, 0}, &game.temp,		&game.temp,		&game.temp,		&game.temp,		&game.temp,		&game.temp},	// chunk5	'b'
-		{1, {0, 0}, &game.t_cont2,	&game.t_cont1,	NULL,			&game.t_cont4,	NULL,			NULL},			// cont1	'c'
-		{1, {0, 0}, &game.t_cont3,	&game.t_cont3,	NULL,			NULL,			NULL,			NULL},			// cont2	'd'
-		{1, {0, 0}, &game.t_cont1,	&game.t_cont2,	&game.t_cont5,	NULL,			NULL,			NULL},			// cont3	'e'
-		{1, {0, 0}, &game.t_cont4,	&game.t_cont5,	&game.t_cont4,	&game.t_cont4,	NULL,			NULL},			// cont4	'f'
-		{1, {0, 0}, &game.clip,		&game.clip,		&game.clip,		&game.clip,		&game.skybox,	&game.skybox},	// chunk6	'_'
-		{1, {0, 0}, &game.temp3,	&game.temp3,	&game.temp3,	&game.temp3,	&game.skybox,	&game.temp2}	// chunk7	'u'
+		{{0, 0}, NULL,			NULL,			NULL,			NULL,			&game.skybox,	&game.temp2},	// chunk0	' '
+		{{0, 0}, &game.skybox,	&game.skybox,	&game.skybox,	&game.skybox,	NULL,			NULL},			// chunk1	's'
+		{{0, 0}, NULL,			NULL,			&game.temp1,	&game.temp2,	&game.temp1,	&game.temp1},	// chunk2	'v'
+		{{0, 0}, &game.temp1,	&game.temp1,	NULL,			NULL,			&game.temp1,	&game.temp1},	// chunk3	'h'
+		{{0, 0}, NULL,			&game.temp1,	NULL,			&game.temp1,	&game.temp1,	&game.temp1},	// chunk4	'a'
+		{{0, 0}, &game.temp,	&game.temp,		&game.temp,		&game.temp,		&game.temp,		&game.temp},	// chunk5	'b'
+		{{0, 0}, &game.t_cont2,	&game.t_cont1,	NULL,			&game.t_cont4,	NULL,			NULL},			// cont1	'c'
+		{{0, 0}, &game.t_cont3,	&game.t_cont3,	NULL,			NULL,			NULL,			NULL},			// cont2	'd'
+		{{0, 0}, &game.t_cont1,	&game.t_cont2,	&game.t_cont5,	NULL,			NULL,			NULL},			// cont3	'e'
+		{{0, 0}, &game.t_cont4,	&game.t_cont5,	&game.t_cont4,	&game.t_cont4,	NULL,			NULL},			// cont4	'f'
+		{{0, 0}, &game.clip,	&game.clip,		&game.clip,		&game.clip,		&game.skybox,	&game.skybox},	// chunk6	'_'
+		{{0, 0}, &game.temp3,	&game.temp3,	&game.temp3,	&game.temp3,	&game.skybox,	&game.temp2}	// chunk7	'u'
 	};
 
 	if (	!init_texture(&game.temp,		IMAGE | ALLOW_CLIP,		"./texture/mc/grass_side.xpm42",					0x0000FFFF)
