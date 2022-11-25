@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:01:25 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/24 13:27:03 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/25 13:10:10 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static void	skip_whitespace(t_parser *data, char *tmp)
  * @brief Convert the texture name with arbitrary index and the texture path.
  * 
  * @note
- * `WE ./path_to_the_west_texture` -> `2 xx* ./path_to_the_west_texture`//TODO #14 Make the new tex struct
+ * `WE ./path_to_the_west_texture` -> `2 xx* ./path_to_the_west_texture`
  * `cub`   [tex token] [tex path/color]
  * `cube`  [tex token] [allow clip][transparency][token skybox] [tex path/color]
  * 
