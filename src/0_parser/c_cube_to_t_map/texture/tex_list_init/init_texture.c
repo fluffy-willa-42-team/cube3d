@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 14:27:58 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/25 12:53:25 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/25 15:56:37 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,16 @@ static void	null_terminate_line(char *line)
 static int	open_file_texture(t_texture *tex)
 {
 	char	*path;
+	xpm_t	*tmp;
 
 	if (!tex || !tex->path)
 		return (ret_print(EXIT_FAILURE, ERR_NULL_TEX));
 	path = tex->path;
 	null_terminate_line(path);
-	tex->image = mlx_load_xpm42(path);
-	if (!tex->image)
+	tmp = mlx_load_xpm42(path);
+	if (!tmp)
 		return (ret_print(EXIT_FAILURE, ERR_EMPTY_FILE));
+	tex->image = &tmp->texture;
 	return (EXIT_SUCCESS);
 }
 

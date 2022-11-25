@@ -6,14 +6,14 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:33:07 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/25 15:43:35 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/25 15:57:15 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUBE3D_H
 # define CUBE3D_H
 
-# include "MLX42/MLX42.h"
+# include "MLX42.h"
 # include <stdint.h>
 # include <stddef.h>
 # include "vector_lib.h"
@@ -110,7 +110,7 @@ typedef struct s_texture {
 	char					token;
 	char					sky_box_token;
 	char					*path;
-	void					*image;
+	mlx_texture_t			*image;
 	uint32_t				color;
 	struct s_texture		*skybox_tex;
 }	t_texture;
@@ -206,8 +206,8 @@ typedef struct s_chunk {
 
 typedef struct s_map
 {
-	int32_t		height;
-	int32_t		width;
+	uint32_t		height;
+	uint32_t		width;
 	t_coord_i32	size;
 	t_vec		tex_list;
 	t_vec		map;
