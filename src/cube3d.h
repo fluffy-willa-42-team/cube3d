@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
+/*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:33:07 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/25 15:57:15 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/25 16:39:37 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,7 +152,6 @@ typedef enum e_chunk_type {
  * @param south    (t_texture *)
  * @param ceiling  (t_texture *)
  * @param floor    (t_texture *)
- * @param skybox   (t_texture *)
  */
 typedef struct s_chunk {
 	int32_t		type;
@@ -163,7 +162,6 @@ typedef struct s_chunk {
 	t_texture	*south;
 	t_texture	*ceiling;
 	t_texture	*floor;
-	t_texture	*skybox;
 }	t_chunk;
 
 # define E_EMPTY '.'
@@ -229,32 +227,9 @@ typedef struct s_player {
 }	t_player;
 
 typedef struct s_game {
-	t_param			param;
-	t_player		player;
-	t_map			map;
-	t_texture		skybox;
-	t_texture		temp;
-	t_texture		temp1;
-	t_texture		temp2;
-	t_texture		t_cont1;
-	t_texture		t_cont2;
-	t_texture		t_cont3;
-	t_texture		t_cont4;
-	t_texture		t_cont5;
-	t_texture		temp3;
-	t_texture		clip;
-	t_chunk			chunk0;
-	t_chunk			chunk1;
-	t_chunk			chunk2;
-	t_chunk			chunk3;
-	t_chunk			chunk4;
-	t_chunk			chunk5;
-	t_chunk			cont1;
-	t_chunk			cont2;
-	t_chunk			cont3;
-	t_chunk			cont4;
-	t_chunk			chunk6;
-	t_chunk			chunk7;
+	t_param		param;
+	t_player	player;
+	t_map		map;
 }	t_game;
 
 /* ************************************************************************** */

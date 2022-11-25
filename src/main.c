@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
+/*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:56:12 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/10 18:36:49 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/25 16:45:23 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
+#include "init_data.h"
 
 #include "cube3d_debug.h"
 
@@ -19,13 +20,29 @@
 /* EXIT_SUCCESS, EXIT_FAILURE*/
 #include <stdlib.h>
 
+void	hook_loop(void *param);
+
 int	run(char *file)
 {
-	t_map map;
-	if (parser(file, &map))
+	t_game game;
+
+	if (parser(file, &game.map))
 		return (EXIT_FAILURE);
 	if (CUBE3D_UNITEST_PARSER)
 		return (EXIT_SUCCESS);
+	game.player = init_player(EAST, set_i32(2, 2));
+	game.param = init_params();
+	game.param.mlx = mlx_init(WIN_WIDTH, WIN_HEIGHT, "MLX42", true);
+	if (!game.param.mlx)
+		return (EXIT_FAILURE);
+	game.param.img = mlx_new_image(game.param.mlx, WIN_WIDTH, WIN_HEIGHT);
+	if (!game.param.img)
+		return (EXIT_FAILURE);
+	mlx_image_to_window(game.param.mlx, game.param.img, 0, 0);
+	mlx_loop_hook(game.param.mlx, &hook_loop, &game);
+	mlx_loop(game.param.mlx);
+	mlx_delete_image(game.param.mlx, game.param.img);
+	mlx_terminate(game.param.mlx);
 	return(EXIT_SUCCESS);
 }
 

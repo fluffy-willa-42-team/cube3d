@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 20:08:12 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/25 13:23:59 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/25 16:40:39 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	draw_top_or_bottom(
 	if (texture)
 	{
 		if (texture->type & SKYBOX && texture->type & IMAGE)
-			draw_pixel_skybox(game, pixel_pos, &game->skybox);
+			draw_pixel_skybox(game, pixel_pos, texture->skybox_tex);
 		else if (texture->type & IMAGE)
 		{
 			put_pixel(game, pixel_pos.x, pixel_pos.y,
