@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:33:07 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/25 13:31:28 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/25 14:36:17 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ typedef struct s_param {
 	double		hob_mult;
 	uint32_t	minimap_size;
 	double		minimap_point_size;
+	double		speed;
 }	t_param;
 
 typedef struct s_player {

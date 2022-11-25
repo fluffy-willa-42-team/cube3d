@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 14:35:07 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/25 12:56:18 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/25 14:40:10 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,11 @@ void	map_point_hook(t_game *game, double incrementation)
 	if (game->param.minimap_point_size + incrementation <= 100
 		&& game->param.minimap_point_size + incrementation >= 1)
 		game->param.minimap_point_size += incrementation;
+}
+
+void	speed_hook(t_game *game, double incrementation)
+{
+	if (game->param.speed + incrementation <= 100
+		&& game->param.speed + incrementation >= 0.001)
+		game->param.speed += incrementation;
 }
