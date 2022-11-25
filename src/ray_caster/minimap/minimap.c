@@ -15,7 +15,6 @@
 
 double		loop_len(double n, double len);
 double		prot_tan(double alpha);
-t_chunk		*get_chunk(t_game *game, t_coord_i32 coord);
 t_inter		get_intersect(t_game *game, double alpha, double tan_a);
 
 void	draw_elem(t_game *game, int32_t x, int32_t y)

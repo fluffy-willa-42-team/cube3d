@@ -6,13 +6,12 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 11:24:28 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/25 11:58:51 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/25 12:21:23 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ray_caster.h"
 
-t_chunk	*get_chunk(t_game *game, t_coord_i32 pos);
 int		is_equal(double a, double b);
 
 t_wall_inter	get_wall(t_game *game, t_coord_f64 inter)

@@ -45,4 +45,9 @@ typedef struct s_inter {
 
 /* ************************************************************************** */
 
+t_chunk			*get_chunk(t_game *game, t_coord_i32 coord);
+t_wall_inter	get_wall(t_game *game, t_coord_f64 inter);
+
+/* ************************************************************************** */
+
 #endif /* RAY_CASTER */

@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:49:27 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/25 12:00:53 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/25 12:09:57 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 #include "cube3d.h"
 #include "init_data.h"
-
 
 t_texture *init_image(t_texture *ptr, char *path);
 t_texture *init_color(t_texture *ptr, uint32_t color);

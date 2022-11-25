@@ -6,14 +6,14 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:46:26 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/25 12:02:40 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/25 12:20:24 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ray_caster.h"
 #include "mlx_utils.h"
 
-t_wall_inter	get_wall(t_game *game, t_coord_f64 inter);
+
 int				is_equal(double a, double b);
 
 void draw_pixel_skybox(t_game *game, t_coord_i32 pixel_pos, t_texture *texture);
