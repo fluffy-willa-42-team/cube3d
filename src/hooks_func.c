@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hooks.c                                            :+:      :+:    :+:   */
+/*   hooks_func.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 14:35:07 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/25 11:22:02 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/25 12:24:39 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,7 @@ void	map_hook(t_game *game, int32_t incrementation)
 {
 	if (game->param.minimap_size + incrementation >= 1
 		&& game->param.minimap_size + incrementation <= WIN_WIDTH / game->map.width
-		&& game->param.minimap_size + incrementation <= WIN_HEIGHT / game->map.height
-		)
+		&& game->param.minimap_size + incrementation <= WIN_HEIGHT / game->map.height)
 		game->param.minimap_size += incrementation;
 }
 
@@ -51,5 +50,4 @@ void	map_point_hook(t_game *game, double incrementation)
 {
 	if (game->param.minimap_point_size + incrementation <= 100 && game->param.minimap_point_size + incrementation >= 1)
 		game->param.minimap_point_size += incrementation;
-	
 }
