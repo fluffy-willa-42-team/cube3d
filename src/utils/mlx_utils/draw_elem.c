@@ -12,7 +12,6 @@
 
 #include "cube3d.h"
 #include "math.h"
-#include <stdio.h>
 
 void put_pixel(t_game *game, int32_t x, int32_t y, uint32_t color)
 {

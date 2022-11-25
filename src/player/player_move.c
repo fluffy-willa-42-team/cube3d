@@ -6,12 +6,11 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:18:47 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/23 15:39:10 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/25 12:03:00 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ray_caster.h"
-#include <stdio.h>
 #include <math.h>
 
 #include "mlx_utils.h"

@@ -13,8 +13,6 @@
 #include "ray_caster.h"
 #include "mlx_utils.h"
 
-#include <stdio.h>
-
 double		loop_len(double n, double len);
 double		prot_tan(double alpha);
 t_chunk		*get_chunk(t_game *game, t_coord_i32 coord);

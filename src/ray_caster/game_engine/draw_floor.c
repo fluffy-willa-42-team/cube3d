@@ -6,14 +6,13 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 20:08:12 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/25 10:42:22 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/25 12:02:57 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ray_caster.h"
 #include "mlx_utils.h"
 #include <math.h>
-#include <stdio.h>
 
 t_chunk *get_chunk(t_game *game, t_coord_i32 coord);
 
