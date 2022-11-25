@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:54:56 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/22 14:26:45 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/25 12:41:46 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int	ret_print(int ret, const char *msg);
 # define ERR_TEX_FORMAT  "Error\nBad texture format !\n"
 # define ERR_TEX_TYPE    "Error\nBad texture type !\n"
 # define ERR_TEX_TOKEN_FORMAT  "Error\nBad texture token format !\n"
+# define ERR_SKY_TOKEN_FORMAT  "Error\nBad skybox token format !\n"
 # define ERR_TEX_RESERVED  "Error\nBad or reserved texture token used !\n"
 # define ERR_TEX_DUP     "Error\nDuplicate texture !\n"
 # define ERR_NO_MAP_AFTER_TEX "Error\nNo map after texture !\n"

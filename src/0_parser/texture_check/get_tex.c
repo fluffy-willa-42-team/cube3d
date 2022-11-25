@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 17:12:59 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/15 15:57:02 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/25 12:39:02 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,12 @@ int	get_tex_index(char token)
  *          If the token is out of range from the `authzed_chunk_char()`
  *          will return `NULL`.
  * 
- * @return int Return a pointer of the texture slot. Or `-1` if the token is
+ * @return int Return a pointer of the texture slot. Or `NULL` if the token is
  *             unauthorized.
  */
-t_texture *get_tex_ptr(t_vec *tex, char token)
+t_texture	*get_tex_ptr(t_vec *tex, char token)
 {
-	const int index = get_tex_index(token);
+	const int	index = get_tex_index(token);
 
 	if (index == -1)
 		return (NULL);

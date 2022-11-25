@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:01:25 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/22 15:52:22 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/25 13:10:10 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,25 @@ static int	is_all_tex(t_parser *data)
 	}
 	return (1);
 }
-#include <stdio.h>//TODO REMOVE DEBUG
 
+static void	skip_whitespace(t_parser *data, char *tmp)
+{
+	while (tmp[data->index] != ' ')
+		data->index++;
+	while (tmp[data->index] == ' ')
+		data->index++;
+}
 
 /**
  * @brief Convert the texture name with arbitrary index and the texture path.
  * 
- * @example `WE ./path_to_the_west_texture` -> `2 xx* ./path_to_the_west_texture`//TODO #14 Make the new tex struct
+ * @note
+ * `WE ./path_to_the_west_texture` -> `2 xx* ./path_to_the_west_texture`
+ * `cub`   [tex token] [tex path/color]
+ * `cube`  [tex token] [allow clip][transparency][token skybox] [tex path/color]
+ * 
+ * For the [allow_clip][transparency] we set to `x` aka false.
+ * And for the [token_skybox] `.` aka none.
  * 
  * @param data Parser struct
  * @param tmp ptr to the `.cub` string
@@ -55,12 +67,9 @@ static int	is_all_tex(t_parser *data)
  */
 static int	cub_tex_to_cube(t_parser *data, char *tmp, int tex_index)
 {
-	if (!v_add(&data->cube, STRING, "%c ", '0' + tex_index))
+	if (!v_add(&data->cube, STRING, "%c xx. ", '0' + tex_index))
 		return (ret_print(EXIT_FAILURE, ERR_VEC_ADD));
-	while (tmp[data->index] != ' ')
-		data->index++;
-	while (tmp[data->index] == ' ')
-		data->index++;
+	skip_whitespace(data, tmp);
 	while (tmp[data->index] && tmp[data->index] != '\n')
 	{
 		if (!v_add(&data->cube, STRING, "%c", tmp[data->index]))
@@ -78,6 +87,15 @@ static int	cub_tex_to_cube(t_parser *data, char *tmp, int tex_index)
  * @author Matthew-Dreemurr
  * 
  * @brief Convert all texture name to the `.cube` format.
+ * 
+ * @note Will rename all texture `.cube` token with arbitrary token.
+ *
+ *       "NO"  -> 0
+ *       "SO"  -> 1
+ *       "WE"  -> 2
+ *       "EA"  -> 3
+ *       "F"   -> 4
+ *       "C"   -> 5
  * 
  * @param data Parser structure.
  * @return int Return 1 if the `c` is find in the `set` otherwise return 0.

@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:33:07 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/18 16:22:39 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/25 12:55:24 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,17 +47,18 @@ typedef enum e_texture_type {
  * @param color          (unit32_t)
  */
 typedef struct s_texture {
-	t_texture_type	type;
-	char			token;
-	char			sky_box_token;
-	char			*path;
-	void			*image;
-	uint32_t		color;
+	t_texture_type			type;
+	char					token;
+	char					sky_box_token;
+	char					*path;
+	void					*image;
+	uint32_t				color;
+	struct s_texture		*skybox_tex;
 }	t_texture;
 
 typedef struct s_coord_f64 {
-	double x;
-	double y;
+	double	x;
+	double	y;
 }	t_coord_f64;
 
 typedef struct s_coord_i32 {
@@ -85,7 +86,7 @@ typedef struct s_coord_f32 {
 typedef struct s_entity {
 	int32_t		type;
 	t_coord_f64	coord;
-	int 		nb_texture;
+	int			nb_texture;
 	t_texture	*texture;
 }	t_entity;
 
@@ -129,37 +130,37 @@ typedef struct s_chunk {
  * Player macro
  */
 
-# define	E_PLAYER			'P'
-# define	OPT_P_NORTH			'N'
-# define	OPT_P_SOUTH			'S'
-# define	OPT_P_EAST			'E'
-# define	OPT_P_WEST			'W'
+# define E_PLAYER			'P'
+# define OPT_P_NORTH		'N'
+# define OPT_P_SOUTH		'S'
+# define OPT_P_EAST			'E'
+# define OPT_P_WEST			'W'
 
 /**
  * Enemy macro
  */
-# define	E_ENEMY			'E'
-# define	T_ENEMY_DEFAULT	'./TODO'
-# define	OPT_E_DEFAULT	'.'
+# define E_ENEMY			'E'
+# define T_ENEMY_DEFAULT	'./TODO'
+# define OPT_E_DEFAULT	'.'
 
 /**
  * Collectible macro
  */
-# define	E_COLLECTIBLE	'C'
-# define	OPT_C_AMMO		'A'
-# define	OPT_C_HEALTH	'H'
+# define E_COLLECTIBLE	'C'
+# define OPT_C_AMMO		'A'
+# define OPT_C_HEALTH	'H'
 
 /**
  * Door macro
  */
-# define	E_DOOR			'D'
-# define	OPT_D_N			'N'
-# define	OPT_D_E			'E'
+# define E_DOOR			'D'
+# define OPT_D_N			'N'
+# define OPT_D_E			'E'
 
 /**
  * Furniture macro
  */
-# define	E_FURNITURE		'F'
+# define E_FURNITURE		'F'
 
 typedef struct s_map
 {

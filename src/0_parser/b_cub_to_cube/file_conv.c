@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:52:08 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/22 13:09:26 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/25 14:50:33 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 
 /* EXIT_SUCCESS, EXIT_FAILURE*/
 #include <stdlib.h>
-#include <stdio.h>//TODO REMOVE
 
 /**
  * @brief Try to find all mandatory texture and convert to `.cube` format. Then
@@ -29,8 +28,8 @@ static int	cub_to_cube(t_parser *data)
 {
 	data->cube = v_init(sizeof(char), NULL, NULL);
 	if (!v_alloc(&data->cube, SET, 5000000))
-		return(ret_print(EXIT_FAILURE, "ERR_VEC_ALLOC"));
-	if (texture_conv(data) || map_conv(data)/*//WIP*/)
+		return (ret_print(EXIT_FAILURE, "ERR_VEC_ALLOC"));
+	if (texture_conv(data) || map_conv(data))
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
@@ -48,7 +47,7 @@ int	file_conv(t_parser *data)
 {
 	if (data->type == CUB_FILE)
 	{
-		if (cub_to_cube(data) || !v_delete(&data->cub)/* //TODO change check after the lib update ! */ /*//TODO REMOVE, free only in main*/)
+		if (cub_to_cube(data) || v_delete(&data->cub))
 			return (EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);

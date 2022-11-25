@@ -3,11 +3,11 @@
 	"configurations": [
 		{
 			"name": "debug cube3d Linux",
-			"preLaunchTask": "cube3d debug compile",
+			// "preLaunchTask": "cube3d debug compile",
 			"type": "cppdbg",
 			"request": "launch",
 			"program": "${workspaceRoot}/cube3d",
-			"args": ["test.cube"],
+			"args": ["${input:map}"],
 			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",
 			"environment": [],
@@ -23,15 +23,23 @@
 		},
 		{
 			"name": "debug cube3d MacOs",
-			"preLaunchTask": "cube3d debug compile",
+			// "preLaunchTask": "cube3d debug compile",
 			"type": "cppdbg",
 			"request": "launch",
 			"program": "${workspaceRoot}/cube3d",
-			"args": ["map.cub"],
+			"args": ["${input:map}"],
 			"stopAtEntry": false,
 			"cwd": "${workspaceRoot}",
 			"environment": [],
 			"MIMode": "lldb"
 		  },
-	]
-  }
+	],
+	"inputs": [
+		{
+			"id": "map",
+			"type": "promptString",
+			"description": "Cube3d map arg",
+			"default": "map.cub"
+		}
+		]
+}
