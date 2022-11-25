@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:46:26 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/24 11:11:45 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/25 09:50:43 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,8 @@ void	draw_wall_text(
 		height = 400000000;
 	uint32_t parse_heigth = height;
 	if (parse_heigth >= MIDDLE_OF_SCREEN)
-		parse_heigth = MIDDLE_OF_SCREEN;
-	for (uint32_t i = height - parse_heigth + 1; i < height + parse_heigth ; i++)
+		parse_heigth = MIDDLE_OF_SCREEN - 1;
+	for (uint32_t i = height - parse_heigth; i < height + parse_heigth + 1; i++)
 		draw_pixel_wall(game, set_i32(x, MIDDLE_OF_SCREEN - height + i), texture, ratio, offset, i);
 }
 
