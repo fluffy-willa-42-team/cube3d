@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 14:27:58 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/22 15:00:43 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/25 12:53:25 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,12 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 
+/* mlx_load_xpm42() */
 #include "MLX42.h"
 
-/* mlx_load_xpm42() */
+/* get_tex_ptr() */
+#include "cube3d_utils.h"
+
 #include "cube3d_debug.h"
 
 #include <stdio.h>//TODO REMOVE
@@ -52,6 +55,31 @@ static int	open_file_texture(t_texture *tex)
 	return (EXIT_SUCCESS);
 }
 
+static int	set_skybox(t_texture *tex, t_parser *data)
+{
+	tex->skybox_tex = get_tex_ptr(&data->tex_list, tex->sky_box_token);
+	if (!tex->sky_box_token)
+		return (ret_print(EXIT_FAILURE, ERR_SKY_TOKEN_FORMAT));
+	return (EXIT_SUCCESS);
+}
+
+static int	init_texture_while(t_texture *tex, t_parser *data)
+{
+	if (tex->type & IMAGE)
+	{
+		if (open_file_texture(tex))
+			return (EXIT_FAILURE);
+	}
+	else if (tex->type & COLOR)
+	{
+		if (set_color_texture(tex))
+			return (EXIT_FAILURE);
+	}
+	if (tex->sky_box_token && tex->sky_box_token != '.')
+		if (set_skybox(tex, data))
+			return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
+}
 
 /**
  * @brief Check the type of texture and open the file or convert the color.
@@ -59,26 +87,15 @@ static int	open_file_texture(t_texture *tex)
 int	init_texture(t_parser *data)
 {
 	int			i;
-	t_texture	*tmp;
+	t_texture	*tex;
 
 	i = 0;
-	tmp = data->tex_list.buffer;
+	tex = data->tex_list.buffer;
 	while (i < DEFAULT_CUBE_TEX_NB)
 	{
-		if (tmp[i].token)
-		{
-			printf("init tex [%c]\n", tmp[i].token);//TODO REMOVE
-			if (tmp[i].type & IMAGE)
-			{
-				if (open_file_texture(&tmp[i]))
-					return (EXIT_FAILURE);
-			}
-			else if (tmp[i].type & COLOR)
-			{
-				if (set_color_texture(&tmp[i]))
-					return (EXIT_FAILURE);
-			}
-		}
+		if (tex[i].token)
+			if (init_texture_while(&tex[i], data))
+				return (EXIT_FAILURE);
 		i++;
 	}
 	return (EXIT_SUCCESS);

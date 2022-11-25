@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 15:47:45 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/24 16:28:07 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/25 12:16:04 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,9 @@
 
 /* v_delete() */
 #include "vector_lib.h"
+
+/* ft_strlen() */
+#include "lib_str.h"
 
 /**
  * @brief Check if the `fd` is successfully close, otherwise print a error
@@ -70,13 +73,15 @@ static int	close_config_file(t_parser *data)
 	return (close_check(data->file_fd));
 }
 
-static int	destroy_vec(t_vec *vector)
-{
-	v_delete(vector);
-}
+// static int	destroy_vec(t_vec *vector)
+// {
+// 	v_delete(vector);
+// 	return (EXIT_FAILURE);
+// }
 
 static int	free_all_vec(t_parser *data)
 {
+	(void) data;
 	return (EXIT_SUCCESS);
 }
 

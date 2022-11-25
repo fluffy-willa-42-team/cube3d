@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 16:12:15 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/22 14:17:37 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/25 12:53:52 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int	tex_debug(t_parser *data)
 		tmp = get_tex_ptr(&data->tex_list, i)->type;
 		if (tmp > 0)
 			printf(
-			"[%c] {\n"
+			"[%c][%p] {\n"
 			"       type          :  {\n"
 			"                          UNDEFINED     [%d]\n"
 			"                          VALID         [%d]\n"
@@ -92,12 +92,15 @@ int	tex_debug(t_parser *data)
 			"                          TRANSPARENCY  [%d]\n"
 			"                        },\n"
 			"       token         :  \'%c\',\n"
-			"       sky_box_token :  \'%c\',\n"
 			"       *path         :  \"%.15s\",\n"
-			"       *image        : [%p],\n"
+			"       *image        :  [%p],\n"
+			"       sky_box_token :  \'%c\',\n"
+			"       *skybox_tex   :  [%p],\n"
 			"       color         :  [%d, %d, %d, %d]\n"
 			"     }\n",
 			(char)i,
+			(get_tex_ptr(&data->tex_list, i)),
+
 			(get_tex_ptr(&data->tex_list, i)->type & UNDEFINED) != 0,
 			(get_tex_ptr(&data->tex_list, i)->type & VALID) != 0,
 			(get_tex_ptr(&data->tex_list, i)->type & COLOR) != 0,
@@ -107,12 +110,12 @@ int	tex_debug(t_parser *data)
 			(get_tex_ptr(&data->tex_list, i)->type & TRANSPARENCY) != 0,
 			
 			get_tex_ptr(&data->tex_list, i)->token,
-
-			get_tex_ptr(&data->tex_list, i)->sky_box_token,
-			
 			get_tex_ptr(&data->tex_list, i)->path,
-			
 			get_tex_ptr(&data->tex_list, i)->image,
+
+			
+			get_tex_ptr(&data->tex_list, i)->sky_box_token,
+			get_tex_ptr(&data->tex_list, i)->skybox_tex,
 
 			get_r(get_tex_ptr(&data->tex_list, i)->color),
 			get_g(get_tex_ptr(&data->tex_list, i)->color),
