@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:49:27 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/25 11:51:20 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/25 11:52:17 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int main(void)
 {
 	t_game game = {
 		init_params(),
+		init_player(WEST, set_i32(15, 15)),
 		{{
 			"ssssssssssssssssssss",
 			"s_______   ________s",
@@ -54,7 +55,6 @@ int main(void)
 			"s   hhhhhhhhhhhh   s",
 			"sssssssssssssssssass"
 		}, NULL, 23, 20},
-		init_player(WEST, set_i32(15, 15)),
 		{0, NULL, 0},
 		{0, NULL, 0},
 		{0, NULL, 0},
