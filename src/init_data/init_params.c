@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 11:39:57 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/25 11:44:12 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/25 11:45:38 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ t_param	init_params(void)
 
 	params.mlx = NULL;
 	params.img = NULL;
-	params.hob_mult = 7;
+	params.hob_mult = 5;
 	params.minimap_size = 8;
 	params.minimap_point_size = 2;
+	return (params);
 }
