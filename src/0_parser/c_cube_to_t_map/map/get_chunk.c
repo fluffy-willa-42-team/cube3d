@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/22 14:40:19 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/22 14:40:37 by mahadad          ###   ########.fr       */
+/*   Created: 2022/11/25 17:28:25 by mahadad           #+#    #+#             */
+/*   Updated: 2022/11/25 17:34:29 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,21 @@
  * 
  * @return t_chunk* Return pointer from the array.
  */
-t_chunk	*get_chunk(t_parser *data, int x, int y)
+t_chunk	*get_chunk_pars(t_parser *data, t_coord_i32 pos)
 {
-	const int	index = (y * data->map_size.x) + x;
+	const int	index = (pos.y * data->map_size.x) + pos.x;
 
 	return (v_get(&data->map, index));
+}
+
+/**
+ * @brief Get the `t_chunk` from the array with the coordinate `{x, y}`.
+ * 
+ * @return t_chunk* Return pointer from the array.
+ */
+t_chunk	*get_chunk(t_game *data, t_coord_i32 pos)
+{
+	const int	index = (pos.y * data->map.width) + pos.x;
+
+	return (v_get(&data->map.map, index));
 }

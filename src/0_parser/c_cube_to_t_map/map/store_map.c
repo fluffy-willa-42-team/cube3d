@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 17:48:29 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/22 14:53:51 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/25 17:27:39 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	set_chunk_coord(t_parser *data)
 			coor.x = 0;
 			coor.y++;
 		}
-		tmp = get_chunk(data, coor.x, coor.y);
+		tmp = get_chunk_pars(data, coor);
 		tmp->coord.x = coor.x;
 		tmp->coord.y = coor.y;
 		coor.x++;
@@ -96,7 +96,7 @@ void	t_map_debug(t_parser *data)
 			coor.y++;
 		}
 		printf("(%d)x(%d)\n", coor.x, coor.y);
-		tmp = get_chunk(data, coor.x, coor.y);
+		tmp = get_chunk_pars(data, coor);
 		if (tmp->type == WHITE_SPACE_CHUNK)
 		{
 			printf("[ , , ,]\n[ , , ,]\n[ , , ,]\n[ , , ,]\n");

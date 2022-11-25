@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 17:33:11 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/22 14:47:16 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/25 17:27:39 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
  * @param data Parser structure.
  * @return int 
  */
-static int	get_chunk_line_width(t_parser *data)
+static int	get_chunk_pars_line_width(t_parser *data)
 {
 	const int	first_chunk_width = get_line_width(data);
 	int			chunk_heigth;
@@ -83,7 +83,7 @@ int	set_map_size(t_parser *data)
 	heigth = 0;
 	while (mapchar(data))
 	{
-		width = get_chunk_line_width(data);
+		width = get_chunk_pars_line_width(data);
 		if (width == -1)
 			return (EXIT_FAILURE);
 		if (width % 3)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks_func.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 14:35:07 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/25 14:40:10 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/25 17:08:46 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ void	scale_hook(t_game *game, double incrementation)
 void	map_hook(t_game *game, int32_t incrementation)
 {
 	if (game->param.minimap_size + incrementation >= 1
-		&& game->param.minimap_size + incrementation <= WIN_WIDTH
+		&& game->param.minimap_size + incrementation <= (uint32_t)WIN_WIDTH
 		/ game->map.width
-		&& game->param.minimap_size + incrementation <= WIN_HEIGHT
+		&& game->param.minimap_size + incrementation <= (uint32_t)WIN_HEIGHT
 		/ game->map.height
 	)
 		game->param.minimap_size += incrementation;

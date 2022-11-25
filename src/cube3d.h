@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:33:07 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/25 17:05:40 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/25 17:13:48 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ typedef enum e_texture_type {
  * @param token          (char)
  * @param sky_box_token  (char)
  * @param path           (char*)
- * @param image          (void*)
+ * @param image          (mlx_tex*)
  * @param color          (unit32_t)
  */
 typedef struct s_texture {
@@ -82,7 +82,7 @@ typedef struct s_texture {
 	char					token;
 	char					sky_box_token;
 	char					*path;
-	void					*image;
+	mlx_texture_t			*image;
 	uint32_t				color;
 	struct s_texture		*skybox_tex;
 }	t_texture;
@@ -152,7 +152,6 @@ typedef struct s_chunk {
 	t_texture	*south;
 	t_texture	*ceiling;
 	t_texture	*floor;
-	t_texture	*skybox;
 }	t_chunk;
 
 # define E_EMPTY '.'
@@ -195,8 +194,8 @@ typedef struct s_chunk {
 
 typedef struct s_map
 {
-	int32_t		height;
-	int32_t		width;
+	uint32_t	height;
+	uint32_t	width;
 	t_coord_i32	size;
 	t_vec		tex_list;
 	t_vec		map;

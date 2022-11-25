@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_floor.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 20:08:12 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/25 13:23:59 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/25 17:12:19 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	draw_top_or_bottom(
 	if (texture)
 	{
 		if (texture->type & SKYBOX && texture->type & IMAGE)
-			draw_pixel_skybox(game, pixel_pos, &game->skybox);
+			draw_pixel_skybox(game, pixel_pos, texture->skybox_tex);
 		else if (texture->type & IMAGE)
 		{
 			put_pixel(game, pixel_pos.x, pixel_pos.y,

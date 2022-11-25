@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 14:36:52 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/22 14:52:36 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/25 17:27:39 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	store_entity_data(t_parser *data, t_chunk *chunk, t_chunk_token *tmp)
  *        floor 3 : BOTTOM | SOUTH | OPT
  * 
  */
-void	get_chunk_token(t_parser *data, t_chunk_token *tmp)
+void	get_chunk_pars_token(t_parser *data, t_chunk_token *tmp)
 {
 	const char	*f1 = mapptr(data);
 	const char	*f2 = mapptr(data) + data->index + data->tmp_width + 1;
@@ -62,7 +62,7 @@ int	set_chunk(t_parser *data, t_chunk *chunk)
 {
 	t_chunk_token	tokens;
 
-	get_chunk_token(data, &tokens);
+	get_chunk_pars_token(data, &tokens);
 	if (check_chunk_type(&tokens) == BAD_CHUNK)
 		return(ret_print(EXIT_FAILURE, "//TODO bad chunk type\n"));
 	chunk->ceiling = get_tex_ptr(&data->tex_list, tokens.ceiling);
