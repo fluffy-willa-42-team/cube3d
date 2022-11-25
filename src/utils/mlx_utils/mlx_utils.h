@@ -19,12 +19,16 @@
 
 /* ************************************************************************** */
 
-void put_pixel(t_game *game, int32_t x, int32_t y, uint32_t color);
-void draw_rectangle(t_game *game, t_coord_f64 point, t_coord_i32 size, uint32_t color);
-void draw_line(t_game *game, t_coord_f64 a, t_coord_f64 b, int32_t color);
+void		put_pixel(t_game *game, int32_t x, int32_t y, uint32_t color);
+void		draw_rectangle(t_game *game, t_coord_f64 point, t_coord_i32 size, uint32_t color);
+void		draw_line(t_game *game, t_coord_f64 a, t_coord_f64 b, int32_t color);
+
+void		draw_mini_rect(t_game *game, t_coord_f64 pos, uint32_t color);
+void		draw_mini_point(t_game *game, t_coord_f64 pos, int size, uint32_t color);
+void		draw_mini_line(t_game *game, t_coord_f64 a, t_coord_f64 b, int32_t color);
 
 uint32_t	get_pixel_image(const t_texture *texture, uint32_t x, uint32_t y, t_coord_f64 ratio);
-void draw_image(t_game *game, t_texture *texture, t_coord_i32 pos, t_coord_i32 size);
+void 		draw_image(t_game *game, t_texture *texture, t_coord_i32 pos, t_coord_i32 size);
 
 /* ************************************************************************** */
 
