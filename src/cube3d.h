@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:33:07 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/25 11:04:23 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/25 11:15:25 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@
 
 // FOV = PI / 3
 # define FOV_ANGLE			1.0471975512
-# define HEIGTH_OF_BLOCK	100
+# define HEIGTH_OF_BLOCK	WIN_HEIGHT / 10
 
 # define MIDDLE_OF_SCREEN	WIN_HEIGHT / 2
 # define FOV_INCRE			(double) (FOV_ANGLE) / WIN_WIDTH
