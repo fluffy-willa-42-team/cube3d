@@ -1,0 +1,132 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main_test.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/25 10:49:27 by awillems          #+#    #+#             */
+/*   Updated: 2022/11/25 14:57:53 by awillems         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <stdlib.h>
+#include "MLX42/MLX42.h"
+
+#include "cube3d.h"
+#include "init_data.h"
+
+t_texture	*init_image(t_texture *ptr, char *path);
+t_texture	*init_color(t_texture *ptr, uint32_t color);
+t_texture	*init_texture(t_texture *ptr, int type, char *path, uint32_t color);
+
+void		init_map(t_game *game);
+
+void		hook_loop(void *param);
+
+int	main_test(void)
+{
+	t_game	game = {
+		init_params(),
+		init_player(WEST, set_i32(15, 15)),
+	{{
+		"ssssssssssssssssssss",
+		"s_______   ________s",
+		"s_______   ________s",
+		"s_______   ________s",
+		"s_______   ________s",
+		"s_______   ________s",
+		"s                  s",
+		"s                  s",
+		"s                  s",
+		"s                  s",
+		"sv                 s",
+		"sv                 s",
+		"sv   bv            s",
+		"sv    vb           s",
+		"sv    ahhhhhh      s",
+		"sv          u      s",
+		"s                  s",
+		"s          cde     s",
+		"s        f         s",
+		"s                  s",
+		"s      hhhhhu      s",
+		"s   hhhhhhhhhhhh   s",
+		"sssssssssssssssssass"
+	}, NULL, 23, 20},
+	{0, NULL, 0},
+	{0, NULL, 0},
+	{0, NULL, 0},
+	{0, NULL, 0},
+	{0, NULL, 0},
+	{0, NULL, 0},
+	{0, NULL, 0},
+	{0, NULL, 0},
+	{0, NULL, 0},
+	{0, NULL, 0},
+	{0, NULL, 0},
+	{{0, 0}, NULL,			NULL,			NULL,			NULL,			&game.skybox,	&game.temp2},	// chunk0	' '
+	{{0, 0}, &game.skybox,	&game.skybox,	&game.skybox,	&game.skybox,	NULL,			NULL},			// chunk1	's'
+	{{0, 0}, NULL,			NULL,			&game.temp1,	&game.temp2,	&game.temp1,	&game.temp1},	// chunk2	'v'
+	{{0, 0}, &game.temp1,	&game.temp1,	NULL,			NULL,			&game.temp1,	&game.temp1},	// chunk3	'h'
+	{{0, 0}, NULL,			&game.temp1,	NULL,			&game.temp1,	&game.temp1,	&game.temp1},	// chunk4	'a'
+	{{0, 0}, &game.temp,	&game.temp,		&game.temp,		&game.temp,		&game.temp,		&game.temp},	// chunk5	'b'
+	{{0, 0}, &game.t_cont2,	&game.t_cont1,	NULL,			&game.t_cont4,	NULL,			NULL},			// cont1	'c'
+	{{0, 0}, &game.t_cont3,	&game.t_cont3,	NULL,			NULL,			NULL,			NULL},			// cont2	'd'
+	{{0, 0}, &game.t_cont1,	&game.t_cont2,	&game.t_cont5,	NULL,			NULL,			NULL},			// cont3	'e'
+	{{0, 0}, &game.t_cont4,	&game.t_cont5,	&game.t_cont4,	&game.t_cont4,	NULL,			NULL},			// cont4	'f'
+	{{0, 0}, &game.clip,	&game.clip,		&game.clip,		&game.clip,		&game.skybox,	&game.skybox},	// chunk6	'_'
+	{{0, 0}, &game.temp3,	&game.temp3,	&game.temp3,	&game.temp3,	&game.skybox,	&game.temp2}	// chunk7	'u'
+	};
+
+	if (	!init_texture(&game.temp,		IMAGE | ALLOW_CLIP,		"./texture/mc/grass_side.xpm42",					0x0000FFFF)
+		||	!init_texture(&game.temp1,		IMAGE,					"./texture/mc/stone.xpm42", 						0xFFFF00FF)
+		||	!init_texture(&game.temp2,		IMAGE,					"./texture/mc/grass_top.xpm42", 					0x2596BEFF)
+		||	!init_texture(&game.temp3,		IMAGE | TRANSPARENCY,	"./texture/bars.xpm42", 							0)
+		||	!init_texture(&game.t_cont1,	IMAGE,					"./texture/cont/container_big_side_l.xpm42", 		0xaaaaaaff)
+		||	!init_texture(&game.t_cont2,	IMAGE,					"./texture/cont/container_big_side_r.xpm42", 		0xaaaaaaff)
+		||	!init_texture(&game.t_cont3,	IMAGE,					"./texture/cont/container_big_side_m.xpm42", 		0xaaaaaaff)
+		||	!init_texture(&game.t_cont4,	IMAGE,					"./texture/cont/container_small_side.xpm42", 		0xaaaaaaff)
+		||	!init_texture(&game.t_cont5,	IMAGE,					"./texture/cont/container_open.xpm42", 				0xaaaaaaff)
+		||	!init_texture(&game.skybox,		IMAGE | SKYBOX,			"./texture/sky/skybox2.xpm42", 						0xf7d79aFF)
+	)
+		return (EXIT_FAILURE);
+	game.clip.type |= TRANSPARENCY;
+	game.map.map = malloc(sizeof(t_chunk) * game.map.width * game.map.height);
+	if (!game.map.map)
+		return (EXIT_FAILURE);
+	init_map(&game);
+	game.param.mlx = mlx_init(WIN_WIDTH, WIN_HEIGHT, "MLX42", true);
+	if (!game.param.mlx)
+		return (EXIT_FAILURE);
+	game.param.img = mlx_new_image(game.param.mlx, WIN_WIDTH, WIN_HEIGHT);
+	if (!game.param.img)
+		return (EXIT_FAILURE);
+	mlx_image_to_window(game.param.mlx, game.param.img, 0, 0);
+	mlx_loop_hook(game.param.mlx, &hook_loop, &game);
+	mlx_loop(game.param.mlx);
+	if (game.temp.image)
+		mlx_delete_texture(game.temp.image);
+	if (game.temp1.image)
+		mlx_delete_texture(game.temp1.image);
+	if (game.temp2.image)
+		mlx_delete_texture(game.temp2.image);
+	if (game.skybox.image)
+		mlx_delete_texture(game.skybox.image);
+	if (game.t_cont1.image)
+		mlx_delete_texture(game.t_cont1.image);
+	if (game.t_cont2.image)
+		mlx_delete_texture(game.t_cont2.image);
+	if (game.t_cont3.image)
+		mlx_delete_texture(game.t_cont3.image);
+	if (game.t_cont4.image)
+		mlx_delete_texture(game.t_cont4.image);
+	if (game.t_cont5.image)
+		mlx_delete_texture(game.t_cont5.image);
+	if (game.temp3.image)
+		mlx_delete_texture(game.temp3.image);
+	free(game.map.map);
+	mlx_delete_image(game.param.mlx, game.param.img);
+	mlx_terminate(game.param.mlx);
+	return (EXIT_SUCCESS);
+}
