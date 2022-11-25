@@ -6,17 +6,11 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 10:56:11 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/23 15:37:06 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/25 11:25:54 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
-#include <stdio.h>
-
-
-int is_equal(double a, double b);
-
-# define NB_CHAR 12
 
 t_chunk *get_chunk(t_game *game, t_coord_i32 pos)
 {
@@ -25,6 +19,8 @@ t_chunk *get_chunk(t_game *game, t_coord_i32 pos)
 		return (NULL);
 	return (&game->map.map[pos.y * game->map.width + pos.x]);
 }
+
+# define NB_CHAR 12
 
 t_chunk *get_chunk_tmp(t_game *game, t_coord_i32 coord)
 {
@@ -61,32 +57,4 @@ void init_map(t_game *game)
 			game->map.map[y * game->map.width + x] = *tmp;
 		}
 	}
-}
-
-t_wall_inter	get_wall(t_game *game, t_coord_f64 inter)
-{
-	t_wall_inter wall_inter;
-	t_coord_i32 pos = set_i32((float) inter.x, (float) inter.y);
-
-	wall_inter.text1 = NULL;
-	wall_inter.text2 = NULL;
-	wall_inter.chunk2 = NULL;
-	wall_inter.chunk1 = get_chunk(game, set_i32(inter.x, inter.y));
-	if (is_equal(inter.y, pos.y)) // NORTH-SOUTH
-	{
-		wall_inter.chunk2 = get_chunk(game, set_i32(pos.x, pos.y - 1));
-		if (wall_inter.chunk1)
-			wall_inter.text1 = wall_inter.chunk1->north;
-		if (wall_inter.chunk2)
-			wall_inter.text2 = wall_inter.chunk2->south;
-	}
-	else if (is_equal(inter.x, pos.x)) // EAST-WEST
-	{
-		wall_inter.chunk2 = get_chunk(game, set_i32(pos.x - 1, pos.y));
-		if (wall_inter.chunk1)
-			wall_inter.text1 = wall_inter.chunk1->west;
-		if (wall_inter.chunk2)
-			wall_inter.text2 = wall_inter.chunk2->east;
-	}
-	return (wall_inter);
 }
