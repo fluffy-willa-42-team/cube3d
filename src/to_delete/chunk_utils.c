@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 10:56:11 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/25 13:00:24 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/26 14:59:03 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,9 @@ t_chunk	*get_chunk(t_game *game, t_coord_i32 pos)
 
 t_chunk	*get_chunk_tmp(t_game *game, t_coord_i32 coord)
 {
-	const char		character[NB_CHAR] = " svhabcdef_u";
+	const char		character[NB_CHAR] = " s";
 	t_chunk			*ptr[NB_CHAR] = {
-		&game->chunk0, &game->chunk1, &game->chunk2, &game->chunk3,
-		&game->chunk4, &game->chunk5,
-		&game->cont1, &game->cont2, &game->cont3, &game->cont4,
-		&game->chunk6, &game->chunk7
+		&game->chunk0, &game->chunk1
 	};
 
 	if (!(0 <= coord.x && coord.x < (int) game->map.width

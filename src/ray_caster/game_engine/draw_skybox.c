@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 10:27:25 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/25 13:14:38 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/26 14:58:45 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ uint32_t	get_skybox_pixel(t_game *game, t_coord_i32 pixel_pos,
 {
 	uint32_t	x;
 
-	x = pixel_pos.x + (game->skybox.image->width * 4)
+	x = pixel_pos.x + (texture->image->width * 4)
 		* (game->player.alpha / PI2);
-	if (x >= game->skybox.image->width * 4)
-		x -= game->skybox.image->width * 4;
+	if (x >= texture->image->width * 4)
+		x -= texture->image->width * 4;
 	return (get_pixel_image(texture,
 			x, pixel_pos.y, set_f64(
 				0.25,
@@ -33,7 +33,7 @@ uint32_t	get_skybox_pixel(t_game *game, t_coord_i32 pixel_pos,
 void	draw_pixel_skybox(t_game *game, t_coord_i32 pixel_pos,
 		t_texture *texture)
 {
-	if (game->skybox.type & IMAGE)
+	if (texture->type & IMAGE)
 		put_pixel(game, pixel_pos.x, pixel_pos.y, 
 			get_skybox_pixel(game, pixel_pos, texture)
 			);

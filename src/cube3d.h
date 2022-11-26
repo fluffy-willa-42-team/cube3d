@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:33:07 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/25 14:36:17 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/26 15:00:36 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@
 /* #####=====----------		Ray Caster Config Var		 ----------=====##### */
 
 // FOV = PI / 3
-# define FOV_ANGLE			1.0471975512
+# define FOV_ANGLE			PI1_2
 # define HEIGTH_OF_BLOCK	WIN_HEIGHT / 10
 
 # define MIDDLE_OF_SCREEN	WIN_HEIGHT / 2
@@ -110,29 +110,14 @@ typedef struct s_game {
 	t_param			param;
 	t_player		player;
 	t_map			map;
-	t_texture		skybox;
-	t_texture		temp;
-	t_texture		temp1;
-	t_texture		temp2;
-	t_texture		t_cont1;
-	t_texture		t_cont2;
-	t_texture		t_cont3;
-	t_texture		t_cont4;
-	t_texture		t_cont5;
-	t_texture		temp3;
-	t_texture		clip;
+	t_texture		north;
+	t_texture		south;
+	t_texture		east;
+	t_texture		west;
+	t_texture		ceiling;
+	t_texture		floor;
 	t_chunk			chunk0;
 	t_chunk			chunk1;
-	t_chunk			chunk2;
-	t_chunk			chunk3;
-	t_chunk			chunk4;
-	t_chunk			chunk5;
-	t_chunk			cont1;
-	t_chunk			cont2;
-	t_chunk			cont3;
-	t_chunk			cont4;
-	t_chunk			chunk6;
-	t_chunk			chunk7;
 }	t_game;
 
 /* ************************************************************************** */
