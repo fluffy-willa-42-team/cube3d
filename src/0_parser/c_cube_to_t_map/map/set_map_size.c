@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_map_size.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
+/*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 17:33:11 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/25 17:27:39 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/26 12:30:52 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,21 +35,21 @@
 static int	get_chunk_pars_line_width(t_parser *data)
 {
 	const int	first_chunk_width = get_line_width(data);
-	int			chunk_heigth;
+	int			chunk_height;
 	int			chunk_width;
 
-	chunk_heigth = 1;
+	chunk_height = 1;
 	chunk_width = 0;
 	data->index += first_chunk_width + 1;
-	while (mapchar(data) && chunk_heigth < 3)
+	while (mapchar(data) && chunk_height < 3)
 	{
 		chunk_width = get_line_width(data);
 		if (first_chunk_width != chunk_width)
 			return (ret_print(-1, ERR_CHUNK_W));
-		chunk_heigth++;
+		chunk_height++;
 		data->index += chunk_width + 1;
 	}
-	if (chunk_heigth == 3)
+	if (chunk_height == 3)
 		return (first_chunk_width);
 	return (ret_print(-1, ERR_CHUNK_H));
 }
@@ -75,12 +75,12 @@ int	set_map_size(t_parser *data)
 {
 	int	biggest_width;
 	int	width;
-	int	heigth;
+	int	height;
 
 	data->index = 0;
 	biggest_width = 0;
 	width = 0;
-	heigth = 0;
+	height = 0;
 	while (mapchar(data))
 	{
 		width = get_chunk_pars_line_width(data);
@@ -90,9 +90,9 @@ int	set_map_size(t_parser *data)
 			return (ret_print(EXIT_FAILURE, ERR_CHUNK_W));
 		if (width > biggest_width)
 			biggest_width = width;
-		heigth++;
+		height++;
 	}
-	data->map_size.x = biggest_width / 3;
-	data->map_size.y = heigth;
+	data->map_width = biggest_width / 3;
+	data->map_height = height;
 	return (EXIT_SUCCESS);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_floor.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
+/*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 20:08:12 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/25 17:12:19 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/26 12:26:24 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	draw_floor(
 	t_game *game,
 	int x,
 	double alpha,
-	double heigth_drawn,
+	double height_drawn,
 	double dist
 )
 {
@@ -60,13 +60,13 @@ void	draw_floor(
 	const t_coord_f64	cosin = set_f64(cos(alpha), sin(alpha));
 	const double		cos_a_minus_pa = game->player.cosin.x * cosin.x
 		+ game->player.cosin.y * cosin.y;
-	const double		rest_to_draw = MIDDLE_OF_SCREEN - heigth_drawn + 2;
+	const double		rest_to_draw = MIDDLE_OF_SCREEN - height_drawn + 2;
 	int32_t				y;
 
 	y = 0;
 	while (y < (int32_t) rest_to_draw)
 	{
-		ratio = (1.0 + ((rest_to_draw - y) / heigth_drawn));
+		ratio = (1.0 + ((rest_to_draw - y) / height_drawn));
 		floor_dist = dist / cos_a_minus_pa / ratio;
 		pos = set_f64(
 				game->player.pos.x + cosin.x * floor_dist,

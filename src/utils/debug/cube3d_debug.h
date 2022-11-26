@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d_debug.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
+/*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:54:56 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/25 12:41:46 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/26 12:26:48 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	ret_print(int ret, const char *msg);
 # define ERR_CUB_CONV_FUNC "Error\nf_{floor_level}_{char_type} fail !\n"
 # define ERR_SEQ_BAD     "Error\nBad cube sequence\n"
 # define ERR_CHUNK_W     "Error\nBad chunk line width\n"
-# define ERR_CHUNK_H     "Error\nBad chunk line heigth\n"
+# define ERR_CHUNK_H     "Error\nBad chunk line height\n"
 # define ERR_MEMCPY      "Error\nmemcpy faild !\n"
 # define ERR_NO_TEX      "Error\nTexture in chunk was not define !\n"
 # define ERR_BAD_CHUNK_FLOOR  "Error\nBad chunk floor !\n"

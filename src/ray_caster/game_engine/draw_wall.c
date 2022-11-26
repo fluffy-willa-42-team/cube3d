@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:46:26 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/25 13:16:45 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/26 12:26:35 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	draw_wall_text(
 {
 	t_coord_f64			ratio;
 	double				offset;
-	uint32_t			parse_heigth;
+	uint32_t			parse_height;
 	uint32_t			i;
 
 	if (!texture || !(texture->type & VALID))
@@ -76,11 +76,11 @@ void	draw_wall_text(
 	}
 	if (height > 400000000)
 		height = 400000000;
-	parse_heigth = height;
-	if (parse_heigth >= MIDDLE_OF_SCREEN)
-		parse_heigth = MIDDLE_OF_SCREEN - 1;
-	i = height - parse_heigth;
-	while (i < height + parse_heigth)
+	parse_height = height;
+	if (parse_height >= MIDDLE_OF_SCREEN)
+		parse_height = MIDDLE_OF_SCREEN - 1;
+	i = height - parse_height;
+	while (i < height + parse_height)
 	{
 		draw_pixel_wall(game, set_i32(x, MIDDLE_OF_SCREEN - height + i),
 			texture, ratio, offset, i);
@@ -124,7 +124,7 @@ void	draw_wall_trans(
 		exchange_textures(&wall);
 	if (wall.text1 || wall.text2)
 	{
-		height = HEIGTH_OF_BLOCK * game->param.hob_mult / height;
+		height = HEIGHT_OF_BLOCK * game->param.hob_mult / height;
 		draw_wall_text(game, inter, wall.text2, x, height);
 		draw_wall_text(game, inter, wall.text1, x, height);
 	}

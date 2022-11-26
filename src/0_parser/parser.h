@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
+/*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:53:43 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/25 14:53:04 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/26 12:29:20 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@
  * @param tmp_width (int)     Temporary width
  * @param tex      (char []) Character array to check duplication `.cub` texture
  * @param tex_list (t_vec)   Structure array with all texture info
- * @param map_size (t_coord_i32) Store the map size, width .x, heigth .y
+ * @param map_size (t_coord_i32) Store the map size, width .x, height .y
  * @param map      (t_vec)   Stucture array with all map info
  */
 typedef struct s_parser
@@ -106,7 +106,8 @@ typedef struct s_parser
 	int				tmp_width;
 	char			tex[DEFAULT_CUB_TEX_NB];
 	t_vec			tex_list;
-	t_coord_i32		map_size;
+	uint32_t		map_width;
+	uint32_t		map_height;
 	t_vec			map;
 }				t_parser;
 

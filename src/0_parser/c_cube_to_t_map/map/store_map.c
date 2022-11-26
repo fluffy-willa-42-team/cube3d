@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   store_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
+/*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 17:48:29 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/25 17:27:39 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/26 12:31:54 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	init_map(t_parser *data)
 	data->index = 0;
 	printf("[%d]\n", data->index);//TODO REMOVE
 	data->map = v_init(sizeof(t_chunk), NULL, NULL);
-	if (!v_alloc(&data->map, SET, (data->map_size.x * data->map_size.y)))
+	if (!v_alloc(&data->map, SET, (data->map_width * data->map_height)))
 		return (ret_print(EXIT_FAILURE, ERR_VEC_ALLOC));
 	err = EXIT_SUCCESS ;
 	while (err == EXIT_SUCCESS)
@@ -56,7 +56,7 @@ int	init_map(t_parser *data)
  */
 void	set_chunk_coord(t_parser *data)
 {
-	const int	max = data->map_size.x * data->map_size.y;
+	const int	max = data->map_width * data->map_height;
 	int			index;
 	t_coord_i32	coor;
 	t_chunk		*tmp;
@@ -65,7 +65,7 @@ void	set_chunk_coord(t_parser *data)
 	struct_set(&coor, sizeof(coor));
 	while (index < max)
 	{
-		if (coor.x >= data->map_size.x)
+		if (coor.x >= (int32_t) data->map_width)
 		{
 			coor.x = 0;
 			coor.y++;
@@ -81,7 +81,7 @@ void	set_chunk_coord(t_parser *data)
 /*
 void	t_map_debug(t_parser *data)
 {
-	const int	max = data->map_size.x * data->map_size.y;
+	const int	max = data->width * data->height;
 	int			index;
 	t_coord_i32	coor;
 	t_chunk	*tmp;
@@ -90,7 +90,7 @@ void	t_map_debug(t_parser *data)
 	struct_set(&coor, sizeof(coor));
 	while (index < max)
 	{
-		if (coor.x >= data->map_size.x)
+		if (coor.x >= data->width)
 		{
 			coor.x = 0;
 			coor.y++;
@@ -139,6 +139,7 @@ int	store_map(t_parser *data)
 	set_chunk_coord(data);
 	// t_map_debug(data);//TODO REMOVE
 	
-	// printf("{{\n%s\n}}\n",data->cube_map);printf("map size [%dx%d]\n", data->map_size.x,data->map_size.y);
+	// printf("{{\n%s\n}}\n", data->cube_map);
+	// printf("map size [%dx%d]\n", data->width, data->height);
 	return (EXIT_SUCCESS);
 }

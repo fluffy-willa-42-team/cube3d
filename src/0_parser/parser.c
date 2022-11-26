@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
+/*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:53:32 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/25 13:07:30 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/26 12:29:58 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,9 +143,8 @@ int	parser(char *av, t_map *map)
 		|| cube_to_t_map(&data))
 		return (destroy_data(&data));
 	map->map = data.map;
-	map->size = data.map_size;
-	map->width = data.map_size.x;
-	map->height = data.map_size.y;
+	map->width = data.map_width;
+	map->height = data.map_height;
 		/*TODO REMOVE*/tex_debug(&data);/*TODO REMOVE*/
 	return (EXIT_SUCCESS);
 }
