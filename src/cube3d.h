@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:33:07 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/26 15:00:36 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/26 15:02:17 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 
 /* #####=====----------			Mlx Config Var			 ----------=====##### */
 
-# define WIN_WIDTH	800
+# define WIN_WIDTH	1200
 # define WIN_HEIGHT	800
 
 # define ANGLE_START	PI
@@ -39,7 +39,7 @@
 /* #####=====----------		Ray Caster Config Var		 ----------=====##### */
 
 // FOV = PI / 3
-# define FOV_ANGLE			PI1_2
+# define FOV_ANGLE			PI1_3
 # define HEIGTH_OF_BLOCK	WIN_HEIGHT / 10
 
 # define MIDDLE_OF_SCREEN	WIN_HEIGHT / 2
