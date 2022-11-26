@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 17:48:29 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/26 13:17:36 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/26 13:29:51 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,11 @@ int	init_map(t_parser *data)
 		{
 			chunk = get_chunk_pars(data, set_i32(x, y));
 			err = get_next_chunk(data, chunk);
-			chunk->coord = set_i32(x, y);
 			if (err == EXIT_FAILURE) //TODO FIX ITS NOT PUTTING EMPTY CHUNK AT THE END OF A LINE
+				return (ret_print(EXIT_FAILURE, "//TODO"));
+			chunk->coord = set_i32(x, y);
+			if (err == END_OF_LINE)
 				break ;
-				// return (ret_print(EXIT_FAILURE, "//TODO"));
 		}
 	}
 	return (EXIT_SUCCESS);
