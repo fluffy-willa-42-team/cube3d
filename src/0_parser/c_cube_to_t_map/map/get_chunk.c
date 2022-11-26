@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 17:28:25 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/26 12:31:03 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/26 13:10:49 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,6 @@ t_chunk	*get_chunk(t_game *game, t_coord_i32 pos)
 	const int	index = (pos.y * game->map.width) + pos.x;
 
 	t_chunk	*chunk = v_get(&game->map.map, index);
-	printf("(%d %d) => (%d %d) [%d, %lu] [%u %u]\n", pos.x, pos.y, chunk->coord.x, chunk->coord.y, index, game->map.map.len, game->map.width, game->map.height);
+	// printf("(%d %d) => (%d %d) [%d, %lu] [%u %u]\n", pos.x, pos.y, chunk->coord.x, chunk->coord.y, index, game->map.map.len, game->map.width, game->map.height);
 	return (chunk);
 }

@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:53:32 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/26 12:29:58 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/26 13:16:50 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	tex_debug(t_parser *data)
 	for (int i = '!'; i < 125; i++)
 	{
 		tmp = get_tex_ptr(&data->tex_list, i)->type;
-		if (tmp > 0)
+		if (tmp > 0 && DEBUG_PARSE)
 			printf(
 			"[%c][%p] {\n"
 			"       type          :  {\n"

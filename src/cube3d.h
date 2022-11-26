@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:33:07 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/26 12:25:44 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/26 13:16:39 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 # include "MLX42.h"
 
 # include "cube_types.h"
+
+# define DEBUG_PARSE 0
 
 /* #####=====----------			Common Math Var			 ----------=====##### */
 
@@ -171,19 +173,19 @@ typedef struct s_chunk {
  */
 # define E_ENEMY			'E'
 # define T_ENEMY_DEFAULT	'./TODO'
-# define OPT_E_DEFAULT	'.'
+# define OPT_E_DEFAULT		'.'
 
 /**
  * Collectible macro
  */
-# define E_COLLECTIBLE	'C'
-# define OPT_C_AMMO		'A'
-# define OPT_C_HEALTH	'H'
+# define E_COLLECTIBLE		'C'
+# define OPT_C_AMMO			'A'
+# define OPT_C_HEALTH		'H'
 
 /**
  * Door macro
  */
-# define E_DOOR			'D'
+# define E_DOOR				'D'
 # define OPT_D_N			'N'
 # define OPT_D_E			'E'
 

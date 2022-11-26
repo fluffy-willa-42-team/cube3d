@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 17:48:29 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/26 12:31:54 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/26 13:17:36 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,56 +26,27 @@
 
 int	init_map(t_parser *data)
 {
-	t_chunk	tmp;
 	int		err;
+	t_chunk	*chunk;
 
 	data->index = 0;
-	printf("[%d]\n", data->index);//TODO REMOVE
 	data->map = v_init(sizeof(t_chunk), NULL, NULL);
 	if (!v_alloc(&data->map, SET, (data->map_width * data->map_height)))
 		return (ret_print(EXIT_FAILURE, ERR_VEC_ALLOC));
-	err = EXIT_SUCCESS ;
-	while (err == EXIT_SUCCESS)
+	data->map.len = data->map_width * data->map_height;
+	for (uint32_t y = 0; y < data->map_height; y++)
 	{
-		err = get_next_chunk(data, &tmp);
-		if (err == EXIT_SUCCESS)
+		for (uint32_t x = 0; x < data->map_width; x++)
 		{
-			if (!v_add(&data->map, DEFAULT, &tmp))
-				return (ret_print(EXIT_FAILURE, ERR_VEC_ADD));
+			chunk = get_chunk_pars(data, set_i32(x, y));
+			err = get_next_chunk(data, chunk);
+			chunk->coord = set_i32(x, y);
+			if (err == EXIT_FAILURE) //TODO FIX ITS NOT PUTTING EMPTY CHUNK AT THE END OF A LINE
+				break ;
+				// return (ret_print(EXIT_FAILURE, "//TODO"));
 		}
-		else if (err == EXIT_FAILURE)
-			return (ret_print(EXIT_FAILURE, "//TODO"));
 	}
 	return (EXIT_SUCCESS);
-}
-
-/**
- * @brief Set the chunk coord, `t_chunk.coor.{x,y}`
- * 
- * @param data 
- */
-void	set_chunk_coord(t_parser *data)
-{
-	const int	max = data->map_width * data->map_height;
-	int			index;
-	t_coord_i32	coor;
-	t_chunk		*tmp;
-
-	index = 0;
-	struct_set(&coor, sizeof(coor));
-	while (index < max)
-	{
-		if (coor.x >= (int32_t) data->map_width)
-		{
-			coor.x = 0;
-			coor.y++;
-		}
-		tmp = get_chunk_pars(data, coor);
-		tmp->coord.x = coor.x;
-		tmp->coord.y = coor.y;
-		coor.x++;
-		index++;
-	}
 }
 
 /*
@@ -136,7 +107,6 @@ int	store_map(t_parser *data)
 {
 	if (set_map_size(data) || init_map(data))
 		return (EXIT_FAILURE);
-	set_chunk_coord(data);
 	// t_map_debug(data);//TODO REMOVE
 	
 	// printf("{{\n%s\n}}\n", data->cube_map);
