@@ -1,9 +1,15 @@
-NO ./path_to_the_north_texture
-SO ./path_to_the_south_texture
-WE ./path_to_the_west_texture
-EA ./path_to_the_east_texture
-F 220,100,0
-C 225,30,0
+NO ./texture/cool.xpm42
+SO ./texture/cool.xpm42
+WE ./texture/cool.xpm42
+EA ./texture/cool.xpm42
+F 220,100,0,32
+C 225,30,0,123
 111111
+100001
+100001
+100001
+100001
+100001
+100001
 100001
 111111

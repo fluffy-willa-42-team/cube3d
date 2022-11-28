@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 14:36:52 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/25 17:27:39 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/28 12:25:34 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ static int	set_next_chunk_index(t_parser *data)
 	data->index = 0;
 	data->cube_map += (get_line_width(data) + 1) * 2;
 	if (!mapchar(data))
-		return (-1);
+		return (END_OF_MAP);
 	return (EXIT_SUCCESS);
 }
 
@@ -124,13 +124,15 @@ static int	set_next_chunk_index(t_parser *data)
  * 
  * @param data 
  * @param chunk 
- * @return int 
+ * @return int Return `0` (aka EXIT_SUCCESS) if there is no error,
+ *             `1` (aka EXIT_FAILURE) if a error is occurred,
+ *             `-1` if is the end of file.
  */
 int	get_next_chunk(t_parser *data, t_chunk *chunk)
 {
 	if (mapchar(data) == '\n')
-		if (set_next_chunk_index(data) == -1)
-			return (-1);
+		if (set_next_chunk_index(data) == END_OF_MAP)
+			return (END_OF_MAP);
 	data->tmp_width = get_line_width(data);
 	if (set_chunk(data, chunk))
 		return (EXIT_FAILURE);

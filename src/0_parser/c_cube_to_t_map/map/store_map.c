@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   store_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 17:48:29 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/26 13:29:51 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/28 12:27:52 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,10 @@ int	init_map(t_parser *data)
 		{
 			chunk = get_chunk_pars(data, set_i32(x, y));
 			err = get_next_chunk(data, chunk);
-			if (err == EXIT_FAILURE) //TODO FIX ITS NOT PUTTING EMPTY CHUNK AT THE END OF A LINE
+			if (err == EXIT_FAILURE)
 				return (ret_print(EXIT_FAILURE, "//TODO"));
 			chunk->coord = set_i32(x, y);
-			if (err == END_OF_LINE)
+			if (err == END_OF_MAP)
 				break ;
 		}
 	}
