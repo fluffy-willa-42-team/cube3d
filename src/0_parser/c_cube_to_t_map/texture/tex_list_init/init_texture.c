@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 14:27:58 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/25 17:11:22 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/28 14:00:50 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ static int	init_texture_while(t_texture *tex, t_parser *data)
 	if (tex->sky_box_token && tex->sky_box_token != '.')
 		if (set_skybox(tex, data))
 			return (EXIT_FAILURE);
+	tex->type |= VALID;
 	return (EXIT_SUCCESS);
 }
 

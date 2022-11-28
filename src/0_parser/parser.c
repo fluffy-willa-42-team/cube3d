@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:53:32 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/26 13:16:50 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/28 14:18:21 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,83 +30,86 @@
 //TODO REMOVE
 /******************************************************************************/
 /* */ // Get the red channel.
-/* */ int get_r(int rgba)
+/* */ static int get_r(int rgba)
 /* */ {
 /* */     // Move 3 bytes to the right and mask out the first byte.
 /* */     return ((rgba >> 24) & 0xFF);
 /* */ }
 /* */ 
 /* */ // Get the green channel.
-/* */ int get_g(int rgba)
+/* */ static int get_g(int rgba)
 /* */ {
 /* */     // Move 2 bytes to the right and mask out the first byte.
 /* */     return ((rgba >> 16) & 0xFF);
 /* */ }
 /* */ 
 /* */ // Get the blue channel.
-/* */ int get_b(int rgba)
+/* */ static int get_b(int rgba)
 /* */ {
 /* */     // Move 1 byte to the right and mask out the first byte.
 /* */     return ((rgba >> 8) & 0xFF);
 /* */ }
 /* */ 
 /* */ // Get the alpha channel.
-/* */ int get_a(int rgba)
+/* */ static int get_a(int rgba)
 /* */ {
 /* */     // Move 0 bytes to the right and mask out the first byte.
 /* */     return (rgba & 0xFF);
 /* */ }
+/* */ static void	print_tex(t_parser *data, char i)
+/* */ {
+/* */ 	printf(
+/* */ 	"[%c][%p] {\n"
+/* */ 	"       type          :  {\n"
+/* */ 	"                          UNDEFINED     [%d]\n"
+/* */ 	"                          VALID         [%d]\n"
+/* */ 	"                          COLOR         [%d]\n"
+/* */ 	"                          IMAGE         [%d]\n"
+/* */ 	"                          SKYBOX        [%d]\n"
+/* */ 	"                          ALLOW_CLIP    [%d]\n"
+/* */ 	"                          TRANSPARENCY  [%d]\n"
+/* */ 	"                        },\n"
+/* */ 	"       token         :  \'%c\',\n"
+/* */ 	"       *path         :  \"%.15s\",\n"
+/* */ 	"       *image        :  [%p],\n"
+/* */ 	"       sky_box_token :  \'%c\',\n"
+/* */ 	"       *skybox_tex   :  [%p],\n"
+/* */ 	"       color         :  [%d, %d, %d, %d]\n"
+/* */ 	"     }\n",
+/* */ 	(char)i,
+/* */ 	(get_tex_ptr(&data->tex_list, i)),
+/* */ 
+/* */ 	(get_tex_ptr(&data->tex_list, i)->type & UNDEFINED) != 0,
+/* */ 	(get_tex_ptr(&data->tex_list, i)->type & VALID) != 0,
+/* */ 	(get_tex_ptr(&data->tex_list, i)->type & COLOR) != 0,
+/* */ 	(get_tex_ptr(&data->tex_list, i)->type & IMAGE) != 0,
+/* */ 	(get_tex_ptr(&data->tex_list, i)->type & SKYBOX) != 0,
+/* */ 	(get_tex_ptr(&data->tex_list, i)->type & ALLOW_CLIP) != 0,
+/* */ 	(get_tex_ptr(&data->tex_list, i)->type & TRANSPARENCY) != 0,
+/* */ 	
+/* */ 	get_tex_ptr(&data->tex_list, i)->token,
+/* */ 	get_tex_ptr(&data->tex_list, i)->path,
+/* */ 	get_tex_ptr(&data->tex_list, i)->image,
+/* */ 
+/* */ 	
+/* */ 	get_tex_ptr(&data->tex_list, i)->sky_box_token,
+/* */ 	get_tex_ptr(&data->tex_list, i)->skybox_tex,
+/* */ 
+/* */ 	get_r(get_tex_ptr(&data->tex_list, i)->color),
+/* */ 	get_g(get_tex_ptr(&data->tex_list, i)->color),
+/* */ 	get_b(get_tex_ptr(&data->tex_list, i)->color),
+/* */ 	get_a(get_tex_ptr(&data->tex_list, i)->color));
+/* */ }
 /******************************************************************************/
-
 
 int	tex_debug(t_parser *data)
 {
-	int tmp = 0;
+	t_texture *tmp = 0;
 	for (int i = '!'; i < 125; i++)
 	{
-		tmp = get_tex_ptr(&data->tex_list, i)->type;
-		if (tmp > 0 && DEBUG_PARSE)
-			printf(
-			"[%c][%p] {\n"
-			"       type          :  {\n"
-			"                          UNDEFINED     [%d]\n"
-			"                          VALID         [%d]\n"
-			"                          COLOR         [%d]\n"
-			"                          IMAGE         [%d]\n"
-			"                          SKYBOX        [%d]\n"
-			"                          ALLOW_CLIP    [%d]\n"
-			"                          TRANSPARENCY  [%d]\n"
-			"                        },\n"
-			"       token         :  \'%c\',\n"
-			"       *path         :  \"%.15s\",\n"
-			"       *image        :  [%p],\n"
-			"       sky_box_token :  \'%c\',\n"
-			"       *skybox_tex   :  [%p],\n"
-			"       color         :  [%d, %d, %d, %d]\n"
-			"     }\n",
-			(char)i,
-			(get_tex_ptr(&data->tex_list, i)),
-
-			(get_tex_ptr(&data->tex_list, i)->type & UNDEFINED) != 0,
-			(get_tex_ptr(&data->tex_list, i)->type & VALID) != 0,
-			(get_tex_ptr(&data->tex_list, i)->type & COLOR) != 0,
-			(get_tex_ptr(&data->tex_list, i)->type & IMAGE) != 0,
-			(get_tex_ptr(&data->tex_list, i)->type & SKYBOX) != 0,
-			(get_tex_ptr(&data->tex_list, i)->type & ALLOW_CLIP) != 0,
-			(get_tex_ptr(&data->tex_list, i)->type & TRANSPARENCY) != 0,
-			
-			get_tex_ptr(&data->tex_list, i)->token,
-			get_tex_ptr(&data->tex_list, i)->path,
-			get_tex_ptr(&data->tex_list, i)->image,
-
-			
-			get_tex_ptr(&data->tex_list, i)->sky_box_token,
-			get_tex_ptr(&data->tex_list, i)->skybox_tex,
-
-			get_r(get_tex_ptr(&data->tex_list, i)->color),
-			get_g(get_tex_ptr(&data->tex_list, i)->color),
-			get_b(get_tex_ptr(&data->tex_list, i)->color),
-			get_a(get_tex_ptr(&data->tex_list, i)->color));
+		tmp = get_tex_ptr(&data->tex_list, i);
+		if (tmp && tmp->type > 0 && DEBUG_PARSE)
+			print_tex(data, i);
 	}
 	return (EXIT_SUCCESS);
 }

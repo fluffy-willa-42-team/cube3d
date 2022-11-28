@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 17:12:59 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/25 12:39:02 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/28 14:15:26 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ t_texture	*get_tex_ptr(t_vec *tex, char token)
 	const int	index = get_tex_index(token);
 
 	if (index == -1)
+		return (NULL);
+	if (token == E_EMPTY)
 		return (NULL);
 	return (&((t_texture *)tex->buffer)[get_tex_index(token)]);
 }
