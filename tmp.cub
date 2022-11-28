@@ -1,15 +1,11 @@
-NO ./texture/cool.xpm42
-SO ./texture/cool.xpm42
-WE ./texture/cool.xpm42
-EA ./texture/cool.xpm42
-F 220,100,0,32
-C 225,30,0,123
+NO 220,100,0,32
+SO 220,100,0,32
+WE 220,100,0,32
+EA 220,100,0,32
+F ./texture/cool.xpm42
+C ./texture/cool.xpm42
 111111
 100001
-100001
-100001
-100001
-100001
-100001
-100001
-111111
+110011
+ 101
+ 111

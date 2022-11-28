@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:56:12 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/25 17:16:43 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/28 14:51:28 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	run(char *file)
 		return (EXIT_FAILURE);
 	if (CUBE3D_UNITEST_PARSER)
 		return (EXIT_SUCCESS);
-	game.player = init_player(EAST, set_i32(2, 2));
+	game.player = init_player(EAST, set_i32(9, 24));
 	game.param = init_params();
 	game.param.mlx = mlx_init(WIN_WIDTH, WIN_HEIGHT, "MLX42", true);
 	if (!game.param.mlx)

@@ -1,9 +1,9 @@
-NO ./texture/cool.xpm42
-SO ./texture/cool.xpm42
-WE ./texture/cool.xpm42
-EA ./texture/cool.xpm42
-F 220,100,0,250
-C 225,30,0,255
+NO ./texture/mc/grass_side.xpm42
+SO ./texture/mc/grass_side.xpm42
+WE ./texture/mc/grass_side.xpm42
+EA ./texture/mc/grass_side.xpm42
+F ./texture/mc/grass_top.xpm42
+C ./texture/mc/stone.xpm42
                         111111
                         1000001
                        100111001
@@ -37,7 +37,7 @@ C 225,30,0,255
    10000000000000000000000000000001
    10000001111111111111111111111111
    10000001
-11110000N011111111111111100011
+11110000N011111111111111111111
 100000000000000000000000000001
 111100000011111111111111111111
    10000001

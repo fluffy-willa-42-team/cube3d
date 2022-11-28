@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 17:48:29 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/28 14:16:23 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/28 15:53:11 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,12 +115,12 @@ int	init_map(t_parser *data)
 			chunk = get_chunk_pars(data, set_i32(x, y));
 			err = get_next_chunk(data, chunk);
 			if (err == EXIT_FAILURE)
-				return (ret_print(EXIT_FAILURE, "//TODO"));
+				return (EXIT_FAILURE);
 			chunk->coord = set_i32(x, y);
-			printf("[%d][%d]\n",x, y);
+			printf("[%d][%d]\n",x, y);//TODO REMOVE
 			if (chunk->east)
 				print_tex(chunk->east);
-			if (err == END_OF_MAP)
+			if (err == END_OF_LINE || err == END_OF_MAP)
 				break ;
 		}
 	}

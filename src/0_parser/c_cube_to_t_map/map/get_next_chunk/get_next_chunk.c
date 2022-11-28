@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 14:36:52 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/28 12:25:34 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/28 15:48:58 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ static int	set_next_chunk_index(t_parser *data)
 	data->cube_map += (get_line_width(data) + 1) * 2;
 	if (!mapchar(data))
 		return (END_OF_MAP);
-	return (EXIT_SUCCESS);
+	return (END_OF_LINE);
 }
 
 /**
@@ -130,12 +130,11 @@ static int	set_next_chunk_index(t_parser *data)
  */
 int	get_next_chunk(t_parser *data, t_chunk *chunk)
 {
-	if (mapchar(data) == '\n')
-		if (set_next_chunk_index(data) == END_OF_MAP)
-			return (END_OF_MAP);
 	data->tmp_width = get_line_width(data);
 	if (set_chunk(data, chunk))
 		return (EXIT_FAILURE);
 	data->index += 3;
+	if (mapchar(data) == '\n')
+		return (set_next_chunk_index(data));
 	return (EXIT_SUCCESS);
 }

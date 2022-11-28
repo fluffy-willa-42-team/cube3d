@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:53:43 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/28 12:25:00 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/28 15:31:44 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@
 # define CUB_FILE 1
 # define CUBE_FILE 2
 
-# define END_OF_MAP -1
+# define END_OF_MAP  -1
+# define END_OF_LINE -2
 
 /**
  * @brief Default number of texture
