@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:50:53 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/29 09:24:16 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/29 12:46:55 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,14 @@ static int	open_fd(t_parser *data)
  */
 int	open_file(t_parser *data)
 {
+	int	err;
+
 	if (check_extension(data) || open_fd(data))
 		return (EXIT_FAILURE);
-	return (EXIT_SUCCESS);
+	err = read_file(data);
+	if (close(data->file_fd) == -1)
+		return (ret_print(EXIT_FAILURE, ERR_CLOSE_FILE));
+	if (err == EXIT_SUCCESS)
+		return (EXIT_SUCCESS);
+	return (EXIT_FAILURE);
 }

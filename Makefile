@@ -6,7 +6,7 @@
 #    By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/05 10:47:56 by awillems          #+#    #+#              #
-#    Updated: 2022/11/22 14:56:10 by mahadad          ###   ########.fr        #
+#    Updated: 2022/11/29 14:18:16 by mahadad          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,6 +70,7 @@ endif
 ifeq ($(DEBUG), 1)
 	FLAGS += -g3
 	FLAGS += -D DEBUG_PRINT=1
+	FLAGS += -D DEBUG_PARSE=1
 	MAKE_FLAG += DEBUG=1
 endif
 

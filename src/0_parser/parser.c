@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:53:32 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/29 10:02:15 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/29 13:50:16 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,19 +116,6 @@ int	tex_debug(t_parser *data)
 
 /**
  * @author @Matthew-Dreemurr
- * 
- * @brief Free all buffer from the parse that is not in use by the game engine.
- * 
- */
-int	destroy_data(t_parser *data)
-{
-	//TODO #11 Free all allocated memory and open file/image.
-	(void)data;
-	return (EXIT_FAILURE);
-}
-
-/**
- * @author @Matthew-Dreemurr
  *
  * @brief Check if the file name have `.cub(e)`, try to open the file and store
  *        in the memory.
@@ -139,21 +126,15 @@ int	destroy_data(t_parser *data)
  * @param av Path of the map file to open and store in the t_map data structure.
  * @return int Return zero value, if there is a error return non zero value.
  */
-int	parser(char *av, t_map *map)
+int	parser(char *av, t_parser *data)
 {
-	t_parser	data;
-
-	struct_set(&data, sizeof(data));
-	data.path = av;
-	if (open_file(&data)
-		|| read_file(&data)
-		|| file_sani(&data)
-		|| file_conv(&data)
-		|| cube_to_t_map(&data))
-		return (destroy_data(&data));
-	map->map = data.map;
-	map->width = data.map_width;
-	map->height = data.map_height;
-		/*TODO REMOVE*/tex_debug(&data);/*TODO REMOVE*/
+	struct_set(data, sizeof(t_parser));
+	data->path = av;
+	if (open_file(data)
+		|| file_sani(data)
+		|| file_conv(data)
+		|| cube_to_t_map(data))
+		return (EXIT_FAILURE);
+	tex_debug(data);
 	return (EXIT_SUCCESS);
 }

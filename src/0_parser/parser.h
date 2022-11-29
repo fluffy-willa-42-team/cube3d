@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:53:43 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/28 15:31:44 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/29 13:10:46 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,7 +138,7 @@ typedef struct s_color
 
 typedef int	(*t_conv_fct)(t_parser *data, char c);
 
-int		parser(char *av, t_map *map);
+int		parser(char *av, t_parser *data);
 
 int		open_file(t_parser *data);
 int		read_file(t_parser *data);

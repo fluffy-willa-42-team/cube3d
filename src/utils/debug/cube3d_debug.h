@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:54:56 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/29 09:29:07 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/29 12:49:41 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	ret_print(int ret, const char *msg);
 # define ERR_RDL_FAIL    "Error\nv_readline fail !\n"
 # define ERR_VEC_ADD     "Error\nv_add fail !\n"
 # define ERR_VEC_ALLOC   "Error\nv_alloc fail !\n"
+# define ERR_FREE_MEME   "Error\nFree all alloc fail !\n"
 # define ERR_SANI_FILE   "Error\nUnauthorized withe space, only ' ' and '\\n'!\n"
 # define ERR_EMPTY_FILE  "Error\nEmpty map file !\n"
 # define ERR_TEX_PARAM   "Error\nBad texture param !\n"

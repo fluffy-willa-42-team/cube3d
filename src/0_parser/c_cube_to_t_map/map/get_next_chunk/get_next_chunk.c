@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 14:36:52 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/29 09:31:07 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/29 13:50:36 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	get_chunk_pars_token(t_parser *data, t_chunk_token *tmp)
 	const char	*f2 = mapptr(data) + data->index + data->tmp_width + 1;
 	const char	*f3 = mapptr(data) + 2 * (data->index + data->tmp_width + 1);
 
-	struct_set(tmp, sizeof(tmp));
+	struct_set(tmp, sizeof(t_chunk_token));
 	tmp->ceiling = f1[0];
 	tmp->north = f1[1];
 	tmp->entity = f1[2];

@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:56:12 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/28 15:58:47 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/29 13:43:43 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,10 @@
 #include "cube3d_debug.h"
 
 #include <stdio.h>//TODO REMOVE
+
+#include "parser.h"
+
+#include "cube3d_utils.h"
 
 /* EXIT_SUCCESS, EXIT_FAILURE*/
 #include <stdlib.h>
@@ -25,12 +29,16 @@ void	hook_loop(void *param);
 
 int	run(char *file)
 {
-	t_game	game;
+	t_game		game;
+	t_parser	data;
 
-	if (parser(file, &game.map))
-		return (EXIT_FAILURE);
+	if (parser(file, &data))
+		return (destroy_data(EXIT_FAILURE, &data));
 	if (CUBE3D_UNITEST_PARSER)
-		return (EXIT_SUCCESS);
+		return (destroy_data(EXIT_SUCCESS, &data));
+	game.map.map = data.map;
+	game.map.width = data.map_width;
+	game.map.height = data.map_height;
 	game.player = init_player(EAST, set_i32(11, 10));
 	game.param = init_params();
 	game.param.mlx = mlx_init(WIN_WIDTH, WIN_HEIGHT, "MLX42", true);
@@ -44,7 +52,7 @@ int	run(char *file)
 	mlx_loop(game.param.mlx);
 	mlx_delete_image(game.param.mlx, game.param.img);
 	mlx_terminate(game.param.mlx);
-	return (EXIT_SUCCESS);
+	return (destroy_data(EXIT_SUCCESS, &data));
 }
 
 int	main(int argc, char *argv[])
