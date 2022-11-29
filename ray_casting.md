@@ -70,6 +70,18 @@ That does mean we can divide our process in two: xIntercept and yIntercept.
 
 We alse can subdivide the process in two major section. The first occurence and all the one after.
 
+## Math notations
+
+Quickly before the math comes in,
+
+$\begin{pmatrix}x \\y\end{pmatrix}$ is the notation for a set of coordinate.
+
+$\overline{AB}$ is the distance between $A$ and $B$.  
+$A_x$ is the coordinate $x$ of the point $A$  
+$A_y$ is the coordinate $y$ of the point $A$  
+$inter(i)$ is the point represented by the function $inter()$ iterated a $i$ number of times  
+$\pm$ is plus or minus
+
 ## yIntercept first step
 
 <img src="doc/math_inter/yInter_init.png" width="300"/>
@@ -126,7 +138,10 @@ $$P'_y + \Delta x = P_x$$
 
 In conclusion, we have that
 
-$$yInter = (P_x - \Delta y . tan(\alpha_{ray})\ ,\  P'_y)$$
+$$yInter = \begin{pmatrix}
+P_x - \Delta y . tan(\alpha_{ray}) \\
+P'_y
+\end{pmatrix}$$
 
 </blockquote></details>
 
@@ -166,7 +181,10 @@ float delta_y = abs(player_y - P_prime_y);
 
 Now, we have everything to calculate yInter with our formula :  
 
-$$yInter = (P_x - \Delta y . tan(\alpha_{ray})\ ,\  P'_y)$$
+$$yInter = \begin{pmatrix}
+P_x - \Delta y . tan(\alpha_{ray}) \\
+P'_y
+\end{pmatrix}$$
 
 ```c
 float yInter_x = player_x - delta_y * tan(alpha_ray);
@@ -236,7 +254,11 @@ but
 $$P'_y + \Delta y = P_y$$
 
 In conclusion, we have that  
-$$xInter = (P'_x,\ P_y - \dfrac{\Delta x}{tan(\alpha_{ray})})$$
+
+$$xInter = \begin{pmatrix}
+P'_x \\
+P_y - \dfrac{\Delta x}{tan(\alpha_{ray})}
+\end{pmatrix}$$
 
 </blockquote></details>
 
@@ -276,7 +298,10 @@ float delta_x = abs(player_x - P_prime_x);
 
 Now, we have everything to calculate xInter with our formula :  
 
-$$xInter = (P'_x,\ P_y - \dfrac{\Delta x}{tan(\alpha_{ray})})$$
+$$xInter = \begin{pmatrix}
+P'_x \\
+P_y - \dfrac{\Delta x}{tan(\alpha_{ray})}
+\end{pmatrix}$$
 
 ```c
 float xInter_x = P_prime_x;
@@ -298,10 +323,8 @@ Now that we have found the first intersection for both $x$ and $y$ axis, we need
 <details open><summary>Definitions</summary><blockquote> 
 
 For readability, i will refer to :  
-- $yInter$ as $yInter(i)$  
-- $prev\ yInter_x$ as $yInter(i + 1)$
-
-For those not used to mathematical representation, $i$ is the number of iteration of the function yInter.
+- "yInter" as $yInter(i)$  
+- "prev yInter" as $yInter(i + 1)$
 
 $\Delta x$ is difference between $| yInter(i)_x - yInter(i+1)_x |$  
 $\Delta y$ is difference between $| yInter(i)_y - yInter(i+1)_y |$  
@@ -313,16 +336,21 @@ $\Delta y$ is difference between $| yInter(i)_y - yInter(i+1)_y |$
 We need to get $yInter(i+1)$ and we know $yInter(i)$ and $\alpha_{ray}$
 
 We can see on the graph that :  
-$$yInter(i+1)_x = yInter(i)_x - \Delta x$$  
-$$yInter(i+1)_y = yInter(i)_y - \Delta y$$  
 
-but that is only valid if we are looking North-West. The sign of both $\Delta$ will vary in function of the angle we are looking at. I'm going to make the function with a $\pm$ (plus or minus) but in the program section we will solve this issue.
+$$yInter(i+1) = \begin{pmatrix}
+yInter(i)_x - \Delta x \\
+yInter(i)_y - \Delta y
+\end{pmatrix}$$
+
+but that is only valid if we are looking North-West. The sign of both $\Delta$ will vary in function of the angle we are looking at. I'm going to make the function with a $\pm$ but in the program section we will solve this issue.
 
 We have then :  
-$$yInter(i+1)_x = yInter(i)_x \pm \Delta x$$  
-$$yInter(i+1)_y = yInter(i)_y \pm \Delta y$$  
+$$yInter(i+1) = \begin{pmatrix}
+yInter(i)_x \pm \Delta x \\
+yInter(i)_y \pm \Delta y
+\end{pmatrix}$$
 
-We need to calculate both $\Delta$ but we can see that $\Delta y$ is equal to one which makes sense because we need to find the next intersection with the line where $y = a + 1$ from the intersection with the line where $y = a$.
+We need to calculate both $\Delta$ but we can see that $\Delta y$ is equal to $1$ which makes sense because we need to find the next intersection with the line where $y = a + 1$ from the intersection with the line where $y = a$.
 
 So the only value missing is $\Delta x$ but we can it inside triangle made by the point $A$, $yInter(i)$ and $yInter(i+1)$. So we can use our favorite trick : trigonometry.  
 
@@ -334,14 +362,156 @@ $$\Delta x = \Delta y . tan(\alpha_{ray})$$
 
 With that done, we now know that
 
-$$yInter(i+1)_x = yInter(i+1)_x + \Delta y . tan(\alpha_{ray})$$
-$$yInter(i+1)_y = yInter(i+1)_y + \Delta y$$
+$$yInter(i+1)_x = yInter(i+1)_x \pm \Delta y . tan(\alpha_{ray})$$
+
+but earlier we said that $\Delta y = 1$, so
+
+$$yInter(i+1)_x = yInter(i+1)_x \pm tan(\alpha_{ray})$$
+
+And finally, 
+
+$$yInter(i+1) = \begin{pmatrix}
+yInter(i)_x \pm tan(\alpha_{ray}) \\
+yInter(i)_y \pm 1
+\end{pmatrix}$$
 
 </blockquote></details>
 
 <details open><summary>Program Explonations</summary><blockquote> 
 
+We now have the formula to get the next intersection of line where y is round. But to compute it we have to get rid of this $\pm$.
 
+For that we observe that we need to subtract $\Delta x$ if we are looking in the west and add if we are looking east.  
+The west being if $\alpha_{ray}$ is between $90^\circ$ and $270^\circ$ or between $\dfrac{\pi}{2}$ and $\dfrac{3\pi}{2}$ radian.
+
+We will use this knowledge and our formula to cumpute it.
+
+$$yInter(i+1)_x = yInter(i)_x \pm tan(\alpha_{ray})$$
+
+```c
+float deltaX = tan(alpha_ray);
+
+if (90 < alpha_ray && alpha_ray <= 270)
+	float yInter_next_x = yInter_prev_x - deltaX;
+else
+	float yInter_next_x = yInter_prev_x + deltaX;
+```
+
+We have the $x$, now we need the $y$ except this time we add if we are looking south and substract if we are looking north.  
+The north being if $\alpha_{ray}$ is between $0^\circ$ and $180^\circ$ or between $0$ and $\pi$ radian.
+
+And with our formula, 
+
+$$yInter(i+1)_y = yInter(i)_y \pm 1$$
+
+```c
+if (0 < alpha_ray && alpha_ray <= 180)
+	float yInter_next_y = yInter_prev_y - 1;
+else
+	float yInter_next_y = yInter_prev_y + 1;
+```
+
+With that done we have have finished a step.
+
+</blockquote></details>
+
+
+## get xIntercept next step
+
+<img src="doc/math_inter/xInter_next.png" width="300"/>
+ 
+<details open><summary>Definitions</summary><blockquote> 
+
+For readability, i will refer to :  
+- $xInter$ as $xInter(i)$  
+- $prev\ xInter$ as $xInter(i + 1)$
+
+$\Delta x$ is difference between $| xInter(i)_x - xInter(i+1)_x |$  
+$\Delta y$ is difference between $| xInter(i)_y - xInter(i+1)_y |$  
+
+</blockquote></details>
+
+<details open><summary>Math Explonations</summary><blockquote> 
+
+We need to get $xInter(i+1)$ and we know $xInter(i)$ and $\alpha_{ray}$
+
+We can see on the graph that :  
+
+$$xInter(i+1) = \begin{pmatrix}
+xInter(i)_x - \Delta x \\
+xInter(i)_y - \Delta y
+\end{pmatrix}$$
+
+but that is only valid if we are looking North-West. The sign of both $\Delta$ will vary in function of the angle we are looking at. I'm going to make the function with a $\pm$ but in the program section we will solve this issue.
+
+We have then :  
+$$xInter(i+1) = \begin{pmatrix}
+xInter(i)_x \pm \Delta x \\
+xInter(i)_y \pm \Delta y
+\end{pmatrix}$$
+
+We need to calculate both $\Delta$ but we can see that $\Delta x$ is equal to $1$ which makes sense because we need to find the next intersection with the line where $x = a + 1$ from the intersection with the line where $x = a$.
+
+So the only value missing is $\Delta x$ but we can it inside triangle made by the point $A$, $xInter(i)$ and $xInter(i+1)$. So we can use our favorite trick : trigonometry.  
+
+<img src="doc/math_toa.png" width="300"/>
+
+With $tan(\alpha) = \dfrac{opposite}{adjacent}$, we can determine that 
+
+$$\Delta y = \dfrac{\Delta x}{tan(\alpha_{ray})}$$
+
+With that done, we now know that
+
+$$xInter(i+1)_y = xInter(i+1)_y \pm \dfrac{\Delta x}{tan(\alpha_{ray})}$$
+
+but earlier we said that $\Delta y = 1$, so
+
+$$xInter(i+1)_y = xInter(i+1)_y \pm \dfrac{1}{tan(\alpha_{ray})}$$
+
+And finally, 
+
+$$xInter(i+1) = \begin{pmatrix}
+xInter(i)_x \pm 1 \\
+xInter(i+1)_y \pm \dfrac{1}{tan(\alpha_{ray})}
+\end{pmatrix}$$
+
+</blockquote></details>
+
+<details open><summary>Program Explonations</summary><blockquote> 
+
+We now have the formula to get the next intersection of line where y is round. But to compute it we have to get rid of this $\pm$.
+
+For that we observe that we need to subtract $\Delta x$ if we are looking in the west and add if we are looking east.  
+The west being if $\alpha_{ray}$ is between $90^\circ$ and $270^\circ$ or between $\dfrac{\pi}{2}$ and $\dfrac{3\pi}{2}$ radian.
+
+We will use this knowledge and our formula to cumpute it.
+
+$$xInter(i+1)_x = xInter(i)_x \pm 1$$
+
+```c
+if (90 < alpha_ray && alpha_ray <= 270)
+	float xInter_next_x = xInter_prev_x - 1;
+else
+	float xInter_next_x = xInter_prev_x + 1;
+```
+
+We have the $x$, now we need the $y$ except this time we add if we are looking south and substract if we are looking north.  
+The north being if $\alpha_{ray}$ is between $0^\circ$ and $180^\circ$ or between $0$ and $\pi$ radian.
+
+And with our formula, 
+
+$$xInter(i+1)_y = xInter(i+1)_y \pm \dfrac{1}{tan(\alpha_{ray})}$$
+
+```c
+float deltaY = 1 / tan(alpha_ray)
+
+if (0 < alpha_ray && alpha_ray <= 180)
+	float xInter_next_y = xInter_prev_y - deltaY;
+else
+	float xInter_next_y = xInter_prev_y + deltaY;
+```
+
+With that done we have have finished a another step.
 
 </blockquote></details>
 
