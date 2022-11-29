@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:53:43 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/29 13:10:46 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/29 16:55:54 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ typedef struct s_parser
 	uint32_t		map_width;
 	uint32_t		map_height;
 	t_vec			map;
+	t_player		player;
 }				t_parser;
 
 typedef struct s_chunk_token
@@ -181,6 +182,7 @@ int		init_texture(t_parser *data);
 int		store_map(t_parser *data);
 
 int		check_chunk_type(t_chunk_token *tokens);
+int		store_entity(t_parser *data, t_chunk *chunk, t_chunk_token *tokens);
 int		get_next_chunk(t_parser *data, t_chunk *chunk);
 int		set_map_size(t_parser *data);
 int		get_line_width(t_parser *data);

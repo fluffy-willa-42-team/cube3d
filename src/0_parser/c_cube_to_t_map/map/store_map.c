@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 17:48:29 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/29 14:50:49 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/29 16:36:29 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,10 +112,10 @@ int	init_map_while(t_parser *data)
 		while (x < data->map_width)
 		{
 			chunk = get_chunk_pars(data, set_i32(x, y));
+			chunk->coord = set_i32(x, y);
 			err = get_next_chunk(data, chunk);
 			if (err == EXIT_FAILURE)
 				return (EXIT_FAILURE);
-			chunk->coord = set_i32(x, y);
 			if (err == END_OF_LINE || err == END_OF_MAP)
 				break ;
 			x++;

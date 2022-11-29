@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:52:08 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/29 13:45:54 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/29 15:56:05 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	cub_to_cube(t_parser *data)
 {
 	data->cube = v_init(sizeof(char), NULL, NULL);
 	if (!v_alloc(&data->cube, SET, 5000000))
-		return (ret_print(EXIT_FAILURE, "ERR_VEC_ALLOC"));
+		return (ret_print(EXIT_FAILURE, ERR_VEC_ALLOC));
 	if (texture_conv(data) || map_conv(data))
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);

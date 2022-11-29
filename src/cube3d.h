@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:33:07 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/29 13:38:44 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/29 16:48:10 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ typedef struct s_player {
 	t_coord_f64	pos;
 	double		alpha;
 	t_coord_f64	cosin;
+	bool		exist;
 }	t_player;
 
 /**
