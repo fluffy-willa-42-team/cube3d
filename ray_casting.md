@@ -74,7 +74,10 @@ We alse can subdivide the process in two major section. The first occurence and 
 
 Quickly before the math comes in,
 
-```math $\begin{pmatrix}x \\y\end{pmatrix}$``` is the notation for a set of coordinate.
+```math
+$\begin{pmatrix}x \\y\end{pmatrix}$
+```
+is the notation for a set of coordinate.
 
 $\overline{AB}$ is the distance between $A$ and $B$.  
 $A_x$ is the coordinate $x$ of the point $A$  
