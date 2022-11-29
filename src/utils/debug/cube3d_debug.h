@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:54:56 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/29 12:49:41 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/29 16:45:51 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	ret_print(int ret, const char *msg);
 # define ERR_SKY_TOKEN_FORMAT  "Error\nBad skybox token format !\n"
 # define ERR_TEX_RESERVED  "Error\nBad or reserved texture token used !\n"
 # define ERR_TEX_DUP     "Error\nDuplicate texture !\n"
+# define ERR_P_DUP       "Error\nDuplicate player !\n"
 # define ERR_NO_MAP_AFTER_TEX "Error\nNo map after texture !\n"
 # define ERR_BAD_CUB_CHAR "Error\nUnauthorized character in the map !\n"
 # define ERR_CUB_CONV_FUNC "Error\nf_{floor_level}_{char_type} fail !\n"
@@ -46,8 +47,9 @@ int	ret_print(int ret, const char *msg);
 # define ERR_NO_TEX      "Error\nTexture in chunk was not define !\n"
 # define ERR_BAD_CHUNK_FLOOR  "Error\nBad chunk floor !\n"
 # define ERR_BAD_CHUNK_TYPE  "Error\nBad chunk type !\n"
-# define ERR_BAD_XPM  "Error\nXPM file is invalid or corrupted !\n"
-# define ERR_NULL_TEX   "Error\nt_texture *NULL !\n"
+# define ERR_BAD_P_OPT   "Error\nBad player direction !\n"
+# define ERR_BAD_XPM     "Error\nXPM file is invalid or corrupted !\n"
+# define ERR_NULL_TEX    "Error\nt_texture *NULL !\n"
 # define ERR_COLOR_R     "Error\n Bad color channel R\n"
 # define ERR_COLOR_G     "Error\n Bad color channel G\n"
 # define ERR_COLOR_B     "Error\n Bad color channel B\n"
