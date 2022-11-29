@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:33:07 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/26 13:16:39 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/29 13:38:44 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@
 
 # include "cube_types.h"
 
-# define DEBUG_PARSE 0
+# ifndef DEBUG_PARSE
+#  define DEBUG_PARSE 0
+# endif /*DEBUG_PARSE*/
 
 /* #####=====----------			Common Math Var			 ----------=====##### */
 

@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 14:03:25 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/29 09:45:17 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/29 13:50:46 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ int	set_current_tex_config(t_parser *data, char *tex)
 {
 	t_texture	tmp;
 
-	ft_memset(&tmp, '\0', sizeof(tmp));
+	ft_memset(&tmp, '\0', sizeof(t_texture));
 	data->index = 0;
 	if (set_token(data, tex, &tmp)
 		|| skip_tex_white_space(data, tex) || set_texture_param(data, tex, &tmp)

@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 15:47:45 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/25 12:16:04 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/29 13:50:52 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,6 @@ int	destroy_t_parser(t_parser *data)
 {
 	return (close_config_file(data)
 		|| free_all_vec(data)
-		|| struct_set(data, sizeof(data)));
+		|| struct_set(data, sizeof(t_parser)));
 }
 
