@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks_loop.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 11:47:01 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/25 14:39:51 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/29 09:42:27 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ void	hook_loop(void *param)
 	if (mlx_is_key_down(game->param.mlx, MLX_KEY_K))			map_point_hook(game, -0.1);
 	if (mlx_is_key_down(game->param.mlx, MLX_KEY_O))			map_hook(game, 1);
 	if (mlx_is_key_down(game->param.mlx, MLX_KEY_L))			map_hook(game, -1);
+	if (mlx_is_key_down(game->param.mlx, MLX_KEY_LEFT))			angle_hook(game, -0.05);
+	if (mlx_is_key_down(game->param.mlx, MLX_KEY_RIGHT))			angle_hook(game, 0.05);
 	if (mlx_is_key_down(game->param.mlx, MLX_KEY_KP_4))			angle_hook(game, -0.05);
 	if (mlx_is_key_down(game->param.mlx, MLX_KEY_KP_6))			angle_hook(game, 0.05);
 	if (mlx_is_key_down(game->param.mlx, MLX_KEY_KP_1))			angle_hook(game, -0.01);
