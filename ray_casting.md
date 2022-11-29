@@ -88,38 +88,49 @@ Then $\Delta x$ and $\Delta y$ will do so aswell.
 
 <details open><summary>Math Explonations</summary><blockquote> 
 
-We need to find $yInter$ but we already know it's $y$ value, it is the same $y$ as $P'$.  
-So $yInter = (yInter_x, p'_y)$  
+We need to find $yInter$ but we already know it's $y$ value, it is the same $y$ as $P'$.
+
+So
+
+$$yInter = (yInter_x, p'_y)$$
+
 The only needed value then is $yInter_x$.
 
-We can see that :  
-$yInter_x = P'_y + \overline{P'\ yInter}$
+We can see that :
+
+$$yInter_x = P'_y + \overline{P'\ yInter}$$
 
 but we can see on the graph that
 
-$\overline{P'\ yInter} = \Delta x - \overline{A\ yInter}$
+$$\overline{P'\ yInter} = \Delta x - \overline{A\ yInter}$$
 
 so
 
-$yInter_x = P'_y + \Delta x - \overline{A\ yInter}$
+$$yInter_x = P'_y + \Delta x - \overline{A\ yInter}$$
 
 So to find $yInter_x$ we need to find $\overline{A\ yInter}$ which is convinently a side of the triangle formed by $yInter$, $Player$ and $A$.  
-With $tan(\alpha) = \dfrac{opposite}{adjacent}$
 
 <img src="doc/math_toa.png" width="300"/>
 
-We can determine that
-$\overline{A\ yInter} = \Delta y . tan(\alpha_{ray})$  
-and so  
-$yInter_x = P'_y + \Delta x - \Delta y . tan(\alpha_{ray})$
+With $tan(\alpha) = \dfrac{opposite}{adjacent}$, we can determine that
 
-but $P'_y + \Delta x = P_x$
+$$\overline{A\ yInter} = \Delta y . tan(\alpha_{ray})$$
 
-In conclusion, we have that $yInter = (P_x - \Delta y . tan(\alpha_{ray})\ ,\  P'_y)$.
+and so
+
+$$yInter_x = P'_y + \Delta x - \Delta y . tan(\alpha_{ray})$$
+
+but
+
+$$P'_y + \Delta x = P_x$$
+
+In conclusion, we have that
+
+$$yInter = (P_x - \Delta y . tan(\alpha_{ray})\ ,\  P'_y)$$
 
 </blockquote></details>
 
-<details open><summary>Program Explonation</summary><blockquote> 
+<details open><summary>Program Explonations</summary><blockquote> 
 
 Now that we know the formula to calculate the first point of intersection. We see that that we know $\alpha_{ray}$ and $P_x$ but only have a description of what $P'_y$ and $\Delta y$ are.
 
@@ -154,7 +165,8 @@ float delta_y = abs(player_y - P_prime_y);
 ```
 
 Now, we have everything to calculate yInter with our formula :  
-$yInter = (P_x - \Delta y . tan(\alpha_{ray})\ ,\  P'_y)$
+
+$$yInter = (P_x - \Delta y . tan(\alpha_{ray})\ ,\  P'_y)$$
 
 ```c
 float yInter_x = player_x - delta_y * tan(alpha_ray);
@@ -190,41 +202,45 @@ Then $\Delta x$ and $\Delta y$ will do so aswell.
 
 
 We need to find $xInter$ but we already know it's $x$ value, it is the same $x$ as $P'$.  
-So $xInter = (p'_x, xInter_y)$  
+So 
+
+$$xInter = (p'_x, xInter_y)$$  
+
 The only needed value then is $xInter_y$.
 
 We can see that :  
-$xInter_y = P'_y - \overline{P'\ xInter}$
+$$xInter_y = P'_y - \overline{P'\ xInter}$$
 
 but we can see on the graph that
 
-$\overline{P'\ xInter} = \overline{A\ xInter} - \Delta y$ 
+$$\overline{P'\ xInter} = \overline{A\ xInter} - \Delta y$$ 
 
 so
 
-$xInter_y = P'_x - (\overline{A\ xInter} - \Delta y)$
+$$xInter_y = P'_x - (\overline{A\ xInter} - \Delta y)$$
 
 *The trick for if it's outside is here. With a double negative the formula can be simplified.*
 
-$xInter_y = P'_x + \Delta y - \overline{A\ xInter}$
+$$xInter_y = P'_x + \Delta y - \overline{A\ xInter}$$
 
 So to find $xInter_y$ we need to find $\overline{A\ xInter}$ which is convinently a side of the triangle formed by $xInter$, $Player$ and $A$.  
-With $tan(\alpha) = \dfrac{opposite}{adjacent}$
 
 <img src="doc/math_toa.png" width="300"/>
 
-We can determine that
-$\overline{A\ xInter} = \dfrac{\Delta x}{tan(\alpha_{ray})}$  
+With $tan(\alpha) = \dfrac{opposite}{adjacent}$, we can determine that  
+$$\overline{A\ xInter} = \dfrac{\Delta x}{tan(\alpha_{ray})}$$  
 and so  
-$xInter_y = P'_x + \Delta y - \dfrac{\Delta x}{tan(\alpha_{ray})}$
+$$xInter_y = P'_x + \Delta y - \dfrac{\Delta x}{tan(\alpha_{ray})}$$
 
-but $P'_y + \Delta y = P_y$
+but
+$$P'_y + \Delta y = P_y$$
 
-In conclusion, we have that $xInter = (P'_x,\ P_y - \dfrac{\Delta x}{tan(\alpha_{ray})})$.
+In conclusion, we have that  
+$$xInter = (P'_x,\ P_y - \dfrac{\Delta x}{tan(\alpha_{ray})})$$
 
 </blockquote></details>
 
-<details open><summary>Program Explonation</summary><blockquote> 
+<details open><summary>Program Explonations</summary><blockquote> 
 
 Now that we know the formula to calculate the first point of intersection. We see that that we know $\alpha_{ray}$ and $P_x$ but only have a description of what $P'_x$ and $\Delta x$ are.
 
@@ -259,7 +275,8 @@ float delta_x = abs(player_x - P_prime_x);
 ```
 
 Now, we have everything to calculate xInter with our formula :  
-$xInter = (P'_x,\ P_y - \dfrac{\Delta x}{tan(\alpha_{ray})})$
+
+$$xInter = (P'_x,\ P_y - \dfrac{\Delta x}{tan(\alpha_{ray})})$$
 
 ```c
 float xInter_x = P_prime_x;
@@ -270,10 +287,63 @@ We finally have the first point of intersection to a line where x is round.
 
 </blockquote></details>
 
+## Get Next Step
+
+Now that we have found the first intersection for both $x$ and $y$ axis, we need to create a function that take an intersection and gets you the next one for both axis.
+
+## get yIntercept next step
+
+<img src="doc/math_inter/yInter_next.png" width="300"/>
+ 
+<details open><summary>Definitions</summary><blockquote> 
+
+For readability, i will refer to :  
+- $yInter$ as $yInter(i)$  
+- $prev\ yInter_x$ as $yInter(i + 1)$
+
+For those not used to mathematical representation, $i$ is the number of iteration of the function yInter.
+
+$\Delta x$ is difference between $| yInter(i)_x - yInter(i+1)_x |$  
+$\Delta y$ is difference between $| yInter(i)_y - yInter(i+1)_y |$  
+
+</blockquote></details>
+
+<details open><summary>Math Explonations</summary><blockquote> 
+
+We need to get $yInter(i+1)$ and we know $yInter(i)$ and $\alpha_{ray}$
+
+We can see on the graph that :  
+$$yInter(i+1)_x = yInter(i)_x - \Delta x$$  
+$$yInter(i+1)_y = yInter(i)_y - \Delta y$$  
+
+but that is only valid if we are looking North-West. The sign of both $\Delta$ will vary in function of the angle we are looking at. I'm going to make the function with a $\pm$ (plus or minus) but in the program section we will solve this issue.
+
+We have then :  
+$$yInter(i+1)_x = yInter(i)_x \pm \Delta x$$  
+$$yInter(i+1)_y = yInter(i)_y \pm \Delta y$$  
+
+We need to calculate both $\Delta$ but we can see that $\Delta y$ is equal to one which makes sense because we need to find the next intersection with the line where $y = a + 1$ from the intersection with the line where $y = a$.
+
+So the only value missing is $\Delta x$ but we can it inside triangle made by the point $A$, $yInter(i)$ and $yInter(i+1)$. So we can use our favorite trick : trigonometry.  
+
+<img src="doc/math_toa.png" width="300"/>
+
+With $tan(\alpha) = \dfrac{opposite}{adjacent}$, we can determine that 
+
+$$\Delta x = \Delta y . tan(\alpha_{ray})$$
+
+With that done, we now know that
+
+$$yInter(i+1)_x = yInter(i+1)_x + \Delta y . tan(\alpha_{ray})$$
+$$yInter(i+1)_y = yInter(i+1)_y + \Delta y$$
+
+</blockquote></details>
+
+<details open><summary>Program Explonations</summary><blockquote> 
 
 
 
-
+</blockquote></details>
 
 ---
 
