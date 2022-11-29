@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:10:55 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/21 14:35:39 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/29 09:25:15 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 #include <stdlib.h>
 
 /**
+ * @author @Matthew-Dreemurr
+ * 
  * @brief Return texture index [0->5] {"NO", "SO", "WE", "EA", "F", "C"},
  *        if an error occur return `-1`.
  * 
@@ -43,6 +45,8 @@ int	get_tex(char *str)
 }
 
 /**
+ * @author @Matthew-Dreemurr
+ * 
  * @brief Return texture index [0->5] and check if there is no duplicate,
  *        if an error occur return `-1`.
  * 

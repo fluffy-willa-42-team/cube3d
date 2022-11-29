@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:52:52 by mahadad           #+#    #+#             */
-/*   Updated: 2022/10/26 11:53:10 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/29 09:24:16 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@
 #include "lib_str.h"
 
 /**
+ * @author @Matthew-Dreemurr
+ * 
  * @brief Check if the `c` char is in the `set` char array.
  * 
  * @param set The char array
@@ -48,6 +50,8 @@ static int	charset(char const *set, char c)
 }
 
 /**
+ * @author @Matthew-Dreemurr
+ * 
  * @brief Remove leading and trailing whitespace from the buffer.
  * 
  * @param buff Buffer to trim
@@ -76,11 +80,12 @@ static int	bufftrim(t_vec *buff)
 		len--;
 	}
 	buff->len = ft_strlen(str);
-	// v_print(buff);//TODO REMOVE
 	return (EXIT_SUCCESS);
 }
 
 /**
+ * @author @Matthew-Dreemurr
+ * 
  * @brief If there is other withe space
  *        than `' '` and `'\n'` will return a error.
  * 
@@ -102,10 +107,10 @@ static int	sanitize_white_space(t_vec *buff)
 }
 
 /**
- * @brief 
+ * @author @Matthew-Dreemurr
  * 
- * @param data 
- * @return int 
+ * @brief Remove the trailing witespace and check if all white space are space
+ *        `' '`.
  */
 int	file_sani(t_parser *data)
 {

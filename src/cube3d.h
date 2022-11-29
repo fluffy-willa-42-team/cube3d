@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
+/*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:33:07 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/25 12:55:24 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/26 13:16:39 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,39 @@
 # include <stdint.h>
 # include <stddef.h>
 # include "vector_lib.h"
+
+# include "MLX42.h"
+
+# include "cube_types.h"
+
+# define DEBUG_PARSE 0
+
+/* #####=====----------			Common Math Var			 ----------=====##### */
+
+# define PI    3.14159265359
+# define PI1_2 1.57079632679
+# define PI1_3 1.0471975512
+# define PI1_4 0.78539816339
+# define PI1_6 0.52359877559
+# define PI3_2 4.71238898038
+# define PI2   6.28318530718
+
+/* #####=====----------			Mlx Config Var			 ----------=====##### */
+
+# define WIN_WIDTH	800
+# define WIN_HEIGHT	800
+
+# define ANGLE_START	PI
+
+/* #####=====----------		Ray Caster Config Var		 ----------=====##### */
+
+// FOV = PI / 3
+# define FOV_ANGLE			1.0471975512
+# define HEIGHT_OF_BLOCK	WIN_HEIGHT / 10
+
+# define MIDDLE_OF_SCREEN	WIN_HEIGHT / 2
+# define FOV_INCRE			(double) (FOV_ANGLE) / WIN_WIDTH
+# define FOV_ANG_1_2		(double) (FOV_ANGLE) / 2
 
 /* ************************************************************************** */
 
@@ -43,7 +76,7 @@ typedef enum e_texture_type {
  * @param token          (char)
  * @param sky_box_token  (char)
  * @param path           (char*)
- * @param image          (void*)
+ * @param image          (mlx_tex*)
  * @param color          (unit32_t)
  */
 typedef struct s_texture {
@@ -51,29 +84,29 @@ typedef struct s_texture {
 	char					token;
 	char					sky_box_token;
 	char					*path;
-	void					*image;
+	mlx_texture_t			*image;
 	uint32_t				color;
 	struct s_texture		*skybox_tex;
 }	t_texture;
 
-typedef struct s_coord_f64 {
-	double	x;
-	double	y;
-}	t_coord_f64;
-
-typedef struct s_coord_i32 {
-	int32_t	x;
-	int32_t	y;
-	int32_t	z;
-}	t_coord_i32;
-
-typedef struct s_coord_f32 {
-	double	x;
-	double	y;
-	double	z;
-}	t_coord_f32;
-
 /* ************************************************************************** */
+
+
+
+typedef struct s_param {
+	mlx_t		*mlx;
+	mlx_image_t	*img;
+	double		hob_mult;
+	uint32_t	minimap_size;
+	double		minimap_point_size;
+	double		speed;
+}	t_param;
+
+typedef struct s_player {
+	t_coord_f64	pos;
+	double		alpha;
+	t_coord_f64	cosin;
+}	t_player;
 
 /**
  *     TOP    | NORTH | ENTITY
@@ -121,7 +154,6 @@ typedef struct s_chunk {
 	t_texture	*south;
 	t_texture	*ceiling;
 	t_texture	*floor;
-	t_texture	*skybox;
 }	t_chunk;
 
 # define E_EMPTY '.'
@@ -141,19 +173,19 @@ typedef struct s_chunk {
  */
 # define E_ENEMY			'E'
 # define T_ENEMY_DEFAULT	'./TODO'
-# define OPT_E_DEFAULT	'.'
+# define OPT_E_DEFAULT		'.'
 
 /**
  * Collectible macro
  */
-# define E_COLLECTIBLE	'C'
-# define OPT_C_AMMO		'A'
-# define OPT_C_HEALTH	'H'
+# define E_COLLECTIBLE		'C'
+# define OPT_C_AMMO			'A'
+# define OPT_C_HEALTH		'H'
 
 /**
  * Door macro
  */
-# define E_DOOR			'D'
+# define E_DOOR				'D'
 # define OPT_D_N			'N'
 # define OPT_D_E			'E'
 
@@ -164,12 +196,18 @@ typedef struct s_chunk {
 
 typedef struct s_map
 {
-	int32_t		height;
-	int32_t		width;
+	uint32_t	height;
+	uint32_t	width;
 	t_coord_i32	size;
 	t_vec		tex_list;
 	t_vec		map;
 }				t_map;
+
+typedef struct s_game {
+	t_param			param;
+	t_player		player;
+	t_map			map;
+}	t_game;
 
 /* ************************************************************************** */
 

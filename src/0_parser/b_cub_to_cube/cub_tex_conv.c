@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:01:25 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/25 13:10:10 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/29 09:24:16 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 #include <stdio.h>//TODO REMOVE
 
 /**
- * @author Matthew-Dreemurr
+ * @author @Matthew-Dreemurr
  * 
  * @brief Check in `data.tex[]` if all the texture have been find.
  * 
@@ -50,6 +50,8 @@ static void	skip_whitespace(t_parser *data, char *tmp)
 }
 
 /**
+ * @author @Matthew-Dreemurr
+ * 
  * @brief Convert the texture name with arbitrary index and the texture path.
  * 
  * @note
@@ -84,7 +86,7 @@ static int	cub_tex_to_cube(t_parser *data, char *tmp, int tex_index)
 }
 
 /**
- * @author Matthew-Dreemurr
+ * @author @Matthew-Dreemurr
  * 
  * @brief Convert all texture name to the `.cube` format.
  * 

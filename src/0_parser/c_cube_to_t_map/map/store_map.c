@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 17:48:29 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/22 14:53:51 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/29 09:44:19 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,106 +24,132 @@
 
 #include <stdio.h>//TODO REMOVE
 
-int	init_map(t_parser *data)
-{
-	t_chunk	tmp;
-	int		err;
+//TODO REMOVE
+/******************************************************************************/
+/* */ // Get the red channel.
+/* */ static int get_r(int rgba)
+/* */ {
+/* */     // Move 3 bytes to the right and mask out the first byte.
+/* */     return ((rgba >> 24) & 0xFF);
+/* */ }
+/* */ 
+/* */ // Get the green channel.
+/* */ static int get_g(int rgba)
+/* */ {
+/* */     // Move 2 bytes to the right and mask out the first byte.
+/* */     return ((rgba >> 16) & 0xFF);
+/* */ }
+/* */ 
+/* */ // Get the blue channel.
+/* */ static int get_b(int rgba)
+/* */ {
+/* */     // Move 1 byte to the right and mask out the first byte.
+/* */     return ((rgba >> 8) & 0xFF);
+/* */ }
+/* */ 
+/* */ // Get the alpha channel.
+/* */ static int get_a(int rgba)
+/* */ {
+/* */     // Move 0 bytes to the right and mask out the first byte.
+/* */     return (rgba & 0xFF);
+/* */ }
+/* */ static void	print_tex(t_texture *tmp)
+/* */ {
+/* */ 	printf(
+/* */ 	"[%p] {\n"
+/* */ 	"       type          :  {\n"
+/* */ 	"                          UNDEFINED     [%d]\n"
+/* */ 	"                          VALID         [%d]\n"
+/* */ 	"                          COLOR         [%d]\n"
+/* */ 	"                          IMAGE         [%d]\n"
+/* */ 	"                          SKYBOX        [%d]\n"
+/* */ 	"                          ALLOW_CLIP    [%d]\n"
+/* */ 	"                          TRANSPARENCY  [%d]\n"
+/* */ 	"                        },\n"
+/* */ 	"       token         :  \'%c\',\n"
+/* */ 	"       *path         :  \"%.15s\",\n"
+/* */ 	"       *image        :  [%p],\n"
+/* */ 	"       sky_box_token :  \'%c\',\n"
+/* */ 	"       *skybox_tex   :  [%p],\n"
+/* */ 	"       color         :  [%d, %d, %d, %d]\n"
+/* */ 	"     }\n",
+/* */ 	(tmp),
+/* */ 
+/* */ 	(tmp->type & UNDEFINED) != 0,
+/* */ 	(tmp->type & VALID) != 0,
+/* */ 	(tmp->type & COLOR) != 0,
+/* */ 	(tmp->type & IMAGE) != 0,
+/* */ 	(tmp->type & SKYBOX) != 0,
+/* */ 	(tmp->type & ALLOW_CLIP) != 0,
+/* */ 	(tmp->type & TRANSPARENCY) != 0,
+/* */ 	
+/* */ 	tmp->token,
+/* */ 	tmp->path,
+/* */ 	tmp->image,
+/* */ 
+/* */ 	
+/* */ 	tmp->sky_box_token,
+/* */ 	tmp->skybox_tex,
+/* */ 
+/* */ 	get_r(tmp->color),
+/* */ 	get_g(tmp->color),
+/* */ 	get_b(tmp->color),
+/* */ 	get_a(tmp->color));
+/* */ }
+/******************************************************************************/
 
-	data->index = 0;
-	printf("[%d]\n", data->index);//TODO REMOVE
-	data->map = v_init(sizeof(t_chunk), NULL, NULL);
-	if (!v_alloc(&data->map, SET, (data->map_size.x * data->map_size.y)))
-		return (ret_print(EXIT_FAILURE, ERR_VEC_ALLOC));
-	err = EXIT_SUCCESS ;
-	while (err == EXIT_SUCCESS)
+int	init_map_while(t_parser *data)
+{
+	uint32_t	x;
+	uint32_t	y;
+	int			err;
+	t_chunk		*chunk;
+
+	y = 0;
+	while (y < data->map_height)
 	{
-		err = get_next_chunk(data, &tmp);
-		if (err == EXIT_SUCCESS)
+		x = 0;
+		while (x < data->map_width)
 		{
-			if (!v_add(&data->map, DEFAULT, &tmp))
-				return (ret_print(EXIT_FAILURE, ERR_VEC_ADD));
+			chunk = get_chunk_pars(data, set_i32(x, y));
+			err = get_next_chunk(data, chunk);
+			if (err == EXIT_FAILURE)
+				return (EXIT_FAILURE);
+			chunk->coord = set_i32(x, y);
+			if (chunk->east)
+				print_tex(chunk->east);
+			if (err == END_OF_LINE || err == END_OF_MAP)
+				break ;
+			x++;
 		}
-		else if (err == EXIT_FAILURE)
-			return (ret_print(EXIT_FAILURE, "//TODO"));
+		y++;
 	}
 	return (EXIT_SUCCESS);
 }
 
 /**
- * @brief Set the chunk coord, `t_chunk.coor.{x,y}`
+ * @author @Matthew-Dreemurr
+ * 
+ * @brief 
  * 
  * @param data 
+ * @return int 
  */
-void	set_chunk_coord(t_parser *data)
+int	init_map(t_parser *data)
 {
-	const int	max = data->map_size.x * data->map_size.y;
-	int			index;
-	t_coord_i32	coor;
-	t_chunk		*tmp;
-
-	index = 0;
-	struct_set(&coor, sizeof(coor));
-	while (index < max)
-	{
-		if (coor.x >= data->map_size.x)
-		{
-			coor.x = 0;
-			coor.y++;
-		}
-		tmp = get_chunk(data, coor.x, coor.y);
-		tmp->coord.x = coor.x;
-		tmp->coord.y = coor.y;
-		coor.x++;
-		index++;
-	}
+	data->index = 0;
+	data->map = v_init(sizeof(t_chunk), NULL, NULL);
+	if (!v_alloc(&data->map, SET, (data->map_width * data->map_height)))
+		return (ret_print(EXIT_FAILURE, ERR_VEC_ALLOC));
+	data->map.len = data->map_width * data->map_height;
+	if (init_map_while(data))
+		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
 }
-
-/*
-void	t_map_debug(t_parser *data)
-{
-	const int	max = data->map_size.x * data->map_size.y;
-	int			index;
-	t_coord_i32	coor;
-	t_chunk	*tmp;
-
-	index = 0;
-	struct_set(&coor, sizeof(coor));
-	while (index < max)
-	{
-		if (coor.x >= data->map_size.x)
-		{
-			coor.x = 0;
-			coor.y++;
-		}
-		printf("(%d)x(%d)\n", coor.x, coor.y);
-		tmp = get_chunk(data, coor.x, coor.y);
-		if (tmp->type == WHITE_SPACE_CHUNK)
-		{
-			printf("[ , , ,]\n[ , , ,]\n[ , , ,]\n[ , , ,]\n");
-		}
-		else
-		{
-			printf("[%c,%c,.]\n[%c,%c,.]\n[%c,%c,.]\n[ %d, %d]\n\n",
-			tmp->ceiling ? (tmp->ceiling->token ? tmp->ceiling->token : '.') : '.' ,
-			tmp->north ? (tmp->north->token ? tmp->north->token : '.') : '.' ,
-
-			tmp->west ? (tmp->west->token ? tmp->west->token : '.') : '.' ,
-			tmp->east ? (tmp->east->token ? tmp->east->token : '.') : '.' ,
-			
-			tmp->floor ? (tmp->floor->token ? tmp->floor->token : '.') : '.' ,
-			tmp->south ? (tmp->south->token ? tmp->south->token : '.') : '.',
-
-			tmp->coord.x,
-			tmp->coord.y
-			);
-		}
-		coor.x++;
-		index++;
-	}
-}
-*/
 
 /**
+ * @author @Matthew-Dreemurr
+ * 
  * @brief 
  * 
  * @note In the first time we skip the `cube separator sequence string`, we
@@ -136,9 +162,5 @@ int	store_map(t_parser *data)
 {
 	if (set_map_size(data) || init_map(data))
 		return (EXIT_FAILURE);
-	set_chunk_coord(data);
-	// t_map_debug(data);//TODO REMOVE
-	
-	// printf("{{\n%s\n}}\n",data->cube_map);printf("map size [%dx%d]\n", data->map_size.x,data->map_size.y);
 	return (EXIT_SUCCESS);
 }

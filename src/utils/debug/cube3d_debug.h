@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:54:56 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/25 12:41:46 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/29 09:29:07 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,11 @@ int	ret_print(int ret, const char *msg);
 # define ERR_CUB_CONV_FUNC "Error\nf_{floor_level}_{char_type} fail !\n"
 # define ERR_SEQ_BAD     "Error\nBad cube sequence\n"
 # define ERR_CHUNK_W     "Error\nBad chunk line width\n"
-# define ERR_CHUNK_H     "Error\nBad chunk line heigth\n"
+# define ERR_CHUNK_H     "Error\nBad chunk line height\n"
 # define ERR_MEMCPY      "Error\nmemcpy faild !\n"
 # define ERR_NO_TEX      "Error\nTexture in chunk was not define !\n"
 # define ERR_BAD_CHUNK_FLOOR  "Error\nBad chunk floor !\n"
+# define ERR_BAD_CHUNK_TYPE  "Error\nBad chunk type !\n"
 # define ERR_BAD_XPM  "Error\nXPM file is invalid or corrupted !\n"
 # define ERR_NULL_TEX   "Error\nt_texture *NULL !\n"
 # define ERR_COLOR_R     "Error\n Bad color channel R\n"

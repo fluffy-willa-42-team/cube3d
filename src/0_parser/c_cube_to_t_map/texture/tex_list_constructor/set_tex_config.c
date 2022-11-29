@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 14:09:15 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/24 13:32:32 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/29 09:48:55 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,15 @@
 /* EXIT_SUCCESS, EXIT_FAILURE*/
 #include <stdlib.h>
 
-#include <stdio.h>//TODO REMOVE
-
+/**
+ * @author @Matthew-Dreemurr
+ * 
+ * @brief Check the texture argument of the allow clip.
+ * 
+ * @note [token] [allow_clip][transparency][skybox] [texutre path/color]
+ *
+ *
+ */
 static int	set_texture_allow_clip(char param, t_texture *tmp)
 {
 	if (param == 'v')
@@ -30,6 +37,13 @@ static int	set_texture_allow_clip(char param, t_texture *tmp)
 	return (EXIT_SUCCESS);
 }
 
+/**
+ * @author @Matthew-Dreemurr
+ * 
+ * @brief Check the texture argument of the texutre transparency.
+ * 
+ * @note [token] [allow_clip][transparency][skybox] [texutre path/color]
+ */
 static int	set_texture_transparency(char param, t_texture *tmp)
 {
 	if (param == 'v')
@@ -39,6 +53,13 @@ static int	set_texture_transparency(char param, t_texture *tmp)
 	return (EXIT_SUCCESS);
 }
 
+/**
+ * @author @Matthew-Dreemurr
+ * 
+ * @brief Check the texture argument of the texture skybox.
+ * 
+ * @note [token] [allow_clip][transparency][skybox] [texutre path/color]
+ */
 static int	set_texture_skybox(char param, t_texture *tmp)
 {
 	if (authzed_cube_tex(param))
@@ -50,6 +71,8 @@ static int	set_texture_skybox(char param, t_texture *tmp)
 }
 
 /**
+ * @author @Matthew-Dreemurr
+ * 
  * @brief Set the texture param and path/color.
  * 
  * @note
@@ -72,6 +95,8 @@ int	set_texture_param(t_parser *data, char *tex, t_texture *tmp)
 }
 
 /**
+ * @author @Matthew-Dreemurr
+ * 
  * @brief Store texture path or color and set the texture type if is a image
  *        texture or color. Skip the texture path or color.
  *

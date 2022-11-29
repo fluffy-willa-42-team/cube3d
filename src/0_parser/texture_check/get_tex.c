@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 17:12:59 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/25 12:39:02 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/29 10:01:27 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 #include "cube3d_utils.h"
 
 /**
+ * @author @Matthew-Dreemurr
+ * 
  * @brief Get the texture index int the list.
  * 
  * @warning The function calculate only the token index, it dont check if the
@@ -35,6 +37,8 @@ int	get_tex_index(char token)
 }
 
 /**
+ * @author @Matthew-Dreemurr
+ * 
  * @brief Get the texture ptr int the list.
  * 
  * @warning The function calculate only the pointer index, it dont check if the
@@ -47,9 +51,9 @@ int	get_tex_index(char token)
  */
 t_texture	*get_tex_ptr(t_vec *tex, char token)
 {
-	const int	index = get_tex_index(token);
-
-	if (index == -1)
+	if (token == E_EMPTY)
+		return (NULL);
+	if (get_tex_index(token) == -1)
 		return (NULL);
 	return (&((t_texture *)tex->buffer)[get_tex_index(token)]);
 }

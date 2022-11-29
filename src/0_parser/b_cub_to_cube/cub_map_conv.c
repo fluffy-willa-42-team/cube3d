@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:04:10 by mahadad           #+#    #+#             */
-/*   Updated: 2022/10/31 11:06:48 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/29 09:24:39 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 #include <stdio.h>//TODO REMOVE
 
 /**
- * @Matthew-Dreemurr
+ * @author @Matthew-Dreemurr
  * 
  * @brief Will push 3 char to create a chunk floor in the `.cube` buffer.
  * 
@@ -45,7 +45,7 @@ int	push_chunk_part(t_parser *data, int a, int b, int c)
 }
 
 /**
- * @Matthew-Dreemurr
+ * @author @Matthew-Dreemurr
  * 
  * @brief Find the rigth function for the floor given.
  * 
@@ -74,7 +74,7 @@ int	exe_conv(t_parser *data, char *line, int floor)
 }
 
 /**
- * @Matthew-Dreemurr
+ * @author @Matthew-Dreemurr
  * 
  * @brief Find the right function to execute for each tree floor of a chunk.
  *        All the function name call will follow this partern:
@@ -106,7 +106,7 @@ int	conv_line(t_parser *data, char *line)
 }
 
 /**
- * @author Matthew-Dreemurr
+ * @author @Matthew-Dreemurr
  *
  * @brief Convert `.cub` map to `.cube` chunk.
  * 

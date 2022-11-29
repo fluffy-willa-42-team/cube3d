@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 14:20:21 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/22 14:22:27 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/29 09:56:01 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 #include <stdlib.h>
 
 /**
+ * @author @Matthew-Dreemurr
+ * 
  * @brief Set the value of the current channel. And check if the value is good.
  * 
  * @param color Pointer to the channel variable.
@@ -50,6 +52,8 @@ static int	set_channel(int *channel, char *color)
 }
 
 /**
+ * @author @Matthew-Dreemurr
+ * 
  * @brief Return the address of the next channel.
  * 
  * 
@@ -83,13 +87,21 @@ static char	*get_next_channel(char *channel)
 	return (channel);
 }
 
+/**
+ * @author @Matthew-Dreemurr
+ * 
+ * @brief Convert `r, g, b` to a int.
+ */
 static int	get_rgba(int r, int g, int b, int a)
 {
 	return (r << 24 | g << 16 | b << 8 | a);
 }
 
 /**
- * @brief Set the `channel->{r,g,b,a}` structure and check if the value is good.
+ * @author @Matthew-Dreemurr
+ * 
+ * @brief Set the `channel->{r,g,b,a}`  structure from the `data->path`
+ *        and check if the value is good.
  * 
  * @param tex 
  * @param channel 
@@ -115,6 +127,12 @@ static int	set_rgba_channel(t_texture *tex, t_color *channel)
 	return (EXIT_SUCCESS);
 }
 
+/**
+ * @author @Matthew-Dreemurr
+ * 
+ * @brief Convert the raw color from the config file to int `rgb` and check if 
+ *        the value is valid.
+ */
 int	set_color_texture(t_texture *tex)
 {
 	t_color	channel;

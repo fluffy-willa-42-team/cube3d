@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 15:03:27 by mahadad           #+#    #+#             */
-/*   Updated: 2022/10/30 15:25:54 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/29 09:24:16 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 #include <stdlib.h>
 
 /**
- * @Matthew-Dreemurr
+ * @author @Matthew-Dreemurr
  * 
  * @brief Set the first chunk floor for the `'0'` case.
  *        TOP is set with the ceiling texture index (or `get_tex("C")`)
@@ -41,7 +41,7 @@ int	f_1_zero(t_parser *data, char c)
 }
 
 /**
- * @Matthew-Dreemurr
+ * @author @Matthew-Dreemurr
  * 
  * @brief Set the second chunk floor for the `'0'` case.
  *        {WEST, EAST, TEX} is set to '.' (or E_EMPTY).
@@ -61,7 +61,7 @@ int	f_2_zero(t_parser *data, char c)
 }
 
 /**
- * @Matthew-Dreemurr
+ * @author @Matthew-Dreemurr
  * 
  * @brief Set the last chunk floor for the `'0'` case.
  *        BOTTOM is set with the floor texture index (or `get_tex("F")`)

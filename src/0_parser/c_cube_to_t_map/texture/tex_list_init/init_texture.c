@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 14:27:58 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/25 12:53:25 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/29 09:51:49 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,11 @@
 
 #include <stdio.h>//TODO REMOVE
 
+/**
+ * @author @Matthew-Dreemurr
+ * 
+ * @brief Replace the `'\n'` of a line with `\0'`.
+ */
 static void	null_terminate_line(char *line)
 {
 	while (*line && *line != ' ' && *line != '\n')
@@ -38,23 +43,32 @@ static void	null_terminate_line(char *line)
 }
 
 /**
+ * @author @Matthew-Dreemurr
+ * 
  * @brief Open xmp file from the `tex->path`
  * 
  */
 static int	open_file_texture(t_texture *tex)
 {
 	char	*path;
+	xpm_t	*tmp;
 
 	if (!tex || !tex->path)
 		return (ret_print(EXIT_FAILURE, ERR_NULL_TEX));
 	path = tex->path;
 	null_terminate_line(path);
-	tex->image = mlx_load_xpm42(path);
-	if (!tex->image)
+	tmp = mlx_load_xpm42(path);
+	if (!tmp)
 		return (ret_print(EXIT_FAILURE, ERR_EMPTY_FILE));
+	tex->image = &tmp->texture;
 	return (EXIT_SUCCESS);
 }
 
+/**
+ * @author @Matthew-Dreemurr
+ * 
+ * @brief Store the texture ptr of the skybox.
+ */
 static int	set_skybox(t_texture *tex, t_parser *data)
 {
 	tex->skybox_tex = get_tex_ptr(&data->tex_list, tex->sky_box_token);
@@ -63,6 +77,12 @@ static int	set_skybox(t_texture *tex, t_parser *data)
 	return (EXIT_SUCCESS);
 }
 
+/**
+ * @author @Matthew-Dreemurr
+ * 
+ * @brief Check the type of the texture and call the rigth function to manage
+ *        it.
+ */
 static int	init_texture_while(t_texture *tex, t_parser *data)
 {
 	if (tex->type & IMAGE)
@@ -78,10 +98,13 @@ static int	init_texture_while(t_texture *tex, t_parser *data)
 	if (tex->sky_box_token && tex->sky_box_token != '.')
 		if (set_skybox(tex, data))
 			return (EXIT_FAILURE);
+	tex->type |= VALID;
 	return (EXIT_SUCCESS);
 }
 
 /**
+ * @author @Matthew-Dreemurr
+ * 
  * @brief Check the type of texture and open the file or convert the color.
  */
 int	init_texture(t_parser *data)

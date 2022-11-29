@@ -6,13 +6,15 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 14:35:23 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/22 14:46:15 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/29 09:32:44 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
 /**
+ * @author @Matthew-Dreemurr
+ * 
  * @brief Return the current character pointed by the index `data->index`.
  * 
  * @warning The function dont check if the `data->index` is out of the memory
@@ -26,6 +28,8 @@ char	mapchar(t_parser *data)
 }
 
 /**
+ * @author @Matthew-Dreemurr
+ * 
  * @brief Return the current addess pointed by the index `data->index`.
  * 
  * @warning The function dont check if the `data->index` is out of the memory

@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 14:44:17 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/22 14:51:16 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/29 09:25:32 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 
 
 /**
+ * @author @Matthew-Dreemurr
+ * 
  * @brief Check if all the token of the current is only white space `' '`.
  * 
  * @warning A chunk with white space `' '` can not have data !
@@ -36,6 +38,8 @@ static int	is_all_white_space_tokens(t_chunk_token *tokens)
 }
 
 /**
+ * @author @Matthew-Dreemurr
+ * 
  * @brief Check if all the token of the current chunk is valid.
  * 
  * @warning A chunk with data can not have white space token `' '` !
@@ -55,6 +59,8 @@ static int	is_all_valid_tokens(t_chunk_token *tokens)
 }
 
 /**
+ * @author @Matthew-Dreemurr
+ * 
  * @brief Check if is a white space chunk or if there is data.
  * 
  * @warning A chunk with white space `' '` can not have data !

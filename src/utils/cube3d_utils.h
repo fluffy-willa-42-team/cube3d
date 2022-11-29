@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:55:41 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/25 14:54:08 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/25 17:38:50 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,6 @@ int			authzed_cube_tex(int c);
 int			find_tex_type(char *tex);
 int			get_tex_index(char token);
 t_texture	*get_tex_ptr(t_vec *tex, char token);
-t_chunk		*get_chunk(t_parser *data, int x, int y);
+t_chunk		*get_chunk_pars(t_parser *data, t_coord_i32 pos);
 
 #endif /* CUBE3D_UTILS_H */
