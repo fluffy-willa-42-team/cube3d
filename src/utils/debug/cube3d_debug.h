@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d_debug.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:54:56 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/26 12:26:48 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/29 09:29:07 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int	ret_print(int ret, const char *msg);
 # define ERR_MEMCPY      "Error\nmemcpy faild !\n"
 # define ERR_NO_TEX      "Error\nTexture in chunk was not define !\n"
 # define ERR_BAD_CHUNK_FLOOR  "Error\nBad chunk floor !\n"
+# define ERR_BAD_CHUNK_TYPE  "Error\nBad chunk type !\n"
 # define ERR_BAD_XPM  "Error\nXPM file is invalid or corrupted !\n"
 # define ERR_NULL_TEX   "Error\nt_texture *NULL !\n"
 # define ERR_COLOR_R     "Error\n Bad color channel R\n"

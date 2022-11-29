@@ -1,16 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   authzed_chunk_char.c                                :+:      :+:    :+:   */
+/*   authzed_cube_char.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/08 17:14:21 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/15 15:56:58 by mahadad          ###   ########.fr       */
+/*   Created: 2022/11/29 10:00:48 by mahadad           #+#    #+#             */
+/*   Updated: 2022/11/29 10:00:50 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /**
+ * @author @Matthew-Dreemurr
+ * 
  * @brief Check if the character is a authorized characters for a `.cube`
  *        chunk format.
  * 

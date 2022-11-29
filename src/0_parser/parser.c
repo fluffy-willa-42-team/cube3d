@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:53:32 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/28 14:18:21 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/29 10:02:15 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,12 @@ int	tex_debug(t_parser *data)
 	return (EXIT_SUCCESS);
 }
 
+/**
+ * @author @Matthew-Dreemurr
+ * 
+ * @brief Free all buffer from the parse that is not in use by the game engine.
+ * 
+ */
 int	destroy_data(t_parser *data)
 {
 	//TODO #11 Free all allocated memory and open file/image.
@@ -122,7 +128,7 @@ int	destroy_data(t_parser *data)
 }
 
 /**
- * @author Matthew-Dreemurr
+ * @author @Matthew-Dreemurr
  *
  * @brief Check if the file name have `.cub(e)`, try to open the file and store
  *        in the memory.

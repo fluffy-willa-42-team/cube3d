@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:53:52 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/09 17:23:50 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/29 09:24:16 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@
 #include <stdio.h>//TODO REMOVE
 
 /**
+ * @author @Matthew-Dreemurr
+ * 
  * @brief Read file and wirte in the `buff`.
  * 
  * @param data Parser structure
@@ -39,12 +41,12 @@ static int	read_to_vec(t_parser *data, t_vec *buff)
 	ret = 1;
 	*buff = v_init(sizeof(char), NULL, NULL);
 	if (!v_alloc(buff, SET, 5000000))
-		return(ret_print(EXIT_FAILURE, "ERR_VEC_ALLOC"));
+		return (ret_print(EXIT_FAILURE, ERR_VEC_ALLOC));
 	while (ret != 0)
 	{
 		ret = v_readline(buff, data->file_fd);
 		line += ret;
-		if (ret == -1 || !v_add(buff, STRING, "\n")/* //TODO change check after the lib update ! */)
+		if (ret == -1 || !v_add(buff, STRING, "\n"))
 			return (ret_print(EXIT_FAILURE, ERR_RDL_FAIL));
 	}
 	if (!line)
@@ -53,7 +55,7 @@ static int	read_to_vec(t_parser *data, t_vec *buff)
 }
 
 /**
- * @author Matthew-Dreemurr
+ * @author @Matthew-Dreemurr
  * 
  * @brief Read the file and store in `data->cube, if is a `.cub` will  read in
  *        `data->cub` and convert to `.cube` format in `data->cube`.

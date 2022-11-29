@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:52:08 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/25 14:50:33 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/29 09:25:04 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 #include <stdlib.h>
 
 /**
+ * @author @Matthew-Dreemurr
+ * 
  * @brief Try to find all mandatory texture and convert to `.cube` format. Then
  *        convert map to `.cube` format.
  * 
@@ -35,7 +37,7 @@ static int	cub_to_cube(t_parser *data)
 }
 
 /**
- * @author Matthew-Dreemurr
+ * @author @Matthew-Dreemurr
  * 
  * @brief Convert `.cub` to `.cube` format if need. Otherwise convert `.cube` to
  *        `t_map` structure.

@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 17:12:59 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/28 14:23:38 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/29 10:01:27 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 #include "cube3d_utils.h"
 
 /**
+ * @author @Matthew-Dreemurr
+ * 
  * @brief Get the texture index int the list.
  * 
  * @warning The function calculate only the token index, it dont check if the
@@ -35,6 +37,8 @@ int	get_tex_index(char token)
 }
 
 /**
+ * @author @Matthew-Dreemurr
+ * 
  * @brief Get the texture ptr int the list.
  * 
  * @warning The function calculate only the pointer index, it dont check if the

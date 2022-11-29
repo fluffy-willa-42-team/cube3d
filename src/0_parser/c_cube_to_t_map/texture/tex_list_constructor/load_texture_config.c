@@ -23,9 +23,9 @@
 /* EXIT_SUCCESS, EXIT_FAILURE*/
 #include <stdlib.h>
 
-#include <stdio.h>//TODO REMOVE
-
 /**
+ * @author @Matthew-Dreemurr
+ * 
  * @brief Check if a line start with a sequence cube comment or
  *        separator sequence.
  *        Return `SEQ_NO`       if there is no sequence
@@ -58,6 +58,8 @@ static int	which_escape_seq(char *line)
 
 
 /**
+ * @author @Matthew-Dreemurr
+ * 
  * @brief Store all texture data in the `data.tex_list` array vector. Will read
  *        line by line and set the rigth texture slot in the array.
  *        Finally set `data.cube_map` to the cube separator sequence line.

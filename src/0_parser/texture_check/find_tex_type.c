@@ -6,15 +6,18 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 17:13:54 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/24 13:42:27 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/29 10:01:14 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "cube3d.h"
+#include "cube3d.h"
 
-#include "lib_is_check.h" /* ft_isdigit */
+/* ft_isdigit */
+#include "lib_is_check.h"
 
 /**
+ * @author @Matthew-Dreemurr
+ * 
  * @brief Check texture type. For a texture path that start with `./` return
  *        `IMAGE`, for a color type, is three set of three numbers separated by
  *        commas `rrr,ggg,bbb,aaa` we return `COLOR` otherwise if we dont not

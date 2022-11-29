@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 14:36:52 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/28 15:48:58 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/29 09:31:07 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ int	store_entity_data(t_parser *data, t_chunk *chunk, t_chunk_token *tmp)
 }
 
 /**
+ * @author @Matthew-Dreemurr
+ * 
  * @brief Store all the chunk token in the `t_chunk_token` structure.
  * 
  * @note
@@ -58,13 +60,24 @@ void	get_chunk_pars_token(t_parser *data, t_chunk_token *tmp)
 	tmp->opt = f3[2];
 }
 
+/**
+ * @author @Matthew-Dreemurr
+ * 
+ * @brief Set the chunk structure, find the chunk type (bad, good, whitespace)
+ *        and store the texture pointer for each face (north, south, east, west,
+ *        ceiling, floor).
+ * 
+ * @param data 
+ * @param chunk 
+ * @return int 
+ */
 int	set_chunk(t_parser *data, t_chunk *chunk)
 {
 	t_chunk_token	tokens;
 
 	get_chunk_pars_token(data, &tokens);
 	if (check_chunk_type(&tokens) == BAD_CHUNK)
-		return(ret_print(EXIT_FAILURE, "//TODO bad chunk type\n"));
+		return (ret_print(EXIT_FAILURE, ERR_BAD_CHUNK_TYPE));
 	chunk->ceiling = get_tex_ptr(&data->tex_list, tokens.ceiling);
 	chunk->north = get_tex_ptr(&data->tex_list, tokens.north);
 	chunk->west = get_tex_ptr(&data->tex_list, tokens.west);
@@ -79,6 +92,16 @@ int	set_chunk(t_parser *data, t_chunk *chunk)
 	return (EXIT_SUCCESS);
 }
 
+
+/**
+ * @author @Matthew-Dreemurr
+ * 
+ * @brief Calculate the next chunk index, will set the index to `0` and
+ *        increment the `data->cube_map` address to offset the pointer.
+ * 
+ * @param data 
+ * @return int 
+ */
 static int	set_next_chunk_index(t_parser *data)
 {
 	data->index++;
@@ -91,6 +114,8 @@ static int	set_next_chunk_index(t_parser *data)
 }
 
 /**
+ * @author @Matthew-Dreemurr
+ * 
  * @brief Set the `chunk` structure, we read each tree floor and check each 3
  *        value then store in the structure. The we skip the current chunk for
  *        the next call.

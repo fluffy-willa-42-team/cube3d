@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 15:34:26 by mahadad           #+#    #+#             */
-/*   Updated: 2022/10/30 15:37:11 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/29 09:24:16 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 #include <stdlib.h>
 
 /**
+ * @author @Matthew-Dreemurr
+ * 
  * @brief Set a chunk floor for the `' '` case.
  *        Set all floor character to `' '`.
  * 

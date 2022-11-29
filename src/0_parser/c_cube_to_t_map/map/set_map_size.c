@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_map_size.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 17:33:11 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/26 12:30:52 by awillems         ###   ########.fr       */
+/*   Updated: 2022/11/29 09:33:31 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,11 @@
 #include <stdlib.h>
 
 /**
+ * @author @Matthew-Dreemurr
+ * 
  * @brief Get the width of the current chunk line.
+ * 
+ * @note
  *        Check each three line of a chunk line. If the three line dont have the
  *        same width return a error.
  *        We check three line by three, each line need to have the same `width`
@@ -55,9 +59,12 @@ static int	get_chunk_pars_line_width(t_parser *data)
 }
 
 /**
+ * @author @Matthew-Dreemurr
+ * 
  * @brief Check if the size of each chunk line is correct and set
  *        `data.map_size.{x, y}`.
- *
+ * 
+ * @note
  *        We use mapchar() and mapptr() to get the current index char or ptr
  *        from the map. Is the equivalent of `data->cube_map[data->index]`.
  *        To increment the index we set `data->index`.
