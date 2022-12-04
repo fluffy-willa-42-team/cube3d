@@ -544,6 +544,8 @@ Then we compare the distance of each wall and see which is the closest one, this
 
 Because if for example our map 
 
+<img src="asset/2d_map/long_map.png" width="500"/>
+
 </blockquote></details>
 
 ---
