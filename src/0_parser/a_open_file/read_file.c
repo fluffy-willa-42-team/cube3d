@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:53:52 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/29 09:24:16 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/29 12:44:56 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,6 @@ int	read_file(t_parser *data)
 		err = read_to_vec(data, &data->cube);
 	else
 		return (ret_print(EXIT_FAILURE, ERR_RFILE_TYPE));
-	if (close(data->file_fd) == -1)
-		return (ret_print(EXIT_FAILURE, ERR_CLOSE_FILE));
 	if (err)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);

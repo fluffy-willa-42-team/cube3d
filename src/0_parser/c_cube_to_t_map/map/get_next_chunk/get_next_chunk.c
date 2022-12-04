@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 14:36:52 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/29 09:31:07 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/11/29 16:55:08 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,6 @@
 
 /* EXIT_SUCCESS, EXIT_FAILURE*/
 #include <stdlib.h>
-
-int	store_entity_data(t_parser *data, t_chunk *chunk, t_chunk_token *tmp)
-{
-	(void)data;
-	(void)chunk;
-	(void)tmp;
-	//TODO #12 Make the entity data structure for the player
-	return (EXIT_SUCCESS);
-}
 
 /**
  * @author @Matthew-Dreemurr
@@ -42,22 +33,22 @@ int	store_entity_data(t_parser *data, t_chunk *chunk, t_chunk_token *tmp)
  *        floor 3 : BOTTOM | SOUTH | OPT
  * 
  */
-void	get_chunk_pars_token(t_parser *data, t_chunk_token *tmp)
+void	get_chunk_pars_token(t_parser *data, t_chunk_token *tokens)
 {
 	const char	*f1 = mapptr(data);
 	const char	*f2 = mapptr(data) + data->index + data->tmp_width + 1;
 	const char	*f3 = mapptr(data) + 2 * (data->index + data->tmp_width + 1);
 
-	struct_set(tmp, sizeof(tmp));
-	tmp->ceiling = f1[0];
-	tmp->north = f1[1];
-	tmp->entity = f1[2];
-	tmp->west = f2[0];
-	tmp->east = f2[1];
-	tmp->tex = f2[2];
-	tmp->floor = f3[0];
-	tmp->south = f3[1];
-	tmp->opt = f3[2];
+	struct_set(tokens, sizeof(t_chunk_token));
+	tokens->ceiling = f1[0];
+	tokens->north = f1[1];
+	tokens->entity = f1[2];
+	tokens->west = f2[0];
+	tokens->east = f2[1];
+	tokens->tex = f2[2];
+	tokens->floor = f3[0];
+	tokens->south = f3[1];
+	tokens->opt = f3[2];
 }
 
 /**
@@ -84,10 +75,7 @@ int	set_chunk(t_parser *data, t_chunk *chunk)
 	chunk->east = get_tex_ptr(&data->tex_list, tokens.east);
 	chunk->floor = get_tex_ptr(&data->tex_list, tokens.floor);
 	chunk->south = get_tex_ptr(&data->tex_list, tokens.south);
-	// chunk.entity = get_tex_ptr(&data->tex_list, tokens.entity);
-	// chunk->tex = get_tex_ptr(&data->tex_list, tokens.tex);
-	// chunk->opt = get_tex_ptr(&data->tex_list, tokens.opt);
-	if (store_entity_data(data, chunk, &tokens))
+	if (store_entity(data, chunk, &tokens))
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
