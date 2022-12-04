@@ -530,21 +530,15 @@ We to create two loops one to get the first intersection of a wall on a X axis a
 
 Then we compare the distance of each wall and see which is the closest one, this is our intersection.
 
-</blockquote></details>
-
-<details open><summary>Simple/Naive Way</summary><blockquote> 
-
-It is simple because it require not much moire than what we have.
-
-We to create two loops one to get the first intersection of a wall on a X axis and one on a Y axis.
-
-Then we compare the distance of each wall and see which is the closest one, this is our intersection.
-
 *Why is this naive ?*
 
-Because if for example our map 
+Let's image a map like this :
 
 <img src="asset/2d_map/long_map.png" width="500"/>
+
+What would our two loops get us ? The interception of x axis find a wall in two steps but the probleme is the interception of y axis it has no answer. It will loops until either it is out of the map if you have a check but if not... it will loops for infinity.
+
+It means
 
 </blockquote></details>
 
