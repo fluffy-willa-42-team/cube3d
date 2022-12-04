@@ -598,13 +598,13 @@ t_point get_intersection(float ray_alpha)
 	{
 		if (dist(player, xInter) < dist(player, yInter))
 		{
-			if (has_found_a_wall)
+			if (has_found_a_wall(xInter))
 				return (xInter);
 			xInter = xInter_step(xInter, ray_alpha);
 		}
 		else
 		{
-			if (has_found_a_wall)
+			if (has_found_a_wall(yInter))
 				return (yInter);
 			yInter = yInter_step(yInter, ray_alpha);
 		}
