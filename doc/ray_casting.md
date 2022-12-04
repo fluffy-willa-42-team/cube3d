@@ -43,15 +43,15 @@ The first step of our ray caster will be to get the intersection of a wall given
 
 This can be difficult to visualize so instead of going straight in 3d will do a detour towards 2d to draw a flashlight for a 2d game. It essencially the same thing as for this game we would need to draw the map then draw the light emitted by the flash light until it intersect with a wall.
 
-<img src="doc/2d_map/example_flashlight.png" width="300"/>
+<img src="asset/2d_map/example_flashlight.png" width="300"/>
 
 For simplification, we will divide the task in small task and draw only a single ray instead of a lot for a flash light.
 
-<img src="doc/2d_map/example_single_ray.png" width="300"/>
+<img src="asset/2d_map/example_single_ray.png" width="300"/>
 
 Our ray can be even more simplified as a line between a two points.
 
-<img src="doc/2d_map/example_what_we_know.png" width="300"/>
+<img src="asset/2d_map/example_what_we_know.png" width="300"/>
 
 What we want to find is $(X_{inter}, Y_{inter})$, the coordinates of Intersection.
 
@@ -64,7 +64,7 @@ That means that the point intersection has to be on either horizontal line with 
 
 So intersection is either on a blue line or green line.
 
-<img src="doc/2d_map/example_grid.png" width="300"/>
+<img src="asset/2d_map/example_grid.png" width="300"/>
 
 That does mean we can divide our process in two: xIntercept and yIntercept.
 
@@ -84,7 +84,7 @@ $\pm$ is plus or minus
 
 ## yIntercept first step
 
-<img src="doc/math_inter/yInter_init.png" width="300"/>
+<img src="asset/math_inter/yInter_init.png" width="300"/>
 
 <details open><summary>Definitions</summary><blockquote> 
 
@@ -122,7 +122,7 @@ $$yInter_x = P'_y + \Delta x - \overline{A\ yInter}$$
 
 So to find $yInter_x$ we need to find $\overline{A\ yInter}$ which is convinently a side of the triangle formed by $yInter$, $Player$ and $A$.  
 
-<img src="doc/math_toa.png" width="300"/>
+<img src="asset/math_toa.png" width="300"/>
 
 With $tan(\alpha) = \dfrac{opposite}{adjacent}$, we can determine that
 
@@ -201,7 +201,7 @@ The math explonation are almost the same as yInter init but some value exchanged
 You'll see it works the same.  
 <!-- The only thing you need to know before hand is that a distance $\overline{AB}$ can go in the negative. -->
 
-<img src="doc/math_inter/xInter_init.png" width="300"/>
+<img src="asset/math_inter/xInter_init.png" width="300"/>
 
 <details open><summary>Definitions</summary><blockquote> 
 
@@ -243,7 +243,7 @@ $$xInter_y = P'_x + \Delta y - \overline{A\ xInter}$$
 
 So to find $xInter_y$ we need to find $\overline{A\ xInter}$ which is convinently a side of the triangle formed by $xInter$, $Player$ and $A$.  
 
-<img src="doc/math_toa.png" width="300"/>
+<img src="asset/math_toa.png" width="300"/>
 
 With $tan(\alpha) = \dfrac{opposite}{adjacent}$, we can determine that  
 $$\overline{A\ xInter} = \dfrac{\Delta x}{tan(\alpha_{ray})}$$  
@@ -318,7 +318,7 @@ Now that we have found the first intersection for both $x$ and $y$ axis, we need
 
 ## get yIntercept next step
 
-<img src="doc/math_inter/yInter_next.png" width="300"/>
+<img src="asset/math_inter/yInter_next.png" width="300"/>
  
 <details open><summary>Definitions</summary><blockquote> 
 
@@ -354,7 +354,7 @@ We need to calculate both $\Delta$ but we can see that $\Delta y$ is equal to $1
 
 So the only value missing is $\Delta x$ but we can it inside triangle made by the point $A$, $yInter(i)$ and $yInter(i+1)$. So we can use our favorite trick : trigonometry.  
 
-<img src="doc/math_toa.png" width="300"/>
+<img src="asset/math_toa.png" width="300"/>
 
 With $tan(\alpha) = \dfrac{opposite}{adjacent}$, we can determine that 
 
@@ -418,7 +418,7 @@ With that done we have have finished a step.
 
 ## get xIntercept next step
 
-<img src="doc/math_inter/xInter_next.png" width="300"/>
+<img src="asset/math_inter/xInter_next.png" width="300"/>
  
 <details open><summary>Definitions</summary><blockquote> 
 
@@ -454,7 +454,7 @@ We need to calculate both $\Delta$ but we can see that $\Delta x$ is equal to $1
 
 So the only value missing is $\Delta x$ but we can it inside triangle made by the point $A$, $xInter(i)$ and $xInter(i+1)$. So we can use our favorite trick : trigonometry.  
 
-<img src="doc/math_toa.png" width="300"/>
+<img src="asset/math_toa.png" width="300"/>
 
 With $tan(\alpha) = \dfrac{opposite}{adjacent}$, we can determine that 
 
