@@ -536,9 +536,81 @@ Let's image a map like this :
 
 <img src="asset/2d_map/long_map.png" width="500"/>
 
-What would our two loops get us ? The interception of x axis find a wall in two steps but the probleme is the interception of y axis it has no answer. It will loops until either it is out of the map if you have a check but if not... it will loops for infinity.
+What would our two loops get us ? The interception of y axis find a wall in two steps but the probleme is the interception of x axis it has no answer. It will loops until either it is out of the map if you have a check but if not... it will loops for infinity.
 
-It means
+It means, we have an answer but can't use it because our other loops never stops.
+To fix it, solution, which i mentioned the solution above, is to stop the loops if it goes out of the map. But still leaves us with a solution a yInter(2) and no solution at xIntercept(25).
+
+We did 25 step for something not needed which is a waste.
+
+Code example :
+
+```c
+typedef struct s_point
+{
+	float x;
+	float y;
+}	t_point;
+
+t_map *map
+t_point player
+float player_alpha
+
+t_point get_intersection(float ray_alpha)
+{
+	t_point xInter = xInter_init(ray_alpha);
+	while (!has_found_a_wall(xInter))
+		xInter = xInter_step(xInter, ray_alpha);
+
+	t_point yInter = yInter_init(ray_alpha);
+	while (!has_found_a_wall(yInter))
+		yInter = yInter_step(yInter, ray_alpha);
+
+	if (dist(player, xInter) < dist(player, yInter))
+		return (xInter);
+	return (yInter);
+}
+```
+
+</blockquote></details>
+
+<details open><summary>More optimized way</summary><blockquote> 
+
+The more optimized way to do it is to only do the step of the one the closest to the player and if that closest one is wall you stop.
+
+```c
+typedef struct s_point
+{
+	float x;
+	float y;
+}	t_point;
+
+t_map *map
+t_point player
+float player_alpha
+
+t_point get_intersection(float ray_alpha)
+{
+	t_point xInter = xInter_init(ray_alpha);
+	t_point yInter = yInter_init(ray_alpha);
+
+	while (1)
+	{
+		if (dist(player, xInter) < dist(player, yInter))
+		{
+			if (has_found_a_wall)
+				return (xInter);
+			xInter = xInter_step(xInter, ray_alpha);
+		}
+		else
+		{
+			if (has_found_a_wall)
+				return (yInter);
+			yInter = yInter_step(yInter, ray_alpha);
+		}
+	}
+}
+```
 
 </blockquote></details>
 
