@@ -86,7 +86,7 @@ $\pm$ is plus or minus
 
 <img src="doc/math_inter/yInter_init.png" width="300"/>
 
-<details><summary>Definitions</summary><blockquote> 
+<details open><summary>Definitions</summary><blockquote> 
 
 $P'$ is a point in the corner of the square where the player is.  
 $\Delta x$ is difference between $| P'_x - P_x|$  
@@ -98,7 +98,7 @@ Then $\Delta x$ and $\Delta y$ will do so aswell.
 
 </blockquote></details>
 
-<details><summary>Math Explonations</summary><blockquote> 
+<details open><summary>Math Explonations</summary><blockquote> 
 
 We need to find $yInter$ but we already know it's $y$ value, it is the same $y$ as $P'$.
 
@@ -145,7 +145,7 @@ P'_y
 
 </blockquote></details>
 
-<details><summary>Program Explonations</summary><blockquote> 
+<details open><summary>Program Explonations</summary><blockquote> 
 
 Now that we know the formula to calculate the first point of intersection. We see that that we know $\alpha_{ray}$ and $P_x$ but only have a description of what $P'_y$ and $\Delta y$ are.
 
@@ -203,7 +203,7 @@ You'll see it works the same.
 
 <img src="doc/math_inter/xInter_init.png" width="300"/>
 
-<details><summary>Definitions</summary><blockquote> 
+<details open><summary>Definitions</summary><blockquote> 
 
 $P'$ is a point in the corner of the square where the player is.  
 $\Delta x$ is difference between $| P'_x - P_x|$  
@@ -215,7 +215,7 @@ Then $\Delta x$ and $\Delta y$ will do so aswell.
 
 </blockquote></details>
 
-<details><summary>Math Explonations</summary><blockquote> 
+<details open><summary>Math Explonations</summary><blockquote> 
 
 
 
@@ -262,7 +262,7 @@ P_y - \dfrac{\Delta x}{tan(\alpha_{ray})}
 
 </blockquote></details>
 
-<details><summary>Program Explonations</summary><blockquote> 
+<details open><summary>Program Explonations</summary><blockquote> 
 
 Now that we know the formula to calculate the first point of intersection. We see that that we know $\alpha_{ray}$ and $P_x$ but only have a description of what $P'_x$ and $\Delta x$ are.
 
@@ -320,7 +320,7 @@ Now that we have found the first intersection for both $x$ and $y$ axis, we need
 
 <img src="doc/math_inter/yInter_next.png" width="300"/>
  
-<details><summary>Definitions</summary><blockquote> 
+<details open><summary>Definitions</summary><blockquote> 
 
 For readability, i will refer to :  
 - "yInter" as $yInter(i)$  
@@ -331,7 +331,7 @@ $\Delta y$ is difference between $| yInter(i)_y - yInter(i+1)_y |$
 
 </blockquote></details>
 
-<details><summary>Math Explonations</summary><blockquote> 
+<details open><summary>Math Explonations</summary><blockquote> 
 
 We need to get $yInter(i+1)$ and we know $yInter(i)$ and $\alpha_{ray}$
 
@@ -377,7 +377,7 @@ yInter(i)_y \pm 1
 
 </blockquote></details>
 
-<details><summary>Program Explonations</summary><blockquote> 
+<details open><summary>Program Explonations</summary><blockquote> 
 
 We now have the formula to get the next intersection of line where y is round. But to compute it we have to get rid of this $\pm$.
 
@@ -420,7 +420,7 @@ With that done we have have finished a step.
 
 <img src="doc/math_inter/xInter_next.png" width="300"/>
  
-<details><summary>Definitions</summary><blockquote> 
+<details open><summary>Definitions</summary><blockquote> 
 
 For readability, i will refer to :  
 - $xInter$ as $xInter(i)$  
@@ -431,7 +431,7 @@ $\Delta y$ is difference between $| xInter(i)_y - xInter(i+1)_y |$
 
 </blockquote></details>
 
-<details><summary>Math Explonations</summary><blockquote> 
+<details open><summary>Math Explonations</summary><blockquote> 
 
 We need to get $xInter(i+1)$ and we know $xInter(i)$ and $\alpha_{ray}$
 
@@ -477,7 +477,7 @@ xInter(i+1)_y \pm \dfrac{1}{tan(\alpha_{ray})}
 
 </blockquote></details>
 
-<details><summary>Program Explonations</summary><blockquote> 
+<details open><summary>Program Explonations</summary><blockquote> 
 
 We now have the formula to get the next intersection of line where y is round. But to compute it we have to get rid of this $\pm$.
 
@@ -512,6 +512,37 @@ else
 ```
 
 With that done we have have finished a another step.
+
+</blockquote></details>
+
+## Get Intersection
+
+We have gained a way to get both first intersection and both next steps.
+Now we need to finalize the get Intersection function.
+
+You can to do it in two ways.
+
+<details open><summary>Simple/Naive Way</summary><blockquote> 
+
+It is simple because it require not much moire than what we have.
+
+We to create two loops one to get the first intersection of a wall on a X axis and one on a Y axis.
+
+Then we compare the distance of each wall and see which is the closest one, this is our intersection.
+
+</blockquote></details>
+
+<details open><summary>Simple/Naive Way</summary><blockquote> 
+
+It is simple because it require not much moire than what we have.
+
+We to create two loops one to get the first intersection of a wall on a X axis and one on a Y axis.
+
+Then we compare the distance of each wall and see which is the closest one, this is our intersection.
+
+*Why is this naive ?*
+
+Because if for example our map 
 
 </blockquote></details>
 
