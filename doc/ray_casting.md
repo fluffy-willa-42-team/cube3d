@@ -1,55 +1,67 @@
 
----
+----
 
-# Ray Casting Explonation
+# Ray Casting Explanation
 
 ## Disclaimer
 
 In this documentation, I'm going to explain the logic I found for a simple ray caster.
-This is in now way the most optimised version but it's what worked and what i understood.  
-My english is not best so sorry in advance if it's not clear.  
+This is in no way the most optimized version, but it's what worked and what I understood.  
+My English is not best, so sorry in advance if it's not clear.  
 With that out of the way, let's start.
 
---- 
+---
 
 # Table of Content
-
-1. [The basic idea, Ray casting at it's core](#1.-the-basic-idea,-ray-casting-at-it's-core)
-2. [A 2d map game with a flashlight](#2.-a-2d-map-game-with-a-flashlight)
-3. [Let's add walls](#3.-let's-add-walls)
-4. [The floor, the ceiling and the skybox](#4.-the-floor,-the-ceiling-and-the-skybox)
-5. [***(bonus)*** Transparency ?!?](#5.-transparency-?!?)
-6. [Sources and inspirations](#6.-sources)
+- [Ray Casting Explanation](#ray-casting-explanation)
+	- [Disclaimer](#disclaimer)
+- [Table of Content](#table-of-content)
+- [1. The basic idea, Ray casting at it's core](#1-the-basic-idea-ray-casting-at-its-core)
+- [2. A 2D map game with a flashlight](#2-a-2d-map-game-with-a-flashlight)
+	- [Math notations](#math-notations)
+	- [$y\_{Intercept}$ first step](#y_intercept-first-step)
+	- [$x\_{Intercept}$ first step](#x_intercept-first-step)
+	- [Get Next Step](#get-next-step)
+	- [Get $y\_{Intercept}$ next step](#get-y_intercept-next-step)
+	- [Get $x\_{Intercept}$ next step](#get-x_intercept-next-step)
+	- [Get Intersection](#get-intersection)
+- [3. Let's add walls](#3-lets-add-walls)
+- [4. The floor, the ceiling and the skybox](#4-the-floor-the-ceiling-and-the-skybox)
+- [5. Transparency ?!?](#5-transparency-)
+- [6. Sources](#6-sources)
 
 ---
 
 # 1. The basic idea, Ray casting at it's core
 
-Ray casting is method of generating a 2.5D world. *(2.5D : A game that looks 3D but can only be played in 2D)*  
-It is a simplification of Ray tracing where Ray tracing calculates for each pixel the direction of light coming in, in contrast a ray caster puts limitation in the world to simplify the calculations so it can calculate only column by column instead of pixel by pixel.
+Ray casting is a method of generating a 2.5D world. *(2.5D : A game that looks 3D but can only be played in 2D)*  
+It is a simplification of Ray tracing, where Ray tracing calculates for each pixel the direction of light coming in, a ray caster puts limitation in the world to simplify the calculations, so it can calculate only column by column instead of pixel by pixel.
 
-The two limitation put the world is that the game is in 2 dimensions and that the world is subdivised in squares.  
-That is because we will simplify the 3d to be a renderer of a 2d game that we will stretch so that 3d wall can appear.
+The two limitation make the game in 2 dimensions, in which the world is subdivided in squares.  
+We simplify the 3D to be rendered has a 2D game, then stretch the wall to appear in 3D.
 
-<!-- It may appear still a bit confusing but don't worry it's only a vague explonation, we'll go into the detail in the later chapters.  
+<!-- It may appear still a bit confusing but don't worry it's only a vague Explanation, we'll go into the detail in the later chapters.  
 All you need to know is the general process of the ray caster which is : -->
 
 ---
 
-# 2. A 2d map game with a flashlight
+# 2. A 2D map game with a flashlight
 
-The first step in our advendture towards 3d is to draw a single line accross the screen with all the intersection of the wall a the middle point. Seems complicated but it's not. It's is simply that for each pixel you get the intersection of the wall and print the corresponding texture of the given wall. The keyword in the last sentence being interscetion.  
-The first step of our ray caster will be to get the intersection of a wall given a player position and player angle.
+The first step in our adventure towards 3D is to draw a single line across the screen, with all the intersection of the wall at the middle point. Seems complicated, but it's not.
 
-This can be difficult to visualize so instead of going straight in 3d will do a detour towards 2d to draw a flashlight for a 2d game. It essencially the same thing as for this game we would need to draw the map then draw the light emitted by the flash light until it intersect with a wall.
+For each pixel you get the intersection of the wall and print the corresponding texture of the given wall. The keyword in the last sentence being intersection.  
+
+In the first place, our ray caster will get the intersection of a wall given a player position and angle.
+
+This can be difficult to visualize, so instead of going straight in 3D will do a detour towards 2D and draw a flashlight for a 2D game. It essentially the same thing for the 3D game, we would need to draw the map then draw the light emitted by the flashlight until it intersect with a wall.
 
 <img src="asset/2d_map/example_flashlight.png" width="300"/>
 
-For simplification, we will divide the task in small task and draw only a single ray instead of a lot for a flash light.
+For simplification, we will divide the task in smaller ones and draw only a single ray instead of a lot for a flashlight.
 
 <img src="asset/2d_map/example_single_ray.png" width="300"/>
 
-Our ray can be even more simplified as a line between a two points.
+Our ray can be even more simplified as a line between two points.
 
 <img src="asset/2d_map/example_what_we_know.png" width="300"/>
 
@@ -59,20 +71,20 @@ We know :
 - $(X_{player}, Y_{player})$, the coordinates of the player  
 - $\alpha_{ray}$, the direction of the ray  
 
-To find the intersection, we will use the rules we set earlier. We know the map is a grid so that mean our intersction is on one of the edge of a square.  
-That means that the point intersection has to be on either horizontal line with a round $y$ or a vertical line with a round $x$.
+To find the intersection, we will use the rules we set earlier. We know the map is a grid, so that mean our intersection is on one of the edges of a square.  
+That means that the point of intersection has to be on either a horizontal line with a round $y$ or a vertical line with a round $x$.
 
-So intersection is either on a blue line or green line.
+So, the intersection is either on a blue or green line.
 
 <img src="asset/2d_map/example_grid.png" width="300"/>
 
-That does mean we can divide our process in two: xIntercept and yIntercept.
+That mean we can divide our process in two: $X_{Intercept}$ and $Y_{Intercept}$.
 
-We alse can subdivide the process in two major section. The first occurence and all the one after.
+We can also subdivide the process in two major sections. The first occurrence and all those that follow.
 
 ## Math notations
 
-Quickly before the math comes in,
+Quickly, before the math comes in,
 
 $\begin{pmatrix}x \\y\end{pmatrix}$ is the notation for a set of coordinate.
 
@@ -82,11 +94,11 @@ $A_y$ is the coordinate $y$ of the point $A$
 $inter(i)$ is the point represented by the function $inter()$ iterated a $i$ number of times  
 $\pm$ is plus or minus
 
-## yIntercept first step
+## $y_{Intercept}$ first step
 
 <img src="asset/math_inter/yInter_init.png" width="300"/>
 
-<details open><summary>Definitions</summary><blockquote> 
+<details open><summary>Definitions</summary><blockquote>
 
 $P'$ is a point in the corner of the square where the player is.  
 $\Delta x$ is difference between $| P'_x - P_x|$  
@@ -94,13 +106,13 @@ $\Delta y$ is difference between $| P'_y - P_y|$
 
 **/!\ Warning /!\\**  
 $P'$ position will vary in function in which direction the player faces.  
-Then $\Delta x$ and $\Delta y$ will do so aswell.
+Then $\Delta x$ and $\Delta y$ will do so as well.
 
 </blockquote></details>
 
-<details open><summary>Math Explonations</summary><blockquote> 
+<details open><summary>Math Explanations</summary><blockquote>
 
-We need to find $yInter$ but we already know it's $y$ value, it is the same $y$ as $P'$.
+We need to find $yInter$, but we already know it's $y$ value, it is the same $y$ as $P'$.
 
 So
 
@@ -120,7 +132,7 @@ so
 
 $$yInter_x = P'_y + \Delta x - \overline{A\ yInter}$$
 
-So to find $yInter_x$ we need to find $\overline{A\ yInter}$ which is convinently a side of the triangle formed by $yInter$, $Player$ and $A$.  
+So to find $yInter_x$ we need to find $\overline{A\ yInter}$ which is confidently a side of the triangle formed by $yInter$, > $Player$ and $A$.  
 
 <img src="asset/math_toa.png" width="300"/>
 
@@ -145,11 +157,11 @@ P'_y
 
 </blockquote></details>
 
-<details open><summary>Program Explonations</summary><blockquote> 
+<details open><summary>Program Explanations</summary><blockquote>
 
-Now that we know the formula to calculate the first point of intersection. We see that that we know $\alpha_{ray}$ and $P_x$ but only have a description of what $P'_y$ and $\Delta y$ are.
+Now that we know the formula to calculate the first point of intersection. We see that we know $\alpha_{ray}$ and $P_x$ but only have a description of what $P'_y$ and $\Delta y$ are.
 
-We know that in the example in our graph that $P'$ is simple equal to a cast to an integer of $P$
+We know that in the example in our graph that $P'$ is simply equal to a cast to an integer of $P$
 
 ```c
 float P_prime_y = (int) player_y;
@@ -179,7 +191,7 @@ We now know the value of $P'_y$. We only need $\Delta y$, for that we can simply
 float delta_y = abs(player_y - P_prime_y);
 ```
 
-Now, we have everything to calculate yInter with our formula :  
+Now, we have everything to calculate $y_{Inter}$ with our formula :  
 
 $$yInter = \begin{pmatrix}
 P_x - \Delta y . tan(\alpha_{ray}) \\
@@ -195,9 +207,9 @@ We finally have the first point of intersection to a line where y is round.
 
 </blockquote></details>
 
-## xIntercept first step
+## $x_{Intercept}$ first step
 
-The math explonation are almost the same as yInter init but some value exchanged. So I'll answer one the question you may have is that if the first intersection is out of the first square.  
+The math explanation is almost the same as $Y_{Intercept}$ init, but some value exchanged. So I'll answer on the question you may have, if the first intersection is out of the first square.
 You'll see it works the same.  
 <!-- The only thing you need to know before hand is that a distance $\overline{AB}$ can go in the negative. -->
 
@@ -211,15 +223,15 @@ $\Delta y$ is difference between $| P'_y - P_y|$
 
 **/!\ Warning /!\\**  
 $P'$ position will vary in function in which direction the player faces.  
-Then $\Delta x$ and $\Delta y$ will do so aswell.
+Then $\Delta x$ and $\Delta y$ will do so as well.
 
 </blockquote></details>
 
-<details open><summary>Math Explonations</summary><blockquote> 
+<details open><summary>Math Explanations</summary><blockquote> 
 
 
 
-We need to find $xInter$ but we already know it's $x$ value, it is the same $x$ as $P'$.  
+We need to find $xInter$, but we already know it's $x$ value, it is the same $x$ as $P'$.  
 So 
 
 $$xInter = (p'_x, xInter_y)$$  
@@ -237,7 +249,7 @@ so
 
 $$xInter_y = P'_x - (\overline{A\ xInter} - \Delta y)$$
 
-*The trick for if it's outside is here. With a double negative the formula can be simplified.*
+*The trick for if it's outside is here. With a double negative, the formula can be simplified.*
 
 $$xInter_y = P'_x + \Delta y - \overline{A\ xInter}$$
 
@@ -262,17 +274,17 @@ P_y - \dfrac{\Delta x}{tan(\alpha_{ray})}
 
 </blockquote></details>
 
-<details open><summary>Program Explonations</summary><blockquote> 
+<details open><summary>Program Explanations</summary><blockquote> 
 
-Now that we know the formula to calculate the first point of intersection. We see that that we know $\alpha_{ray}$ and $P_x$ but only have a description of what $P'_x$ and $\Delta x$ are.
+Now that we know the formula to calculate the first point of intersection. We see that we know $\alpha_{ray}$ and $P_x$ but only have a description of what $P'_x$ and $\Delta x$ are.
 
-We know that in the example in our graph that $P'$ is simple equal to a cast to an integer of $P$
+We know that in the example in our graph that $P'$ is simply equal to a cast to an integer of $P$
 
 ```c
 float P_prime_x = (int) player_x;
 ```
 
-But that only is the case when the player is looking to the West, or in more precise terms :   
+But it's only the case when the player looking to the West, or in more precise terms :   
 $\alpha_{ray}$ is between $90^\circ$ and $270^\circ$ or between $\dfrac{\pi}{2}$ and $\dfrac{3\pi}{2}$ radian. 
 
 ```c
@@ -282,7 +294,7 @@ else
 	float P_prime_x = (int) player_x + 1;
 ```
 
-or a bit better
+Or a bit better
 
 ```c
 float P_prime_x = (int) player_x;
@@ -296,7 +308,7 @@ We now know the value of $P'_x$. We only need $\Delta x$, for that we can simply
 float delta_x = abs(player_x - P_prime_x);
 ```
 
-Now, we have everything to calculate xInter with our formula :  
+Now, we have everything to calculate xInter $x_{Inter}$ with our formula :  
 
 $$xInter = \begin{pmatrix}
 P'_x \\
@@ -316,7 +328,7 @@ We finally have the first point of intersection to a line where x is round.
 
 Now that we have found the first intersection for both $x$ and $y$ axis, we need to create a function that take an intersection and gets you the next one for both axis.
 
-## get yIntercept next step
+## Get $y_{Intercept}$ next step
 
 <img src="asset/math_inter/yInter_next.png" width="300"/>
  
@@ -331,7 +343,7 @@ $\Delta y$ is difference between $| yInter(i)_y - yInter(i+1)_y |$
 
 </blockquote></details>
 
-<details open><summary>Math Explonations</summary><blockquote> 
+<details open><summary>Math Explanations</summary><blockquote> 
 
 We need to get $yInter(i+1)$ and we know $yInter(i)$ and $\alpha_{ray}$
 
@@ -377,14 +389,14 @@ yInter(i)_y \pm 1
 
 </blockquote></details>
 
-<details open><summary>Program Explonations</summary><blockquote> 
+<details open><summary>Program Explanations</summary><blockquote> 
 
 We now have the formula to get the next intersection of line where y is round. But to compute it we have to get rid of this $\pm$.
 
-For that we observe that we need to subtract $\Delta x$ if we are looking in the west and add if we are looking east.  
+For that, we observe that we need to subtract $\Delta x$ if we are looking in the west and add if we are looking east.  
 The west being if $\alpha_{ray}$ is between $90^\circ$ and $270^\circ$ or between $\dfrac{\pi}{2}$ and $\dfrac{3\pi}{2}$ radian.
 
-We will use this knowledge and our formula to cumpute it.
+We will use this knowledge and our formula to compute it.
 
 $$yInter(i+1)_x = yInter(i)_x \pm tan(\alpha_{ray})$$
 
@@ -397,7 +409,7 @@ else
 	float yInter_next_x = yInter_prev_x + deltaX;
 ```
 
-We have the $x$, now we need the $y$ except this time we add if we are looking south and substract if we are looking north.  
+We have the $x$, now we need the $y$ except this time we add if we are looking south and subtract if we are looking north.  
 The north being if $\alpha_{ray}$ is between $0^\circ$ and $180^\circ$ or between $0$ and $\pi$ radian.
 
 And with our formula, 
@@ -411,12 +423,12 @@ else
 	float yInter_next_y = yInter_prev_y + 1;
 ```
 
-With that done we have have finished a step.
+With that done, we have finished a step.
 
 </blockquote></details>
 
 
-## get xIntercept next step
+## Get $x_{Intercept}$ next step
 
 <img src="asset/math_inter/xInter_next.png" width="300"/>
  
@@ -431,7 +443,7 @@ $\Delta y$ is difference between $| xInter(i)_y - xInter(i+1)_y |$
 
 </blockquote></details>
 
-<details open><summary>Math Explonations</summary><blockquote> 
+<details open><summary>Math Explanations</summary><blockquote> 
 
 We need to get $xInter(i+1)$ and we know $xInter(i)$ and $\alpha_{ray}$
 
@@ -442,7 +454,7 @@ xInter(i)_x - \Delta x \\
 xInter(i)_y - \Delta y
 \end{pmatrix}$$
 
-but that is only valid if we are looking North-West. The sign of both $\Delta$ will vary in function of the angle we are looking at. I'm going to make the function with a $\pm$ but in the program section we will solve this issue.
+But that is only valid if we are looking North-West. The sign of both $\Delta$ will vary in function of the angle we are looking at. I'm going to make the function with a $\pm$ but in the program section we will solve this issue.
 
 We have then :  
 $$xInter(i+1) = \begin{pmatrix}
@@ -477,11 +489,11 @@ xInter(i+1)_y \pm \dfrac{1}{tan(\alpha_{ray})}
 
 </blockquote></details>
 
-<details open><summary>Program Explonations</summary><blockquote> 
+<details open><summary>Program Explanations</summary><blockquote> 
 
-We now have the formula to get the next intersection of line where y is round. But to compute it we have to get rid of this $\pm$.
+We now have the formula to get the next intersection of line where y is round. But to compute it, we have to get rid of this $\pm$.
 
-For that we observe that we need to subtract $\Delta x$ if we are looking in the west and add if we are looking east.  
+For that, we observe that we need to subtract $\Delta x$ if we are looking in the west and add if we are looking east.  
 The west being if $\alpha_{ray}$ is between $90^\circ$ and $270^\circ$ or between $\dfrac{\pi}{2}$ and $\dfrac{3\pi}{2}$ radian.
 
 We will use this knowledge and our formula to cumpute it.
@@ -495,7 +507,7 @@ else
 	float xInter_next_x = xInter_prev_x + 1;
 ```
 
-We have the $x$, now we need the $y$ except this time we add if we are looking south and substract if we are looking north.  
+We have the $x$, now we need the $y$ except this time we add if we are looking south and subtract if we are looking north.  
 The north being if $\alpha_{ray}$ is between $0^\circ$ and $180^\circ$ or between $0$ and $\pi$ radian.
 
 And with our formula, 
@@ -511,7 +523,7 @@ else
 	float xInter_next_y = xInter_prev_y + deltaY;
 ```
 
-With that done we have have finished a another step.
+With that done, we have finished an another step.
 
 </blockquote></details>
 
@@ -524,9 +536,9 @@ You can to do it in two ways.
 
 <details open><summary>Simple/Naive Way</summary><blockquote> 
 
-It is simple because it require not much moire than what we have.
+It is simple because it requires not much more than what we have.
 
-We to create two loops one to get the first intersection of a wall on a X axis and one on a Y axis.
+We to create two loops, one to get the first intersection of a wall on an X axis and one on a Y axis.
 
 Then we compare the distance of each wall and see which is the closest one, this is our intersection.
 
@@ -536,12 +548,12 @@ Let's image a map like this :
 
 <img src="asset/2d_map/long_map.png" width="500"/>
 
-What would our two loops get us ? The interception of y axis find a wall in two steps but the probleme is the interception of x axis it has no answer. It will loops until either it is out of the map if you have a check but if not... it will loops for infinity.
+What would our two loops get us ? The interception of y-axis find a wall in two steps but the problem is the interception of x-axis it has no answer. It will loop until either it is out of the map if you have a check, but if not... it will loop for infinity.
 
-It means, we have an answer but can't use it because our other loops never stops.
-To fix it, solution, which i mentioned the solution above, is to stop the loops if it goes out of the map. But still leaves us with a solution a yInter(2) and no solution at xIntercept(25).
+It means, we have an answer but can't use it because our other loops never stop.
+To fix it, the solution, which I mentioned above, is to stop the loops if it goes out of the map. But still leaves us with a solution a $y_{Inter(2)}$ and no solution at $x_{Intercept(25)}$.
 
-We did 25 step for something not needed which is a waste.
+We did 25 steps for something not needed, which is a waste.
 
 Code example :
 
@@ -576,7 +588,7 @@ t_point get_intersection(float ray_alpha)
 
 <details open><summary>More optimized way</summary><blockquote> 
 
-The more optimized way to do it is to only do the step of the one the closest to the player and if that closest one is wall you stop.
+The more optimized way is to only do the closest one step from the player, if the closest one is a wall you stop.
 
 ```c
 typedef struct s_point
