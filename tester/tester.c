@@ -27,6 +27,7 @@ int		fd_err;
 int		file_out;
 int		file_err;
 int		test_no = -1;
+int		test_faild = 0;
 
 /**
  * @brief copy `src` in `dest` starting by the end of `src`
@@ -180,6 +181,7 @@ void	test(const char *file, int ret, const char *comm)
 		printf(GRE"    OK ([%d])"RES" [%s]\n", run_ret, file);
 	else
 	{
+		test_faild++;
 		printf(RED"    K0! ([%d] vs %d)"RES" [%s]\n", run_ret, ret, file);
 		printf(BLK"        ./cube3d tester/map/%s\n"RES, file);
 	}
@@ -191,113 +193,94 @@ int main(int argc, char const *argv[])
 	(void)argc;
 	(void)argv;
 
-	TEST_PRINT("BASIC FILE TEST")
-	
-	test(	"cub_map.cub",
-			EXIT_SUCCESS,
-			"Normal cub file");
+	TEST_PRINT("GOOD CUB FILE SEP AND NEWLINE")
 
-	test(	"cube_map.cube",
-			EXIT_SUCCESS,
-			"Normal cube file");
+	test(	"/good_cub/1_no_sep_no_newline.cub",
+		EXIT_SUCCESS,
+		"Good cub file, no tex map separation, no newline at the end.");
 
-	test(	"cub_map.cube",
-			EXIT_FAILURE,
-			".cube file with a .cub map format");
+	test(	"/good_cub/2_sep_no_newline.cub",
+		EXIT_SUCCESS,
+		"Good cub file, tex map separation, no newline at the end.");
 
-	test(	"empty_file.cub",
-			EXIT_FAILURE,
-			"Empty file .cub");
+	test(	"/good_cub/3_sep_newline.cub",
+		EXIT_SUCCESS,
+		"Good cub file, tex map separation, newline at the end.");
 
-	test(	"empty_file.cube",
-			EXIT_FAILURE,
-			"Empty file .cube");
+	test(	"/good_cub/4_no_sep_newline.cub",
+		EXIT_SUCCESS,
+		"Good cub file, no tex map separation, newline at the end.");
 
-	test(	"cub_no_rwx_perm.cub",
-			EXIT_FAILURE,
-			".cub file -rwx");
+	test(	"/good_cub/5_tex_newline_no_sep_no_newline.cub",
+		EXIT_SUCCESS,
+		"Good cub file, newline between tex, no tex map separation, no newline at the end.");
 
-	test(	"cub_no_rwx_perm.cube",
-			EXIT_FAILURE,
-			".cube file -rwx");
 
-	test(	"no_rwx_perm",
-			EXIT_FAILURE,
-			"Empty file no extention -rwx");
+	TEST_PRINT("GOOD CUB FILE PLAYER TEST")
 
-	TEST_PRINT("PLAYER TEST")
 
-	test(	"cub_player_W.cub",
-			EXIT_SUCCESS,
-			"Good cub file with player to W");
+	test(	"/good_cub/6_tex_newline_sep_newline_player_n.cub",
+		EXIT_SUCCESS,
+		"Good cub file, newline between tex, tex map separation, newline at the end, player set to North");
 
-	test(	"cub_player_S.cub",
-			EXIT_SUCCESS,
-			"Good cub file with player to S");
+	test(	"/good_cub/7_tex_newline_sep_newline_player_s.cub",
+		EXIT_SUCCESS,
+		"Good cub file, newline between tex, tex map separation, newline at the end, player set to South");
 
-	test(	"cub_player_E.cub",
-			EXIT_SUCCESS,
-			"Good cub file with player to E");
+	test(	"/good_cub/8_tex_newline_sep_newline_player_e.cub",
+		EXIT_SUCCESS,
+		"Good cub file, newline between tex, tex map separation, newline at the end, player set to East");
 
-	test(	"cub_player_N.cub",
-			EXIT_SUCCESS,
-			"Good cub file with player to N");
+	test(	"/good_cub/9_tex_newline_sep_newline_player_w.cub",
+		EXIT_SUCCESS,
+		"Good cub file, newline between tex, tex map separation, newline at the end, player set to West");
 
-	test(	"cub_player_none.cub",
-			EXIT_FAILURE,
-			"Good cub file without player");
 
-	TEST_PRINT("TEXTURE TEST")
+	TEST_PRINT("GOOD CUB FILE PLAYER TEST")
 
-	test(	"cub_tex_without_F.cub",
+
+	test(	"/bad_cub/1_missing_tex_no.cub",
 		EXIT_FAILURE,
-		"Good cub file without F texture");
+		"Bad cub file, newline between tex, tex map separation, no newline at the end, tex NO missing");
 
-	test(	"cub_tex_without_C.cub",
+	test(	"/bad_cub/2_missing_tex_so.cub",
 		EXIT_FAILURE,
-		"Good cub file without C texture");
+		"Bad cub file, newline between tex, tex map separation, no newline at the end, tex SO missing");
 
-	test(	"cub_tex_without_NO.cub",
+	test(	"/bad_cub/3_missing_tex_we.cub",
 		EXIT_FAILURE,
-		"Good cub file without NO texture");
+		"Bad cub file, newline between tex, tex map separation, no newline at the end, tex WE missing");
 
-	test(	"cub_tex_without_SO.cub",
+	test(	"/bad_cub/4_missing_tex_ea.cub",
 		EXIT_FAILURE,
-		"Good cub file without SO texture");
+		"Bad cub file, newline between tex, tex map separation, no newline at the end, tex EA missing");
 
-	test(	"cub_tex_without_WE.cub",
+	test(	"/bad_cub/5_missing_tex_f.cub",
 		EXIT_FAILURE,
-		"Good cub file without WE texture");
+		"Bad cub file, newline between tex, tex map separation, no newline at the end, tex F missing");
 
-	test(	"cub_tex_without_EA.cub",
+	test(	"/bad_cub/6_missing_tex_c.cub",
 		EXIT_FAILURE,
-		"Good cub file without EA texture");
+		"Bad cub file, newline between tex, tex map separation, no newline at the end, tex C missing");
 
-	test(	"cub_tex_dup_NO.cub",
-		EXIT_FAILURE,
-		"Good cub file with duplication NO texture");
 
-	test(	"cub_tex_dup_SO.cub",
-		EXIT_FAILURE,
-		"Good cub file with duplication SO texture");
-
-	test(	"cub_tex_dup_EA.cub",
-		EXIT_FAILURE,
-		"Good cub file with duplication EA texture");
-
-	test(	"cub_tex_dup_WE.cub",
-		EXIT_FAILURE,
-		"Good cub file with duplication WE texture");
-
-	test(	"cub_tex_dup_C.cub",
-		EXIT_FAILURE,
-		"Good cub file with duplication C texture");
-
-	test(	"cub_tex_dup_F.cub",
-		EXIT_FAILURE,
-		"Good cub file with duplication F texture");
 
 	close(fd_out);
 	close(fd_err);
+
+	if (test_faild)
+		printf(	RED
+				"  --===#############################===--  \n"
+				"----===### [%d] TESTUNIT FAILD ! ###===----\n"
+				"  --===#############################===--  "RES"\n", test_faild);
+	else
+		printf(	GRE
+				"  --===######################===--  \n"
+				"----===### TESTUNIT OK :) ###===----\n"
+				"  --===######################===--  "RES"\n");
+
 	return 0;
 }
+
+
+
