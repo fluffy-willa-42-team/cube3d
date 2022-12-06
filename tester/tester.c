@@ -195,23 +195,23 @@ int main(int argc, char const *argv[])
 
 	TEST_PRINT("GOOD CUB FILE SEP AND NEWLINE")
 
-	test(	"/good_cub/1_no_sep_no_newline.cub",
+	test(	"/good_cub/no_sep_no_newline.cub",
 		EXIT_SUCCESS,
 		"Good cub file, no tex map separation, no newline at the end.");
 
-	test(	"/good_cub/2_sep_no_newline.cub",
+	test(	"/good_cub/sep_no_newline.cub",
 		EXIT_SUCCESS,
 		"Good cub file, tex map separation, no newline at the end.");
 
-	test(	"/good_cub/3_sep_newline.cub",
+	test(	"/good_cub/sep_newline.cub",
 		EXIT_SUCCESS,
 		"Good cub file, tex map separation, newline at the end.");
 
-	test(	"/good_cub/4_no_sep_newline.cub",
+	test(	"/good_cub/no_sep_newline.cub",
 		EXIT_SUCCESS,
 		"Good cub file, no tex map separation, newline at the end.");
 
-	test(	"/good_cub/5_tex_newline_no_sep_no_newline.cub",
+	test(	"/good_cub/tex_newline_no_sep_no_newline.cub",
 		EXIT_SUCCESS,
 		"Good cub file, newline between tex, no tex map separation, no newline at the end.");
 
@@ -219,19 +219,19 @@ int main(int argc, char const *argv[])
 	TEST_PRINT("GOOD CUB FILE PLAYER TEST")
 
 
-	test(	"/good_cub/6_tex_newline_sep_newline_player_n.cub",
+	test(	"/good_cub/tex_newline_sep_newline_player_n.cub",
 		EXIT_SUCCESS,
 		"Good cub file, newline between tex, tex map separation, newline at the end, player set to North");
 
-	test(	"/good_cub/7_tex_newline_sep_newline_player_s.cub",
+	test(	"/good_cub/tex_newline_sep_newline_player_s.cub",
 		EXIT_SUCCESS,
 		"Good cub file, newline between tex, tex map separation, newline at the end, player set to South");
 
-	test(	"/good_cub/8_tex_newline_sep_newline_player_e.cub",
+	test(	"/good_cub/tex_newline_sep_newline_player_e.cub",
 		EXIT_SUCCESS,
 		"Good cub file, newline between tex, tex map separation, newline at the end, player set to East");
 
-	test(	"/good_cub/9_tex_newline_sep_newline_player_w.cub",
+	test(	"/good_cub/tex_newline_sep_newline_player_w.cub",
 		EXIT_SUCCESS,
 		"Good cub file, newline between tex, tex map separation, newline at the end, player set to West");
 
@@ -239,27 +239,27 @@ int main(int argc, char const *argv[])
 	TEST_PRINT("GOOD CUB FILE PLAYER TEST")
 
 
-	test(	"/bad_cub/1_missing_tex_no.cub",
+	test(	"/bad_cub/missing_tex_no.cub",
 		EXIT_FAILURE,
 		"Bad cub file, newline between tex, tex map separation, no newline at the end, tex NO missing");
 
-	test(	"/bad_cub/2_missing_tex_so.cub",
+	test(	"/bad_cub/missing_tex_so.cub",
 		EXIT_FAILURE,
 		"Bad cub file, newline between tex, tex map separation, no newline at the end, tex SO missing");
 
-	test(	"/bad_cub/3_missing_tex_we.cub",
+	test(	"/bad_cub/missing_tex_we.cub",
 		EXIT_FAILURE,
 		"Bad cub file, newline between tex, tex map separation, no newline at the end, tex WE missing");
 
-	test(	"/bad_cub/4_missing_tex_ea.cub",
+	test(	"/bad_cub/missing_tex_ea.cub",
 		EXIT_FAILURE,
 		"Bad cub file, newline between tex, tex map separation, no newline at the end, tex EA missing");
 
-	test(	"/bad_cub/5_missing_tex_f.cub",
+	test(	"/bad_cub/missing_tex_f.cub",
 		EXIT_FAILURE,
 		"Bad cub file, newline between tex, tex map separation, no newline at the end, tex F missing");
 
-	test(	"/bad_cub/6_missing_tex_c.cub",
+	test(	"/bad_cub/missing_tex_c.cub",
 		EXIT_FAILURE,
 		"Bad cub file, newline between tex, tex map separation, no newline at the end, tex C missing");
 
