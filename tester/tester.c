@@ -83,7 +83,7 @@ char	*ft_itoa(int n)
 
 int	create_file(const char *ext)
 {
-	char	file[1000] = "./tester/";
+	char	file[1000] = "./tester/log/";
 	int		fd;
 	char	*file_name = ft_itoa(test_no);
 
@@ -185,7 +185,7 @@ void	test(const char *file, int ret, const char *comm)
 		printf(RED"    K0! ([%d] vs %d)"RES" [%s]\n", run_ret, ret, file);
 		printf(BLK"        ./cube3d tester/map/%s\n"RES, file);
 	}
-	printf("        ["BYEL"./tester/%d.out"RES"] ["YEL"./tester/%d.err"RES"]\n\n", test_no, test_no);
+	printf("        ["BYEL"./tester/log/%d.out"RES"] ["YEL"./tester/log/%d.err"RES"]\n\n", test_no, test_no);
 }
 
 int main(int argc, char const *argv[])
@@ -236,7 +236,80 @@ int main(int argc, char const *argv[])
 		"Good cub file, newline between tex, tex map separation, newline at the end, player set to West");
 
 
-	TEST_PRINT("GOOD CUB FILE PLAYER TEST")
+	TEST_PRINT("BAD CUB FILE PLAYER TEST")
+
+
+	test(	"/bad_cub/missing_player.cub",
+		EXIT_FAILURE,
+		"Bad cub file, newline between tex, tex map separation, no newline at the end, player missing");
+
+	test(	"/bad_cub/dup_player_w_w.cub",
+		EXIT_FAILURE,
+		"Bad cub file, newline between tex, tex map separation, no newline at the end, duplicate player");
+
+	test(	"/bad_cub/dup_player_n_w.cub",
+		EXIT_FAILURE,
+		"Bad cub file, newline between tex, tex map separation, no newline at the end, duplicate player");
+
+	test(	"/bad_cub/dup_player_s_s.cub",
+		EXIT_FAILURE,
+		"Bad cub file, newline between tex, tex map separation, no newline at the end, duplicate player");
+
+	test(	"/bad_cub/dup_player_n_s.cub",
+		EXIT_FAILURE,
+		"Bad cub file, newline between tex, tex map separation, no newline at the end, duplicate player");
+
+	test(	"/bad_cub/dup_player_n_e.cub",
+		EXIT_FAILURE,
+		"Bad cub file, newline between tex, tex map separation, no newline at the end, duplicate player");
+
+	test(	"/bad_cub/dup_player_w_n.cub",
+		EXIT_FAILURE,
+		"Bad cub file, newline between tex, tex map separation, no newline at the end, duplicate player");
+
+	test(	"/bad_cub/dup_player_s_n.cub",
+		EXIT_FAILURE,
+		"Bad cub file, newline between tex, tex map separation, no newline at the end, duplicate player");
+
+	test(	"/bad_cub/dup_player_s_w.cub",
+		EXIT_FAILURE,
+		"Bad cub file, newline between tex, tex map separation, no newline at the end, duplicate player");
+
+	test(	"/bad_cub/dup_player_e_n.cub",
+		EXIT_FAILURE,
+		"Bad cub file, newline between tex, tex map separation, no newline at the end, duplicate player");
+
+	test(	"/bad_cub/dup_player_w_e.cub",
+		EXIT_FAILURE,
+		"Bad cub file, newline between tex, tex map separation, no newline at the end, duplicate player");
+
+	test(	"/bad_cub/dup_player_e_e.cub",
+		EXIT_FAILURE,
+		"Bad cub file, newline between tex, tex map separation, no newline at the end, duplicate player");
+
+	test(	"/bad_cub/dup_player_w_s.cub",
+		EXIT_FAILURE,
+		"Bad cub file, newline between tex, tex map separation, no newline at the end, duplicate player");
+
+	test(	"/bad_cub/dup_player_e_w.cub",
+		EXIT_FAILURE,
+		"Bad cub file, newline between tex, tex map separation, no newline at the end, duplicate player");
+
+	test(	"/bad_cub/dup_player_s_e.cub",
+		EXIT_FAILURE,
+		"Bad cub file, newline between tex, tex map separation, no newline at the end, duplicate player");
+
+	test(	"/bad_cub/dup_player_n_n.cub",
+		EXIT_FAILURE,
+		"Bad cub file, newline between tex, tex map separation, no newline at the end, duplicate player");
+
+	test(	"/bad_cub/dup_player_e_s.cub",
+		EXIT_FAILURE,
+		"Bad cub file, newline between tex, tex map separation, no newline at the end, duplicate player");
+
+
+
+	TEST_PRINT("BAD CUB FILE TEXTURE TEST")
 
 
 	test(	"/bad_cub/missing_tex_no.cub",
@@ -262,7 +335,6 @@ int main(int argc, char const *argv[])
 	test(	"/bad_cub/missing_tex_c.cub",
 		EXIT_FAILURE,
 		"Bad cub file, newline between tex, tex map separation, no newline at the end, tex C missing");
-
 
 
 	close(fd_out);
