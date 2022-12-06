@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 12:51:50 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/29 13:51:17 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/12/06 14:27:15 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 #include <stdlib.h>
 
 #include "cube3d_debug.h"
-
+#include <stdio.h>//TODO REMOVE
 /**
  * @author @Matthew-Dreemurr
  * 
@@ -31,15 +31,16 @@ int	destroy_data(int ret, t_parser *data)
 	int i;
 	t_texture *tmp;
 
-	tmp = 0;
 	i = '!';
-	while (i < 125)
-	{
-		tmp = get_tex_ptr(&data->tex_list, i);
-		if (tmp && tmp->image)
-			mlx_delete_texture(tmp->image);
-		i++;
-	}
+	if (data->tex_list.buffer)
+		while (i < 125)
+		{
+			printf("[%c]\n", i);
+			tmp = get_tex_ptr(&data->tex_list, i);
+			if (tmp && tmp->token && tmp->image)
+				mlx_delete_texture(tmp->image);
+			i++;
+		}
 	if ((v_delete(&data->cub))
 		|| v_delete(&data->cube)
 		|| v_delete(&data->map)

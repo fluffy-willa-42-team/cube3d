@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:53:32 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/29 13:50:16 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/12/06 14:28:52 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,6 @@ int	tex_debug(t_parser *data)
  */
 int	parser(char *av, t_parser *data)
 {
-	struct_set(data, sizeof(t_parser));
 	data->path = av;
 	if (open_file(data)
 		|| file_sani(data)
