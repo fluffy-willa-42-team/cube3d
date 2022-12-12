@@ -334,9 +334,9 @@ Now that we have found the first intersection for both $x$ and $y$ axis, we need
  
 <details open><summary>Definitions</summary><blockquote> 
 
-For readability, i will refer to :  
-- "yInter" as $yInter(i)$  
-- "prev yInter" as $yInter(i + 1)$
+For readability, i will refer to :
+- "prev yInter" as $yInter(i)$
+- "yInter" as $yInter(i + 1)$  
 
 $\Delta x$ is difference between $| yInter(i)_x - yInter(i+1)_x |$  
 $\Delta y$ is difference between $| yInter(i)_y - yInter(i+1)_y |$  
@@ -434,9 +434,9 @@ With that done, we have finished a step.
  
 <details open><summary>Definitions</summary><blockquote> 
 
-For readability, i will refer to :  
-- $xInter$ as $xInter(i)$  
-- $prev\ xInter$ as $xInter(i + 1)$
+For readability, i will refer to :
+- "prev yInter" as $yInter(i)$
+- "yInter" as $yInter(i + 1)$  
 
 $\Delta x$ is difference between $| xInter(i)_x - xInter(i+1)_x |$  
 $\Delta y$ is difference between $| xInter(i)_y - xInter(i+1)_y |$  
@@ -578,7 +578,7 @@ t_point get_intersection(float ray_alpha)
 	while (!has_found_a_wall(yInter))
 		yInter = yInter_step(yInter, ray_alpha);
 
-	if (dist(player, xInter) < dist(player, yInter))
+	if (distance(player, xInter) < distance(player, yInter))
 		return (xInter);
 	return (yInter);
 }
@@ -608,7 +608,7 @@ t_point get_intersection(float ray_alpha)
 
 	while (1)
 	{
-		if (dist(player, xInter) < dist(player, yInter))
+		if (distance(player, xInter) < distance(player, yInter))
 		{
 			if (has_found_a_wall(xInter))
 				return (xInter);
@@ -625,6 +625,54 @@ t_point get_intersection(float ray_alpha)
 ```
 
 </blockquote></details>
+
+<details open><summary>Optimization for the Distance</summary><blockquote> 
+
+You might have seen the distance() function and imagined it to be a simple distance between two points.
+
+$$d(A,B) = \sqrt{(A_x - B_x)^2 + (A_y - B_y)^2}$$
+
+but this function use a square root which is a heavy operation and is only used to compare with another distance. This means that our distance function can simpler if we simply us find which is the furthest.
+
+First we can remove the square root as it the the heaviest operation.
+
+$$d'(A,B) = (A_x - B_x)^2 + (A_y - B_y)^2$$
+
+Then whe can remove the square as it only exagerate our value but we have to keep the sign positives so
+
+$$d'(A,B) = |A_x - B_x| + |A_y - B_y|$$
+
+this is much better for our use here.
+
+</blockquote></details>
+
+## Back to rays
+
+Now the that we have the get_intersection() function, we can simply use to draw a line for each ray for flashlight.
+
+```c
+typedef struct s_point
+{
+	float x;
+	float y;
+}	t_point;
+
+t_point player
+float player_alpha
+
+void draw_flashlight()
+{
+	float alpha = player_alpha - 30;
+	while (alpha <= player_alpha + 30)
+	{
+		t_point intersection = get_intercection(alpha);
+		draw_line(player, intersection);
+		alpha += 1;
+	}
+}
+```
+
+
 
 ---
 
