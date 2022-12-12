@@ -564,9 +564,9 @@ typedef struct s_point
 	float y;
 }	t_point;
 
-t_map *map
-t_point player
-float player_alpha
+t_map *map;
+t_point player;
+float player_alpha;
 
 t_point get_intersection(float ray_alpha)
 {
@@ -597,9 +597,9 @@ typedef struct s_point
 	float y;
 }	t_point;
 
-t_map *map
-t_point player
-float player_alpha
+t_map *map;
+t_point player;
+float player_alpha;
 
 t_point get_intersection(float ray_alpha)
 {
@@ -657,31 +657,165 @@ typedef struct s_point
 	float y;
 }	t_point;
 
-t_point player
-float player_alpha
+t_point player;
+float player_alpha;
 
 void draw_flashlight()
 {
 	float alpha = player_alpha - 30;
 	while (alpha <= player_alpha + 30)
 	{
-		t_point intersection = get_intercection(alpha);
+		t_point intersection = get_intersection(alpha);
 		draw_line(player, intersection);
 		alpha += 1;
 	}
 }
 ```
 
-
-
 ---
 
 # 3. Let's add walls
 
-x  
-x  
-x  
-x  
+We have made a 2d map game great right... Oh yeah we are missing a dimension.  
+Lets add it. 
+
+In the intro, I talked about streching our 2d map game this is where we'll do it.
+
+<img src="asset/2d_map/example_flashlight.png" width="150"/>
+
+// TODO explain 2d expansion with gif
+
+
+
+## Our main loop
+
+The main loop of our 3d game is the first step in our 3d game.  
+We know that all our step will be done in column. For each pixel on the screen we will need the angle associated with that pixel.
+
+$$\alpha_{step} = \dfrac{FOV}{win_{width}}$$
+
+We know that the angle in the middle is $\alpha_{player}$. The angle for the first and last pixel is also simple.
+
+$$\alpha_{start} = \alpha_{player} - \dfrac{FOV}{2}$$
+$$\alpha_{end} = \alpha_{player} + \dfrac{FOV}{2}$$
+
+With that information, we can make our main loop.
+
+```c
+int win_width;
+
+float player_alpha;
+
+float fov = 60;
+float fov_incrementation = fov / win_width;
+
+void	draw_3d()
+{
+	float alpha = player_alpha - fov / 2
+	for(int pixel = 0; pixel < win_width; pixel++)
+	{
+		draw_column(alpha, pixel);
+		alpha += fov_incrementation;
+	}
+}
+
+```
+
+## Draw our column
+
+Now that we have our draw_column() function to write.
+
+We know the angle at which we are looking, this is the first argument we received.  
+The first thing we can do is to get the wall intersection using our get_intersection() function. 
+
+```c
+t_point intersection = get_intersection(alpha);
+```
+
+We know that our player cannot be looking up our down, that means our wall is a line that has its center in middle of the screen, or that the line of the wall we will draw has its two extremities be
+$$pixel_{top} = \dfrac{win_{height}}{2} + \dfrac{wall_{height}}{2}$$
+$$pixel_{bottom} = \dfrac{win_{height}}{2} - \dfrac{wall_{height}}{2}$$
+
+That means that to know the top and the bottom pixel we only need to know the height of the wall.
+
+By logic, we know that our wall height is dependent of the distance of the wall. The further away the wall is the small it is and bigger the distance is. We can then determine that the wall height is dependent of the inverse of the distance.
+
+$$wall_{height} = \dfrac{a}{d(player,inter)}$$
+
+$a$ being a constant multiplier to expand the wall *(trust me it will be usefull later)* but we can set it to 1 for the time being.
+
+The only missing peace now is the distance of the player and the intersection. We can use the basic distance between two point formula.
+
+$$d(A,B) = \sqrt{(A_x - B_x)^2 + (A_y - B_y)^2}$$
+
+And so
+
+$$wall_{height} = \dfrac{a}{\sqrt{(player_x - inter_x)^2 + (player_y - inter_y)^2}}$$
+
+now that we have our wall height all we have to do is draw it.
+
+```c
+typedef struct s_point
+{
+	float x;
+	float y;
+}	t_point;
+
+t_point player;
+int win_width;
+float a = 1;
+
+float distance(t_point a, t_point b)
+{
+	return (sqrt(exp2(a.x - b.x) + exp2(a.y - b.y)));
+}
+
+void draw_column(float alpha, int pixel_x)
+{
+	t_point intersection = get_intersection(alpha);
+
+	float dist = distance(player, intersection);
+	float wall_height = a / dist;
+
+	int pixel_y = win_height / 2 - wall_height / 2;
+	while (pixel_y < win_height / 2 + wall_height / 2)
+	{
+		draw_pixel(pixel_x, pixel_y);
+		pixel_y++;
+	}
+}
+```
+
+but before you copy paste and of this, there is two mistake in the code.  
+The first one is that our while loop will grow larger and larger the closer to a wall we are, and try draw a pixel at all pixel within pixel top and pixel bottom even if they are out of the window.
+
+```c
+void draw_column(float alpha, int pixel_x)
+{
+	t_point intersection = get_intersection(alpha);
+
+	float dist = distance(player, intersection);
+	float wall_height = a / dist;
+
+	int pixel_y = win_height / 2 - wall_height / 2;
+	if (pixel_y < 0)
+		pixel_y = 0;
+	
+	int pixel_max = win_height / 2 + wall_height / 2;
+	if (pixel_max >= win_height)
+		pixel_max = win_height - 1;
+	
+	while (pixel_y < pixel_max)
+	{
+		draw_pixel(pixel_x, pixel_y);
+		pixel_y++;
+	}
+}
+```
+
+The second is more devious and will force us to execute our mistake to show it.
+
+<img src="asset/draw_wall_fisheye/normal_3d.png" width="300"/> <img src="asset/draw_wall_fisheye/broken_3d.png" width="300"/>
 
 ---
 
