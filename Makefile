@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+         #
+#    By: awillems <awillems@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/05 10:47:56 by awillems          #+#    #+#              #
-#    Updated: 2022/11/29 14:18:16 by mahadad          ###   ########.fr        #
+#    Updated: 2022/12/12 17:06:38 by awillems         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ CODE_EXT	= .c
 HEAD_EXT	= .h
 INC			= -I include -I lib/MLX42/include/MLX42 -I lib/MLX42/ -Ilib/vector-lib/include -Ilib/libft/include
 FLAGS		= -Wall -Wextra -Werror
-FLAGS_COMP	= 
+FLAGS_COMP	= -lmlx -framework OpenGL -framework AppKit
 
 # **************************************************************************** #
 #                                  PARAMS
@@ -189,7 +189,7 @@ r:  fc all
 # **************************************************************************** #
 
 exe: all
-	@bash -c "./$(NAME)"
+	@bash -c "./$(NAME) ./test.cube"
 
 test: clear_test
 	@make re SANI=1 TEST_UNIT=1
