@@ -158,7 +158,7 @@ int	init_map(t_parser *data)
  */
 int	store_map(t_parser *data)
 {
-	if (set_map_size(data) || init_map(data))
+	if (set_map_size(data) || init_map(data) || check_map(data))
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
