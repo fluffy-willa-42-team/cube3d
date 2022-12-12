@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
+/*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:33:07 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/29 16:48:10 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/12/12 16:54:00 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@
 # include <stddef.h>
 # include "vector_lib.h"
 
-# include "MLX42.h"
-
+# include "mlx.h"
 # include "cube_types.h"
 
 # ifndef DEBUG_PARSE
@@ -54,6 +53,15 @@
 
 /* ************************************************************************** */
 
+typedef struct	s_image
+{
+	uint32_t	width;
+	uint32_t	height;
+	uint32_t	*buffer;
+}	t_image;
+
+/* ************************************************************************** */
+
 /**
  * @param UNDEFINED
  * @param VALID
@@ -86,7 +94,7 @@ typedef struct s_texture {
 	char					token;
 	char					sky_box_token;
 	char					*path;
-	mlx_texture_t			*image;
+	t_image					*image;
 	uint32_t				color;
 	struct s_texture		*skybox_tex;
 }	t_texture;
@@ -96,8 +104,9 @@ typedef struct s_texture {
 
 
 typedef struct s_param {
-	mlx_t		*mlx;
-	mlx_image_t	*img;
+	void		*mlx;
+	void		*win;
+	t_image		*img;
 	double		hob_mult;
 	uint32_t	minimap_size;
 	double		minimap_point_size;
@@ -108,7 +117,7 @@ typedef struct s_player {
 	t_coord_f64	pos;
 	double		alpha;
 	t_coord_f64	cosin;
-	bool		exist;
+	int			exist;
 }	t_player;
 
 /**

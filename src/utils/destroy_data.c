@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   destroy_data.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
+/*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 12:51:50 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/29 13:51:17 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/12/12 16:55:24 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	destroy_data(int ret, t_parser *data)
 	{
 		tmp = get_tex_ptr(&data->tex_list, i);
 		if (tmp && tmp->image)
-			mlx_delete_texture(tmp->image);
+			mlx_destroy_image(data->param.mlx, tmp->image);
 		i++;
 	}
 	if ((v_delete(&data->cub))

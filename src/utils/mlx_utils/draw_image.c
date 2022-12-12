@@ -6,13 +6,14 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 15:54:48 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/25 13:22:03 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/12 17:02:50 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 
 void	put_pixel(t_param *param, int32_t x, int32_t y, uint32_t color);
+uint32_t *get_pixel_from_image(t_image *texture, uint32_t x, uint32_t y);
 
 static int	get_rgba(int r, int g, int b, int a)
 {
@@ -33,10 +34,7 @@ uint32_t	get_pixel_image(
 	if ((uint32_t)(y * ratio.y) >= texture->image->height
 		|| (uint32_t)(x * ratio.x) >= texture->image->width)
 		return (0);
-	ptr = &texture->image->pixels[
-		(((int)(y * ratio.y)) * texture->image->width
-			+ ((int)(x * ratio.x))) * 4
-	];
+	ptr = (uint8_t *) get_pixel_from_image(texture->image, x * ratio.x, y * ratio.y);
 	return (get_rgba(*ptr, *(ptr + 1), *(ptr + 2), *(ptr + 3)));
 }
 

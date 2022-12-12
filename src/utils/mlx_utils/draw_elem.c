@@ -13,10 +13,12 @@
 #include "cube3d.h"
 #include "math.h"
 
+u_int32_t put_pixel_in_image(t_image *texture, uint32_t x, uint32_t y, uint32_t color);
+
 void	put_pixel(t_game *game, int32_t x, int32_t y, uint32_t color)
 {
 	if (color != 0)
-		mlx_put_pixel(game->param.img, x, y, color);
+		put_pixel_in_image(game->param.img, x, y, color);
 }
 
 void	draw_rectangle(
