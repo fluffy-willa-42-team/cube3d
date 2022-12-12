@@ -17,7 +17,7 @@
 # include <stddef.h>
 # include "vector_lib.h"
 
-# include "MLX42.h"
+# include "mlx.h"
 
 # include "cube_types.h"
 

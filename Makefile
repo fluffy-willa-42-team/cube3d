@@ -27,7 +27,7 @@ SRCS		= $(SRCS_FIND)
 SRC_DIR		= src
 INC_DIR		= include
 OBJ_DIR 	= $(NAME)_obj
-LIB_DIR		= lib
+LIB_DIR		= lib /usr/local/lib
 
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ CC			= gcc
 OBJ_EXT		= .o
 CODE_EXT	= .c
 HEAD_EXT	= .h
-INC			= -I include -I lib/MLX42/include/MLX42 -I lib/MLX42/ -Ilib/vector-lib/include -Ilib/libft/include
+INC			= -I include -I/usr/local/include -Ilib/vector-lib/include -Ilib/libft/include
 FLAGS		= -Wall -Wextra -Werror
 FLAGS_COMP	= 
 
@@ -120,11 +120,7 @@ $(DIR):
 
 # Compiles every lib in the lib repository
 lib_comp:
-	@for path in $(ALL_LIB); do \
-		if [ -f $$path/Makefile ]; then \
-			make -sC $$path $(MAKE_FLAG) all;\
-		fi; \
-	done
+	git submodule foreach make $(MAKE_FLAG) all
 
 # Takes any C/CPP files and transforms into an object into the OBJ_DIR
 $(OBJ_DIR)/%$(OBJ_EXT): %$(CODE_EXT) $(HEADER)
@@ -151,11 +147,7 @@ print:
 
 clean:
 	@rm -rf $(OBJ)
-	@for path in $(ALL_LIB); do \
-	if [ -f $$path/Makefile ]; then \
-		make -sC $$path clean;\
-	fi; \
-done
+	git submodule foreach make clean
 
 c:
 	@rm -rf $(OBJ)
@@ -164,11 +156,7 @@ c:
 
 fclean:
 	@rm -rf $(OBJ) $(INC_DIR)* $(NAME)
-	@for path in $(ALL_LIB); do \
-	if [ -f $$path/Makefile ]; then \
-		make -sC $$path fclean;\
-	fi; \
-done
+	git submodule foreach make fclean
 
 fc:
 	@rm -rf $(OBJ) $(INC_DIR)* $(NAME)
