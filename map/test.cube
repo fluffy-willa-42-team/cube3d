@@ -1,8 +1,8 @@
 * vx. 1,222,33,44
-0 vx* ./texture/cool.xpm42
-1 xv* ./texture/cool.xpm42
-2 xv* ./texture/cool.xpm42
-3 xv* ./texture/cool.xpm42
+0 vx* ../texture/cool.xpm42
+1 xv* ../texture/cool.xpm42
+2 xv* ../texture/cool.xpm42
+3 xv* ../texture/cool.xpm42
 4 xx* 220,100,0,255
 5 xv* 225,30,0,255
 ~~~

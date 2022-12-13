@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   store_entity.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
+/*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 16:54:58 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/29 16:55:29 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/12/12 16:48:56 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,13 @@ static int	set_player(t_parser *data, t_chunk *chunk, t_chunk_token *t)
 {
 	t_direction	dir;
 
-	if (data->player.exist == true)
+	if (data->player.exist == 1)
 		return (ret_print(EXIT_FAILURE, ERR_P_DUP));
 	dir = check_player_opt(t->opt);
 	if (dir == BAD_DIRECTION)
 		return (EXIT_FAILURE);
 	data->player = init_player(dir, set_i32(chunk->coord.x, chunk->coord.y));
-	data->player.exist = true;
+	data->player.exist = 1;
 	return (EXIT_SUCCESS);
 }
 
