@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 12:51:50 by mahadad           #+#    #+#             */
-/*   Updated: 2022/12/13 11:57:57 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/13 12:03:38 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ int	destroy_data(int ret, t_parser *data)
 	i = '!';
 	while (i < 125)
 	{
-		printf("[%c]\n", i);
 		tmp = get_tex_ptr(&data->tex_list, i);
 		if (tmp && tmp->token && tmp->image)
 			destroy_image(data->param.mlx, tmp->image);

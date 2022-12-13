@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:56:12 by mahadad           #+#    #+#             */
-/*   Updated: 2022/12/13 11:55:38 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/13 12:09:25 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,25 +37,13 @@ int	init_game(t_param *param)
 	*param = init_params();
 	param->mlx = mlx_init();
 	if (!param->mlx)
-	{
-		printf("error: mlx failure\n");
 		return (EXIT_FAILURE);//TODO use ret_print
-	}
 	param->win = mlx_new_window(param->mlx, WIN_WIDTH, WIN_HEIGHT, "cube3d");
 	if (!param->win)
-	{
-		printf("error: win failure\n");
-		free(param->mlx);
 		return (EXIT_FAILURE);
-	}
 	param->img = mlx_new_image(param->mlx, WIN_WIDTH, WIN_HEIGHT);
 	if (!param->img)
-	{
-		printf("error: img failure\n");
-		mlx_destroy_window(param->mlx, param->win);
-		free(param->mlx);
 		return (EXIT_FAILURE);//TODO use ret_print
-	}
 	return (EXIT_SUCCESS);
 }
 
