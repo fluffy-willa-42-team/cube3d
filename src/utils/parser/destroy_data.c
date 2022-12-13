@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 12:51:50 by mahadad           #+#    #+#             */
-/*   Updated: 2022/12/13 10:57:54 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/13 11:04:55 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ int	destroy_data(int ret, t_parser *data)
 	while (i < 125)
 	{
 		tmp = get_tex_ptr(&data->tex_list, i);
-		printf("%p\n", tmp);
 		if (tmp && tmp->image)
 			destroy_image(data->param.mlx, tmp->image);
 		i++;
@@ -48,7 +47,13 @@ int	destroy_data(int ret, t_parser *data)
 			|| v_delete(&data->cube)
 			|| v_delete(&data->map)
 			|| v_delete(&data->tex_list))
-		ret_print(EXIT_FAILURE, ERR_FREE_MEME);
+			ret_print(EXIT_FAILURE, ERR_FREE_MEME);
+		if (data->param.mlx && data->param.img)
+			destroy_image(data->param.mlx, data->param.img);
+		if (data->param.mlx && data->param.win)
+			mlx_destroy_window(data->param.mlx, data->param.win);
+		if (data->param.mlx)
+			free(data->param.mlx);
 	}
 	return (ret);
 }

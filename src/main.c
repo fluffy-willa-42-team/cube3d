@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:56:12 by mahadad           #+#    #+#             */
-/*   Updated: 2022/12/13 10:51:30 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/13 11:06:39 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,21 @@ int	init_game(t_param *param)
 	*param = init_params();
 	param->mlx = mlx_init();
 	if (!param->mlx)
+	{
+		printf("error: mlx failure\n");
 		return (EXIT_FAILURE);//TODO use ret_print
+	}
 	param->win = mlx_new_window(param->mlx, WIN_WIDTH, WIN_HEIGHT, "cube3d");
 	if (!param->win)
+	{
+		printf("error: win failure\n");
 		free(param->mlx);
 		return (EXIT_FAILURE);
+	}
 	param->img = mlx_new_image(param->mlx, WIN_WIDTH, WIN_HEIGHT);
 	if (!param->img)
 	{
+		printf("error: img failure\n");
 		mlx_destroy_window(param->mlx, param->win);
 		free(param->mlx);
 		return (EXIT_FAILURE);//TODO use ret_print
@@ -69,9 +76,6 @@ int	run_game(t_parser *data)
 	ray_caster(&game);
 	draw_minimap(&game);
 	mlx_loop(game.param.mlx);
-	destroy_image(game.param.mlx, game.param.img);
-	mlx_destroy_window(game.param.mlx, game.param.win);
-	free(game.param.mlx);
 	return (EXIT_SUCCESS);
 }
 
@@ -80,12 +84,15 @@ int	run(char *file)
 	t_parser	data;
 
 	struct_set(&data, sizeof(t_parser));
+	printf("Start engine...\n");
 	if (init_game(&data.param))
 		return (destroy_data(EXIT_FAILURE, &data));
+	printf("Parser...\n");
 	if (parser(file, &data))
 		return (destroy_data(EXIT_FAILURE, &data));
 	if (CUBE3D_UNITEST_PARSER)
 		return (destroy_data(EXIT_SUCCESS, &data));
+	printf("Starting game...\n");
 	if (run_game(&data))
 		return (destroy_data(EXIT_FAILURE, &data));
 	return (destroy_data(EXIT_SUCCESS, &data));
