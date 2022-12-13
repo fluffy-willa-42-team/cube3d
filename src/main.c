@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:56:12 by mahadad           #+#    #+#             */
-/*   Updated: 2022/12/13 14:19:44 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/13 14:33:45 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,10 @@ int	run_game(t_parser *data)
 	game.player = data->player;
 	game.param = data->param;
 	game.parser_data = data;
-	draw_rectangle(&game, set_f64(0, 0), set_i32(WIN_WIDTH, WIN_HEIGHT), 0x000000ff);
-	ray_caster(&game);
-	draw_minimap(&game);
+	
 	// mlx_hook(game.param.win, 17, 1L << 17, NULL, &game);
 	mlx_hook(game.param.win, 2, 1L << 0, do_key, &game);
-	mlx_put_image_to_window(game.param.mlx, game.param.win, game.param.img, 0, 0);
+	
 	mlx_loop(game.param.mlx);
 	return (EXIT_SUCCESS);
 }
