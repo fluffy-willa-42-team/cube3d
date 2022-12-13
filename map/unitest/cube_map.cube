@@ -1,7 +1,7 @@
-0 ./path_to_the_north_texture
-1 ./path_to_the_south_texture
-2 ./path_to_the_west_texture
-3 ./path_to_the_east_texture
+0 ../path_to_the_north_texture
+1 ../path_to_the_south_texture
+2 ../path_to_the_west_texture
+3 ../path_to_the_east_texture
 4 220,100,0
 5 225,30,0
 ~~~
