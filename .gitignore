@@ -60,3 +60,4 @@ include/
 tester/tester
 *.err
 map.cub
+/lib/minilibx_opengl_20191021/._font.xcf
