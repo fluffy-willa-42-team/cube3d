@@ -19,6 +19,13 @@
 
 /* ************************************************************************** */
 
+# define COLOR_RAY			0x00fcba03
+# define COLOR_SIDE			0x0021634c
+# define COLOR_BACKGROUND	0x00222222
+# define COLOR_PLAYER		0x00FF00FF
+
+/* ************************************************************************** */
+
 void			draw_minimap(t_game *game);
 void			ray_caster(t_game *game);
 

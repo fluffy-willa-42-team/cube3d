@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 13:00:39 by awillems          #+#    #+#             */
-/*   Updated: 2022/12/13 14:34:01 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/13 15:22:22 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,14 @@ void	map_hook(t_game *game, int32_t incrementation);
 void	map_point_hook(t_game *game, double incrementation);
 
 void	exit_cube3d(t_game *game, int ret);
+
+void	update_win(t_game *game)
+{
+	// draw_rectangle(game, set_f64(0, 0), set_i32(WIN_WIDTH, WIN_HEIGHT), 0x00FFFFFF);
+	ray_caster(game);
+	draw_minimap(game);
+	mlx_put_image_to_window(game->param.mlx, game->param.win, game->param.img, 0, 0);
+}
 
 int	do_key(int keycode, t_game *game)
 {
@@ -56,9 +64,6 @@ int	do_key(int keycode, t_game *game)
 	else if (keycode == KEY_NUM_3)		angle_hook(game, 0.01);
 	if (move_vec.x != 0 || move_vec.y != 0)
 		move_player(game, game->player.pos, move_vec);
-	draw_rectangle(game, set_f64(0, 0), set_i32(WIN_WIDTH, WIN_HEIGHT), 0xFF000000);
-	ray_caster(game);
-	draw_minimap(game);
-	mlx_put_image_to_window(game->param.mlx, game->param.win, game->param.img, 0, 0);
+	update_win(game);
 	return (0);
 }

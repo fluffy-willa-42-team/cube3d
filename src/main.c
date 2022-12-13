@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:56:12 by mahadad           #+#    #+#             */
-/*   Updated: 2022/12/13 14:33:45 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/13 15:13:37 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 
 // void	hook_loop(void *param);
 int		do_key(int keycode, t_game *game);
+void	update_win(t_game *game);
 
 int	init_game(t_param *param)
 {
@@ -59,8 +60,8 @@ int	run_game(t_parser *data)
 	game.parser_data = data;
 	
 	// mlx_hook(game.param.win, 17, 1L << 17, NULL, &game);
+	update_win(&game);
 	mlx_hook(game.param.win, 2, 1L << 0, do_key, &game);
-	
 	mlx_loop(game.param.mlx);
 	return (EXIT_SUCCESS);
 }
