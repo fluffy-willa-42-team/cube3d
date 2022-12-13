@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:54:56 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/29 16:45:51 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/12/12 16:05:32 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int	ret_print(int ret, const char *msg);
 # define ERR_BAD_CHUNK_FLOOR  "Error\nBad chunk floor !\n"
 # define ERR_BAD_CHUNK_TYPE  "Error\nBad chunk type !\n"
 # define ERR_BAD_P_OPT   "Error\nBad player direction !\n"
+# define ERR_BAD_P_NO    "Error\nNo player set !\n"
 # define ERR_BAD_XPM     "Error\nXPM file is invalid or corrupted !\n"
 # define ERR_NULL_TEX    "Error\nt_texture *NULL !\n"
 # define ERR_COLOR_R     "Error\n Bad color channel R\n"

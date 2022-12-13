@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:56:12 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/29 16:28:12 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/12/06 14:29:30 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ int	run(char *file)
 {
 	t_parser	data;
 
+	struct_set(&data, sizeof(t_parser));
 	if (parser(file, &data))
 		return (destroy_data(EXIT_FAILURE, &data));
 	if (CUBE3D_UNITEST_PARSER)
