@@ -69,6 +69,7 @@ int	set_chunk(t_parser *data, t_chunk *chunk)
 	get_chunk_pars_token(data, &tokens);
 	if (check_chunk_type(&tokens) == BAD_CHUNK)
 		return (ret_print(EXIT_FAILURE, ERR_BAD_CHUNK_TYPE));
+	chunk->type = tokens.type;
 	chunk->ceiling = get_tex_ptr(&data->tex_list, tokens.ceiling);
 	chunk->north = get_tex_ptr(&data->tex_list, tokens.north);
 	chunk->west = get_tex_ptr(&data->tex_list, tokens.west);
