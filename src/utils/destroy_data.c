@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 12:51:50 by mahadad           #+#    #+#             */
-/*   Updated: 2022/12/12 16:55:24 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/13 10:53:55 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include <stdlib.h>
 
 #include "cube3d_debug.h"
+#include "mlx_utils.h"
 
 /**
  * @author @Matthew-Dreemurr
@@ -36,14 +37,19 @@ int	destroy_data(int ret, t_parser *data)
 	while (i < 125)
 	{
 		tmp = get_tex_ptr(&data->tex_list, i);
+		printf("%p\n", tmp);
 		if (tmp && tmp->image)
-			mlx_destroy_image(data->param.mlx, tmp->image);
+			destroy_image(data->param.mlx, tmp->image);
+			// mlx_destroy_image(data->param.mlx, tmp->image);
 		i++;
 	}
-	if ((v_delete(&data->cub))
-		|| v_delete(&data->cube)
-		|| v_delete(&data->map)
-		|| v_delete(&data->tex_list))
-	ret_print(EXIT_FAILURE, ERR_FREE_MEME);
+	if (data)
+	{
+		if ((v_delete(&data->cub))
+			|| v_delete(&data->cube)
+			|| v_delete(&data->map)
+			|| v_delete(&data->tex_list))
+		ret_print(EXIT_FAILURE, ERR_FREE_MEME);
+	}
 	return (ret);
 }

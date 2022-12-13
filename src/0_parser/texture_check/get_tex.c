@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_tex.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
+/*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 17:12:59 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/29 10:01:27 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/12/13 10:56:10 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,5 @@ t_texture	*get_tex_ptr(t_vec *tex, char token)
 		return (NULL);
 	if (get_tex_index(token) == -1)
 		return (NULL);
-	return (&((t_texture *)tex->buffer)[get_tex_index(token)]);
+	return (v_getr(tex->buffer, get_tex_index(token)));
 }

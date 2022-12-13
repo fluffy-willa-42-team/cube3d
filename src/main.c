@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:56:12 by mahadad           #+#    #+#             */
-/*   Updated: 2022/12/12 16:52:05 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/13 10:51:30 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,8 @@ int	init_game(t_param *param)
 		return (EXIT_FAILURE);//TODO use ret_print
 	param->win = mlx_new_window(param->mlx, WIN_WIDTH, WIN_HEIGHT, "cube3d");
 	if (!param->win)
-	{
 		free(param->mlx);
 		return (EXIT_FAILURE);
-	}
 	param->img = mlx_new_image(param->mlx, WIN_WIDTH, WIN_HEIGHT);
 	if (!param->img)
 	{
@@ -71,7 +69,7 @@ int	run_game(t_parser *data)
 	ray_caster(&game);
 	draw_minimap(&game);
 	mlx_loop(game.param.mlx);
-	mlx_destroy_image(game.param.mlx, game.param.img);
+	destroy_image(game.param.mlx, game.param.img);
 	mlx_destroy_window(game.param.mlx, game.param.win);
 	free(game.param.mlx);
 	return (EXIT_SUCCESS);
@@ -81,7 +79,8 @@ int	run(char *file)
 {
 	t_parser	data;
 
-	if (!init_game(&data.param))
+	struct_set(&data, sizeof(t_parser));
+	if (init_game(&data.param))
 		return (destroy_data(EXIT_FAILURE, &data));
 	if (parser(file, &data))
 		return (destroy_data(EXIT_FAILURE, &data));

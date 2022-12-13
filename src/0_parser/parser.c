@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:53:32 by mahadad           #+#    #+#             */
-/*   Updated: 2022/12/12 16:49:23 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/13 10:44:31 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,6 @@ int	tex_debug(t_parser *data)
  */
 int	parser(char *av, t_parser *data)
 {
-	struct_set(data, sizeof(t_parser));
 	data->path = av;
 	if (open_file(data)
 		|| file_sani(data)

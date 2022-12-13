@@ -6,7 +6,7 @@
 #    By: awillems <awillems@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/05 10:47:56 by awillems          #+#    #+#              #
-#    Updated: 2022/12/12 17:06:38 by awillems         ###   ########.fr        #
+#    Updated: 2022/12/13 10:52:48 by awillems         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -189,15 +189,15 @@ r:  fc all
 # **************************************************************************** #
 
 exe: all
-	@bash -c "./$(NAME) ./test.cube"
+	@bash -c "./$(NAME) ./map/test.cube"
 
 test: clear_test
 	@make re SANI=1 TEST_UNIT=1
-	@gcc -Wall -Wextra -Werror tester/tester.c -o tester/tester
+	@gcc -Wall -Wextra -Werror tester.c -o tester
 
 run_test:
-	@gcc -Wall -Wextra -Werror tester/tester.c -o tester/tester
-	@./tester/tester
+	@gcc -Wall -Wextra -Werror tester.c -o tester
+	@./tester
 
 clear_test:
 	@find . -type f -name "*.err" -prune -exec rm -rf {} \;
