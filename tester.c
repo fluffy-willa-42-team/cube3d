@@ -82,7 +82,7 @@ char	*ft_itoa(int n)
 
 int	create_file(const char *ext)
 {
-	char	file[1000] = "./tester/";
+	char	file[1000] = "./map/unitest/";
 	int		fd;
 	char	*file_name = ft_itoa(test_no);
 
@@ -181,7 +181,7 @@ void	test(const char *file, int ret, const char *comm)
 	else
 	{
 		printf(RED"    K0! ([%d] vs %d)"RES" [%s]\n", run_ret, ret, file);
-		printf(BLK"        ./cube3d tester/map/%s\n"RES, file);
+		printf(BLK"        ./cube3d map/unitest/%s\n"RES, file);
 	}
 	printf("        ["BYEL"./tester/%d.out"RES"] ["YEL"./tester/%d.err"RES"]\n\n", test_no, test_no);
 }
