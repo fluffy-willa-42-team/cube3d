@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:56:12 by mahadad           #+#    #+#             */
-/*   Updated: 2022/12/13 12:09:25 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/13 13:36:14 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	run_game(t_parser *data)
 	mlx_put_image_to_window(game.param.mlx, game.param.win, game.param.img, 0, 0);
 	// mlx_loop_hook(game.param.mlx, &hook_loop, &game);
 	// mlx_hook(game->param.win, 17, 1L << 17, NULL, &data);
-	mlx_hook(&game.param.win, 2, 1L << 0, do_key, &data);
+	mlx_hook(game.param.win, 2, 1L << 0, do_key, data);
 	draw_rectangle(&game, set_f64(0, 0), set_i32(WIN_WIDTH, WIN_HEIGHT), 0x000000ff);
 	ray_caster(&game);
 	draw_minimap(&game);

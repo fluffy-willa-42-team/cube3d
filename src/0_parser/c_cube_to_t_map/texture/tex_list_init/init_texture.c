@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_texture.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 14:27:58 by mahadad           #+#    #+#             */
-/*   Updated: 2022/12/12 16:30:20 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/13 13:21:05 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static int	open_file_texture(t_param *param, t_texture *tex)
 	null_terminate_line(path);
 	tex->image = mlx_xpm_file_to_image(param->mlx, path, &useless1, &useless2);
 	if (!tex->image)
-		return (ret_print(EXIT_FAILURE, ERR_EMPTY_FILE));
+		return (ret_print(EXIT_FAILURE, ERR_TEX_FILE));
 	return (EXIT_SUCCESS);
 }
 

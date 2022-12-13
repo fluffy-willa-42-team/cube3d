@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:54:56 by mahadad           #+#    #+#             */
-/*   Updated: 2022/12/12 16:05:32 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/12/13 13:22:07 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int	ret_print(int ret, const char *msg);
 # define ERR_FREE_MEME   "Error\nFree all alloc fail !\n"
 # define ERR_SANI_FILE   "Error\nUnauthorized withe space, only ' ' and '\\n'!\n"
 # define ERR_EMPTY_FILE  "Error\nEmpty map file !\n"
+# define ERR_TEX_FILE    "Error\nUnable to open xmp file !\n"
 # define ERR_TEX_PARAM   "Error\nBad texture param !\n"
 # define ERR_TEX_FORMAT  "Error\nBad texture format !\n"
 # define ERR_TEX_TYPE    "Error\nBad texture type !\n"
