@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 12:51:50 by mahadad           #+#    #+#             */
-/*   Updated: 2022/12/13 10:53:55 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/13 10:57:54 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ int	destroy_data(int ret, t_parser *data)
 		printf("%p\n", tmp);
 		if (tmp && tmp->image)
 			destroy_image(data->param.mlx, tmp->image);
-			// mlx_destroy_image(data->param.mlx, tmp->image);
 		i++;
 	}
 	if (data)
