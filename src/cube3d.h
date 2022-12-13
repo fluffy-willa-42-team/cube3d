@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:33:07 by awillems          #+#    #+#             */
-/*   Updated: 2022/12/12 16:54:00 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/13 14:17:06 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ typedef struct s_param {
 	uint32_t	minimap_size;
 	double		minimap_point_size;
 	double		speed;
+	int			has_ended;
 }	t_param;
 
 typedef struct s_player {
@@ -219,6 +220,7 @@ typedef struct s_game {
 	t_param			param;
 	t_player		player;
 	t_map			map;
+	void			*parser_data;
 }	t_game;
 
 /* ************************************************************************** */
