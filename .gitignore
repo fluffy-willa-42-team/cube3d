@@ -60,4 +60,3 @@ include/
 tester/tester
 *.err
 map.cub
-log

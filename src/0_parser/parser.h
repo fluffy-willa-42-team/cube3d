@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:53:43 by mahadad           #+#    #+#             */
-/*   Updated: 2022/12/12 16:26:35 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/13 11:56:33 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,6 +180,7 @@ int		set_current_tex_config(t_parser *data, char *tex);
 int		load_texture_config(t_parser *data, char *tex);
 int		init_texture(t_parser *data);
 
+int		check_map(t_parser *data);
 int		store_map(t_parser *data);
 
 int		check_chunk_type(t_chunk_token *tokens);

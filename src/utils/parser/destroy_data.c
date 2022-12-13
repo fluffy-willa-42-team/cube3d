@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 12:51:50 by mahadad           #+#    #+#             */
-/*   Updated: 2022/12/13 11:04:55 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/13 11:57:57 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 #include "cube3d_debug.h"
 #include "mlx_utils.h"
 
+#include <stdio.h>//TODO REMOVE
 /**
  * @author @Matthew-Dreemurr
  * 
@@ -32,12 +33,12 @@ int	destroy_data(int ret, t_parser *data)
 	int i;
 	t_texture *tmp;
 
-	tmp = 0;
 	i = '!';
 	while (i < 125)
 	{
+		printf("[%c]\n", i);
 		tmp = get_tex_ptr(&data->tex_list, i);
-		if (tmp && tmp->image)
+		if (tmp && tmp->token && tmp->image)
 			destroy_image(data->param.mlx, tmp->image);
 		i++;
 	}
