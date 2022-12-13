@@ -2,9 +2,5 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/lib/MLX42" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/lib/libft" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/lib/libft/lib/wraloc" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/lib/vector-lib" vcs="Git" />
   </component>
 </project>
