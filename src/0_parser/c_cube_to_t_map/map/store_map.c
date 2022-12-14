@@ -100,8 +100,8 @@
 
 int	init_map_while(t_parser *data)
 {
-	uint32_t	x;
-	uint32_t	y;
+	int32_t	x;
+	int32_t	y;
 	int			err;
 	t_chunk		*chunk;
 
