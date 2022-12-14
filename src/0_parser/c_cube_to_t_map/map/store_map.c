@@ -109,15 +109,17 @@ int	init_map_while(t_parser *data)
 	while (y < data->map_height)
 	{
 		x = 0;
+		err = 0;
 		while (x < data->map_width)
 		{
 			chunk = get_chunk_pars(data, set_i32(x, y));
 			chunk->coord = set_i32(x, y);
-			err = get_next_chunk(data, chunk);
+			if (err == END_OF_LINE || err == END_OF_MAP)
+				chunk->type = WHITE_SPACE_CHUNK;
+			else
+				err = get_next_chunk(data, chunk);
 			if (err == EXIT_FAILURE)
 				return (EXIT_FAILURE);
-			if (err == END_OF_LINE || err == END_OF_MAP)
-				break ;
 			x++;
 		}
 		y++;
