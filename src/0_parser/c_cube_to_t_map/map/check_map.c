@@ -49,9 +49,6 @@
 	return (tex->type & ALLOW_CLIP);
 }*/
 
-int		wip = 0;
-int		outside = 1;
-
 static t_chunk	*get(t_parser *data, t_coord_i32 pos)
 {
 	const int	index = (pos.y * data->map_width) + pos.x;
@@ -59,26 +56,51 @@ static t_chunk	*get(t_parser *data, t_coord_i32 pos)
 	return (v_get(&data->map, index));
 }
 
+
+static t_chunk *get_next(t_parser *data, int x, int line)
+{
+	if (x >= 0 && x > data->map_width)
+		return (NULL);
+	return (get(data, set_i32((x + 1), line)));
+}
+
+
+int		wip = 0;
+int		outside = 1;
 static int check_vertical_while(t_parser *data, int line)
 {
 	int x;
+	t_chunk current;
 
-	x = 0;
+	current = (t_chunk){ WHITE_SPACE_CHUNK,
+						 set_i32(-1, 0),
+						 NULL,
+						 NULL,
+						 NULL,
+						 NULL,
+						 NULL,
+						 NULL,
+	};
+	x = -1;
 	while (x < data->map_width)
 	{
-		if (get(data, set_i32(x, line))) print_debug(get(data, set_i32(x, line))); else printf("Nop\n");
+		print_debug(&current);
+//		if (get(data, set_i32(x, line))) print_debug(get(data, set_i32(x, line))); else printf("Nop\n");
+
+		if (get_next(data, x, line) && get_next(data, x, line)->type == WHITE_SPACE_CHUNK)
+		{
+
+		}
+
 		if (outside) {
 			printf("OUT\n");//TODO REMOVE
 		}
 		if (!outside) {
 			printf("IN\n");//TODO REMOVE
 		}
-		if ((x + 1) < data->map_width) {
-			if (get(data, set_i32((x + 1), line))->type == WHITE_SPACE_CHUNK)
-				outside = 1;
-			else
-				outside = 0;
-		}
+		if (get_next(data, x, line))
+		current = *get_next(data, x, line);
+		x++;
 	}
 	return (EXIT_SUCCESS);
 }
