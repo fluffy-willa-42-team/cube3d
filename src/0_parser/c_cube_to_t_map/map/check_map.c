@@ -43,27 +43,65 @@
 /* */ );
 /* */ }
 
+
+/*static int is_clip(t_texture *tex)
+{
+	return (tex->type & ALLOW_CLIP);
+}*/
+
+int		wip = 0;
+int		outside = 1;
+
+static t_chunk	*get(t_parser *data, t_coord_i32 pos)
+{
+	const int	index = (pos.y * data->map_width) + pos.x;
+
+	return (v_get(&data->map, index));
+}
+
+static int check_vertical_while(t_parser *data, int line)
+{
+	int x;
+
+	x = 0;
+	while (x < data->map_width)
+	{
+		if (get(data, set_i32(x, line))) print_debug(get(data, set_i32(x, line))); else printf("Nop\n");
+		if (outside) {
+			printf("OUT\n");//TODO REMOVE
+		}
+		if (!outside) {
+			printf("IN\n");//TODO REMOVE
+		}
+		if ((x + 1) < data->map_width) {
+			if (get(data, set_i32((x + 1), line))->type == WHITE_SPACE_CHUNK)
+				outside = 1;
+			else
+				outside = 0;
+		}
+	}
+	return (EXIT_SUCCESS);
+}
+
+static int	check_vertical(t_parser *data)
+{
+	int	y;
+
+	y = 0;
+	while (y < data->map_height)
+	{
+		if (check_vertical_while(data, y))
+			return (EXIT_FAILURE);
+		y++;
+	}
+	return (EXIT_SUCCESS);
+}
+
 int	check_map_border(t_parser *data)
 {
-	t_coord_i32	coord;
-	t_chunk		*tmp;
-
-	coord = (t_coord_i32){0, 0};
-	while ((uint32_t)coord.y < data->map_height)
-	{
-		coord.x = 0;
-		while ((uint32_t)coord.x < data->map_width)
-		{
-			tmp = get_chunk_pars(data, coord);
-			if (tmp)
-				print_debug(tmp);
-			else
-				printf("Nop\n");
-			coord.x++;
-		}
-		coord.y++;
-	}
-	return (EXIT_FAILURE);
+	if (check_vertical(data))
+		return (EXIT_FAILURE);
+	return (/*EXIT_SUCCESS*/ EXIT_FAILURE);//TODO return success
 }
 
 /**
@@ -78,8 +116,8 @@ static int	check_player(t_parser *data)
 int	check_map(t_parser *data)
 {
 	if (check_player(data))
-		return (ret_print(EXIT_FAILURE, ERR_BAD_CHUNK_FLOOR));
+		return (ret_print(EXIT_FAILURE, ERR_BAD_P_NO));
     if (check_map_border(data))
-          return (ret_print(EXIT_FAILURE, "//TODO ERRMSG"));
+          return (ret_print(EXIT_FAILURE, "//TODO BREAKPOINT TO REMOVE"));
 	return (EXIT_SUCCESS);
 }
