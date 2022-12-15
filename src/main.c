@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:56:12 by mahadad           #+#    #+#             */
-/*   Updated: 2022/12/15 11:40:17 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/15 11:56:01 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,7 @@
 
 #include <stdio.h>//TODO REMOVE
 
-#include "parser.h"
-
 #include "cube3d_utils.h"
-
-#include "init_data.h"
 
 int	init_game(t_param *param);
 int	run_game(t_parser *data);
