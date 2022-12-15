@@ -134,7 +134,7 @@ int	check_map_border(t_parser *data)
 {
 	if (check_vertical(data))
 		return (EXIT_FAILURE);
-	return (/*EXIT_SUCCESS*/ EXIT_FAILURE);//TODO return success
+	return (EXIT_SUCCESS /*EXIT_FAILURE*/);//TODO return success
 }
 
 /**
