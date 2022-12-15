@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   draw_skybox.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
+/*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 10:27:25 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/25 17:13:17 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/12/15 14:08:36 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ray_caster.h"
 #include "mlx_utils.h"
+
+#include <stdio.h>
 
 uint32_t	get_skybox_pixel(t_game *game, t_coord_i32 pixel_pos,
 				t_texture *texture)

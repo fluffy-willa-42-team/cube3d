@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:46:26 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/26 12:26:35 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/15 14:23:26 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ void	draw_wall_text(
 	t_coord_f64 inter,
 	t_texture *texture,
 	uint32_t x,
-	double height
+	double height,
+	int recursive
 )
 {
 	t_coord_f64			ratio;
@@ -68,6 +69,8 @@ void	draw_wall_text(
 
 	if (!texture || !(texture->type & VALID))
 		return ;
+	if (texture->skybox_tex && texture->type & TRANSPARENCY && recursive)
+		draw_wall_text(game, inter, texture->skybox_tex, x, height, 0);
 	if (texture->type & IMAGE)
 	{
 		ratio = set_f64(1, (double) texture->image->height / (height * 2));
@@ -99,11 +102,11 @@ void	draw_wall(t_game *game, uint32_t x, t_coord_f64 inter, double height)
 		&& inter.x > game->player.pos.x))
 		exchange_textures(&wall);
 	if (!is_transparent(wall.text1))
-		draw_wall_text(game, inter, wall.text1, x, height);
+		draw_wall_text(game, inter, wall.text1, x, height, 1);
 	else if (is_transparent(wall.text1) && !is_transparent(wall.text2))
 	{
-		draw_wall_text(game, inter, wall.text2, x, height);
-		draw_wall_text(game, inter, wall.text1, x, height);
+		draw_wall_text(game, inter, wall.text2, x, height, 1);
+		draw_wall_text(game, inter, wall.text1, x, height, 1);
 	}
 }
 
@@ -125,7 +128,7 @@ void	draw_wall_trans(
 	if (wall.text1 || wall.text2)
 	{
 		height = HEIGHT_OF_BLOCK * game->param.hob_mult / height;
-		draw_wall_text(game, inter, wall.text2, x, height);
-		draw_wall_text(game, inter, wall.text1, x, height);
+		draw_wall_text(game, inter, wall.text2, x, height, 1);
+		draw_wall_text(game, inter, wall.text1, x, height, 1);
 	}
 }
