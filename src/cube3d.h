@@ -87,7 +87,7 @@ typedef enum e_texture_type {
 /**
  * @param type           (t_texture_type)
  * @param token          (char)
- * @param sky_box_token  (char)
+ * @param token_ptr  (char)
  * @param path           (char*)
  * @param image          (mlx_tex*)
  * @param color          (unit32_t)
@@ -95,7 +95,7 @@ typedef enum e_texture_type {
 typedef struct s_texture {
 	t_texture_type			type;
 	char					token;
-	char					sky_box_token;
+	char					token_ptr;
 	char					*path;
 	t_image					*image;
 	uint32_t				color;

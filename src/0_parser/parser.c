@@ -68,7 +68,7 @@
 /* */ 	"       token         :  \'%c\',\n"
 /* */ 	"       *path         :  \"%.15s\",\n"
 /* */ 	"       *image        :  [%p],\n"
-/* */ 	"       sky_box_token :  \'%c\',\n"
+/* */ 	"       token_ptr :  \'%c\',\n"
 /* */ 	"       *skybox_tex   :  [%p],\n"
 /* */ 	"       color         :  [%d, %d, %d, %d]\n"
 /* */ 	"     }\n",
@@ -88,7 +88,7 @@
 /* */ 	get_tex_ptr(&data->tex_list, i)->image,
 /* */ 
 /* */ 	
-/* */ 	get_tex_ptr(&data->tex_list, i)->sky_box_token,
+/* */ 	get_tex_ptr(&data->tex_list, i)->token_ptr,
 /* */ 	get_tex_ptr(&data->tex_list, i)->skybox_tex,
 /* */ 
 /* */ 	get_r(get_tex_ptr(&data->tex_list, i)->color),

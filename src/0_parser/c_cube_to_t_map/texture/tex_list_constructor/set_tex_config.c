@@ -21,7 +21,7 @@
  * 
  * @brief Check the texture argument of the allow clip.
  * 
- * @note [token] [allow_clip][transparency][skybox] [texutre path/color]
+ * @note [token] [allow_clip][transparency][skybox] [tex path/color]
  *
  *
  */
@@ -30,23 +30,23 @@ static int	set_texture_allow_clip(char param, t_texture *tmp)
 	if (param == 'v')
 		tmp->type |= ALLOW_CLIP;
 	else if (param != 'x')
-		return (EXIT_FAILURE);
+		return (ret_print(EXIT_FAILURE, NULL));
 	return (EXIT_SUCCESS);
 }
 
 /**
  * @author @Matthew-Dreemurr
  * 
- * @brief Check the texture argument of the texutre transparency.
+ * @brief Check the texture argument of the texture transparency.
  * 
- * @note [token] [allow_clip][transparency][skybox] [texutre path/color]
+ * @note [token] [allow_clip][transparency][skybox] [tex path/color]
  */
 static int	set_texture_transparency(char param, t_texture *tmp)
 {
 	if (param == 'v')
 		tmp->type |= TRANSPARENCY;
 	else if (param != 'x')
-		return (EXIT_FAILURE);
+		return (ret_print(EXIT_FAILURE, NULL));
 	return (EXIT_SUCCESS);
 }
 
@@ -55,15 +55,30 @@ static int	set_texture_transparency(char param, t_texture *tmp)
  * 
  * @brief Check the texture argument of the texture skybox.
  * 
- * @note [token] [allow_clip][transparency][skybox] [texutre path/color]
+ * @note [token] [allow_clip][transparency][skybox] [tex path/color]
  */
 static int	set_texture_skybox(char param, t_texture *tmp)
 {
-	if (authzed_cube_tex(param))
+	if (param == 'v')
 		tmp->type |= SKYBOX;
+	else if (param != 'x')
+		return (ret_print(EXIT_FAILURE, NULL));
+	return (EXIT_SUCCESS);
+}
+
+/**
+ * @author @Matthew-Dreemurr
+ *
+ * @brief Check the texture argument of the texture skybox.
+ *
+ * @note [token] [allow_clip][transparency][skybox] [tex path/color]
+ */
+static int	set_texture_pointer(char param, t_texture *tmp)
+{
+	if (authzed_cube_tex(param))
+		tmp->token_ptr = param;
 	else if (param != '.')
-		return (EXIT_FAILURE);
-	tmp->sky_box_token = param;
+		return (ret_print(EXIT_FAILURE, NULL));
 	return (EXIT_SUCCESS);
 }
 
@@ -73,7 +88,7 @@ static int	set_texture_skybox(char param, t_texture *tmp)
  * @brief Set the texture param and path/color.
  * 
  * @note
- * [[allow_clip] [transparency],     [token_tex_skybox]] 
+ * [[allow_clip] [transparency],     [token_tex_skybox]]
  * [x,v]         [x,v]               [autohirize_token, `'.'`]
  *
  * @return int 
@@ -84,7 +99,8 @@ int	set_texture_param(t_parser *data, char *tex, t_texture *tmp)
 
 	if (set_texture_allow_clip(param[0], tmp)
 		|| set_texture_transparency(param[1], tmp)
-		|| set_texture_skybox(param[2], tmp))
+		|| set_texture_skybox(param[2], tmp)
+		|| set_texture_pointer(param[3], tmp))
 		return (ret_print(EXIT_FAILURE, ERR_TEX_PARAM));
 	while (tex[data->index] && tex[data->index] != ' ')
 		data->index++;

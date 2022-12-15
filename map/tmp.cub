@@ -1,9 +1,9 @@
-NO ./texture/mc/grass_side.xpm42
-SO ./texture/mc/grass_side.xpm42
-WE ./texture/mc/grass_side.xpm42
-EA ./texture/mc/grass_side.xpm42
-F ./texture/mc/grass_top.xpm42
-C ./texture/mc/stone.xpm42
+NO ./texture/mc/grass_side.xpm
+SO ./texture/mc/grass_side.xpm
+WE ./texture/mc/grass_side.xpm
+EA ./texture/mc/grass_side.xpm
+F ./texture/mc/grass_top.xpm
+C ./texture/mc/stone.xpm
 111111111111111111111
 100000000000000000001
 101110111010111011101
