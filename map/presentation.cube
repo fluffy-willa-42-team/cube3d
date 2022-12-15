@@ -1,12 +1,12 @@
 ~ TPS* ptr
-g xx. ./texture/mc/grass_side.xpm
-t xx. ./texture/mc/grass_top.xpm
-s xx. ./texture/mc/stone.xpm
-b vv. ./texture/bars.xpm
-x xxS ./texture/bars.xpm
+g xxx. ./texture/mc/grass_side.xpm
+t xxx. ./texture/mc/grass_top.xpm
+s xxx. ./texture/mc/stone.xpm
+b vvx. ./texture/bars.xpm
+x xxxS ./texture/bars.xpm
 
 ~ SKYBOX
-S xx. ./texture/sky/skybox1.xpm
+S xxv. ./texture/sky/skybox1.xpm
 
 ~~~
    sx.
