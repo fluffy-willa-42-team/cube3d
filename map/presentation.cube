@@ -1,9 +1,9 @@
-~ TPS* ptr
+~ PTS* ptr
 g xxx. ./texture/mc/grass_side.xpm
 t xxx. ./texture/mc/grass_top.xpm
 s xxx. ./texture/mc/stone.xpm
 b vvx. ./texture/bars.xpm
-x xxxS ./texture/bars.xpm
+x xvxS ./texture/bars.xpm
 
 ~ SKYBOX
 S xxv. ./texture/sky/skybox1.xpm
@@ -20,4 +20,4 @@ gb..g.
 tg.t.W
    S..
    SS.
-   SS.
+   xS.
