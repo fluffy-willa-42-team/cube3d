@@ -53,20 +53,21 @@ static t_chunk	*get(t_parser *data, t_coord_i32 pos)
 {
 	const int	index = (pos.y * data->map_width) + pos.x;
 
-	return (v_get(&data->map, index));
+	return (v_getr(&data->map, index));
 }
 
 
 static t_chunk *get_next(t_parser *data, int x, int line)
 {
-	if (x >= 0 && x > data->map_width)
+	x++;
+	if (x > data->map_width)
 		return (NULL);
-	return (get(data, set_i32((x + 1), line)));
+	return (get(data, set_i32(x, line)));
 }
 
 
 int		wip = 0;
-int		outside = 1;
+int		inside = 0;
 static int check_vertical_while(t_parser *data, int line)
 {
 	int x;
@@ -87,25 +88,29 @@ static int check_vertical_while(t_parser *data, int line)
 		print_debug(&current);
 
 			// Check if the current is a good chunk
-		if (current.type == GOOD_CHUNK &&
+		if ((current.type == GOOD_CHUNK
 				// check if the next is not null, if is the case that mean we
-				// are at the end of the line. So we will be outside.
-				!get_next(data, x, line)
+				// are at the end of the line. So we will be inside.
+				&& !get_next(data, x, line))
+
 				// if there is a next chunk check if is a white space.
-				// if is the case we will go outside.
+				// if is the case we will go inside.
+				|| !get_next(data, x, line)
 				|| get_next(data, x, line)->type == WHITE_SPACE_CHUNK)
 		{
-
+			inside = 0;
 		}
-
-		if (outside) {
+		else
+			inside = 1;
+		if (!inside) {
 			printf("OUT\n");//TODO REMOVE
 		}
-		if (!outside) {
+		if (inside) {
 			printf("IN\n");//TODO REMOVE
 		}
+//		current = *get(data, set_i32(x, line));
 		if (get_next(data, x, line))
-		current = *get_next(data, x, line);
+			current = *get_next(data, x, line);
 		x++;
 	}
 	return (EXIT_SUCCESS);

@@ -31,7 +31,7 @@
  */
 int	get_tex_index(char token)
 {
-	if (!authzed_chunk_char(token))
+	if (!authzed_cube_tex(token))
 		return (-1);
 	return (token - '!');
 }
