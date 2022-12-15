@@ -2,7 +2,7 @@ g xx. ./texture/mc/grass_side.xpm
 t xx. ./texture/mc/grass_top.xpm
 s xx. ./texture/mc/stone.xpm
 b vv. ./texture/bars.xpm
-x xvS ./texture/bars.xpm
+x xxS ./texture/bars.xpm
 
 ~ SKYBOX
 S xx. ./texture/sky/skybox1.xpm
@@ -16,4 +16,4 @@ S xx. ./texture/sky/skybox1.xpm
    t..
 sg.s.P
 gb..g.
-tg.tgW
+tg.tSW
