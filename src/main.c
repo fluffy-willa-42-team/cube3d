@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:56:12 by mahadad           #+#    #+#             */
-/*   Updated: 2022/12/15 11:34:46 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/15 11:40:17 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,25 +23,10 @@
 
 #include "cube3d_utils.h"
 
-
 #include "init_data.h"
 
+int	init_game(t_param *param);
 int	run_game(t_parser *data);
-
-int	init_game(t_param *param)
-{
-	*param = init_params();
-	param->mlx = mlx_init();
-	if (!param->mlx)
-		return (EXIT_FAILURE);//TODO use ret_print
-	param->win = mlx_new_window(param->mlx, WIN_WIDTH, WIN_HEIGHT, "cube3d");
-	if (!param->win)
-		return (EXIT_FAILURE);
-	param->img = mlx_new_image(param->mlx, WIN_WIDTH, WIN_HEIGHT);
-	if (!param->img)
-		return (EXIT_FAILURE);//TODO use ret_print
-	return (EXIT_SUCCESS);
-}
 
 int	run(char *file)
 {
