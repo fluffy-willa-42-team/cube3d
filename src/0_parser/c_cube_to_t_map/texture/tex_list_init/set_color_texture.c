@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_color_texture.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
+/*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 14:20:21 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/29 09:56:01 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/12/15 11:36:37 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,6 @@
 
 /* ft_isdigit */
 #include "lib_is_check.h"
-
-/* EXIT_SUCCESS, EXIT_FAILURE*/
-#include <stdlib.h>
 
 /**
  * @author @Matthew-Dreemurr

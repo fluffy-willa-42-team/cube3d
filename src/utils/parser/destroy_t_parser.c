@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   destroy_t_parser.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
+/*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 15:47:45 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/29 13:50:52 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/12/15 11:36:44 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,6 @@
 #include "cube3d_utils.h"
 /* close() */
 #include <unistd.h>
-
-/* free() */
-#include <stdlib.h>
 
 /* strerror() */
 #include <string.h>

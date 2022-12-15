@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_conv.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
+/*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 15:04:49 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/29 09:21:50 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/12/15 11:36:05 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,6 @@
 #include "cube3d.h"
 
 #include "cube3d_debug.h"
-
-/* EXIT_SUCCESS, EXIT_FAILURE*/
-#include <stdlib.h>
 
 /**
  * @Matthew-Dreemurr

@@ -3,19 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   tex_conv_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
+/*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:10:55 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/29 09:25:15 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/12/15 11:35:58 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
 #include "cube3d_debug.h"
-
-/* EXIT_SUCCESS, EXIT_FAILURE*/
-#include <stdlib.h>
 
 /**
  * @author @Matthew-Dreemurr

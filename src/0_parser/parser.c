@@ -6,17 +6,13 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:53:32 by mahadad           #+#    #+#             */
-/*   Updated: 2022/12/13 11:56:18 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/15 11:36:54 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
 #include "cube3d_utils.h"
-
-/* EXIT_SUCCESS, EXIT_FAILURE*/
-#include <stdlib.h>
-
 /* ft_memcpy */
 #include "lib_mem.h"
 

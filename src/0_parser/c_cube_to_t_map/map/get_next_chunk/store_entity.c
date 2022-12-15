@@ -6,16 +6,13 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 16:54:58 by mahadad           #+#    #+#             */
-/*   Updated: 2022/12/12 16:48:56 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/15 11:36:22 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
 #include "cube3d_debug.h"
-
-/* EXIT_SUCCESS, EXIT_FAILURE*/
-#include <stdlib.h>
 
 #include "init_data.h"
 
