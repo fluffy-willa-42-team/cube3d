@@ -85,9 +85,15 @@ static int check_vertical_while(t_parser *data, int line)
 	while (x < data->map_width)
 	{
 		print_debug(&current);
-//		if (get(data, set_i32(x, line))) print_debug(get(data, set_i32(x, line))); else printf("Nop\n");
 
-		if (get_next(data, x, line) && get_next(data, x, line)->type == WHITE_SPACE_CHUNK)
+			// Check if the current is a good chunk
+		if (current.type == GOOD_CHUNK &&
+				// check if the next is not null, if is the case that mean we
+				// are at the end of the line. So we will be outside.
+				!get_next(data, x, line)
+				// if there is a next chunk check if is a white space.
+				// if is the case we will go outside.
+				|| get_next(data, x, line)->type == WHITE_SPACE_CHUNK)
 		{
 
 		}
