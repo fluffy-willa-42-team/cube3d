@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 20:08:12 by awillems          #+#    #+#             */
-/*   Updated: 2022/12/15 14:07:26 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/15 14:24:31 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,24 +24,25 @@ void	draw_top_or_bottom(
 	t_coord_i32 pixel_pos
 )
 {
-	if (texture)
+	if (!texture)
+		return ;
+	if (texture->skybox_tex && texture->type & TRANSPARENCY)
+		draw_pixel_skybox(game, pixel_pos, texture->skybox_tex);
+	if (texture->type & SKYBOX)
+		draw_pixel_skybox(game, pixel_pos, texture);
+	else if (texture->type & IMAGE)
 	{
-		if (texture->type & SKYBOX && texture->type & IMAGE)
-			draw_pixel_skybox(game, pixel_pos, texture);
-		else if (texture->type & IMAGE)
-		{
-			put_pixel(game, pixel_pos.x, pixel_pos.y,
-				get_pixel_image(texture,
-					(floor_pos.x - (int) floor_pos.x) * texture->image->width,
-					(floor_pos.y - (int) floor_pos.y) * texture->image->height,
-					set_f64(1, 1)
-					)
-				);
-		}
-		else
-		{
-			put_pixel(game, pixel_pos.x, pixel_pos.y, texture->color);
-		}
+		put_pixel(game, pixel_pos.x, pixel_pos.y,
+			get_pixel_image(texture,
+				(floor_pos.x - (int) floor_pos.x) * texture->image->width,
+				(floor_pos.y - (int) floor_pos.y) * texture->image->height,
+				set_f64(1, 1)
+				)
+			);
+	}
+	else
+	{
+		put_pixel(game, pixel_pos.x, pixel_pos.y, texture->color);
 	}
 }
 

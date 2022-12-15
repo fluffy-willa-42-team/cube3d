@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:46:26 by awillems          #+#    #+#             */
-/*   Updated: 2022/12/15 14:15:23 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/15 14:23:26 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	draw_wall_text(
 
 	if (!texture || !(texture->type & VALID))
 		return ;
-	if (texture->skybox_tex && recursive)
+	if (texture->skybox_tex && texture->type & TRANSPARENCY && recursive)
 		draw_wall_text(game, inter, texture->skybox_tex, x, height, 0);
 	if (texture->type & IMAGE)
 	{
