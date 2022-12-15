@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 13:00:39 by awillems          #+#    #+#             */
-/*   Updated: 2022/12/13 15:22:22 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/15 11:35:36 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include "ray_caster.h"
 #include "mlx_utils.h"
 #include "key_macro.h"
-#include <stdlib.h>
 
 void	move_player(t_game *game, t_coord_f64 player, t_coord_f64 incr);
 void	pos_hook(double incr_x, double incr_y, t_coord_f64 *move_vec);
@@ -24,7 +23,7 @@ void	scale_hook(t_game *game, double incrementation);
 void	map_hook(t_game *game, int32_t incrementation);
 void	map_point_hook(t_game *game, double incrementation);
 
-void	exit_cube3d(t_game *game, int ret);
+int	exit_cube3d(t_game *game);
 
 void	update_win(t_game *game)
 {
@@ -43,7 +42,7 @@ int	do_key(int keycode, t_game *game)
 	cosin = &game->player.cosin;
 	move_vec = set_f64(0, 0);
 	speed = &game->param.speed;
-	if (keycode == KEY_ESCAPE)			exit_cube3d(game, 0);
+	if (keycode == KEY_ESCAPE)			exit_cube3d(game);
 	else if (keycode == KEY_W)			pos_hook(*speed * cosin->x, *speed * cosin->y, &move_vec);
 	else if (keycode == KEY_S)			pos_hook(-*speed * cosin->x, -*speed * cosin->y, &move_vec);
 	else if (keycode == KEY_A)			pos_hook(*speed * cosin->y, -*speed * cosin->x, &move_vec);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_tex_config.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
+/*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 14:09:15 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/29 09:48:55 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/12/15 11:36:31 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,6 @@
 #include "cube3d_utils.h"
 
 #include "cube3d_debug.h"
-
-/* EXIT_SUCCESS, EXIT_FAILURE*/
-#include <stdlib.h>
 
 /**
  * @author @Matthew-Dreemurr

@@ -19,6 +19,7 @@
 
 /* ************************************************************************** */
 
+//							0xAARRGGBB
 # define COLOR_RAY			0x00fcba03
 # define COLOR_SIDE			0x0021634c
 # define COLOR_BACKGROUND	0x00222222

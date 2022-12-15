@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:56:12 by mahadad           #+#    #+#             */
-/*   Updated: 2022/12/13 15:13:37 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/15 11:34:46 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,10 @@
 
 #include "cube3d_utils.h"
 
-/* EXIT_SUCCESS, EXIT_FAILURE*/
-#include <stdlib.h>
 
 #include "init_data.h"
 
-
-// void	hook_loop(void *param);
-int		do_key(int keycode, t_game *game);
-void	update_win(t_game *game);
+int	run_game(t_parser *data);
 
 int	init_game(t_param *param)
 {
@@ -45,24 +40,6 @@ int	init_game(t_param *param)
 	param->img = mlx_new_image(param->mlx, WIN_WIDTH, WIN_HEIGHT);
 	if (!param->img)
 		return (EXIT_FAILURE);//TODO use ret_print
-	return (EXIT_SUCCESS);
-}
-
-int	run_game(t_parser *data)
-{
-	t_game		game;
-
-	game.map.map = data->map;
-	game.map.width = data->map_width;
-	game.map.height = data->map_height;
-	game.player = data->player;
-	game.param = data->param;
-	game.parser_data = data;
-	
-	// mlx_hook(game.param.win, 17, 1L << 17, NULL, &game);
-	update_win(&game);
-	mlx_hook(game.param.win, 2, 1L << 0, do_key, &game);
-	mlx_loop(game.param.mlx);
 	return (EXIT_SUCCESS);
 }
 

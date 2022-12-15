@@ -20,9 +20,6 @@
 
 #include "lib_is_check.h" /* ft_isdigit */
 
-/* EXIT_SUCCESS, EXIT_FAILURE*/
-#include <stdlib.h>
-
 /**
  * @author @Matthew-Dreemurr
  * 
