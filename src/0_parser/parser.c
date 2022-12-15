@@ -6,17 +6,13 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:53:32 by mahadad           #+#    #+#             */
-/*   Updated: 2022/12/13 11:56:18 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/15 11:36:54 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
 #include "cube3d_utils.h"
-
-/* EXIT_SUCCESS, EXIT_FAILURE*/
-#include <stdlib.h>
-
 /* ft_memcpy */
 #include "lib_mem.h"
 
@@ -72,7 +68,7 @@
 /* */ 	"       token         :  \'%c\',\n"
 /* */ 	"       *path         :  \"%.15s\",\n"
 /* */ 	"       *image        :  [%p],\n"
-/* */ 	"       sky_box_token :  \'%c\',\n"
+/* */ 	"       token_ptr :  \'%c\',\n"
 /* */ 	"       *skybox_tex   :  [%p],\n"
 /* */ 	"       color         :  [%d, %d, %d, %d]\n"
 /* */ 	"     }\n",
@@ -92,7 +88,7 @@
 /* */ 	get_tex_ptr(&data->tex_list, i)->image,
 /* */ 
 /* */ 	
-/* */ 	get_tex_ptr(&data->tex_list, i)->sky_box_token,
+/* */ 	get_tex_ptr(&data->tex_list, i)->token_ptr,
 /* */ 	get_tex_ptr(&data->tex_list, i)->skybox_tex,
 /* */ 
 /* */ 	get_r(get_tex_ptr(&data->tex_list, i)->color),

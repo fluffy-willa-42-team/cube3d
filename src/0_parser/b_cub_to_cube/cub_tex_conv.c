@@ -3,19 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   cub_tex_conv.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
+/*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:01:25 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/29 09:24:16 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/12/15 11:35:55 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
 #include "cube3d_debug.h"
-
-/* EXIT_SUCCESS, EXIT_FAILURE*/
-#include <stdlib.h>
 
 #include <stdio.h>//TODO REMOVE
 
@@ -55,9 +52,9 @@ static void	skip_whitespace(t_parser *data, char *tmp)
  * @brief Convert the texture name with arbitrary index and the texture path.
  * 
  * @note
- * `WE ./path_to_the_west_texture` -> `2 xx* ./path_to_the_west_texture`
+ * `WE ./path_to_the_west_texture` -> `2 xxx* ./path_to_the_west_texture`
  * `cub`   [tex token] [tex path/color]
- * `cube`  [tex token] [allow clip][transparency][token skybox] [tex path/color]
+ * `cube`  [tex token] [allow clip][transparency][skybox][background] [tex path/color]
  * 
  * For the [allow_clip][transparency] we set to `x` aka false.
  * And for the [token_skybox] `.` aka none.
@@ -69,7 +66,7 @@ static void	skip_whitespace(t_parser *data, char *tmp)
  */
 static int	cub_tex_to_cube(t_parser *data, char *tmp, int tex_index)
 {
-	if (!v_add(&data->cube, STRING, "%c xx. ", '0' + tex_index))
+	if (!v_add(&data->cube, STRING, "%c xxx. ", '0' + tex_index))
 		return (ret_print(EXIT_FAILURE, ERR_VEC_ADD));
 	skip_whitespace(data, tmp);
 	while (tmp[data->index] && tmp[data->index] != '\n')

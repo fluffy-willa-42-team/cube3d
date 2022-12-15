@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:33:07 by awillems          #+#    #+#             */
-/*   Updated: 2022/12/12 16:54:00 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/15 11:34:53 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@
 # include <stdint.h>
 # include <stddef.h>
 # include "vector_lib.h"
+
+/* EXIT_SUCCESS, EXIT_FAILURE*/
+# include <stdlib.h>
 
 # include "mlx.h"
 # include "cube_types.h"
@@ -84,7 +87,7 @@ typedef enum e_texture_type {
 /**
  * @param type           (t_texture_type)
  * @param token          (char)
- * @param sky_box_token  (char)
+ * @param token_ptr  (char)
  * @param path           (char*)
  * @param image          (mlx_tex*)
  * @param color          (unit32_t)
@@ -92,7 +95,7 @@ typedef enum e_texture_type {
 typedef struct s_texture {
 	t_texture_type			type;
 	char					token;
-	char					sky_box_token;
+	char					token_ptr;
 	char					*path;
 	t_image					*image;
 	uint32_t				color;
@@ -111,6 +114,7 @@ typedef struct s_param {
 	uint32_t	minimap_size;
 	double		minimap_point_size;
 	double		speed;
+	int			has_ended;
 }	t_param;
 
 typedef struct s_player {
@@ -219,6 +223,8 @@ typedef struct s_game {
 	t_param			param;
 	t_player		player;
 	t_map			map;
+	void			*parser_data;
+	int				return_value;
 }	t_game;
 
 /* ************************************************************************** */

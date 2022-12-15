@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   store_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
+/*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 17:48:29 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/29 16:36:29 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/12/15 11:36:19 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,6 @@
 
 /* struct_set() */
 #include "cube3d_utils.h"
-
-/* EXIT_SUCCESS, EXIT_FAILURE*/
-#include <stdlib.h>
 
 #include <stdio.h>//TODO REMOVE
 
@@ -69,7 +66,7 @@
 // /* */ 	"       token         :  \'%c\',\n"
 // /* */ 	"       *path         :  \"%.15s\",\n"
 // /* */ 	"       *image        :  [%p],\n"
-// /* */ 	"       sky_box_token :  \'%c\',\n"
+// /* */ 	"       token_ptr :  \'%c\',\n"
 // /* */ 	"       *skybox_tex   :  [%p],\n"
 // /* */ 	"       color         :  [%d, %d, %d, %d]\n"
 // /* */ 	"     }\n",
@@ -88,7 +85,7 @@
 // /* */ 	tmp->image,
 // /* */ 
 // /* */ 	
-// /* */ 	tmp->sky_box_token,
+// /* */ 	tmp->token_ptr,
 // /* */ 	tmp->skybox_tex,
 // /* */ 
 // /* */ 	get_r(tmp->color),

@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 13:00:39 by awillems          #+#    #+#             */
-/*   Updated: 2022/12/12 16:54:51 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/15 11:41:02 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,15 @@ void	scale_hook(t_game *game, double incrementation);
 void	map_hook(t_game *game, int32_t incrementation);
 void	map_point_hook(t_game *game, double incrementation);
 
-#define NB_OF_KEYBIND 9
+int		exit_game(t_game *game);
+
+void	update_win(t_game *game)
+{
+	// draw_rectangle(game, set_f64(0, 0), set_i32(WIN_WIDTH, WIN_HEIGHT), 0x00FFFFFF);
+	ray_caster(game);
+	draw_minimap(game);
+	mlx_put_image_to_window(game->param.mlx, game->param.win, game->param.img, 0, 0);
+}
 
 int	do_key(int keycode, t_game *game)
 {
@@ -34,7 +42,7 @@ int	do_key(int keycode, t_game *game)
 	cosin = &game->player.cosin;
 	move_vec = set_f64(0, 0);
 	speed = &game->param.speed;
-	if (keycode == KEY_ESCAPE)		mlx_destroy_window(game->param.mlx, game->param.win);
+	if (keycode == KEY_ESCAPE)			exit_game(game);
 	else if (keycode == KEY_W)			pos_hook(*speed * cosin->x, *speed * cosin->y, &move_vec);
 	else if (keycode == KEY_S)			pos_hook(-*speed * cosin->x, -*speed * cosin->y, &move_vec);
 	else if (keycode == KEY_A)			pos_hook(*speed * cosin->y, -*speed * cosin->x, &move_vec);
@@ -55,6 +63,6 @@ int	do_key(int keycode, t_game *game)
 	else if (keycode == KEY_NUM_3)		angle_hook(game, 0.01);
 	if (move_vec.x != 0 || move_vec.y != 0)
 		move_player(game, game->player.pos, move_vec);
-
+	update_win(game);
 	return (0);
 }

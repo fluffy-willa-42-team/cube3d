@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file_sani.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
+/*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:52:52 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/29 09:24:16 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/12/15 11:35:40 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,6 @@
 
 /* memmove */
 #include "lib_mem.h"
-
-/* EXIT_SUCCESS, EXIT_FAILURE*/
-#include <stdlib.h>
 
 /* ft_strlen */
 #include "lib_str.h"

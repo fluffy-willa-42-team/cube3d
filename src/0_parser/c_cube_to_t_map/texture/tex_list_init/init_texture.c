@@ -3,24 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   init_texture.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
+/*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 14:27:58 by mahadad           #+#    #+#             */
-/*   Updated: 2022/12/13 13:21:05 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/12/15 11:36:34 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
-
-/* EXIT_SUCCESS, EXIT_FAILURE*/
-#include <stdlib.h>
 
 /* open */
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
 
-/* mlx_load_xpm42() */
 #include "mlx.h"
 
 /* get_tex_ptr() */
@@ -69,10 +65,10 @@ static int	open_file_texture(t_param *param, t_texture *tex)
  * 
  * @brief Store the texture ptr of the skybox.
  */
-static int	set_skybox(t_texture *tex, t_parser *data)
+static int	set_tex_ptr(t_texture *tex, t_parser *data)
 {
-	tex->skybox_tex = get_tex_ptr(&data->tex_list, tex->sky_box_token);
-	if (!tex->sky_box_token)
+	tex->skybox_tex = get_tex_ptr(&data->tex_list, tex->token_ptr);
+	if (!tex->token_ptr)
 		return (ret_print(EXIT_FAILURE, ERR_SKY_TOKEN_FORMAT));
 	return (EXIT_SUCCESS);
 }
@@ -95,8 +91,8 @@ static int	init_texture_while(t_texture *tex, t_parser *data)
 		if (set_color_texture(tex))
 			return (EXIT_FAILURE);
 	}
-	if (tex->sky_box_token && tex->sky_box_token != '.')
-		if (set_skybox(tex, data))
+	if (tex->token_ptr && tex->token_ptr != '.')
+		if (set_tex_ptr(tex, data))
 			return (EXIT_FAILURE);
 	tex->type |= VALID;
 	return (EXIT_SUCCESS);

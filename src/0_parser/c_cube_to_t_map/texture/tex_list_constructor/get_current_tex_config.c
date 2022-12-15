@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_current_tex_config.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
+/*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 14:03:25 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/29 13:50:46 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/12/15 11:36:25 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,6 @@
 #include "cube3d_utils.h"
 
 #include "lib_mem.h" /* ft_memcpy */
-
-/* EXIT_SUCCESS, EXIT_FAILURE*/
-#include <stdlib.h>
 
 /**
  * @author @Matthew-Dreemurr

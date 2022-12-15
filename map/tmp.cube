@@ -1,15 +1,15 @@
-0 xx. ./texture/mc/grass_side.xpm42
-1 xx. ./texture/mc/grass_side.xpm42
-2 xx. ./texture/mc/grass_side.xpm42
-3 xx. ./texture/mc/grass_side.xpm42
-4 xx. ./texture/mc/grass_top.xpm42
-5 xx. ./texture/mc/stone.xpm42
+0 xx. ./texture/mc/grass_side.xpm
+1 xx. ./texture/mc/grass_side.xpm
+2 xx. ./texture/mc/grass_side.xpm
+3 xx. ./texture/mc/grass_side.xpm
+4 xx. ./texture/mc/grass_top.xpm
+5 xx. ./texture/mc/stone.xpm
 
-n xx. ./texture/cont/container_big_side_m.xpm42
-e xx. ./texture/cont/container_big_side_m.xpm42
-w xx. ./texture/cont/container_big_side_m.xpm42
-s xx. ./texture/cont/container_small_side.xpm42
-o vx. ./texture/cont/container_open.xpm42
+n xx. ./texture/cont/container_big_side_m.xpm
+e xx. ./texture/cont/container_big_side_m.xpm
+w xx. ./texture/cont/container_big_side_m.xpm
+s xx. ./texture/cont/container_small_side.xpm
+o vx. ./texture/cont/container_open.xpm
 
 ~~~
 
