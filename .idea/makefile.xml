@@ -11,6 +11,15 @@
           </build-configuration>
         </build-configurations>
       </build-target>
+      <build-target name="SANI=1">
+        <build-configurations>
+          <build-configuration toolchainName="Default">
+            <make-targets>
+              <make-target>SANI=1</make-target>
+            </make-targets>
+          </build-configuration>
+        </build-configurations>
+      </build-target>
     </user-build-targets>
   </component>
 </project>

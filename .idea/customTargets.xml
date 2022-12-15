@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CLionExternalBuildManager">
-    <target id="f56a55f0-30ae-4f85-a356-c5dd96bf9636" name="all debug" defaultType="MAKE">
-      <configuration id="930dc573-76f6-4e22-9d17-a900e930c64d" name="all debug" toolchainName="Default">
+    <target id="f56a55f0-30ae-4f85-a356-c5dd96bf9636" name="all DEBUG=1" defaultType="MAKE">
+      <configuration id="930dc573-76f6-4e22-9d17-a900e930c64d" name="all DEBUG=1" toolchainName="Default">
         <build type="MAKE">
           <make targetName="DEBUG=1" />
+        </build>
+      </configuration>
+    </target>
+    <target id="ca58a48e-edb1-4c66-b7e2-5fef7b670ff8" name="all SANI=1" defaultType="MAKE">
+      <configuration id="24183585-59cd-4144-bf12-a47a86817521" name="all SANI=1" toolchainName="Default">
+        <build type="MAKE">
+          <make targetName="SANI=1" />
         </build>
       </configuration>
     </target>
