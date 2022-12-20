@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: awillems <awillems@student.42.fr>          +#+  +:+       +#+         #
+#    By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/05 10:47:56 by awillems          #+#    #+#              #
-#    Updated: 2022/12/13 10:52:48 by awillems         ###   ########.fr        #
+#    Updated: 2022/12/20 13:20:06 by mahadad          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,6 @@ SRC_DIR		= src
 INC_DIR		= include
 OBJ_DIR 	= $(NAME)_obj
 LIB_DIR		= lib
-
 # **************************************************************************** #
 
 CC			= gcc
@@ -37,7 +36,6 @@ CODE_EXT	= .c
 HEAD_EXT	= .h
 INC			= -I include -Ilib/vector-lib/include -Ilib/libft/include
 FLAGS		= -Wall -Wextra -Werror
-FLAGS_COMP	= -lmlx -framework OpenGL -framework AppKit
 
 # **************************************************************************** #
 #                                  PARAMS
@@ -75,12 +73,22 @@ ifeq ($(DEBUG), 1)
 endif
 
 ifeq ($(shell uname),Darwin)
+	FLAGS_COMP	= -lmlx -framework OpenGL -framework AppKit
 	INC 		+= -I$(shell brew --prefix glfw)/include
 	FLAGS_COMP	+= -lglfw -L $(shell brew --prefix glfw)/lib
+	ALL_LIB 	+=	\
+					lib/libft \
+					lib/minilibx_opengl_20191021 \
+					lib/vector-lib
 endif
 
 ifeq ($(shell uname),Linux)
-	FLAGS_COMP	+= -ldl -lglfw -pthread -lm
+	FLAGS_COMP	= -ldl -lglfw -pthread -lm -lX11 -lXext  -I lib/minilibx-linux
+	INC			+= -I lib/minilibx-linux
+	ALL_LIB 	+=	\
+					lib/libft \
+					lib/vector-lib \
+					lib/minilibx-linux
 endif
 
 # **************************************************************************** #
@@ -94,7 +102,7 @@ SRCS_FIND	= $(notdir $(shell find $(SRC_DIR) -type f -name "*$(CODE_EXT)"))
 OBJ			= $(addprefix $(OBJ_DIR)/, $(SRCS:$(CODE_EXT)=$(OBJ_EXT)))
 
 # Finds all folders in the LIB_DIR
-ALL_LIB		= $(shell find $(LIB_DIR)/ -maxdepth 1 -mindepth 1 -type d)
+# ALL_LIB		= $(shell find $(LIB_DIR)/ -maxdepth 1 -mindepth 1 -type d)
 
 # Finds all the compiled libraries in ALL_LIB
 LIB			= $(shell find $(LIB_DIR) -type f -name "*.a")
