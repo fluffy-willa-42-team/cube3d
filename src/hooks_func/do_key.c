@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   do_key.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 13:00:39 by awillems          #+#    #+#             */
-/*   Updated: 2022/12/15 11:41:02 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/20 15:04:58 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,8 @@ int	do_key(int keycode, t_game *game)
 	else if (keycode == KEY_K)			map_point_hook(game, -0.1);
 	else if (keycode == KEY_O)			map_hook(game, 1);
 	else if (keycode == KEY_L)			map_hook(game, -1);
-	else if (keycode == KEY_NUM_4)		angle_hook(game, -0.05);
-	else if (keycode == KEY_NUM_6)		angle_hook(game, 0.05);
-	else if (keycode == KEY_NUM_1)		angle_hook(game, -0.01);
-	else if (keycode == KEY_NUM_3)		angle_hook(game, 0.01);
+	else if (keycode == KEY_ARROW_LEFT)		angle_hook(game, -0.05);
+	else if (keycode == KEY_ARROW_RIGHT)		angle_hook(game, 0.05);
 	if (move_vec.x != 0 || move_vec.y != 0)
 		move_player(game, game->player.pos, move_vec);
 	update_win(game);

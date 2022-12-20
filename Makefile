@@ -6,7 +6,7 @@
 #    By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/05 10:47:56 by awillems          #+#    #+#              #
-#    Updated: 2022/12/20 13:20:06 by mahadad          ###   ########.fr        #
+#    Updated: 2022/12/20 15:07:48 by mahadad          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -73,7 +73,7 @@ ifeq ($(DEBUG), 1)
 endif
 
 ifeq ($(shell uname),Darwin)
-	FLAGS_COMP	= -lmlx -framework OpenGL -framework AppKit
+	FLAGS_COMP	= -lmlx -framework OpenGL -framework AppKit 
 	INC 		+= -I$(shell brew --prefix glfw)/include
 	FLAGS_COMP	+= -lglfw -L $(shell brew --prefix glfw)/lib
 	ALL_LIB 	+=	\
@@ -83,7 +83,8 @@ ifeq ($(shell uname),Darwin)
 endif
 
 ifeq ($(shell uname),Linux)
-	FLAGS_COMP	= -ldl -lglfw -pthread -lm -lX11 -lXext  -I lib/minilibx-linux
+	FLAGS += -D KEY_X11=1
+	FLAGS_COMP	= -ldl -lglfw -pthread -lm -lX11 -lXext  -I lib/minilibx-linux -D KEY_X11=1
 	INC			+= -I lib/minilibx-linux
 	ALL_LIB 	+=	\
 					lib/libft \
