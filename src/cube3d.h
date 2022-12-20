@@ -162,14 +162,14 @@ typedef enum e_chunk_type {
  * @param skybox   (t_texture *)
  */
 typedef struct s_chunk {
-	int32_t		type;
-	t_coord_i32	coord;
-	t_texture	*north;
-	t_texture	*east;
-	t_texture	*west;
-	t_texture	*south;
-	t_texture	*ceiling;
-	t_texture	*floor;
+	t_chunk_type	type;
+	t_coord_i32		coord;
+	t_texture		*north;
+	t_texture		*east;
+	t_texture		*west;
+	t_texture		*south;
+	t_texture		*ceiling;
+	t_texture		*floor;
 }	t_chunk;
 
 # define E_EMPTY '.'

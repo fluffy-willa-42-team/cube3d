@@ -109,8 +109,8 @@ typedef struct s_parser
 	int				tmp_width;
 	char			tex[DEFAULT_CUB_TEX_NB];
 	t_vec			tex_list;
-	uint32_t		map_width;
-	uint32_t		map_height;
+	int32_t		map_width;
+	int32_t		map_height;
 	t_vec			map;
 	t_player		player;
 	t_param			param;

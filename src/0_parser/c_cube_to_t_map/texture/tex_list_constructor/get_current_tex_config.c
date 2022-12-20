@@ -46,7 +46,7 @@ static int	skip_tex_white_space(t_parser *data, char *tex)
  *       the case, the slot is already used.
  * 
  * @warning The `data->tex_list` need to be memset to `0`, or all the token set
- *          to `'\0'` to avoid garbadge memory.
+ *          to `'\0'` to avoid garbage memory.
  * 
  * @return int If the slot is used return `1` otherwise `0`.
  */

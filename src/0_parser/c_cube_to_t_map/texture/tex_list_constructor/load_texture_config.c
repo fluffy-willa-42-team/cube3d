@@ -74,6 +74,7 @@ int	load_texture_config(t_parser *data, char *tex)
 	data->tex_list = v_init(sizeof(t_texture), NULL, NULL);
 	if (!v_alloc(&data->tex_list, SET, DEFAULT_CUBE_TEX_NB))
 		return (ret_print(EXIT_FAILURE, ERR_VEC_ALLOC));
+	data->tex_list.len = DEFAULT_CUBE_TEX_NB;
 	while (*tex)
 	{
 		while (*tex && (*tex == ' ' || *tex == '\n'))
