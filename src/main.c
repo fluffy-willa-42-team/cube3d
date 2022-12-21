@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:56:12 by mahadad           #+#    #+#             */
-/*   Updated: 2022/12/15 11:56:01 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/21 11:59:41 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,9 @@ int	run(char *file)
 
 int	main(int argc, char *argv[])
 {
-	(void) argc;
-	(void) argv;
 	if (argc != 2)
-	{
-		printf("[%d]\n", argc);
-		return (ret_print(1, "TODO\n"));
-	}
-	printf("Arg [%s]\n", argv[1]);
+		return (ret_print(1, ERR_BAD_ARGS));
+	printf("Loading map: %s\n", argv[1]);
 	if (run(argv[1]))
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
