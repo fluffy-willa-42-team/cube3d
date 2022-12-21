@@ -201,7 +201,7 @@ exe: all
 	@bash -c "./$(NAME) ./map/test.cube"
 
 test: clear_test
-	@make re SANI=1 TEST_UNIT=1
+	@make SANI=1 TEST_UNIT=1
 	@gcc -Wall -Wextra -Werror tester.c -o tester
 
 run_test:

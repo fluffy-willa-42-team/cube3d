@@ -22,26 +22,26 @@
 
 #include <stdio.h>//TODO REMOVE
 
-/* */ static void	print_debug(t_chunk *tmp)
-/* */ {
-/* */ 	printf(
-/* */ 	"[%d][%d] {\n"
-/* */ 	"       type          :  {\n"
-/* */ 	"                          WHITE_SPACE_CHUNK  [%d]\n"
-/* */ 	"                          GOOD_CHUNK         [%d]\n"
-/* */ 	"                          BAD_CHUNK          [%d]\n"
-/* */ 	"                        },\n"
-/* */ 	"       log           : [%c],\n"
-/* */ 	"     }\n",
-/* */ 	tmp->coord.x,
-/* */ 	tmp->coord.y,
-/* */ 	WHITE_SPACE_CHUNK == tmp->type,
-/* */ 	GOOD_CHUNK == tmp->type,
-/* */ 	BAD_CHUNK == tmp->type,
-/* */ 	tmp->east ? tmp->east->token : '#'
-/* */
-/* */ );
-/* */ }
+///* */ static void	print_debug(t_chunk *tmp)
+///* */ {
+///* */ 	printf(
+///* */ 	"[%d][%d] {\n"
+///* */ 	"       type          :  {\n"
+///* */ 	"                          WHITE_SPACE_CHUNK  [%d]\n"
+///* */ 	"                          GOOD_CHUNK         [%d]\n"
+///* */ 	"                          BAD_CHUNK          [%d]\n"
+///* */ 	"                        },\n"
+///* */ 	"       log           : [%c],\n"
+///* */ 	"     }\n",
+///* */ 	tmp->coord.x,
+///* */ 	tmp->coord.y,
+///* */ 	WHITE_SPACE_CHUNK == tmp->type,
+///* */ 	GOOD_CHUNK == tmp->type,
+///* */ 	BAD_CHUNK == tmp->type,
+///* */ 	tmp->east ? tmp->east->token : '#'
+///* */
+///* */ );
+///* */ }
 
 
 /*static int is_clip(t_texture *tex)
@@ -57,13 +57,13 @@ static t_chunk	*get(t_parser *data, t_coord_i32 pos)
 }
 
 
-static t_chunk *get_next(t_parser *data, int x, int line)
-{
-	x++;
-	if (x > data->map_width)
-		return (NULL);
-	return (get(data, set_i32(x, line)));
-}
+//static t_chunk *get_next(t_parser *data, int x, int line)
+//{
+//	x++;
+//	if (x > data->map_width)
+//		return (NULL);
+//	return (get(data, set_i32(x, line)));
+//}
 
 
 int		wip = 0;
@@ -71,48 +71,57 @@ int		inside = 0;
 static int check_vertical_while(t_parser *data, int line)
 {
 	int x;
+	int	inside;
+	int	count;
 	t_chunk current;
 
-	current = (t_chunk){ WHITE_SPACE_CHUNK,
-						 set_i32(-1, 0),
-						 NULL,
-						 NULL,
-						 NULL,
-						 NULL,
-						 NULL,
-						 NULL,
-	};
-	x = -1;
+//	current = (t_chunk){ WHITE_SPACE_CHUNK,
+//						 set_i32(-1, 0),
+//						 NULL,
+//						 NULL,
+//						 NULL,
+//						 NULL,
+//						 NULL,
+//						 NULL,
+//	};
+	x = 0;
+	inside = 0;
+	count = 0;
 	while (x < data->map_width)
 	{
-		print_debug(&current);
-
-			// Check if the current is a good chunk
-		if ((current.type == GOOD_CHUNK
-				// check if the next is not null, if is the case that mean we
-				// are at the end of the line. So we will be inside.
-				&& !get_next(data, x, line))
-
-				// if there is a next chunk check if is a white space.
-				// if is the case we will go inside.
-				|| !get_next(data, x, line)
-				|| get_next(data, x, line)->type == WHITE_SPACE_CHUNK)
-		{
+		current = *get(data, set_i32((float)x, (float)line));
+//		if (get_next(data, x, line))
+//			current = *get_next(data, x, line);
+		if (current.type == WHITE_SPACE_CHUNK) {
+			if (inside) {
+				count -= 1;
+				printf("|");
+			} else {
+				printf("0");
+			}//TODO REMOVE
 			inside = 0;
 		}
-		else
+		if (current.type == GOOD_CHUNK) {
+			if (!inside) {
+				printf("1");//TODO REMOVE
+				count += 1;
+			} else {
+				count += 2;
+				printf("2");
+			}//TODO REMOVE
 			inside = 1;
-		if (!inside) {
-			printf("OUT\n");//TODO REMOVE
 		}
-		if (inside) {
-			printf("IN\n");//TODO REMOVE
+		if (current.type == BAD_CHUNK) {
+			printf("!");//TODO REMOVE
 		}
-//		current = *get(data, set_i32(x, line));
-		if (get_next(data, x, line))
-			current = *get_next(data, x, line);
+//		print_debug(&current);
 		x++;
 	}
+	if (inside) {
+		count -= 1;
+		printf("|");
+	}
+	printf(" [%d]\n", count);//TODO REMOVE
 	return (EXIT_SUCCESS);
 }
 
