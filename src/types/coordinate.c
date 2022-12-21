@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:50:02 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/25 12:56:56 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/21 11:33:51 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_coord_f64	set_f64(float x, float y)
 	return ((t_coord_f64){x, y});
 }
 
-t_coord_i32	set_i32(int32_t x, int32_t y)
+t_coord_i32	set_i32(float x, float y)
 {
 	return ((t_coord_i32){x, y});
 }
