@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:54:56 by mahadad           #+#    #+#             */
-/*   Updated: 2022/12/21 11:57:04 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/21 12:14:38 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@
 
 int	ret_print(int ret, const char *msg);
 
-# define ERR_PREFIX				"\n\e[0;31mError: "
-# define ERR_SUFFIX				"\n\e[0m"
 # define ERR_BAD_ARGS			"Bad Arguments\n\nExpected: ./exec filename"
 # define ERR_FILE_EXT			"Bad file extension !"
 # define ERR_OPEN_FILE			"Failed to open file !"
