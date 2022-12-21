@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:53:32 by mahadad           #+#    #+#             */
-/*   Updated: 2022/12/15 11:36:54 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/21 13:13:39 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,33 @@ int	tex_debug(t_parser *data)
 	return (EXIT_SUCCESS);
 }
 
+void	map_debug(t_parser *data)
+{
+	int32_t	x;
+	int32_t	y;
+	t_chunk		*chunk;
+
+	y = 0;
+	while (y < data->map_height)
+	{
+		x = 0;
+		while (x < data->map_width)
+		{
+			chunk = get_chunk_pars(data, set_i32(x, y));
+			if (!chunk || chunk->type == BAD_CHUNK)
+				printf("!");
+			if (chunk->type == WHITE_SPACE_CHUNK)
+				printf("_");
+			if (chunk->type == GOOD_CHUNK)
+				printf("0");
+			x++;
+		}
+		y++;
+		printf("\n");
+	}
+	
+}
+
 /**
  * @author @Matthew-Dreemurr
  *
@@ -130,6 +157,7 @@ int	parser(char *av, t_parser *data)
 		|| file_conv(data)
 		|| cube_to_t_map(data))
 		return (EXIT_FAILURE);
-	tex_debug(data);
+	map_debug(data);
+	tex_debug(data);//TODO REMOVE
 	return (EXIT_SUCCESS);
 }
