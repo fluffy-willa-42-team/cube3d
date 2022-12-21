@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 13:23:03 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/25 13:19:38 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/21 13:32:35 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,12 @@ t_intersect	get_init_x(t_game *game, double alpha, double tan_a);
 t_intersect	get_init_y(t_game *game, double alpha, double tan_a);
 t_intersect	get_step_x(t_intersect prev, double alpha, double tan_a);
 t_intersect	get_step_y(t_intersect prev, double alpha, double tan_a);
+
+int	is_in_map(t_game *game, t_coord_f64 point)
+{
+	return (0 <= point.x && point.x < game->map.width
+		&& 0 <= point.y && point.y < game->map.height);
+}
 
 int	is_a_wall_vue(t_wall_inter inter)
 {
@@ -42,14 +48,14 @@ t_inter	get_intersect(t_game *game, double alpha, double tan_a)
 	{
 		if (x_dist < y_dist)
 		{
-			if (is_a_wall_vue(get_wall(game, x_inter.point)))
+			if (!is_in_map(game, x_inter.point) || is_a_wall_vue(get_wall(game, x_inter.point)))
 				return ((t_inter){x_inter.point, x_inter, y_inter});
 			x_inter = get_step_x(x_inter, alpha, tan_a);
 			x_dist = get_distance(game, x_inter.point);
 		}
 		else
 		{
-			if (is_a_wall_vue(get_wall(game, y_inter.point)))
+			if (!is_in_map(game, y_inter.point) || is_a_wall_vue(get_wall(game, y_inter.point)))
 				return ((t_inter){y_inter.point, x_inter, y_inter});
 			y_inter = get_step_y(y_inter, alpha, tan_a);
 			y_dist = get_distance(game, y_inter.point);
