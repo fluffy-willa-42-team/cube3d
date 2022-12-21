@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 13:23:03 by awillems          #+#    #+#             */
-/*   Updated: 2022/12/21 13:32:35 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/21 13:38:16 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ int	is_in_map(t_game *game, t_coord_f64 point)
 
 int	is_a_wall_vue(t_wall_inter inter)
 {
-	if (inter.text1 && !(inter.text1->type & TRANSPARENCY))
+	if (inter.text1 && !(inter.text1->type & TRANSPARENCY && !inter.text1->skybox_tex))
 		return (1);
-	if (inter.text2 && !(inter.text2->type & TRANSPARENCY))
+	if (inter.text2 && !(inter.text2->type & TRANSPARENCY && !inter.text2->skybox_tex))
 		return (1);
 	return (0);
 }

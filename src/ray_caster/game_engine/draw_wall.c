@@ -6,12 +6,13 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:46:26 by awillems          #+#    #+#             */
-/*   Updated: 2022/12/15 14:23:26 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/21 14:18:27 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ray_caster.h"
 #include "mlx_utils.h"
+#include <stdio.h>
 
 int		is_equal(double a, double b);
 void	draw_pixel_skybox(t_game *game, t_coord_i32 pixel_pos,
@@ -31,7 +32,8 @@ void	exchange_textures(t_wall_inter *wall)
 
 int	is_transparent(t_texture *text)
 {
-	return (!text || text->type & TRANSPARENCY);
+	return (!text
+		|| (text->type & TRANSPARENCY && !text->skybox_tex));
 }
 
 void	draw_pixel_wall(
