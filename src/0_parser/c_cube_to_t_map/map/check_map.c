@@ -96,7 +96,7 @@ static int check_vertical_while(t_parser *data, int line)
 			if (inside) {
 				count -= 1;
 				printf("|");
-			} else {
+				} else {
 				printf("0");
 			}//TODO REMOVE
 			inside = 0;

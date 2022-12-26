@@ -1,18 +1,13 @@
-~ SKYBOX
-S xxv. ./texture/sky/skybox1.xpm
-
-~ PTS* ptr
-t xvxS ./texture/bars.xpm
+0 xxx. ./texture/mc/stone.xpm
+1 xxx. ./texture/mc/stone.xpm
+2 xxx. ./texture/mc/stone.xpm
+3 xxx. ./texture/mc/stone.xpm
+4 xxx. ./texture/mc/stone.xpm
+5 xxx. ./texture/mc/stone.xpm
 ~~~
-tt.tt.tt.tt.tt.tt.               tt.tt.tt.tt.tt.tt.tt.
-tt.tt.tt.tt.tt.tt.               tt.tt.tt.tt.tt.tt.tt.
-tt.tt.tt.tt.tt.tt.               tt.tt.tt.tt.tt.tt.tt.
-tt.t.Pt..t..t..tt.               tt.t..t..tt.t..t..tt.
-tt.............tt.               tt.......tt.......tt.
-tt.t.Wt..t..t..tt.               tt.t..t..tt.t..t..tt.
-tt.t..t..t..t..tt.               tt.t..t..tt.t..t..tt.
-tt.............tt.               tt.......tt.......tt.
-tt.t..t..t..t..tt.               tt.t..t..tt.t..t..tt.
-tt.tt.tt.tt.tt.tt.               tt.tt.tt.tt.tt.tt.tt.
-tt.tt.tt.tt.tt.tt.               tt.tt.tt.tt.tt.tt.tt.
-tt.tt.tt.tt.tt.tt.               tt.tt.tt.tt.tt.tt.tt.
+51.51P51....51.51.51.
+1........11........1.
+4..4.S4..1..4..4..4..
+5..5..5..51.5..5..5..
+1..................1.
+41.41.41.41.41.41.41.

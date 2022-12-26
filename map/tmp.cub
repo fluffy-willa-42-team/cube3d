@@ -4,7 +4,7 @@ WE ./texture/teapot.xpm
 EA ./texture/teapot.xpm
 F ./texture/teapot.xpm
 C ./texture/teapot.xpm
-111111     1111111
-1W0001111111001001
-100000000000000000
-111111111111111111
+111 111
+1011101
+1E00001
+1111111
