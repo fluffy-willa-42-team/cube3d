@@ -6,15 +6,14 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 11:44:48 by awillems          #+#    #+#             */
-/*   Updated: 2022/12/27 13:10:12 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/27 13:15:48 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
-#include "ray_caster.h"
-#include "mlx_utils.h"
 #include "key_macro.h"
-#include <stdio.h>
+
+int	use_hooks(t_game *game);
 
 int	save_hooks_var_change(const t_keyset *config, int keycode, int status)
 {
@@ -54,21 +53,8 @@ int	save_hooks(int keycode, t_game *game, int status)
 	{KEY_J,			&game->hooks.minimap_player_scale_down,	TRUE},
 	};
 
-	return (save_hooks_var_change(config, keycode, status));
+	return (save_hooks_var_change(config, keycode, status) && use_hooks(game));
 }
-
-// printf("\nexit:			%d\n", game->hooks.exit);
-// printf("dir:			%d\n", game->hooks.dir);
-// printf("look_left:		%d\n", game->hooks.look_left);
-// printf("look_right:		%d\n", game->hooks.look_right);
-// printf("minimap_scale_up:	%d\n", game->hooks.minimap_scale_up);
-// printf("minimap_scale_down:	%d\n", game->hooks.minimap_scale_down);
-// printf("minimap_scale_up:	%d\n", game->hooks.minimap_scale_up);
-// printf("minimap_scale_down:	%d\n", game->hooks.minimap_scale_down);
-// printf("map_scale_up:		%d\n", game->hooks.map_scale_up);
-// printf("map_scale_down:		%d\n", game->hooks.map_scale_down);
-// printf("player_scale_up:	%d\n", game->hooks.minimap_player_scale_up);
-// printf("player_scale_down:	%d\n", game->hooks.minimap_player_scale_down);
 
 int	save_hooks_up(int keycode, t_game *game)
 {
@@ -79,6 +65,3 @@ int	save_hooks_down(int keycode, t_game *game)
 {
 	return (save_hooks(keycode, game, KEY_DOWN));
 }
-
-// 	else if (keycode == KEY_Q)				speed_hook(game, 0.01);
-// 	else if (keycode == KEY_E)				speed_hook(game, -0.01);
