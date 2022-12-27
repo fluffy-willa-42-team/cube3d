@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 11:32:07 by awillems          #+#    #+#             */
-/*   Updated: 2022/12/27 14:56:33 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/27 15:35:16 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ int	run_game(t_parser *data)
 
 	update_win(&game);
 	mlx_hook(game.param.win, 17, 1L << 17, exit_game, &game);
-	// mlx_hook(game.param.win, 2, 1L << 0, do_key, &game);
 	mlx_hook(game.param.win, 2, 1L << 0, save_hooks_down, &game);
 	mlx_hook(game.param.win, 3, 1L << 1, save_hooks_up, &game);
 	mlx_loop(game.param.mlx);

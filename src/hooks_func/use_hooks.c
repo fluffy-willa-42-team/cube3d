@@ -6,11 +6,13 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 13:13:06 by awillems          #+#    #+#             */
-/*   Updated: 2022/12/27 15:33:38 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/27 15:36:26 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
+
+#include "ray_caster.h"
 
 int		exit_game(t_game *game);
 
@@ -22,6 +24,14 @@ void	rotate_player(t_game *game);
 void	move_player_hook(t_game *game, t_dir dir);
 
 void	update_win(t_game *game);
+
+void	update_win(t_game *game)
+{
+	ray_caster(game);
+	draw_minimap(game);
+	mlx_put_image_to_window(game->param.mlx, game->param.win,
+		game->param.img, 0, 0);
+}
 
 int	use_hooks(t_game *game)
 {
