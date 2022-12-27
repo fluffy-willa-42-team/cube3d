@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:33:07 by awillems          #+#    #+#             */
-/*   Updated: 2022/12/15 11:34:53 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/27 11:50:28 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 
 # include "mlx.h"
 # include "cube_types.h"
+# include "hooks.h"
 
 # ifndef DEBUG_PARSE
 #  define DEBUG_PARSE 0
@@ -223,6 +224,7 @@ typedef struct s_game {
 	t_param			param;
 	t_player		player;
 	t_map			map;
+	t_hooks			hooks;
 	void			*parser_data;
 	int				return_value;
 }	t_game;
