@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 11:44:48 by awillems          #+#    #+#             */
-/*   Updated: 2022/12/27 13:06:50 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/27 13:10:12 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,16 @@ int	save_hooks_var_change(const t_keyset *config, int keycode, int status)
 {
 	int	i;
 
-	i = 0;
-	while (i < NB_ASSIGNED_KEYS)
+	i = -1;
+	while (++i < NB_ASSIGNED_KEYS)
 	{
-		if (keycode == config[i].keycode)
-		{
-			if (status == KEY_DOWN)
-				*(int *) config[i].ptr |= config[i].value;
-			else if (status == KEY_UP)
-				*(int *) config[i].ptr &= ~config[i].value;
-			return (1);
-		}
-		i++;
+		if (keycode != config[i].keycode)
+			continue ;
+		if (status == KEY_DOWN)
+			*(int *) config[i].ptr |= config[i].value;
+		else if (status == KEY_UP)
+			*(int *) config[i].ptr &= ~config[i].value;
+		return (1);
 	}
 	return (0);
 }
@@ -39,11 +37,11 @@ int	save_hooks_var_change(const t_keyset *config, int keycode, int status)
 int	save_hooks(int keycode, t_game *game, int status)
 {
 	const t_keyset	config[NB_ASSIGNED_KEYS] = {
-	{KEY_ESCAPE,	&game->hooks.exit,	TRUE},
-	{KEY_W,			&game->hooks.dir,	FRONT},
-	{KEY_S,			&game->hooks.dir,	BACK},
-	{KEY_A,			&game->hooks.dir,	RIGHT},
-	{KEY_D,			&game->hooks.dir,	LEFT},
+	{KEY_ESCAPE,	&game->hooks.exit,						TRUE},
+	{KEY_W,			&game->hooks.dir,						FRONT},
+	{KEY_S,			&game->hooks.dir,						BACK},
+	{KEY_A,			&game->hooks.dir,						RIGHT},
+	{KEY_D,			&game->hooks.dir,						LEFT},
 	{KEY_Q,			&game->hooks.look_left,					TRUE},
 	{KEY_E,			&game->hooks.look_right,				TRUE},
 	{KEY_R,			&game->hooks.add_speed,					TRUE},
@@ -58,6 +56,19 @@ int	save_hooks(int keycode, t_game *game, int status)
 
 	return (save_hooks_var_change(config, keycode, status));
 }
+
+// printf("\nexit:			%d\n", game->hooks.exit);
+// printf("dir:			%d\n", game->hooks.dir);
+// printf("look_left:		%d\n", game->hooks.look_left);
+// printf("look_right:		%d\n", game->hooks.look_right);
+// printf("minimap_scale_up:	%d\n", game->hooks.minimap_scale_up);
+// printf("minimap_scale_down:	%d\n", game->hooks.minimap_scale_down);
+// printf("minimap_scale_up:	%d\n", game->hooks.minimap_scale_up);
+// printf("minimap_scale_down:	%d\n", game->hooks.minimap_scale_down);
+// printf("map_scale_up:		%d\n", game->hooks.map_scale_up);
+// printf("map_scale_down:		%d\n", game->hooks.map_scale_down);
+// printf("player_scale_up:	%d\n", game->hooks.minimap_player_scale_up);
+// printf("player_scale_down:	%d\n", game->hooks.minimap_player_scale_down);
 
 int	save_hooks_up(int keycode, t_game *game)
 {
