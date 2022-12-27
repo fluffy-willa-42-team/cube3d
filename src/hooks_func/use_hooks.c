@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 13:13:06 by awillems          #+#    #+#             */
-/*   Updated: 2022/12/27 15:20:25 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/27 15:26:14 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,24 @@ void	move_player_hook(t_game *game, t_dir dir)
 	move_player(game, game->player.pos, move_vec);
 }
 
+#include <math.h>
+
+void	rotate_player(t_game *game)
+{
+	if (game->hooks.look_left && game->hooks.look_right)
+		return ;
+	if (game->hooks.look_right)
+		game->player.alpha += 0.05;
+	else if (game->hooks.look_left)
+		game->player.alpha -= 0.05;
+	if (game->player.alpha < 0)
+		game->player.alpha += PI2;
+	else if (game->player.alpha > PI2)
+		game->player.alpha -= PI2;
+	game->player.cosin.x = cos(game->player.alpha);
+	game->player.cosin.y = sin(game->player.alpha);
+}
+
 int	use_hooks(t_game *game)
 {
 	printf("Update Keys...\n");
@@ -101,8 +119,8 @@ int	use_hooks(t_game *game)
 		change_speed(game);
 	if (game->hooks.dir != 0)
 		move_player_hook(game, game->hooks.dir);
-	// if (game->hooks.look_left || game->hooks.look_right)
-	// 	rotate_player(game);
+	if (game->hooks.look_left || game->hooks.look_right)
+		rotate_player(game);
 	if (game->hooks.minimap_scale_up || game->hooks.minimap_scale_down)
 		scale_minimap(game);
 	if (game->hooks.player_scale_up || game->hooks.player_scale_down)
