@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 11:45:17 by awillems          #+#    #+#             */
-/*   Updated: 2022/12/27 13:05:48 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/27 14:42:32 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ typedef struct s_hooks
 	t_bool	minimap_scale_down;
 	t_bool	map_scale_up;
 	t_bool	map_scale_down;
-	t_bool	minimap_player_scale_up;
-	t_bool	minimap_player_scale_down;
+	t_bool	player_scale_up;
+	t_bool	player_scale_down;
 }	t_hooks;
 
 typedef struct s_keyset
