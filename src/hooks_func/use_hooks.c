@@ -6,15 +6,11 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 13:13:06 by awillems          #+#    #+#             */
-/*   Updated: 2022/12/27 15:31:17 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/27 15:33:38 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
-#include "ray_caster.h"
-#include "mlx_utils.h"
-#include "key_macro.h"
-#include <stdio.h>
 
 int		exit_game(t_game *game);
 
@@ -29,7 +25,6 @@ void	update_win(t_game *game);
 
 int	use_hooks(t_game *game)
 {
-	printf("Update Keys...\n");
 	if (game->hooks.exit)
 		exit_game(game);
 	if (game->hooks.add_speed || game->hooks.reduce_speed)
