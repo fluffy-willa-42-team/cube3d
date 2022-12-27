@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 13:13:06 by awillems          #+#    #+#             */
-/*   Updated: 2022/12/27 14:57:36 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/27 15:20:25 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,33 @@ void	scale_player(t_game *game)
 		change_value_f(&game->param.minimap_point_size, -1, 1, 100);
 }
 
+void	add_f64_ptr(t_coord_f64 *a, t_coord_f64 b);
+void	move_player(t_game *game, t_coord_f64 player, t_coord_f64 incr);
+
+void	move_player_hook(t_game *game, t_dir dir)
+{
+	t_coord_f64	*cosin;
+	double		*speed;
+	t_coord_f64	move_vec;
+
+	cosin = &game->player.cosin;
+	speed = &game->param.speed;
+	move_vec = set_f64(0, 0);
+	if (dir & FRONT && dir & BACK)
+		dir &= ~(FRONT | BACK);
+	if (dir & RIGHT && dir & LEFT)
+		dir &= ~(RIGHT | LEFT);
+	if (dir & FRONT)
+		add_f64_ptr(&move_vec, set_f64(*speed * cosin->x, *speed * cosin->y));
+	if (dir & BACK)
+		add_f64_ptr(&move_vec, set_f64(*speed * -cosin->x, *speed * -cosin->y));
+	if (dir & RIGHT)
+		add_f64_ptr(&move_vec, set_f64(*speed * cosin->y, *speed * -cosin->x));
+	if (dir & LEFT)
+		add_f64_ptr(&move_vec, set_f64(*speed * -cosin->y, *speed * cosin->x));
+	move_player(game, game->player.pos, move_vec);
+}
+
 int	use_hooks(t_game *game)
 {
 	printf("Update Keys...\n");
@@ -72,8 +99,8 @@ int	use_hooks(t_game *game)
 		exit_game(game);
 	if (game->hooks.add_speed || game->hooks.reduce_speed)
 		change_speed(game);
-	// if (game->hooks.dir != 0)
-	// 	move_player_new(game, game->hooks.dir)
+	if (game->hooks.dir != 0)
+		move_player_hook(game, game->hooks.dir);
 	// if (game->hooks.look_left || game->hooks.look_right)
 	// 	rotate_player(game);
 	if (game->hooks.minimap_scale_up || game->hooks.minimap_scale_down)
