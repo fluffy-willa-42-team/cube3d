@@ -6,12 +6,16 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 11:45:17 by awillems          #+#    #+#             */
-/*   Updated: 2022/12/27 12:33:41 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/27 13:05:48 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef HOOKS_H
 # define HOOKS_H
+
+/* ************************************************************************** */
+
+# define NB_ASSIGNED_KEYS 15
 
 /* ************************************************************************** */
 
@@ -39,10 +43,16 @@ typedef struct s_hooks
 {
 	t_bool	exit;
 	t_dir	dir;
+	t_bool	look_left;
+	t_bool	look_right;
+	t_bool	add_speed;
+	t_bool	reduce_speed;
 	t_bool	minimap_scale_up;
 	t_bool	minimap_scale_down;
 	t_bool	map_scale_up;
 	t_bool	map_scale_down;
+	t_bool	minimap_player_scale_up;
+	t_bool	minimap_player_scale_down;
 }	t_hooks;
 
 typedef struct s_keyset
