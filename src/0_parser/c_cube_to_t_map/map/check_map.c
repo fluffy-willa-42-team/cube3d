@@ -46,82 +46,113 @@
 
 /*static int is_clip(t_texture *tex)
 {
-	return (tex->type & ALLOW_CLIP);
+	return (tex->type & NO_CLIP);
 }*/
 
 static t_chunk	*get(t_parser *data, t_coord_i32 pos)
 {
 	const int	index = (pos.y * data->map_width) + pos.x;
-
 	return (v_getr(&data->map, index));
 }
 
 
-//static t_chunk *get_next(t_parser *data, int x, int line)
-//{
-//	x++;
-//	if (x > data->map_width)
-//		return (NULL);
-//	return (get(data, set_i32(x, line)));
-//}
+static t_chunk *get_next(t_parser *data, t_coord_i32 coord)
+{
+	coord.x++;
+	if (coord.x >= data->map_width)
+		return (NULL);
+	return (get(data, coord));
+}
 
 
-int		wip = 0;
-int		inside = 0;
+/**
+ * @brief Check if the given texture can be pass-through by a player.
+ * @return `1` if clip, `0` if noclip
+ */
+int	is_clip(t_texture *tmp)
+{
+	if (tmp == NULL)
+		return (0);
+	return (tmp->type != NO_CLIP);
+}
+
+typedef enum e_wall
+{
+	W1     = 1000,
+	W2     = 0100,
+	W      = 1100,
+	NW     = 0000,
+	WEMPTY = 0010,
+	WWHITESPACE = 0001
+}			t_wall;
+
+int	get_wall_x(t_parser *data, t_coord_i32 coord)
+{
+	t_wall ret;
+	t_chunk *chunk1;
+	t_chunk *chunk2;
+
+	ret = NW;
+	if (coord.x == -1)
+		chunk1 = NULL;
+	else
+		chunk1 = get(data, set_i32(coord.x, coord.y));
+	chunk2 = get_next(data, set_i32(coord.x, coord.y));
+
+	if (chunk1 && chunk1->type == WHITE_SPACE_CHUNK) {
+		ret |= WWHITESPACE;
+	}
+
+	if (chunk1 && chunk1->east) {
+		if (!(chunk1->east->type & NO_CLIP)){
+			ret |= W1;}
+	}
+	if (chunk2 && chunk2->west) {
+		if (!(chunk2->west->type & NO_CLIP))
+			ret |= W2;
+	}
+	else if (chunk2 && !chunk2->north && !chunk2->south && !chunk2->east && !chunk2->west)
+		ret |= WEMPTY;
+	return (ret);
+}
+
 static int check_vertical_while(t_parser *data, int line)
 {
 	int x;
 	int	inside;
 	int	count;
-	t_chunk current;
+	t_wall wall;
 
-//	current = (t_chunk){ WHITE_SPACE_CHUNK,
-//						 set_i32(-1, 0),
-//						 NULL,
-//						 NULL,
-//						 NULL,
-//						 NULL,
-//						 NULL,
-//						 NULL,
-//	};
-	x = 0;
+	x = -1;
 	inside = 0;
 	count = 0;
 	while (x < data->map_width)
 	{
-		current = *get(data, set_i32((float)x, (float)line));
-//		if (get_next(data, x, line))
-//			current = *get_next(data, x, line);
-		if (current.type == WHITE_SPACE_CHUNK) {
-			if (inside) {
-				count -= 1;
-				printf("|");
-				} else {
-				printf("0");
-			}//TODO REMOVE
-			inside = 0;
+		wall = get_wall_x(data, set_i32(x, line));
+		if (wall & WWHITESPACE) {
+			x++;
+			printf("WP\n");
+			continue ;
 		}
-		if (current.type == GOOD_CHUNK) {
-			if (!inside) {
-				printf("1");//TODO REMOVE
-				count += 1;
-			} else {
-				count += 2;
-				printf("2");
-			}//TODO REMOVE
+		if (!inside && wall) {
 			inside = 1;
+			count += 1;
+			printf("in ");
 		}
-		if (current.type == BAD_CHUNK) {
-			printf("!");//TODO REMOVE
+		else if (wall & WEMPTY) {
+			inside = 0;
+			count += 1;
+			printf("out ");
 		}
-//		print_debug(&current);
+		else if (wall == W2) {
+			count += 1 + inside;
+			printf("wall ");
+		} else if (wall) {
+			printf("EOL ");
+		}
+		printf("[%d](%u)\n", inside, wall);
 		x++;
 	}
-	if (inside) {
-		count -= 1;
-		printf("|");
-	}
-	printf(" [%d]\n", count);//TODO REMOVE
 	return (EXIT_SUCCESS);
 }
 
@@ -134,6 +165,7 @@ static int	check_vertical(t_parser *data)
 	{
 		if (check_vertical_while(data, y))
 			return (EXIT_FAILURE);
+		printf("\n");//TODO REMOVE
 		y++;
 	}
 	return (EXIT_SUCCESS);

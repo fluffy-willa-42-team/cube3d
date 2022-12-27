@@ -62,7 +62,7 @@
 /* */ 	"                          COLOR         [%d]\n"
 /* */ 	"                          IMAGE         [%d]\n"
 /* */ 	"                          SKYBOX        [%d]\n"
-/* */ 	"                          ALLOW_CLIP    [%d]\n"
+/* */ 	"                          NO_CLIP    [%d]\n"
 /* */ 	"                          TRANSPARENCY  [%d]\n"
 /* */ 	"                        },\n"
 /* */ 	"       token         :  \'%c\',\n"
@@ -80,7 +80,7 @@
 /* */ 	(get_tex_ptr(&data->tex_list, i)->type & COLOR) != 0,
 /* */ 	(get_tex_ptr(&data->tex_list, i)->type & IMAGE) != 0,
 /* */ 	(get_tex_ptr(&data->tex_list, i)->type & SKYBOX) != 0,
-/* */ 	(get_tex_ptr(&data->tex_list, i)->type & ALLOW_CLIP) != 0,
+/* */ 	(get_tex_ptr(&data->tex_list, i)->type & NO_CLIP) != 0,
 /* */ 	(get_tex_ptr(&data->tex_list, i)->type & TRANSPARENCY) != 0,
 /* */ 	
 /* */ 	get_tex_ptr(&data->tex_list, i)->token,

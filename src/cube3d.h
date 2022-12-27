@@ -71,7 +71,7 @@ typedef struct	s_image
  * @param COLOR
  * @param IMAGE
  * @param SKYBOX
- * @param ALLOW_CLIP
+ * @param NO_CLIP
  * @param TRANSPARENCY
  */
 typedef enum e_texture_type {
@@ -80,7 +80,7 @@ typedef enum e_texture_type {
 	COLOR			= 0b0000100,
 	IMAGE			= 0b0001000,
 	SKYBOX			= 0b0010000,
-	ALLOW_CLIP		= 0b0100000,
+	NO_CLIP			= 0b0100000,
 	TRANSPARENCY	= 0b1000000
 }	t_texture_type;
 

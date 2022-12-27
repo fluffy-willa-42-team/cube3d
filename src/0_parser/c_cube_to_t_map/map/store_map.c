@@ -60,7 +60,7 @@
 // /* */ 	"                          COLOR         [%d]\n"
 // /* */ 	"                          IMAGE         [%d]\n"
 // /* */ 	"                          SKYBOX        [%d]\n"
-// /* */ 	"                          ALLOW_CLIP    [%d]\n"
+// /* */ 	"                          NO_CLIP    [%d]\n"
 // /* */ 	"                          TRANSPARENCY  [%d]\n"
 // /* */ 	"                        },\n"
 // /* */ 	"       token         :  \'%c\',\n"
@@ -77,7 +77,7 @@
 // /* */ 	(tmp->type & COLOR) != 0,
 // /* */ 	(tmp->type & IMAGE) != 0,
 // /* */ 	(tmp->type & SKYBOX) != 0,
-// /* */ 	(tmp->type & ALLOW_CLIP) != 0,
+// /* */ 	(tmp->type & NO_CLIP) != 0,
 // /* */ 	(tmp->type & TRANSPARENCY) != 0,
 // /* */ 	
 // /* */ 	tmp->token,

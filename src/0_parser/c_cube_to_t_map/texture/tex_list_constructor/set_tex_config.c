@@ -28,7 +28,7 @@
 static int	set_texture_allow_clip(char param, t_texture *tmp)
 {
 	if (param == 'v')
-		tmp->type |= ALLOW_CLIP;
+		tmp->type |= NO_CLIP;
 	else if (param != 'x')
 		return (ret_print(EXIT_FAILURE, NULL));
 	return (EXIT_SUCCESS);

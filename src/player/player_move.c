@@ -19,9 +19,9 @@ t_wall_inter	get_wall(t_game *game, t_coord_f64 inter);
 
 int	is_a_wall_move(t_wall_inter inter)
 {
-	if (inter.text1 && !(inter.text1->type & ALLOW_CLIP))
+	if (inter.text1 && !(inter.text1->type & NO_CLIP))
 		return (1);
-	if (inter.text2 && !(inter.text2->type & ALLOW_CLIP))
+	if (inter.text2 && !(inter.text2->type & NO_CLIP))
 		return (1);
 	return (0);
 }
