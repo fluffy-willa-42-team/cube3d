@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 15:47:45 by mahadad           #+#    #+#             */
-/*   Updated: 2022/12/28 14:04:51 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/28 14:14:43 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ int	close_check(int fd)
 	return (EXIT_FAILURE);
 }
 
-
 static int	close_config_file(t_parser *data)
 {
 	return (close_check(data->file_fd));
@@ -82,4 +81,3 @@ int	destroy_t_parser(t_parser *data)
 		|| free_all_vec(data)
 		|| struct_set(data, sizeof(t_parser)));
 }
-

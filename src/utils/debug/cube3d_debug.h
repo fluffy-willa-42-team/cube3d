@@ -6,12 +6,14 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:54:56 by mahadad           #+#    #+#             */
-/*   Updated: 2022/12/21 12:14:38 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/28 14:15:57 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUBE3D_DEBUG_H
 # define CUBE3D_DEBUG_H
+
+#  include <stdio.h>
 
 # ifndef CUBE3D_UNITEST_PARSER
 #  define CUBE3D_UNITEST_PARSER 0
@@ -63,14 +65,17 @@ int	ret_print(int ret, const char *msg);
 
 # ifdef DEBUG_PRINT
 
-#  include <stdio.h>
-
-static inline int	ret_print_debug(int ret, const char *msg, const char *file, const char *func, int line)
+static inline int	ret_print_debug(
+	int ret,
+	const char *msg,
+	const char *file,
+	const char *func,
+	int line
+)
 {
-		printf ("%s[INFO] ret_print[%d] %s() %s:%d\n", msg, ret, func, file, line);
-		return (ret);
+	printf ("%s[INFO] ret_print[%d] %s() %s:%d\n", msg, ret, func, file, line);
+	return (ret);
 }
-
 
 #  ifdef ret_print
 #   undef ret_print
