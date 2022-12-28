@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 15:47:45 by mahadad           #+#    #+#             */
-/*   Updated: 2022/12/15 11:36:44 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/28 14:04:51 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,12 +69,6 @@ static int	close_config_file(t_parser *data)
 {
 	return (close_check(data->file_fd));
 }
-
-// static int	destroy_vec(t_vec *vector)
-// {
-// 	v_delete(vector);
-// 	return (EXIT_FAILURE);
-// }
 
 static int	free_all_vec(t_parser *data)
 {
