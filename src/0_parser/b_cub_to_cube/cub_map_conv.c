@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:04:10 by mahadad           #+#    #+#             */
-/*   Updated: 2022/12/15 11:35:48 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/28 15:29:47 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,6 +162,5 @@ int	map_conv(t_parser *data)
 		if (tmp[data->index])
 			data->index++;
 	}
-	printf("\n(CUB CONV)\n%s\n", (char *)data->cube.buffer);//TODO REMOVE DEBUG
 	return (EXIT_SUCCESS);
 }

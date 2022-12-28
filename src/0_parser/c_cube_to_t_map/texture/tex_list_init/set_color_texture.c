@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 14:20:21 by mahadad           #+#    #+#             */
-/*   Updated: 2022/12/28 13:54:03 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/28 15:30:08 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,6 @@ static int	set_rgba_channel(t_texture *tex, t_color *channel)
 	char	*color;
 
 	color = tex->path;
-
 	if (set_channel(&(channel->r), color))
 		return (ret_print(EXIT_FAILURE, ERR_COLOR_R));
 	color = get_next_channel(color);
