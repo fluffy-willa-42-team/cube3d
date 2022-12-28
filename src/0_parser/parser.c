@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:53:32 by mahadad           #+#    #+#             */
-/*   Updated: 2022/12/28 15:38:43 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/28 15:40:38 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ static void	print_tex(t_parser *data, char i)
 		"     }\n",
 		(char)i,
 		(get_tex_ptr(&data->tex_list, i)),
-
 		(get_tex_ptr(&data->tex_list, i)->type & UNDEFINED) != 0,
 		(get_tex_ptr(&data->tex_list, i)->type & VALID) != 0,
 		(get_tex_ptr(&data->tex_list, i)->type & COLOR) != 0,
@@ -85,10 +84,8 @@ static void	print_tex(t_parser *data, char i)
 		get_tex_ptr(&data->tex_list, i)->token,
 		get_tex_ptr(&data->tex_list, i)->path,
 		get_tex_ptr(&data->tex_list, i)->image,
-
 		get_tex_ptr(&data->tex_list, i)->token_ptr,
 		get_tex_ptr(&data->tex_list, i)->skybox_tex,
-
 		get_r(get_tex_ptr(&data->tex_list, i)->color),
 		get_g(get_tex_ptr(&data->tex_list, i)->color),
 		get_b(get_tex_ptr(&data->tex_list, i)->color),
