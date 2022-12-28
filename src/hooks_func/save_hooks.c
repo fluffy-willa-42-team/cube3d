@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 11:44:48 by awillems          #+#    #+#             */
-/*   Updated: 2022/12/27 15:32:04 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/28 15:10:26 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,6 @@ int	save_hooks(int keycode, t_game *game, int status)
 	{KEY_L,				&game->hooks.minimap_scale_down,	TRUE},
 	{KEY_I,				&game->hooks.map_scale_up,			TRUE},
 	{KEY_K,				&game->hooks.map_scale_down,		TRUE},
-	{KEY_U,				&game->hooks.player_scale_up,		TRUE},
-	{KEY_J,				&game->hooks.player_scale_down,		TRUE},
 	};
 
 	return (save_hooks_var_change(config, keycode, status) && use_hooks(game));

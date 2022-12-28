@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 13:13:06 by awillems          #+#    #+#             */
-/*   Updated: 2022/12/27 15:36:26 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/28 15:10:32 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,6 @@ int	use_hooks(t_game *game)
 		rotate_player(game);
 	if (game->hooks.minimap_scale_up || game->hooks.minimap_scale_down)
 		scale_minimap(game);
-	if (game->hooks.player_scale_up || game->hooks.player_scale_down)
-		scale_player(game);
 	if (game->hooks.map_scale_up || game->hooks.map_scale_down)
 		scale_map(game);
 	update_win(game);
