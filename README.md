@@ -47,7 +47,7 @@ brew install glfw
 
 Install lib dependencies
 ```sh
- apt install build-essential libx11-dev libglfw3-dev libglfw3 xorg-dev
+ apt install build-essential libx11-dev libglfw3-dev libglfw3 xorg-dev libxext-dev zlib1g-dev libbsd-dev
 ```
 
 ## Compile

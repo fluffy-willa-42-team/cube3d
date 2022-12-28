@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:33:07 by awillems          #+#    #+#             */
-/*   Updated: 2022/12/15 11:34:53 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/28 15:28:23 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 
 # include "mlx.h"
 # include "cube_types.h"
+# include "hooks.h"
 
 # ifndef DEBUG_PARSE
 #  define DEBUG_PARSE 0
@@ -43,20 +44,17 @@
 # define WIN_HEIGHT	800
 
 # define ANGLE_START	PI
+# define PLAYER_RADIUS	(double) 0.03
+# define PLAYER_SPEED	(double) 0.03
 
 /* #####=====----------		Ray Caster Config Var		 ----------=====##### */
 
 // FOV = PI / 3
 # define FOV_ANGLE			1.0471975512
-# define HEIGHT_OF_BLOCK	WIN_HEIGHT / 10
-
-# define MIDDLE_OF_SCREEN	WIN_HEIGHT / 2
-# define FOV_INCRE			(double) (FOV_ANGLE) / WIN_WIDTH
-# define FOV_ANG_1_2		(double) (FOV_ANGLE) / 2
 
 /* ************************************************************************** */
 
-typedef struct	s_image
+typedef struct s_image
 {
 	uint32_t	width;
 	uint32_t	height;
@@ -104,17 +102,17 @@ typedef struct s_texture {
 
 /* ************************************************************************** */
 
-
-
 typedef struct s_param {
 	void		*mlx;
 	void		*win;
 	t_image		*img;
 	double		hob_mult;
 	uint32_t	minimap_size;
-	double		minimap_point_size;
+	double		player_size;
+	uint32_t	max_minimap_size;
 	double		speed;
 	int			has_ended;
+	double		ray;
 }	t_param;
 
 typedef struct s_player {
@@ -223,6 +221,7 @@ typedef struct s_game {
 	t_param			param;
 	t_player		player;
 	t_map			map;
+	t_hooks			hooks;
 	void			*parser_data;
 	int				return_value;
 }	t_game;

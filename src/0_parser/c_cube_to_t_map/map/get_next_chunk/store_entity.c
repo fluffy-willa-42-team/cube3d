@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 16:54:58 by mahadad           #+#    #+#             */
-/*   Updated: 2022/12/15 11:36:22 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/28 15:30:20 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,9 @@ static int	set_player(t_parser *data, t_chunk *chunk, t_chunk_token *t)
 	return (EXIT_SUCCESS);
 }
 
+//TODO #12 Make the entity data structure for the player
 int	store_entity(t_parser *data, t_chunk *chunk, t_chunk_token *tokens)
 {
-	//TODO #12 Make the entity data structure for the player
 	if (tokens->entity == E_PLAYER)
 		if (set_player(data, chunk, tokens))
 			return (EXIT_FAILURE);

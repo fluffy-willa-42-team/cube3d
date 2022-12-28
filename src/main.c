@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:56:12 by mahadad           #+#    #+#             */
-/*   Updated: 2022/12/21 11:59:41 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/28 11:15:49 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	run(char *file)
 	printf("Start engine...\n");
 	if (init_game(&data.param))
 		return (destroy_data(EXIT_FAILURE, &data));
-	printf("Parser...\n");
+	printf("Parsing map...\n");
 	if (parser(file, &data))
 		return (destroy_data(EXIT_FAILURE, &data));
 	if (CUBE3D_UNITEST_PARSER)

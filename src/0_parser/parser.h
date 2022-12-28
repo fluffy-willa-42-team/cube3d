@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:53:43 by mahadad           #+#    #+#             */
-/*   Updated: 2022/12/13 11:56:33 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/28 15:23:54 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,8 +109,8 @@ typedef struct s_parser
 	int				tmp_width;
 	char			tex[DEFAULT_CUB_TEX_NB];
 	t_vec			tex_list;
-	int32_t		map_width;
-	int32_t		map_height;
+	int32_t			map_width;
+	int32_t			map_height;
 	t_vec			map;
 	t_player		player;
 	t_param			param;

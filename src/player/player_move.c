@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:18:47 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/25 13:02:25 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/28 14:33:46 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,15 @@
 #include <math.h>
 
 #include "mlx_utils.h"
+#include <stdio.h>
 
 t_wall_inter	get_wall(t_game *game, t_coord_f64 inter);
 
-int	is_a_wall_move(t_wall_inter inter)
+int	is_a_wall_move(t_game *game, t_coord_f64 inter_point)
 {
+	t_wall_inter	inter;
+
+	inter = get_wall(game, inter_point);
 	if (inter.text1 && !(inter.text1->type & NO_CLIP))
 		return (1);
 	if (inter.text2 && !(inter.text2->type & NO_CLIP))
@@ -26,28 +30,38 @@ int	is_a_wall_move(t_wall_inter inter)
 	return (0);
 }
 
-static t_coord_f64	get_pos_x(t_coord_f64 pos, double incre)
+/**
+ * @brief Player can move if in the movement between p1 and p2 and they
+ * encounter no walls or any pass through walls in the first intersection and if
+ * p2 + R does not encounter any walls tha aren't pass through.
+ *
+ * R < 0.5 or 2R < 1
+ *
+ * Speed <= 1
+ */
+void	player_move(t_game *game, t_coord_f64 player, t_coord_f64 incr)
 {
-	return (set_f64(
-			(int) pos.x + (int []){0, 1}[incre > 0],
-		pos.y)
-	);
-}
+	const double		ray = game->param.ray;
+	const t_coord_f64	inter_p1_p2 = set_f64(
+			(int) player.x + (int []){0, 1}[incr.x > 0],
+			(int) player.y + (int []){0, 1}[incr.y > 0]);
+	const t_coord_f64	inter_p2_r = set_f64(
+			(int)(player.x + incr.x) + (int []){0, 1}[incr.x > 0],
+			(int)(player.y + incr.y) + (int []){0, 1}[incr.y > 0]);
+	t_coord_f64			dest;
 
-static t_coord_f64	get_pos_y(t_coord_f64 pos, double incre)
-{
-	return (set_f64(
-			pos.x,
-			(int) pos.y + (int []){0, 1}[incre > 0]
-	));
-}
-
-void	move_player(t_game *game, t_coord_f64 player, t_coord_f64 incre)
-{
-	if ((int) player.x == (int)(player.x + incre.x)
-		|| !is_a_wall_move(get_wall(game, get_pos_x(player, incre.x))))
-		game->player.pos.x += incre.x;
-	if ((int) player.y == (int)(player.y + incre.y)
-		|| !is_a_wall_move(get_wall(game, get_pos_y(player, incre.y))))
-		game->player.pos.y += incre.y;
+	dest = set_f64(player.x + incr.x, player.y + incr.y);
+	if ((int) player.x != (int)(dest.x)
+		&& is_a_wall_move(game, set_f64(inter_p1_p2.x, player.y)))
+		dest.x = player.x;
+	else if (fabs(inter_p2_r.x - dest.x) <= ray
+		&& is_a_wall_move(game, set_f64(inter_p2_r.x, dest.y)))
+		dest.x = player.x;
+	if ((int) player.y != (int)(dest.y)
+		&& is_a_wall_move(game, set_f64(player.x, inter_p1_p2.y)))
+		dest.y = player.y;
+	else if ((fabs(inter_p2_r.y - dest.y) <= ray)
+		&& is_a_wall_move(game, set_f64(dest.x, inter_p2_r.y)))
+		dest.y = player.y;
+	game->player.pos = dest;
 }

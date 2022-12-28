@@ -14,64 +14,61 @@
 #include "mlx_utils.h"
 
 double		loop_len(double n, double len);
-double		prot_tan(double alpha);
-t_inter		get_intersect(t_game *game, double alpha, double tan_a);
 
-void	draw_side(t_game *game, int32_t x, int32_t y)
+void		draw_side(t_game *game, int32_t x, int32_t y);
+void		draw_ray(t_game *game, uint32_t color, double alpha);
+
+void	draw_background(t_game *game, t_map	*map)
 {
-	t_chunk	*chunk;
+	t_chunk		*chunk;
+	t_coord_i32	iter;
 
-	chunk = get_chunk(game, set_i32(x, y));
-	if (chunk->north)
-		draw_mini_line(game, set_f64(x, y), set_f64(x + 1, y), COLOR_SIDE);
-	if (chunk->south)
-		draw_mini_line(game, set_f64(x, y + 1), set_f64(x + 1, y + 1),
-			COLOR_SIDE);
-	if (chunk->east)
-		draw_mini_line(game, set_f64(x + 1, y), set_f64(x + 1, y + 1),
-			COLOR_SIDE);
-	if (chunk->west)
-		draw_mini_line(game, set_f64(x, y), set_f64(x, y + 1), COLOR_SIDE);
+	iter = set_i32(-1, -1);
+	while (++iter.x < (int) map->width)
+	{
+		iter.y = -1;
+		while (++iter.y < (int) map->height)
+		{
+			chunk = get_chunk(game, set_i32(iter.x, iter.y));
+			if (chunk && chunk->floor && !(chunk->floor->type & SKYBOX))
+				draw_mini_rect(game, set_f64(iter.x, iter.y), COLOR_BACKGROUND);
+			draw_side(game, iter.x, iter.y);
+		}
+	}
 }
 
-void	draw_ray(t_game *game, uint32_t color, double alpha)
+void	draw_walls(t_game *game, t_map *map)
 {
-	double	tan_a;
-	t_inter	test;
+	t_coord_i32	iter;
 
-	tan_a = prot_tan(alpha);
-	test = get_intersect(game, alpha, tan_a);
-	draw_mini_line(game, game->player.pos, test.point, color);
+	iter = set_i32(-1, -1);
+	while (++iter.x < (int) map->width)
+	{
+		iter.y = -1;
+		while (++iter.y < (int) map->height)
+			draw_side(game, iter.x, iter.y);
+	}
+}
+
+void	draw_player(t_game *game)
+{
+	float		i;
+
+	draw_ray(game, COLOR_RAY, game->player.alpha);
+	i = 0.001;
+	while (i < (FOV_ANGLE / 2))
+	{
+		draw_ray(game, COLOR_RAY, loop_len(game->player.alpha - i, PI2));
+		draw_ray(game, COLOR_RAY, loop_len(game->player.alpha + i, PI2));
+		i += 0.001;
+	}
+	draw_mini_point(game, game->player.pos, game->param.player_size,
+		COLOR_PLAYER);
 }
 
 void	draw_minimap(t_game *game)
 {
-	t_map	*map = &game->map;
-	float	i;
-
-	for (uint32_t y = 0; y < map->height; y++)
-	{
-		for (uint32_t x = 0; x < map->width; x++)
-		{
-			if (
-				get_chunk(game, set_i32(x, y))
-				&& get_chunk(game, set_i32(x, y))->floor
-				&& !(get_chunk(game, set_i32(x, y))->floor->type & SKYBOX)
-			)
-				draw_mini_rect(game, set_f64(x, y), COLOR_BACKGROUND);
-		}
-	}
-	draw_ray(game, COLOR_RAY, game->player.alpha);
-	i = 0.001;
-	while (i < FOV_ANG_1_2)
-	{
-		draw_ray(game, COLOR_RAY, loop_len(game->player.alpha - i,	PI2));
-		draw_ray(game, COLOR_RAY, loop_len(game->player.alpha + i,	PI2));
-		i += 0.001;
-	}
-	for (uint32_t y = 0; y < map->height; y++)
-		for (uint32_t x = 0; x < map->width; x++)
-			draw_side(game, x, y);
-	draw_mini_point(game, game->player.pos, game->param.minimap_point_size,
-		COLOR_PLAYER);
+	draw_background(game, &game->map);
+	draw_walls(game, &game->map);
+	draw_player(game);
 }

@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 14:36:52 by mahadad           #+#    #+#             */
-/*   Updated: 2022/12/15 11:36:48 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/28 15:31:39 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ int	set_chunk(t_parser *data, t_chunk *chunk)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
-
 
 /**
  * @author @Matthew-Dreemurr

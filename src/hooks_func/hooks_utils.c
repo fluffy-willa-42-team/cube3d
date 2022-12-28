@@ -1,29 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_params.c                                      :+:      :+:    :+:   */
+/*   hooks_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/25 11:39:57 by awillems          #+#    #+#             */
-/*   Updated: 2022/12/28 15:04:23 by awillems         ###   ########.fr       */
+/*   Created: 2022/12/27 14:34:42 by awillems          #+#    #+#             */
+/*   Updated: 2022/12/27 15:18:02 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
-#include "init_data.h"
 
-t_param	init_params(void)
+void	change_value_f(double *ptr, double incr, double min, double max)
 {
-	t_param	params;
+	if (min <= *ptr + incr && *ptr + incr <= max)
+		*ptr += incr;
+}
 
-	params.mlx = NULL;
-	params.win = NULL;
-	params.img = NULL;
-	params.hob_mult = 5;
-	params.minimap_size = 8;
-	params.player_size = 2;
-	params.speed = PLAYER_SPEED;
-	params.ray = PLAYER_RADIUS;
-	return (params);
+void	change_value_i(uint32_t *ptr, uint32_t incr, uint32_t min, uint32_t max)
+{
+	if (min <= *ptr + incr && *ptr + incr <= max)
+		*ptr += incr;
+}
+
+void	add_f64_ptr(t_coord_f64 *a, t_coord_f64 b)
+{
+	*a = add_f64(*a, b);
 }
