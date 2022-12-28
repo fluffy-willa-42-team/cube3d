@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_chunk.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
+/*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 14:44:17 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/29 09:25:32 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/12/28 15:31:52 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 /* authzed_chunk_char() */
 #include "cube3d_utils.h"
-
 
 /**
  * @author @Matthew-Dreemurr

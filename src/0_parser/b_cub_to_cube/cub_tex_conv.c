@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:01:25 by mahadad           #+#    #+#             */
-/*   Updated: 2022/12/15 11:35:55 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/28 15:32:37 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ static void	skip_whitespace(t_parser *data, char *tmp)
  * @note
  * `WE ./path_to_the_west_texture` -> `2 xxx* ./path_to_the_west_texture`
  * `cub`   [tex token] [tex path/color]
- * `cube`  [tex token] [allow clip][transparency][skybox][background] [tex path/color]
+ * `cube`  =>
+ *   [tex token] [allow clip][transparency][skybox][background] [tex path/color]
  * 
  * For the [allow_clip][transparency] we set to `x` aka false.
  * And for the [token_skybox] `.` aka none.

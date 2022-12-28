@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 17:09:25 by mahadad           #+#    #+#             */
-/*   Updated: 2022/12/28 15:17:51 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/28 15:32:07 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ static int	which_escape_seq(char *line)
 		return (SEQ_ENDOFTEX);
 	return (SEQ_ERR);
 }
-
 
 /**
  * @author @Matthew-Dreemurr
