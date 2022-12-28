@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 15:27:39 by awillems          #+#    #+#             */
-/*   Updated: 2022/12/28 11:26:06 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/28 13:24:37 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	change_speed(t_game *game)
 	if (game->hooks.add_speed && game->hooks.reduce_speed)
 		return ;
 	if (game->hooks.add_speed)
-		change_value_f(&game->param.speed, 0.05, 0.001, 10.001);
+		change_value_f(&game->param.speed, 0.05, 0.001, 1.0);
 	else if (game->hooks.reduce_speed)
-		change_value_f(&game->param.speed, -0.05, 0.001, 10.001);
+		change_value_f(&game->param.speed, -0.05, 0.001, 1.0);
 }
