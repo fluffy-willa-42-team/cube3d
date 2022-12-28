@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:33:07 by awillems          #+#    #+#             */
-/*   Updated: 2022/12/28 13:23:59 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/28 15:04:03 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ typedef struct s_param {
 	t_image		*img;
 	double		hob_mult;
 	uint32_t	minimap_size;
-	double		minimap_point_size;
+	double		player_size;
 	uint32_t	max_minimap_size;
 	double		speed;
 	int			has_ended;

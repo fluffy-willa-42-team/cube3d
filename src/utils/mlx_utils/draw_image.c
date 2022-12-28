@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 15:54:48 by awillems          #+#    #+#             */
-/*   Updated: 2022/12/28 14:01:03 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/28 15:00:33 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,10 @@ void	draw_image(
 			);
 	iter = set_i32(-1, -1);
 	while (++iter.x < size.x)
+	{
 		while (++iter.y < size.y)
 			put_pixel(&game->param, pos.x + iter.x, pos.y + iter.y,
 				get_pixel_image(texture, iter.x, iter.y, ratio));
+		iter.y = -1;
+	}
 }

@@ -34,8 +34,13 @@ void	draw_rectangle(
 
 	iter = set_i32(-1, -1);
 	while (++iter.x < size.x)
+	{
 		while (++iter.y < size.y)
+		{
 			put_pixel(game, point.x + iter.x, point.y + iter.y, color);
+		}
+		iter.y = -1;
+	}
 }
 
 void	draw_line(t_game *game, t_coord_f64 a, t_coord_f64 b, int32_t color)

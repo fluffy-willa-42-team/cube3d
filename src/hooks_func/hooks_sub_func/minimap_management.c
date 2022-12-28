@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 15:28:29 by awillems          #+#    #+#             */
-/*   Updated: 2022/12/27 15:30:49 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/28 15:04:21 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	scale_player(t_game *game)
 	if (game->hooks.player_scale_up && game->hooks.player_scale_down)
 		return ;
 	if (game->hooks.player_scale_up)
-		change_value_f(&game->param.minimap_point_size, 1, 1, 100);
+		change_value_f(&game->param.player_size, 1, 1, 100);
 	else if (game->hooks.player_scale_down)
-		change_value_f(&game->param.minimap_point_size, -1, 1, 100);
+		change_value_f(&game->param.player_size, -1, 1, 100);
 }
