@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:18:47 by awillems          #+#    #+#             */
-/*   Updated: 2022/12/28 11:55:17 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/28 13:21:21 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <math.h>
 
 #include "mlx_utils.h"
+#include <stdio.h>
 
 t_wall_inter	get_wall(t_game *game, t_coord_f64 inter);
 
@@ -50,29 +51,28 @@ void	move_player(t_game *game, t_coord_f64 player, t_coord_f64 incr)
  */
 void	player_move(t_game *game, t_coord_f64 player, t_coord_f64 incr)
 {
-	t_coord_f64 destination = set_f64(player.x + incr.x, player.y + incr.y);
+	t_coord_f64 dest = set_f64(player.x + incr.x, player.y + incr.y);
 	double		ray = game->param.ray;
 
 	double	xinter_p1_p2 = (int) player.x + (int []){0, 1}[incr.x > 0];
-	double	xinter_p2_r = (int) destination.x + (int []){0, 1}[incr.x > 0];
-	if ((int) player.x != (int)(player.x + incr.x))
-	{
-		if (is_a_wall_move(game, set_f64(xinter_p1_p2, player.y)))
-			destination.x = xinter_p1_p2 + (int []){ray, -ray}[incr.x > 0];
-	}
-	else if (fabs(xinter_p2_r - destination.x) <= ray
-		&& is_a_wall_move(game, set_f64(xinter_p2_r, destination.y)))
-		destination.x = xinter_p2_r + (int []){ray, -ray}[incr.x > 0];
-		
+	double	xinter_p2_r = (int) dest.x + (int []){0, 1}[incr.x > 0];
+	
+	if ((int) player.x != (int)(dest.x)
+		&& is_a_wall_move(game, set_f64(xinter_p1_p2, player.y)))
+		dest.x = player.x;
+	else if (fabs(xinter_p2_r - dest.x) <= ray
+		&& is_a_wall_move(game, set_f64(xinter_p2_r, dest.y)))
+		dest.x = player.x;
+	
+	
 	double	yinter_p1_p2 = (int) player.y + (int []){0, 1}[incr.y > 0];
-	double	yinter_p2_r = (int) destination.y + (int []){0, 1}[incr.y > 0];
-	if ((int) player.y != (int)(player.y + incr.y))
-	{
-		if (is_a_wall_move(game, set_f64(player.x, yinter_p1_p2)))
-			destination.y = yinter_p1_p2 + (int []){ray, -ray}[incr.y > 0];
-	}
-	else if ((fabs(yinter_p2_r - destination.y) <= ray)
-		&& is_a_wall_move(game, set_f64(destination.x, yinter_p2_r)))
-		destination.y = yinter_p2_r + (int []){ray, -ray}[incr.y > 0];
-	game->player.pos = destination;
+	double	yinter_p2_r = (int) dest.y + (int []){0, 1}[incr.y > 0];
+	
+	if ((int) player.y != (int)(dest.y)
+		&& is_a_wall_move(game, set_f64(player.x, yinter_p1_p2)))
+		dest.y = player.y;
+	else if ((fabs(yinter_p2_r - dest.y) <= ray)
+		&& is_a_wall_move(game, set_f64(dest.x, yinter_p2_r)))
+		dest.y = player.y;
+	game->player.pos = dest;
 }

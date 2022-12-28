@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:33:07 by awillems          #+#    #+#             */
-/*   Updated: 2022/12/28 11:56:24 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/28 13:22:24 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@
 
 # define ANGLE_START	PI
 # define PLAYER_RADIUS	(double) 0.1
+# define PLAYER_SPEED	(double) 0.03
 
 /* #####=====----------		Ray Caster Config Var		 ----------=====##### */
 

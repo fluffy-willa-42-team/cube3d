@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 11:39:57 by awillems          #+#    #+#             */
-/*   Updated: 2022/12/28 11:17:21 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/28 13:16:55 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_param	init_params(void)
 	params.hob_mult = 5;
 	params.minimap_size = 8;
 	params.minimap_point_size = 2;
-	params.speed = 0.05;
+	params.speed = PLAYER_SPEED;
 	params.ray = PLAYER_RADIUS;
 	return (params);
 }
