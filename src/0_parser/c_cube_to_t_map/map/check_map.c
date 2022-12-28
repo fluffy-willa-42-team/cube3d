@@ -78,12 +78,10 @@ int	is_clip(t_texture *tmp)
 
 typedef enum e_wall
 {
-	W1     = 1000,
-	W2     = 0100,
-	W      = 1100,
-	NW     = 0000,
-	WEMPTY = 0010,
-	WWHITESPACE = 0001
+	NW      =  0b0000,
+	W2EMPTY =  0b0001,
+	W2      =  0b0100,
+	W1      =  0b1000,
 }			t_wall;
 
 int	get_wall_x(t_parser *data, t_coord_i32 coord)
@@ -99,20 +97,19 @@ int	get_wall_x(t_parser *data, t_coord_i32 coord)
 		chunk1 = get(data, set_i32(coord.x, coord.y));
 	chunk2 = get_next(data, set_i32(coord.x, coord.y));
 
-	if (chunk1 && chunk1->type == WHITE_SPACE_CHUNK) {
-		ret |= WWHITESPACE;
+	if (!chunk2 || chunk2->type == WHITE_SPACE_CHUNK) {
+		ret |= W2EMPTY;
 	}
 
 	if (chunk1 && chunk1->east) {
 		if (!(chunk1->east->type & NO_CLIP)){
 			ret |= W1;}
 	}
+
 	if (chunk2 && chunk2->west) {
 		if (!(chunk2->west->type & NO_CLIP))
 			ret |= W2;
 	}
-	else if (chunk2 && !chunk2->north && !chunk2->south && !chunk2->east && !chunk2->west)
-		ret |= WEMPTY;
 	return (ret);
 }
 
@@ -129,31 +126,26 @@ static int check_vertical_while(t_parser *data, int line)
 	while (x < data->map_width)
 	{
 		wall = get_wall_x(data, set_i32(x, line));
-		if (wall & WWHITESPACE) {
-			x++;
-			printf("WP\n");
-			continue ;
-		}
-		if (!inside && wall) {
+		if (!inside && wall & W2EMPTY) {
+			printf("_");
+		} else if (!inside && wall & W2) {
+			printf("in");
+			count += 1;
 			inside = 1;
-			count += 1;
-			printf("in ");
 		}
-		else if (wall & WEMPTY) {
+		else if (inside && wall & W1 && !(wall & W2) && wall & W2EMPTY) {
+			printf("out");
+			count += 1;
 			inside = 0;
-			count += 1;
-			printf("out ");
+		} else if (inside && (wall & W1 || wall & W2)) {
+			printf("|");
+			count += 2;
 		}
-		else if (wall == W2) {
-			count += 1 + inside;
-			printf("wall ");
-		} else if (wall) {
-			printf("EOL ");
-		}
-		printf("[%d](%u)\n", inside, wall);
+		printf("(%d, %d)[%d] W1[%d] W2[%d] NW[%d] W2EMPTY[%d]\n", x, line, inside, (wall & W1) != 0, (wall & W2) != 0, (wall & NW) != 0, (wall & W2EMPTY) != 0);
 		x++;
 	}
-	return (EXIT_SUCCESS);
+	printf("count [%d]\n", count);
+	return (count % 2);
 }
 
 static int	check_vertical(t_parser *data)
