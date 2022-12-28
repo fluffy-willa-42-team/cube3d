@@ -56,7 +56,7 @@ void	draw_player(t_game *game)
 
 	draw_ray(game, COLOR_RAY, game->player.alpha);
 	i = 0.001;
-	while (i < FOV_ANG_1_2)
+	while (i < (FOV_ANGLE / 2))
 	{
 		draw_ray(game, COLOR_RAY, loop_len(game->player.alpha - i, PI2));
 		draw_ray(game, COLOR_RAY, loop_len(game->player.alpha + i, PI2));

@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:46:26 by awillems          #+#    #+#             */
-/*   Updated: 2022/12/21 14:18:27 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/28 15:27:50 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,12 +82,12 @@ void	draw_wall_text(
 	if (height > 400000000)
 		height = 400000000;
 	parse_height = height;
-	if (parse_height >= MIDDLE_OF_SCREEN)
-		parse_height = MIDDLE_OF_SCREEN - 1;
+	if (parse_height >= WIN_HEIGHT / 2)
+		parse_height = WIN_HEIGHT / 2 - 1;
 	i = height - parse_height;
 	while (i < height + parse_height)
 	{
-		draw_pixel_wall(game, set_i32(x, MIDDLE_OF_SCREEN - height + i),
+		draw_pixel_wall(game, set_i32(x, WIN_HEIGHT / 2 - height + i),
 			texture, ratio, offset, i);
 		i++;
 	}
@@ -129,7 +129,7 @@ void	draw_wall_trans(
 		exchange_textures(&wall);
 	if (wall.text1 || wall.text2)
 	{
-		height = HEIGHT_OF_BLOCK * game->param.hob_mult / height;
+		height = WIN_HEIGHT / 10 * game->param.hob_mult / height;
 		draw_wall_text(game, inter, wall.text2, x, height, 1);
 		draw_wall_text(game, inter, wall.text1, x, height, 1);
 	}

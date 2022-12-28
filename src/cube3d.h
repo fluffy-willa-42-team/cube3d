@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:33:07 by awillems          #+#    #+#             */
-/*   Updated: 2022/12/28 15:04:03 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/28 15:28:23 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,15 +51,10 @@
 
 // FOV = PI / 3
 # define FOV_ANGLE			1.0471975512
-# define HEIGHT_OF_BLOCK	WIN_HEIGHT / 10
-
-# define MIDDLE_OF_SCREEN	WIN_HEIGHT / 2
-# define FOV_INCRE			(double) (FOV_ANGLE) / WIN_WIDTH
-# define FOV_ANG_1_2		(double) (FOV_ANGLE) / 2
 
 /* ************************************************************************** */
 
-typedef struct	s_image
+typedef struct s_image
 {
 	uint32_t	width;
 	uint32_t	height;
@@ -106,8 +101,6 @@ typedef struct s_texture {
 }	t_texture;
 
 /* ************************************************************************** */
-
-
 
 typedef struct s_param {
 	void		*mlx;

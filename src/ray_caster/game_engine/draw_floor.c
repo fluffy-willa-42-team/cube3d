@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 20:08:12 by awillems          #+#    #+#             */
-/*   Updated: 2022/12/15 14:24:31 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/28 15:27:24 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	draw_floor(
 	const t_coord_f64	cosin = set_f64(cos(alpha), sin(alpha));
 	const double		cos_a_minus_pa = game->player.cosin.x * cosin.x
 		+ game->player.cosin.y * cosin.y;
-	const double		rest_to_draw = MIDDLE_OF_SCREEN - height_drawn + 2;
+	const double		rest_to_draw = WIN_HEIGHT / 2 - height_drawn + 2;
 	int32_t				y;
 
 	y = 0;

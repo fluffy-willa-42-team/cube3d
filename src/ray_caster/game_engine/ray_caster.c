@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 10:01:39 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/26 12:26:43 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/28 15:27:54 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ void	draw_column(t_game *game, uint32_t x, double alpha, double tan_a)
 
 	inter = get_intersect(game, loop_len(alpha, PI2), tan_a);
 	dist = get_distance(game, inter.point);
-	height_to_draw = HEIGHT_OF_BLOCK * game->param.hob_mult / dist;
+	height_to_draw = WIN_HEIGHT / 10 * game->param.hob_mult / dist;
 	draw_wall(game, x, inter.point, height_to_draw);
-	if (height_to_draw < MIDDLE_OF_SCREEN - 1)
+	if (height_to_draw < WIN_HEIGHT / 2 - 1)
 		draw_floor(game, x, alpha, height_to_draw, dist);
 	draw_transparency(game, x, inter, loop_len(alpha, PI2), tan_a);
 }
@@ -71,15 +71,16 @@ All of these steps are done on a column but column basis.
  */
 void	ray_caster(t_game *game)
 {
-	double		tan_a;
-	double		alpha;
-	uint32_t	i;
+	const double	fov_incr = (double)(FOV_ANGLE) / WIN_WIDTH;
+	double			tan_a;
+	double			alpha;
+	uint32_t		i;
 
-	alpha = game->player.alpha - FOV_ANG_1_2 - FOV_INCRE;
+	alpha = game->player.alpha - (FOV_ANGLE / 2) - fov_incr;
 	i = 0;
 	while (i < WIN_WIDTH)
 	{
-		alpha += FOV_INCRE;
+		alpha += fov_incr;
 		tan_a = prot_tan(alpha);
 		draw_column(game, i, alpha, tan_a);
 		i++;
