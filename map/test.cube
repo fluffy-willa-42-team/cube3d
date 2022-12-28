@@ -1,10 +1,9 @@
-* vxx. 1,222,33,44
-0 vxx* ../texture/cool.xpm
-1 xvx* ../texture/cool.xpm
-2 xvx* ../texture/cool.xpm
-3 xvx* ../texture/cool.xpm
-4 xxx* 220,100,0,255
-5 xvx* 225,30,0,255
+0 xxx. ./texture/mc/stone.xpm
+1 xxx. ./texture/mc/stone.xpm
+2 xxx. ./texture/mc/stone.xpm
+3 xxx. ./texture/mc/stone.xpm
+4 xxx. ./texture/mc/stone.xpm
+5 xxx. ./texture/mc/stone.xpm
 ~~~
                                                                         50.50.50.50.50.50.50.
                                                                         23.23.23.23.23.23.23.
