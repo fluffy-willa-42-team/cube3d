@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 11:32:07 by awillems          #+#    #+#             */
-/*   Updated: 2022/12/27 15:35:16 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/28 11:13:31 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ int	run_game(t_parser *data)
 	game.param.max_minimap_size = (uint32_t) WIN_WIDTH / game.map.width;
 	if ((uint32_t) WIN_HEIGHT / game.map.height < game.param.max_minimap_size)
 		game.param.max_minimap_size = (uint32_t) WIN_HEIGHT / game.map.height;
+	game.param.ray = PLAYER_RADIUS;
 
 	update_win(&game);
 	mlx_hook(game.param.win, 17, 1L << 17, exit_game, &game);

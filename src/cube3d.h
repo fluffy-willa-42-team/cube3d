@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:33:07 by awillems          #+#    #+#             */
-/*   Updated: 2022/12/27 14:52:56 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/28 11:13:18 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@
 # define WIN_HEIGHT	800
 
 # define ANGLE_START	PI
+# define PLAYER_RADIUS	0.3
 
 /* #####=====----------		Ray Caster Config Var		 ----------=====##### */
 
@@ -117,6 +118,7 @@ typedef struct s_param {
 	uint32_t	max_minimap_size;
 	double		speed;
 	int			has_ended;
+	double		ray;
 }	t_param;
 
 typedef struct s_player {
