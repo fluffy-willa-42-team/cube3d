@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 15:27:39 by awillems          #+#    #+#             */
-/*   Updated: 2022/12/27 15:30:57 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/28 11:26:06 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <math.h>
 
 void	add_f64_ptr(t_coord_f64 *a, t_coord_f64 b);
-void	move_player(t_game *game, t_coord_f64 player, t_coord_f64 incr);
+void	player_move(t_game *game, t_coord_f64 player, t_coord_f64 incr);
 
 void	change_value_f(double *v, double x, double y, double z);
 
@@ -39,7 +39,7 @@ void	move_player_hook(t_game *game, t_dir dir)
 		add_f64_ptr(&move_vec, set_f64(*speed * cosin->y, *speed * -cosin->x));
 	if (dir & LEFT)
 		add_f64_ptr(&move_vec, set_f64(*speed * -cosin->y, *speed * cosin->x));
-	move_player(game, game->player.pos, move_vec);
+	player_move(game, game->player.pos, move_vec);
 }
 
 void	rotate_player(t_game *game)
