@@ -12,13 +12,18 @@
 
 #include "cube3d.h"
 #include "math.h"
+#include <stdio.h>
 
 u_int32_t put_pixel_in_image(t_image *texture, uint32_t x, uint32_t y, uint32_t color);
 
+
 void	put_pixel(t_game *game, int32_t x, int32_t y, uint32_t color)
 {
-	if (color != 0x000000ff)
-		put_pixel_in_image(game->param.img, x, y, (color >> 8) + (color << 24));
+	if (color != 0xff000000)
+	{
+		// printf("%.8x %.8x %.8x\n", color, color >> 8, color << 24);
+		put_pixel_in_image(game->param.img, x, y, color);
+	}
 }
 
 void	draw_rectangle(

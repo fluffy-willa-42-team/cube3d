@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 15:54:48 by awillems          #+#    #+#             */
-/*   Updated: 2022/12/12 17:02:50 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/28 13:57:07 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,6 @@
 void	put_pixel(t_param *param, int32_t x, int32_t y, uint32_t color);
 uint32_t *get_pixel_from_image(t_image *texture, uint32_t x, uint32_t y);
 
-static int	get_rgba(int r, int g, int b, int a)
-{
-	return (r << 24 | g << 16 | b << 8 | a);
-}
-
 uint32_t	get_pixel_image(
 	const t_texture *texture,
 	uint32_t x,
@@ -27,15 +22,12 @@ uint32_t	get_pixel_image(
 	t_coord_f64 ratio
 )
 {
-	uint8_t	*ptr;
-
 	if (!texture || !texture->image)
 		return (0);
 	if ((uint32_t)(y * ratio.y) >= texture->image->height
 		|| (uint32_t)(x * ratio.x) >= texture->image->width)
 		return (0);
-	ptr = (uint8_t *) get_pixel_from_image(texture->image, x * ratio.x, y * ratio.y);
-	return (get_rgba(*ptr, *(ptr + 1), *(ptr + 2), *(ptr + 3)));
+	return (*(uint32_t *) get_pixel_from_image(texture->image, x * ratio.x, y * ratio.y));
 }
 
 void	draw_image(
