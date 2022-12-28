@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 14:20:21 by mahadad           #+#    #+#             */
-/*   Updated: 2022/12/15 11:36:37 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/28 13:54:03 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,9 +89,9 @@ static char	*get_next_channel(char *channel)
  * 
  * @brief Convert `r, g, b` to a int.
  */
-static int	get_rgba(int r, int g, int b, int a)
+static int	get_argb(int r, int g, int b, int a)
 {
-	return (r << 24 | g << 16 | b << 8 | a);
+	return (a << 24 | r << 16 | g << 8 | b);
 }
 
 /**
@@ -135,6 +135,6 @@ int	set_color_texture(t_texture *tex)
 	t_color	channel;
 
 	set_rgba_channel(tex, &channel);
-	tex->color = get_rgba(channel.r, channel.g, channel.b, channel.a);
+	tex->color = get_argb(channel.r, channel.g, channel.b, channel.a);
 	return (EXIT_SUCCESS);
 }

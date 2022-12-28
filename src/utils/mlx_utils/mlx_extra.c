@@ -6,14 +6,19 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 16:57:51 by awillems          #+#    #+#             */
-/*   Updated: 2022/12/13 11:01:20 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/28 14:02:46 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 #include <stdio.h>
 
-u_int32_t put_pixel_in_image(t_image *texture, uint32_t x, uint32_t y, uint32_t color)
+u_int32_t	put_pixel_in_image(
+	t_image *texture,
+	uint32_t x,
+	uint32_t y,
+	uint32_t color
+)
 {
 	if (!texture || !texture->buffer)
 		return (0);
@@ -23,7 +28,7 @@ u_int32_t put_pixel_in_image(t_image *texture, uint32_t x, uint32_t y, uint32_t 
 	return (1);
 }
 
-uint32_t *get_pixel_from_image(t_image *texture, uint32_t x, uint32_t y)
+uint32_t	*get_pixel_from_image(t_image *texture, uint32_t x, uint32_t y)
 {
 	if (!texture || !texture->buffer)
 		return (NULL);
@@ -32,7 +37,7 @@ uint32_t *get_pixel_from_image(t_image *texture, uint32_t x, uint32_t y)
 	return (&texture->buffer[y * texture->width + x]);
 }
 
-uint32_t destroy_image(void *mlx, t_image *image)
+uint32_t	destroy_image(void *mlx, t_image *image)
 {
 	if (!mlx || !image)
 		return (0);

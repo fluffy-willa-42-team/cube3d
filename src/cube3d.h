@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:33:07 by awillems          #+#    #+#             */
-/*   Updated: 2022/12/15 11:34:53 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/28 13:23:59 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 
 # include "mlx.h"
 # include "cube_types.h"
+# include "hooks.h"
 
 # ifndef DEBUG_PARSE
 #  define DEBUG_PARSE 0
@@ -43,6 +44,8 @@
 # define WIN_HEIGHT	800
 
 # define ANGLE_START	PI
+# define PLAYER_RADIUS	(double) 0.03
+# define PLAYER_SPEED	(double) 0.03
 
 /* #####=====----------		Ray Caster Config Var		 ----------=====##### */
 
@@ -113,8 +116,10 @@ typedef struct s_param {
 	double		hob_mult;
 	uint32_t	minimap_size;
 	double		minimap_point_size;
+	uint32_t	max_minimap_size;
 	double		speed;
 	int			has_ended;
+	double		ray;
 }	t_param;
 
 typedef struct s_player {
@@ -223,6 +228,7 @@ typedef struct s_game {
 	t_param			param;
 	t_player		player;
 	t_map			map;
+	t_hooks			hooks;
 	void			*parser_data;
 	int				return_value;
 }	t_game;
