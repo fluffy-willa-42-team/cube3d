@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:53:32 by mahadad           #+#    #+#             */
-/*   Updated: 2022/12/28 15:40:38 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/29 11:39:25 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ void	map_debug(t_parser *data)
 			if (!chunk || chunk->type == BAD_CHUNK)
 				printf("!");
 			if (chunk->type == WHITE_SPACE_CHUNK)
-				printf("_");
+				printf(" ");
 			if (chunk->type == GOOD_CHUNK)
 				printf("0");
 			x++;
