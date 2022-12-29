@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 15:58:16 by mahadad           #+#    #+#             */
-/*   Updated: 2022/12/15 11:36:17 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/29 16:20:53 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,30 +20,6 @@
 /* EXIT_SUCCESS, EXIT_FAILURE*/
 #include <stdlib.h>
 
-#include <stdio.h>//TODO REMOVE
-
-///* */ static void	print_debug(t_chunk *tmp)
-///* */ {
-///* */ 	printf(
-///* */ 	"[%d][%d] {\n"
-///* */ 	"       type          :  {\n"
-///* */ 	"                          WHITE_SPACE_CHUNK  [%d]\n"
-///* */ 	"                          GOOD_CHUNK         [%d]\n"
-///* */ 	"                          BAD_CHUNK          [%d]\n"
-///* */ 	"                        },\n"
-///* */ 	"       log           : [%c],\n"
-///* */ 	"     }\n",
-///* */ 	tmp->coord.x,
-///* */ 	tmp->coord.y,
-///* */ 	WHITE_SPACE_CHUNK == tmp->type,
-///* */ 	GOOD_CHUNK == tmp->type,
-///* */ 	BAD_CHUNK == tmp->type,
-///* */ 	tmp->east ? tmp->east->token : '#'
-///* */
-///* */ );
-///* */ }
-
-
 /*static int is_clip(t_texture *tex)
 {
 	return (tex->type & NO_CLIP);
@@ -52,11 +28,11 @@
 static t_chunk	*get(t_parser *data, t_coord_i32 pos)
 {
 	const int	index = (pos.y * data->map_width) + pos.x;
+
 	return (v_getr(&data->map, index));
 }
 
-
-static t_chunk *get_next_x(t_parser *data, t_coord_i32 coord)
+static t_chunk	*get_next_x(t_parser *data, t_coord_i32 coord)
 {
 	coord.x++;
 	if (coord.x >= data->map_width)
@@ -64,14 +40,13 @@ static t_chunk *get_next_x(t_parser *data, t_coord_i32 coord)
 	return (get(data, coord));
 }
 
-static t_chunk *get_next_y(t_parser *data, t_coord_i32 coord)
+static t_chunk	*get_next_y(t_parser *data, t_coord_i32 coord)
 {
 	coord.y++;
 	if (coord.y >= data->map_height)
 		return (NULL);
 	return (get(data, coord));
 }
-
 
 /**
  * @brief Check if the given texture can be pass-through by a player.
@@ -86,17 +61,17 @@ int	is_clip(t_texture *tmp)
 
 typedef enum e_wall
 {
-	NW      =  0b0000,
-	W2EMPTY =  0b0001,
-	W2      =  0b0100,
-	W1      =  0b1000,
+	NW		= 0b0000,
+	W2EMPTY	= 0b0001,
+	W2		= 0b0100,
+	W1		= 0b1000,
 }			t_wall;
 
 int	get_wall_x(t_parser *data, t_coord_i32 coord)
 {
-	t_wall ret;
-	t_chunk *chunk1;
-	t_chunk *chunk2;
+	t_wall	ret;
+	t_chunk	*chunk1;
+	t_chunk	*chunk2;
 
 	ret = NW;
 	if (coord.x == -1)
@@ -104,7 +79,6 @@ int	get_wall_x(t_parser *data, t_coord_i32 coord)
 	else
 		chunk1 = get(data, set_i32(coord.x, coord.y));
 	chunk2 = get_next_x(data, set_i32(coord.x, coord.y));
-
 	if (!chunk2 || chunk2->type == WHITE_SPACE_CHUNK)
 		ret |= W2EMPTY;
 	if (chunk1 && chunk1->east)
@@ -115,11 +89,12 @@ int	get_wall_x(t_parser *data, t_coord_i32 coord)
 			ret |= W2;
 	return (ret);
 }
+
 int	get_wall_y(t_parser *data, t_coord_i32 coord)
 {
-	t_wall ret;
-	t_chunk *chunk1;
-	t_chunk *chunk2;
+	t_wall	ret;
+	t_chunk	*chunk1;
+	t_chunk	*chunk2;
 
 	ret = NW;
 	if (coord.y == -1)
@@ -138,12 +113,12 @@ int	get_wall_y(t_parser *data, t_coord_i32 coord)
 	return (ret);
 }
 
-static int check_y_while(t_parser *data, int x)
+static int	check_y_while(t_parser *data, int x)
 {
-	int y;
-	int	inside;
-	int	count;
-	t_wall wall;
+	int		y;
+	int		inside;
+	int		count;
+	t_wall	wall;
 
 	y = -1;
 	inside = 0;
@@ -172,12 +147,12 @@ static int check_y_while(t_parser *data, int x)
 	return (count % 2);
 }
 
-static int check_x_while(t_parser *data, int y)
+static int	check_x_while(t_parser *data, int y)
 {
-	int x;
-	int	inside;
-	int	count;
-	t_wall wall;
+	int		x;
+	int		inside;
+	int		count;
+	t_wall	wall;
 
 	x = -1;
 	inside = 0;
@@ -219,6 +194,7 @@ static int	check_x(t_parser *data)
 	}
 	return (EXIT_SUCCESS);
 }
+
 static int	check_y(t_parser *data)
 {
 	int	x;
@@ -253,7 +229,7 @@ int	check_map(t_parser *data)
 {
 	if (check_player(data))
 		return (ret_print(EXIT_FAILURE, ERR_BAD_P_NO));
-    if (check_map_border(data))
-          return (ret_print(EXIT_FAILURE, "//TODO BREAKPOINT TO REMOVE"));
+	if (check_map_border(data))
+		return (ret_print(EXIT_FAILURE, "//TODO BREAKPOINT TO REMOVE"));
 	return (EXIT_SUCCESS);
 }
