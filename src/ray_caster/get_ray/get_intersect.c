@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 13:23:03 by awillems          #+#    #+#             */
-/*   Updated: 2022/12/29 12:34:00 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/29 13:12:28 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ t_inter	get_intersect2(t_game *game, double alpha, double tan_a)
 		get_init_y(game, alpha, tan_a),
 		get_distance(game, a.x_inter.point),
 		get_distance(game, a.y_inter.point)};
-	while (1)
+	while (TRUE)
 	{
 		if (a.x_dist < a.y_dist)
 		{
