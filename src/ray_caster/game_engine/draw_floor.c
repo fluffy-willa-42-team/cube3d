@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 20:08:12 by awillems          #+#    #+#             */
-/*   Updated: 2022/12/28 15:27:24 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/29 14:22:35 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 void	draw_pixel_skybox(t_game *game, t_coord_i32 pixel_pos,
 			t_texture *texture);
 
-void	draw_top_or_bottom(
+void	draw_texture(
 	t_game *game,
 	t_texture *texture,
 	t_coord_f64 floor_pos,
@@ -46,18 +46,43 @@ void	draw_top_or_bottom(
 	}
 }
 
-void	draw_floor(
+void	draw_floor_plus(
 	t_game *game,
-	int x,
-	double alpha,
+	double rest_to_draw,
+	double cos_a_minus_pa,
+	t_coord_f64 cosin,
 	double height_drawn,
-	double dist
+	double dist,
+	int32_t x,
+	int32_t y
 )
 {
 	double				ratio;
 	double				floor_dist;
 	t_coord_f64			pos;
 	t_chunk				*chunk;
+
+	ratio = (1.0 + ((rest_to_draw - y) / height_drawn));
+	floor_dist = dist / cos_a_minus_pa / ratio;
+	pos = set_f64(
+			game->player.pos.x + cosin.x * floor_dist,
+			game->player.pos.y + cosin.y * floor_dist
+			);
+	chunk = get_chunk(game, set_i32(pos.x, pos.y));
+	if (!chunk)
+		return ;
+	draw_texture(game, chunk->floor, pos, set_i32(x, WIN_HEIGHT - y - 1));
+	draw_texture(game, chunk->ceiling, pos, set_i32(x, y));
+}
+
+void	draw_floor(
+	t_game *game,
+	int32_t	x,
+	double alpha,
+	double height_drawn,
+	double dist
+)
+{
 	const t_coord_f64	cosin = set_f64(cos(alpha), sin(alpha));
 	const double		cos_a_minus_pa = game->player.cosin.x * cosin.x
 		+ game->player.cosin.y * cosin.y;
@@ -67,18 +92,8 @@ void	draw_floor(
 	y = 0;
 	while (y < (int32_t) rest_to_draw)
 	{
-		ratio = (1.0 + ((rest_to_draw - y) / height_drawn));
-		floor_dist = dist / cos_a_minus_pa / ratio;
-		pos = set_f64(
-				game->player.pos.x + cosin.x * floor_dist,
-				game->player.pos.y + cosin.y * floor_dist
-				);
-		chunk = get_chunk(game, set_i32(pos.x, pos.y));
-		if (!chunk)
-			continue ;
-		draw_top_or_bottom(game, chunk->floor, pos, set_i32(x,
-				WIN_HEIGHT - y - 1));
-		draw_top_or_bottom(game, chunk->ceiling, pos, set_i32(x, y));
+		draw_floor_plus(game, rest_to_draw, cos_a_minus_pa,
+			cosin, height_drawn, dist, x, y);
 		y++;
 	}
 }
