@@ -6,14 +6,14 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:54:56 by mahadad           #+#    #+#             */
-/*   Updated: 2022/12/28 14:15:57 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/29 16:21:14 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUBE3D_DEBUG_H
 # define CUBE3D_DEBUG_H
 
-#  include <stdio.h>
+# include <stdio.h>
 
 # ifndef CUBE3D_UNITEST_PARSER
 #  define CUBE3D_UNITEST_PARSER 0
@@ -37,7 +37,7 @@ int	ret_print(int ret, const char *msg);
 # define ERR_TEX_FORMAT			"Bad texture format !"
 # define ERR_TEX_TYPE			"Bad texture type !"
 # define ERR_TEX_TOKEN_FORMAT	"Bad texture token format !"
-# define ERR_SKY_TOKEN_FORMAT	"Bad skybox token format !"
+# define ERR_SKY_TOKEN_FORMAT	"Bad skybox token format or dont exist !"
 # define ERR_TEX_RESERVED		"Bad or reserved texture token used !"
 # define ERR_TEX_DUP			"Duplicate texture !"
 # define ERR_P_DUP				"Duplicate player !"

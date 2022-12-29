@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:53:32 by mahadad           #+#    #+#             */
-/*   Updated: 2022/12/29 11:39:25 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/29 16:41:43 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,6 @@
 #include "cube3d_utils.h"
 /* ft_memcpy */
 #include "lib_mem.h"
-
-#include "cube3d_debug.h"
-
-#include "mlx.h"
-
 
 #include <stdio.h>//TODO REMOVE
 

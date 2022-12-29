@@ -70,6 +70,7 @@ static int	no_data(t_chunk_token *tokens)
 		&& tokens->opt == E_EMPTY
 		&& tokens->west == E_EMPTY);
 }
+
 /**
  * @author @Matthew-Dreemurr
  * 

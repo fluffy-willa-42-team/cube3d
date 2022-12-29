@@ -73,6 +73,7 @@ typedef struct s_image
  * @param TRANSPARENCY
  */
 typedef enum e_texture_type {
+	NOT_SET			= 0b0000000,
 	UNDEFINED		= 0b0000001,
 	VALID			= 0b0000010,
 	COLOR			= 0b0000100,
