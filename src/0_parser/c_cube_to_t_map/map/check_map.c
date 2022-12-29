@@ -127,24 +127,24 @@ static int check_vertical_while(t_parser *data, int line)
 	{
 		wall = get_wall_x(data, set_i32(x, line));
 		if (!inside && wall & W2EMPTY) {
-			printf("_");
+//			printf("_");
 		} else if (!inside && wall & W2) {
-			printf("in");
+//			printf("in");
 			count += 1;
 			inside = 1;
 		}
 		else if (inside && wall & W1 && !(wall & W2) && wall & W2EMPTY) {
-			printf("out");
+//			printf("out");
 			count += 1;
 			inside = 0;
 		} else if (inside && (wall & W1 || wall & W2)) {
-			printf("|");
+//			printf("|");
 			count += 2;
 		}
-		printf("(%d, %d)[%d] W1[%d] W2[%d] NW[%d] W2EMPTY[%d]\n", x, line, inside, (wall & W1) != 0, (wall & W2) != 0, (wall & NW) != 0, (wall & W2EMPTY) != 0);
+//		printf("(%d, %d)[%d] W1[%d] W2[%d] NW[%d] W2EMPTY[%d]\n", x, line, inside, (wall & W1) != 0, (wall & W2) != 0, (wall & NW) != 0, (wall & W2EMPTY) != 0);
 		x++;
 	}
-	printf("count [%d]\n", count);
+//	printf("count [%d]\n", count);
 	return (count % 2);
 }
 
@@ -157,7 +157,7 @@ static int	check_vertical(t_parser *data)
 	{
 		if (check_vertical_while(data, y))
 			return (EXIT_FAILURE);
-		printf("\n");//TODO REMOVE
+//		printf("\n");//TODO REMOVE
 		y++;
 	}
 	return (EXIT_SUCCESS);
