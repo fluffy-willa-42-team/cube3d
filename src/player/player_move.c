@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:18:47 by awillems          #+#    #+#             */
-/*   Updated: 2022/12/28 14:33:46 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/29 11:25:37 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,16 @@
 
 t_wall_inter	get_wall(t_game *game, t_coord_f64 inter);
 
-int	is_a_wall_move(t_game *game, t_coord_f64 inter_point)
+t_bool	is_a_wall_move(t_game *game, t_coord_f64 inter_point)
 {
 	t_wall_inter	inter;
 
 	inter = get_wall(game, inter_point);
 	if (inter.text1 && !(inter.text1->type & NO_CLIP))
-		return (1);
+		return (TRUE);
 	if (inter.text2 && !(inter.text2->type & NO_CLIP))
-		return (1);
-	return (0);
+		return (TRUE);
+	return (FALSE);
 }
 
 /**
@@ -36,7 +36,7 @@ int	is_a_wall_move(t_game *game, t_coord_f64 inter_point)
  * p2 + R does not encounter any walls tha aren't pass through.
  *
  * R < 0.5 or 2R < 1
- *
+ * 
  * Speed <= 1
  */
 void	player_move(t_game *game, t_coord_f64 player, t_coord_f64 incr)

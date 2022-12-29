@@ -6,13 +6,13 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 11:24:28 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/25 13:19:25 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/29 11:22:39 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ray_caster.h"
 
-int		is_equal(double a, double b);
+t_bool	is_equal(double a, double b);
 
 t_wall_inter	get_wall(t_game *game, t_coord_f64 inter)
 {

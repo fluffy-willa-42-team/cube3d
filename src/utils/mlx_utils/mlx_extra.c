@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 16:57:51 by awillems          #+#    #+#             */
-/*   Updated: 2022/12/28 14:02:46 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/29 11:20:22 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ u_int32_t	put_pixel_in_image(
 	if (x >= texture->width || y >= texture->height)
 		return (0);
 	texture->buffer[y * texture->width + x] = color;
-	return (1);
+	return (EXIT_SUCCESS);
 }
 
 uint32_t	*get_pixel_from_image(t_image *texture, uint32_t x, uint32_t y)
@@ -40,7 +40,7 @@ uint32_t	*get_pixel_from_image(t_image *texture, uint32_t x, uint32_t y)
 uint32_t	destroy_image(void *mlx, t_image *image)
 {
 	if (!mlx || !image)
-		return (0);
+		return (EXIT_FAILURE);
 	mlx_destroy_image(mlx, image);
-	return (1);
+	return (EXIT_SUCCESS);
 }

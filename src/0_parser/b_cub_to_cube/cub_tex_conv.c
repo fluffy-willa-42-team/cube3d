@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:01:25 by mahadad           #+#    #+#             */
-/*   Updated: 2022/12/28 15:32:37 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/29 11:27:24 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
  * @param data Parser struct
  * @return int Return `1` if all texture is there, if not `0`.
  */
-static int	is_all_tex(t_parser *data)
+static t_bool	is_all_tex(t_parser *data)
 {
 	int	x;
 
@@ -32,10 +32,10 @@ static int	is_all_tex(t_parser *data)
 	while (x < DEFAULT_CUB_TEX_NB)
 	{
 		if (!data->tex[x])
-			return (0);
+			return (FALSE);
 		x++;
 	}
-	return (1);
+	return (TRUE);
 }
 
 static void	skip_whitespace(t_parser *data, char *tmp)
