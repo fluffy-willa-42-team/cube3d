@@ -1,12 +1,19 @@
 ~ PTS* ptr
 
+~ => COLOR
+R xxx. 255,0,0,0
+G xxx. 0,255,0,0
+B xxx. 0,0,255,0
+Y xxx. 255,0,255,0
+Q xxx. 128,128,128,0
+
 ~ => MC
 g xxx. ./texture/mc/grass_side.xpm
 t xxx. ./texture/mc/grass_top.xpm
 s xxx. ./texture/mc/stone.xpm
 
 ~ => Bars
-B vvx. ./texture/bars.xpm
+y vvx. ./texture/bars.xpm
 b xvx. ./texture/bars.xpm
 x xvxS ./texture/bars.xpm
 
@@ -19,24 +26,42 @@ x xvxS ./texture/bars.xpm
 
 ~ SKYBOX
 S xxv. ./texture/sky/skybox1.xpm
+U xxv. ./texture/sky/skybox2.xpm
 
 ~~~
 
-SS.SS.SS.SS.SS.SS.SS.SS.SS.SS.SS.SS.SS.   
-g....................................g.   
-t..t..t..t..t..t..t..t..t..t..t..t..t..   
-S..S..S..S..S..S.PS..S..S..S..S..S..S..   
-g....................................g.   
-t..t..t..t..t..t.Nt..t..t..t..t..t..t..   
-S..S..S..S..S..S..S..S..S..S..S..S..S..   
-g....................................g.   
-t..t..t..t..t..t..t..t..t..t..t..t..t..   
-S..S..S..S..S..S..S..S..S..S..S..S..S..   
-g.........e..........................g.   
-t..t..t..t..t..t..t..t..t..t..t..t..t..   
-S..S..S..S..S..S..S..S..S..S..S..S..S..   
-g....................................g.   
-tg.tg.tg.tg.tg.tg.t..tg.tg.tg.tg.tg.tg.   
+
+
+                                             QR.QR.QR.
+                                             Y......G.
+                                             Q..Q..Q..
+                                             Q..Q.PQ..
+                                             Y......G.
+                                             Q..Q.NQ..
+                                             Q..Q..Q..
+                                             Y......G.
+                                             QB.Q..QB.
+                                                Q..
+                                                BB.
+                                                Q..
+                                                U..
+                                                BB.
+                                                U..
+SS.SS.SS.SS.SS.SS.SS.SS.SS.SS.SS.SS.SS.         U..
+g....................................g.         BB.
+t..t..t..t..t..t..t..t..t..t..t..t..t..         U..
+S..S..S..S..S..S..S..S..S..S..S..S..S..      UR.U..UR.
+g....................................g.      Y......G.
+t..t..t..t..t..t..t..t..t..t..t..t..t..      U..U..U..
+S..S..S..S..S..S..S..S..S..S..S..S..S..ss.UR.U..U..U..
+g...................................................G.
+t..t..t..t..t..t..t..t..t..t..t..t..t..ss.UB.U..U..U..
+S..S..S..S..S..S..S..S..S..S..S..S..S..      U..U..U..
+g....................................g.      Y......G.
+t..t..t..t..t..t..t..t..t..t..t..t..t..      UB.UB.UB.
+S..S..S..S..S..S..S..S..S..S..S..S..S..      
+g....................................g.      
+tg.tg.tg.tg.tg.tg.t..tg.tg.tg.tg.tg.tg.      
                   s..                     
                   gg.                     
                   t..                     
@@ -47,7 +72,7 @@ S..S..S..S..S..S..S..S..S..S..S..S..S..S..S..S..S..S..s..s..s..s..s..s..s..s..s.
 g2...................................g................s.....s.....s.....s.....s.....s...s.
 t..t..t..t..t..t..t..t..t..t..t..t..t..S..S..S..S..S..s..s..s..s..s..s..s..s..s..s..s..s..
 S..S..S..S..S..S..S..S..S..S..S..S..S..Sb.Sb.Sb.Sb.Sb.sb.sb.sb.sb.sb.sb.sb.sb.sb.sb.sb.sb.
-g1.....................................B............B...................................s.
+g1.....................................y............y...................................s.
 t5.t..t..t..t..t..t..t..t..t..t..t..t..tx.tx.tx.tx.tx.sb.sb.sb.sb.sb.sb.sb.sb.sb.sb.sb.sb.
 S..S..S..S..S..S..S..S..S..S..S..S..S..               s..s..s..s..s..s..s..s..s..s..s..s..
 g....................................g.               s.....s.....s.....s.....s.....s...s.
