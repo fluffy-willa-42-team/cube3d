@@ -105,19 +105,14 @@ int	get_wall_x(t_parser *data, t_coord_i32 coord)
 		chunk1 = get(data, set_i32(coord.x, coord.y));
 	chunk2 = get_next_x(data, set_i32(coord.x, coord.y));
 
-	if (!chunk2 || chunk2->type == WHITE_SPACE_CHUNK) {
+	if (!chunk2 || chunk2->type == WHITE_SPACE_CHUNK)
 		ret |= W2EMPTY;
-	}
-
-	if (chunk1 && chunk1->east) {
-		if (!(chunk1->east->type & NO_CLIP)){
-			ret |= W1;}
-	}
-
-	if (chunk2 && chunk2->west) {
+	if (chunk1 && chunk1->east)
+		if (!(chunk1->east->type & NO_CLIP))
+			ret |= W1;
+	if (chunk2 && chunk2->west)
 		if (!(chunk2->west->type & NO_CLIP))
 			ret |= W2;
-	}
 	return (ret);
 }
 int	get_wall_y(t_parser *data, t_coord_i32 coord)
@@ -132,20 +127,14 @@ int	get_wall_y(t_parser *data, t_coord_i32 coord)
 	else
 		chunk1 = get(data, set_i32(coord.x, coord.y));
 	chunk2 = get_next_y(data, set_i32(coord.x, coord.y));
-
-	if (!chunk2 || chunk2->type == WHITE_SPACE_CHUNK) {
+	if (!chunk2 || chunk2->type == WHITE_SPACE_CHUNK)
 		ret |= W2EMPTY;
-	}
-
-	if (chunk1 && chunk1->south) {
-		if (!(chunk1->south->type & NO_CLIP)){
-			ret |= W1;}
-	}
-
-	if (chunk2 && chunk2->north) {
+	if (chunk1 && chunk1->south)
+		if (!(chunk1->south->type & NO_CLIP))
+			ret |= W1;
+	if (chunk2 && chunk2->north)
 		if (!(chunk2->north->type & NO_CLIP))
 			ret |= W2;
-	}
 	return (ret);
 }
 
@@ -162,28 +151,24 @@ static int check_y_while(t_parser *data, int x)
 	while (y < data->map_height)
 	{
 		wall = get_wall_y(data, set_i32(x, y));
-		if (!inside && wall & W2EMPTY) {
-			printf("_");
-		} else if (!inside && wall & W2) {
-			printf("in");
+		if (!inside && wall & W2EMPTY)
+			;
+		else if (!inside && wall & W2)
+		{
 			count += 1;
 			inside = 1;
 		}
-		else if (inside && wall & W1 && !(wall & W2) && wall & W2EMPTY) {
-			printf("out");
+		else if (inside && wall & W1 && !(wall & W2) && wall & W2EMPTY)
+		{
 			count += 1;
 			inside = 0;
-		} else if (inside && (wall & W1 || wall & W2)) {
-			printf("|");
+		}
+		else if (inside && (wall & W1 || wall & W2))
 			count += 2;
-		} else if (!inside && !(wall & W2EMPTY)) {
+		else if (!inside && !(wall & W2EMPTY))
 			return (ret_print(EXIT_FAILURE, "FFFFFFF\n"));
-		} else
-			printf(" ");
-//		printf("(%d, %d)[%d] W1[%d] W2[%d] NW[%d] W2EMPTY[%d]\n", x, y, inside, (wall & W1) != 0, (wall & W2) != 0, (wall & NW) != 0, (wall & W2EMPTY) != 0);
-	y++;
+		y++;
 	}
-	printf("count [%d]\n", count);
 	return (count % 2);
 }
 
@@ -200,29 +185,24 @@ static int check_x_while(t_parser *data, int y)
 	while (x < data->map_width)
 	{
 		wall = get_wall_x(data, set_i32(x, y));
-		if (!inside && wall & W2EMPTY) {
-			printf("_");
-		} else if (!inside && wall & W2) {
-			printf("in");
+		if (!inside && wall & W2EMPTY)
+			;
+		else if (!inside && wall & W2)
+		{
 			count += 1;
 			inside = 1;
 		}
-		else if (inside && wall & W1 && !(wall & W2) && wall & W2EMPTY) {
-			printf("out");
+		else if (inside && wall & W1 && !(wall & W2) && wall & W2EMPTY)
+		{
 			count += 1;
 			inside = 0;
-		} else if (inside && (wall & W1 || wall & W2)) {
-			printf("|");
-			count += 2;
-		} else if (!inside && !(wall & W2EMPTY)) {
-			return (ret_print(EXIT_FAILURE, "FFFFFFF\n"));
 		}
-		else
-			printf(" ");
-//		printf("(%d, %d)[%d] W1[%d] W2[%d] NW[%d] W2EMPTY[%d]\n", x, y, inside, (wall & W1) != 0, (wall & W2) != 0, (wall & NW) != 0, (wall & W2EMPTY) != 0);
+		else if (inside && (wall & W1 || wall & W2))
+			count += 2;
+		else if (!inside && !(wall & W2EMPTY))
+			return (ret_print(EXIT_FAILURE, "FFFFFFF\n"));
 		x++;
 	}
-	printf("count [%d]\n", count);
 	return (count % 2);
 }
 
@@ -235,7 +215,6 @@ static int	check_x(t_parser *data)
 	{
 		if (check_x_while(data, y))
 			return (EXIT_FAILURE);
-//		printf("\n");//TODO REMOVE
 		y++;
 	}
 	return (EXIT_SUCCESS);
@@ -249,7 +228,6 @@ static int	check_y(t_parser *data)
 	{
 		if (check_y_while(data, x))
 			return (EXIT_FAILURE);
-//		printf("\n");//TODO REMOVE
 		x++;
 	}
 	return (EXIT_SUCCESS);
@@ -259,7 +237,7 @@ int	check_map_border(t_parser *data)
 {
 	if (check_x(data) || check_y(data))
 		return (EXIT_FAILURE);
-	return (EXIT_SUCCESS /*EXIT_FAILURE*/);//TODO return success
+	return (EXIT_SUCCESS);
 }
 
 /**
