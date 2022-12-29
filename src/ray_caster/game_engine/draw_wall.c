@@ -6,12 +6,13 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:46:26 by awillems          #+#    #+#             */
-/*   Updated: 2022/12/29 11:55:16 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/29 14:39:25 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ray_caster.h"
 #include "mlx_utils.h"
+#include "thenormforcedmetodothis.h"
 #include <stdio.h>
 
 t_bool	is_equal(double a, double b);

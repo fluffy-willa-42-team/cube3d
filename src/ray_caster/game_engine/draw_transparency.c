@@ -6,11 +6,12 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 12:46:00 by awillems          #+#    #+#             */
-/*   Updated: 2022/12/29 14:05:42 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/29 14:39:28 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ray_caster.h"
+#include "thenormforcedmetodothis.h"
 
 double		get_distance(t_game *game, t_coord_f64 pos);
 t_intersect	get_r_step_x(t_intersect prev, double alpha, double tan_a);

@@ -6,11 +6,12 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 13:23:03 by awillems          #+#    #+#             */
-/*   Updated: 2022/12/29 13:51:25 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/29 14:40:18 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ray_caster.h"
+#include "thenormforcedmetodothis.h"
 #include <stdio.h>
 
 double		get_distance(t_game *game, t_coord_f64 pos);

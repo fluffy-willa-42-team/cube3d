@@ -6,11 +6,12 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 15:02:04 by awillems          #+#    #+#             */
-/*   Updated: 2022/12/29 13:36:44 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/29 14:40:07 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ray_caster.h"
+#include "thenormforcedmetodothis.h"
 #include "mlx_utils.h"
 
 double		prot_tan(double alpha);
