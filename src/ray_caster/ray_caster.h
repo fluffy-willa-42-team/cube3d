@@ -65,6 +65,13 @@ typedef struct s_draw_pixel {
 	uint32_t	i;
 }	t_draw_pixel;
 
+typedef struct s_draw_trans {
+	double		alpha;
+	double		tan_a;
+	uint32_t	x;
+	t_intersect	(*func)(t_intersect a, double b, double c);
+}	t_draw_trans;
+
 typedef struct s_ang_param {
 	double	alpha;
 	double	tan_a;
