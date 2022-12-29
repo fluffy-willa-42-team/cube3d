@@ -53,6 +53,20 @@ typedef struct s_inter {
 
 /* ************************************************************************** */
 
+typedef struct s_draw_wall {
+	uint32_t	x;
+	double		height;
+	int			recursive;
+}	t_draw_wall;
+
+typedef struct s_draw_pixel {
+	t_coord_f64	ratio;
+	double		offset;
+	uint32_t	i;
+}	t_draw_pixel;
+
+/* ************************************************************************** */
+
 t_chunk			*get_chunk(t_game *data, t_coord_i32 pos);
 t_wall_inter	get_wall(t_game *game, t_coord_f64 inter);
 
