@@ -6,10 +6,11 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 10:30:13 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/25 13:28:01 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/29 11:22:27 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "cube3d.h"
 #include <math.h>
 
 double	prot_tan(double alpha)
@@ -42,7 +43,7 @@ double	loop_len(double n, double len)
 	return (n);
 }
 
-int	is_equal(double a, double b)
+t_bool	is_equal(double a, double b)
 {
 	return ((a > b - 0.0001 && a < b + 0.0001)
 		|| (b > a - 0.0001 && b < a + 0.0001));

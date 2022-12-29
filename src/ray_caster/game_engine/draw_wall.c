@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:46:26 by awillems          #+#    #+#             */
-/*   Updated: 2022/12/28 15:27:50 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/29 11:22:04 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "mlx_utils.h"
 #include <stdio.h>
 
-int		is_equal(double a, double b);
+t_bool	is_equal(double a, double b);
 void	draw_pixel_skybox(t_game *game, t_coord_i32 pixel_pos,
 			t_texture *texture);
 

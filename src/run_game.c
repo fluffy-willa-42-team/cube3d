@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 11:32:07 by awillems          #+#    #+#             */
-/*   Updated: 2022/12/29 11:16:40 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/29 11:19:36 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	exit_game(t_game *game)
 	destroy_data(game->return_value, game->parser_data);
 	printf("Exit\n");
 	exit(game->return_value);
-	return (1);
+	return (EXIT_SUCCESS);
 }
 
 int	run_game(t_parser *data)

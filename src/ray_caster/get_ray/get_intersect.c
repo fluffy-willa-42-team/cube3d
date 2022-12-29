@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 13:23:03 by awillems          #+#    #+#             */
-/*   Updated: 2022/12/28 14:31:24 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/29 11:21:22 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,21 @@ t_intersect	get_init_y(t_game *game, double alpha, double tan_a);
 t_intersect	get_step_x(t_intersect prev, double alpha, double tan_a);
 t_intersect	get_step_y(t_intersect prev, double alpha, double tan_a);
 
-int	is_in_map(t_game *game, t_coord_f64 point)
+t_bool	is_in_map(t_game *game, t_coord_f64 point)
 {
 	return (0 <= point.x && point.x < game->map.width
 		&& 0 <= point.y && point.y < game->map.height);
 }
 
-int	is_a_wall_vue(t_wall_inter inter)
+t_bool	is_a_wall_vue(t_wall_inter inter)
 {
 	if (inter.text1
 		&& !(inter.text1->type & TRANSPARENCY && !inter.text1->skybox_tex))
-		return (1);
+		return (TRUE);
 	if (inter.text2
 		&& !(inter.text2->type & TRANSPARENCY && !inter.text2->skybox_tex))
-		return (1);
-	return (0);
+		return (TRUE);
+	return (FALSE);
 }
 
 t_inter	get_intersect(t_game *game, double alpha, double tan_a)
