@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 15:02:04 by awillems          #+#    #+#             */
-/*   Updated: 2022/12/28 15:03:25 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/29 13:36:44 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "mlx_utils.h"
 
 double		prot_tan(double alpha);
-t_inter		get_intersect(t_game *game, double alpha, double tan_a);
+t_inter		get_intersect(t_game *game, t_ang_param a);
 
 void	draw_ray(t_game *game, uint32_t color, double alpha)
 {
@@ -22,7 +22,7 @@ void	draw_ray(t_game *game, uint32_t color, double alpha)
 	t_inter	test;
 
 	tan_a = prot_tan(alpha);
-	test = get_intersect(game, alpha, tan_a);
+	test = get_intersect(game, (t_ang_param){alpha, tan_a});
 	draw_mini_line(game, game->player.pos, test.point, color);
 }
 

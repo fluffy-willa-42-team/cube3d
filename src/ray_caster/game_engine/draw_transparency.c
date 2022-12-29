@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 12:46:00 by awillems          #+#    #+#             */
-/*   Updated: 2022/12/29 12:06:06 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/29 13:32:16 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	draw_transparency(
 	t_game *game,
 	uint32_t x,
 	t_inter inter,
-	t_draw_tans a
+	t_ang_param a
 )
 {
 	double	x_dist;

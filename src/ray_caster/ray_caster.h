@@ -65,11 +65,16 @@ typedef struct s_draw_pixel {
 	uint32_t	i;
 }	t_draw_pixel;
 
-typedef struct s_draw_tans {
+typedef struct s_ang_param {
 	double	alpha;
 	double	tan_a;
-}	t_draw_tans;
+}	t_ang_param;
 
+typedef struct s_get_inter2 {
+	double		alpha;
+	double		tan_a;
+	t_intersect	(*func)(t_intersect a, double b, double c);
+}	t_get_inter2;
 
 typedef struct s_get_inter {
 	t_intersect	x_inter;

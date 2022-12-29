@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 10:01:39 by awillems          #+#    #+#             */
-/*   Updated: 2022/12/28 15:27:54 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/29 13:35:42 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 double	prot_tan(double alpha);
 double	loop_len(double n, double len);
 double	get_distance(t_game *game, t_coord_f64 pos);
-t_inter	get_intersect(t_game *game, double alpha, double tan_a);
+t_inter	get_intersect(t_game *game, t_ang_param a);
 
 void	draw_wall(t_game *game, uint32_t x, t_coord_f64 inter, double height);
 void	draw_floor(t_game *game, int x, double alpha, double height_drawn,
@@ -39,7 +39,7 @@ void	draw_column(t_game *game, uint32_t x, double alpha, double tan_a)
 	double	dist;
 	double	height_to_draw;
 
-	inter = get_intersect(game, loop_len(alpha, PI2), tan_a);
+	inter = get_intersect(game, (t_ang_param){loop_len(alpha, PI2), tan_a});
 	dist = get_distance(game, inter.point);
 	height_to_draw = WIN_HEIGHT / 10 * game->param.hob_mult / dist;
 	draw_wall(game, x, inter.point, height_to_draw);
