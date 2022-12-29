@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:52:52 by mahadad           #+#    #+#             */
-/*   Updated: 2022/12/15 11:35:40 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/29 11:26:54 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
  * @param c The char to check
  * @return int Return 1 if the `c` is find in the `set` otherwise return 0.
  */
-static int	charset(char const *set, char c)
+static t_bool	charset(char const *set, char c)
 {
 	int	i;
 
@@ -40,10 +40,10 @@ static int	charset(char const *set, char c)
 	while (set[i])
 	{
 		if (set[i] == c)
-			return (1);
+			return (TRUE);
 		i++;
 	}
-	return (0);
+	return (FALSE);
 }
 
 /**

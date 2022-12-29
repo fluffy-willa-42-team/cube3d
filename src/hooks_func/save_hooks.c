@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 11:44:48 by awillems          #+#    #+#             */
-/*   Updated: 2022/12/28 15:10:26 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/29 11:26:26 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ int	save_hooks_var_change(const t_keyset *config, int keycode, int status)
 			*(int *) config[i].ptr |= config[i].value;
 		else if (status == KEY_UP)
 			*(int *) config[i].ptr &= ~config[i].value;
-		return (1);
+		return (EXIT_SUCCESS);
 	}
-	return (0);
+	return (EXIT_FAILURE);
 }
 
 int	save_hooks(int keycode, t_game *game, int status)

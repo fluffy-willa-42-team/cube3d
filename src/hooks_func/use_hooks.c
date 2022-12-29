@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 13:13:06 by awillems          #+#    #+#             */
-/*   Updated: 2022/12/29 11:18:14 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/29 11:26:03 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,5 @@ int	use_hooks(t_game *game)
 	if (game->hooks.map_scale_up || game->hooks.map_scale_down)
 		scale_map(game);
 	update_win(game, &game->param);
-	return (1);
+	return (EXIT_SUCCESS);
 }
