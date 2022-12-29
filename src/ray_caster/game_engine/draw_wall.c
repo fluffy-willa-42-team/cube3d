@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:46:26 by awillems          #+#    #+#             */
-/*   Updated: 2022/12/29 14:39:25 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/29 14:48:13 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,8 @@ void	draw_wall_text(
 	t_draw_wall a
 )
 {
-	t_coord_f64			ratio;
-	double				offset;
 	uint32_t			parse_height;
-	uint32_t			i;
+	t_draw_pixel		b;
 
 	if (!texture || !(texture->type & VALID))
 		return ;
@@ -72,8 +70,8 @@ void	draw_wall_text(
 			(t_draw_wall){a.x, a.height, 0});
 	if (texture->type & IMAGE)
 	{
-		ratio = set_f64(1, (double) texture->image->height / (a.height * 2));
-		offset = (inter.x - (int)(float) inter.x) * texture->image->width
+		b.ratio = set_f64(1, (double) texture->image->height / (a.height * 2));
+		b.offset = (inter.x - (int)(float) inter.x) * texture->image->width
 			+ (inter.y - (int)(float) inter.y) * texture->image->height;
 	}
 	if (a.height > 400000000)
@@ -81,12 +79,11 @@ void	draw_wall_text(
 	parse_height = a.height;
 	if (parse_height >= WIN_HEIGHT / 2)
 		parse_height = WIN_HEIGHT / 2 - 1;
-	i = a.height - parse_height;
-	while (i < a.height + parse_height)
+	b.i = a.height - parse_height - 1;
+	while (++b.i < a.height + parse_height)
 	{
-		draw_pixel_wall(game, set_i32(a.x, WIN_HEIGHT / 2 - a.height + i),
-			texture, (t_draw_pixel){ratio, offset, i});
-		i++;
+		draw_pixel_wall(game, set_i32(a.x, WIN_HEIGHT / 2 - a.height + b.i),
+			texture, b);
 	}
 }
 
