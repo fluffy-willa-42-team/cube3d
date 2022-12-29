@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:33:07 by awillems          #+#    #+#             */
-/*   Updated: 2022/12/28 15:28:23 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/29 12:33:48 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@
 # define WIN_HEIGHT	800
 
 # define ANGLE_START	PI
-# define PLAYER_RADIUS	(double) 0.03
-# define PLAYER_SPEED	(double) 0.03
+# define PLAYER_RADIUS	(double) 0.2
+# define PLAYER_SPEED	(double) 0.1
 
 /* #####=====----------		Ray Caster Config Var		 ----------=====##### */
 

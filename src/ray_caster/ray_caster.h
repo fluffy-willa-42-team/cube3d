@@ -65,6 +65,19 @@ typedef struct s_draw_pixel {
 	uint32_t	i;
 }	t_draw_pixel;
 
+typedef struct s_draw_tans {
+	double	alpha;
+	double	tan_a;
+}	t_draw_tans;
+
+
+typedef struct s_get_inter {
+	t_intersect	x_inter;
+	t_intersect	y_inter;
+	double		x_dist;
+	double		y_dist;
+}	t_get_inter;
+
 /* ************************************************************************** */
 
 t_chunk			*get_chunk(t_game *data, t_coord_i32 pos);

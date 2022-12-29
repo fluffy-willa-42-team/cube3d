@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 12:46:00 by awillems          #+#    #+#             */
-/*   Updated: 2022/11/25 13:24:09 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/29 12:06:06 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@ void	draw_transparency(
 	t_game *game,
 	uint32_t x,
 	t_inter inter,
-	double alpha,
-	double tan_a
+	t_draw_tans a
 )
 {
 	double	x_dist;
@@ -41,7 +40,7 @@ void	draw_transparency(
 				x_dist = -1;
 				continue ;
 			}
-			inter.x_inter = get_r_step_x(inter.x_inter, alpha, tan_a);
+			inter.x_inter = get_r_step_x(inter.x_inter, a.alpha, a.tan_a);
 			x_dist = get_distance(game, inter.x_inter.point);
 			draw_wall_trans(game, x, inter.x_inter.point, x_dist);
 		}
@@ -52,7 +51,7 @@ void	draw_transparency(
 				y_dist = -1;
 				continue ;
 			}
-			inter.y_inter = get_r_step_y(inter.y_inter, alpha, tan_a);
+			inter.y_inter = get_r_step_y(inter.y_inter, a.alpha, a.tan_a);
 			y_dist = get_distance(game, inter.y_inter.point);
 			draw_wall_trans(game, x, inter.y_inter.point, y_dist);
 		}
