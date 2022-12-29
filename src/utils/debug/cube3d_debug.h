@@ -37,7 +37,7 @@ int	ret_print(int ret, const char *msg);
 # define ERR_TEX_FORMAT			"Bad texture format !"
 # define ERR_TEX_TYPE			"Bad texture type !"
 # define ERR_TEX_TOKEN_FORMAT	"Bad texture token format !"
-# define ERR_SKY_TOKEN_FORMAT	"Bad skybox token format !"
+# define ERR_SKY_TOKEN_FORMAT	"Bad skybox token format or dont exist !"
 # define ERR_TEX_RESERVED		"Bad or reserved texture token used !"
 # define ERR_TEX_DUP			"Duplicate texture !"
 # define ERR_P_DUP				"Duplicate player !"

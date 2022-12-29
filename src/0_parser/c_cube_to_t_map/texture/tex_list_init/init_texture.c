@@ -68,7 +68,7 @@ static int	open_file_texture(t_param *param, t_texture *tex)
 static int	set_tex_ptr(t_texture *tex, t_parser *data)
 {
 	tex->skybox_tex = get_tex_ptr(&data->tex_list, tex->token_ptr);
-	if (!tex->token_ptr)
+	if (!tex->skybox_tex || tex->skybox_tex->type == NOT_SET)
 		return (ret_print(EXIT_FAILURE, ERR_SKY_TOKEN_FORMAT));
 	return (EXIT_SUCCESS);
 }
