@@ -57,6 +57,19 @@ static int	is_all_valid_tokens(t_chunk_token *tokens)
 		&& authzed_chunk_char(tokens->west));
 }
 
+static int	no_data(t_chunk_token *tokens)
+{
+	return (tokens->ceiling == E_EMPTY
+		&& tokens->east == E_EMPTY
+		&& tokens->floor == E_EMPTY
+		&& tokens->floor == E_EMPTY
+		&& tokens->north == E_EMPTY
+		&& tokens->south == E_EMPTY
+		&& tokens->entity == E_EMPTY
+		&& tokens->tex == E_EMPTY
+		&& tokens->opt == E_EMPTY
+		&& tokens->west == E_EMPTY);
+}
 /**
  * @author @Matthew-Dreemurr
  * 
@@ -72,7 +85,7 @@ int	check_chunk_type(t_chunk_token *tokens)
 		tokens->type = WHITE_SPACE_CHUNK;
 		return (WHITE_SPACE_CHUNK);
 	}
-	if (is_all_valid_tokens(tokens))
+	if (is_all_valid_tokens(tokens) && !no_data(tokens))
 	{
 		tokens->type = GOOD_CHUNK;
 		return (GOOD_CHUNK);

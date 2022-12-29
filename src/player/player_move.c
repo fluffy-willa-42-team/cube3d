@@ -23,9 +23,9 @@ t_bool	is_a_wall_move(t_game *game, t_coord_f64 inter_point)
 	t_wall_inter	inter;
 
 	inter = get_wall(game, inter_point);
-	if (inter.text1 && !(inter.text1->type & ALLOW_CLIP))
+	if (inter.text1 && !(inter.text1->type & NO_CLIP))
 		return (TRUE);
-	if (inter.text2 && !(inter.text2->type & ALLOW_CLIP))
+	if (inter.text2 && !(inter.text2->type & NO_CLIP))
 		return (TRUE);
 	return (FALSE);
 }
@@ -33,8 +33,8 @@ t_bool	is_a_wall_move(t_game *game, t_coord_f64 inter_point)
 /**
  * @brief Player can move if in the movement between p1 and p2 and they
  * encounter no walls or any pass through walls in the first intersection and if
- * p2 + R does not encounter any walls tha aren't pass through. 
- * 
+ * p2 + R does not encounter any walls tha aren't pass through.
+ *
  * R < 0.5 or 2R < 1
  * 
  * Speed <= 1

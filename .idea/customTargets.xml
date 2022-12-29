@@ -15,5 +15,15 @@
         </build>
       </configuration>
     </target>
+    <target id="04c0cbe3-7b32-4c51-a7e4-213b1323f0c8" name="all test parser" defaultType="MAKE">
+      <configuration id="ac6d8347-6806-41a7-81b7-0860e149ce36" name="all test parser" toolchainName="Default">
+        <build type="MAKE">
+          <make targetName="test" />
+        </build>
+        <clean type="MAKE">
+          <make targetName="clear_test" />
+        </clean>
+      </configuration>
+    </target>
   </component>
 </project>

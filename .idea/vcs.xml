@@ -4,6 +4,7 @@
     <mapping directory="" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/lib/libft" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/lib/libft/lib/wraloc" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/lib/minilibx-linux" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/lib/vector-lib" vcs="Git" />
   </component>
 </project>

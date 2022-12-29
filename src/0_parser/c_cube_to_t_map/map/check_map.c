@@ -22,98 +22,130 @@
 
 #include <stdio.h>//TODO REMOVE
 
-/* */ static void	print_debug(t_chunk *tmp)
-/* */ {
-/* */ 	printf(
-/* */ 	"[%d][%d] {\n"
-/* */ 	"       type          :  {\n"
-/* */ 	"                          WHITE_SPACE_CHUNK  [%d]\n"
-/* */ 	"                          GOOD_CHUNK         [%d]\n"
-/* */ 	"                          BAD_CHUNK          [%d]\n"
-/* */ 	"                        },\n"
-/* */ 	"       log           : [%c],\n"
-/* */ 	"     }\n",
-/* */ 	tmp->coord.x,
-/* */ 	tmp->coord.y,
-/* */ 	WHITE_SPACE_CHUNK == tmp->type,
-/* */ 	GOOD_CHUNK == tmp->type,
-/* */ 	BAD_CHUNK == tmp->type,
-/* */ 	tmp->east ? tmp->east->token : '#'
-/* */
-/* */ );
-/* */ }
+///* */ static void	print_debug(t_chunk *tmp)
+///* */ {
+///* */ 	printf(
+///* */ 	"[%d][%d] {\n"
+///* */ 	"       type          :  {\n"
+///* */ 	"                          WHITE_SPACE_CHUNK  [%d]\n"
+///* */ 	"                          GOOD_CHUNK         [%d]\n"
+///* */ 	"                          BAD_CHUNK          [%d]\n"
+///* */ 	"                        },\n"
+///* */ 	"       log           : [%c],\n"
+///* */ 	"     }\n",
+///* */ 	tmp->coord.x,
+///* */ 	tmp->coord.y,
+///* */ 	WHITE_SPACE_CHUNK == tmp->type,
+///* */ 	GOOD_CHUNK == tmp->type,
+///* */ 	BAD_CHUNK == tmp->type,
+///* */ 	tmp->east ? tmp->east->token : '#'
+///* */
+///* */ );
+///* */ }
 
 
 /*static int is_clip(t_texture *tex)
 {
-	return (tex->type & ALLOW_CLIP);
+	return (tex->type & NO_CLIP);
 }*/
 
 static t_chunk	*get(t_parser *data, t_coord_i32 pos)
 {
 	const int	index = (pos.y * data->map_width) + pos.x;
-
 	return (v_getr(&data->map, index));
 }
 
 
-static t_chunk *get_next(t_parser *data, int x, int line)
+static t_chunk *get_next(t_parser *data, t_coord_i32 coord)
 {
-	x++;
-	if (x > data->map_width)
+	coord.x++;
+	if (coord.x >= data->map_width)
 		return (NULL);
-	return (get(data, set_i32(x, line)));
+	return (get(data, coord));
 }
 
 
-int		wip = 0;
-int		inside = 0;
+/**
+ * @brief Check if the given texture can be pass-through by a player.
+ * @return `1` if clip, `0` if noclip
+ */
+int	is_clip(t_texture *tmp)
+{
+	if (tmp == NULL)
+		return (0);
+	return (tmp->type != NO_CLIP);
+}
+
+typedef enum e_wall
+{
+	NW      =  0b0000,
+	W2EMPTY =  0b0001,
+	W2      =  0b0100,
+	W1      =  0b1000,
+}			t_wall;
+
+int	get_wall_x(t_parser *data, t_coord_i32 coord)
+{
+	t_wall ret;
+	t_chunk *chunk1;
+	t_chunk *chunk2;
+
+	ret = NW;
+	if (coord.x == -1)
+		chunk1 = NULL;
+	else
+		chunk1 = get(data, set_i32(coord.x, coord.y));
+	chunk2 = get_next(data, set_i32(coord.x, coord.y));
+
+	if (!chunk2 || chunk2->type == WHITE_SPACE_CHUNK) {
+		ret |= W2EMPTY;
+	}
+
+	if (chunk1 && chunk1->east) {
+		if (!(chunk1->east->type & NO_CLIP)){
+			ret |= W1;}
+	}
+
+	if (chunk2 && chunk2->west) {
+		if (!(chunk2->west->type & NO_CLIP))
+			ret |= W2;
+	}
+	return (ret);
+}
+
 static int check_vertical_while(t_parser *data, int line)
 {
 	int x;
-	t_chunk current;
+	int	inside;
+	int	count;
+	t_wall wall;
 
-	current = (t_chunk){ WHITE_SPACE_CHUNK,
-						 set_i32(-1, 0),
-						 NULL,
-						 NULL,
-						 NULL,
-						 NULL,
-						 NULL,
-						 NULL,
-	};
 	x = -1;
+	inside = 0;
+	count = 0;
 	while (x < data->map_width)
 	{
-		print_debug(&current);
-
-			// Check if the current is a good chunk
-		if ((current.type == GOOD_CHUNK
-				// check if the next is not null, if is the case that mean we
-				// are at the end of the line. So we will be inside.
-				&& !get_next(data, x, line))
-
-				// if there is a next chunk check if is a white space.
-				// if is the case we will go inside.
-				|| !get_next(data, x, line)
-				|| get_next(data, x, line)->type == WHITE_SPACE_CHUNK)
-		{
-			inside = 0;
-		}
-		else
+		wall = get_wall_x(data, set_i32(x, line));
+		if (!inside && wall & W2EMPTY) {
+			printf("_");
+		} else if (!inside && wall & W2) {
+			printf("in");
+			count += 1;
 			inside = 1;
-		if (!inside) {
-			printf("OUT\n");//TODO REMOVE
 		}
-		if (inside) {
-			printf("IN\n");//TODO REMOVE
+		else if (inside && wall & W1 && !(wall & W2) && wall & W2EMPTY) {
+			printf("out");
+			count += 1;
+			inside = 0;
+		} else if (inside && (wall & W1 || wall & W2)) {
+			printf("|");
+			count += 2;
 		}
-//		current = *get(data, set_i32(x, line));
-		if (get_next(data, x, line))
-			current = *get_next(data, x, line);
+		printf("(%d, %d)[%d] W1[%d] W2[%d] NW[%d] W2EMPTY[%d]\n", x, line, inside, (wall & W1) != 0, (wall & W2) != 0, (wall & NW) != 0, (wall & W2EMPTY) != 0);
 		x++;
 	}
-	return (EXIT_SUCCESS);
+	printf("count [%d]\n", count);
+	return (count % 2);
 }
 
 static int	check_vertical(t_parser *data)
@@ -125,6 +157,7 @@ static int	check_vertical(t_parser *data)
 	{
 		if (check_vertical_while(data, y))
 			return (EXIT_FAILURE);
+		printf("\n");//TODO REMOVE
 		y++;
 	}
 	return (EXIT_SUCCESS);
