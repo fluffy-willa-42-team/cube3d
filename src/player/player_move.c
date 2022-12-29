@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:18:47 by awillems          #+#    #+#             */
-/*   Updated: 2022/12/28 14:33:46 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/29 11:24:16 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 t_wall_inter	get_wall(t_game *game, t_coord_f64 inter);
 
-int	is_a_wall_move(t_game *game, t_coord_f64 inter_point)
+t_bool	is_a_wall_move(t_game *game, t_coord_f64 inter_point)
 {
 	t_wall_inter	inter;
 
