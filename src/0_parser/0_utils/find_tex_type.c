@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 17:13:54 by mahadad           #+#    #+#             */
-/*   Updated: 2022/11/29 10:01:14 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/12/30 12:30:57 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,7 @@
  *             [8 ] b
  *             [9 ] b
  *             [10] b
- *             [11] ,
- *             [12] a
- *             [13] a
- *             [14] a
- * 
+ *
  * @param tex 
  * @return int 
  */
@@ -70,7 +66,7 @@ int	find_tex_type(char *tex)
 			return (UNDEFINED);
 		x++;
 	}
-	if (comma_nb == 3 && num_len)
+	if (comma_nb == 2 && num_len)
 		return (COLOR);
 	return (UNDEFINED);
 }
