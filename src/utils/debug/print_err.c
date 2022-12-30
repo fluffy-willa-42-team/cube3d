@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:55:28 by mahadad           #+#    #+#             */
-/*   Updated: 2022/12/21 12:14:41 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/30 12:59:01 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	ret_print(int ret, const char *msg)
 	fd = STDOUT_FILENO + (ret != EXIT_SUCCESS);
 	if (!msg)
 		return (ret);
-	write(fd, "\n\e[0;31mError: ", ft_strlen("\n\e[0;31mError: "));
+	write(fd, "\n\e[0;31mError\n", ft_strlen("\n\e[0;31mError\n"));
 	write(fd, msg, ft_strlen(msg));
 	write(fd, "\n\e[0m", ft_strlen("\n\e[0m"));
 	return (ret);
