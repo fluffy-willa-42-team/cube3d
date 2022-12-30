@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:54:56 by mahadad           #+#    #+#             */
-/*   Updated: 2022/12/30 11:19:44 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/30 10:35:42 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,26 @@ int	ret_print(int ret, const char *msg);
 
 # define UNAUTHORIZED_SPACE "\t\v\f\r"
 # define WHITE_SPACE "\t\v\f\r \n"
+
+# ifdef DEBUG_PRINT
+
+static inline int	ret_print_debug(
+	int ret,
+	const char *msg,
+	const char *file,
+	const char *func,
+	int line
+)
+{
+	printf ("%s[INFO] ret_print[%d] %s() %s:%d\n", msg, ret, func, file, line);
+	return (ret);
+}
+
+#  ifdef ret_print
+#   undef ret_print
+#  endif
+
+#  define ret_print(x, y) ret_print_debug(x, y,__FILE__, __FUNCTION__, __LINE__)
+# endif /* DEBUG_PRINT */
 
 #endif /* CUBE3D_DEBUG_H */

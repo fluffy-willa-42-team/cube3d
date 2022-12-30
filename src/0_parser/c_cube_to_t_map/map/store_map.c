@@ -19,6 +19,82 @@
 /* struct_set() */
 #include "cube3d_utils.h"
 
+#include <stdio.h>//TODO REMOVE
+
+//TODO REMOVE
+/******************************************************************************/
+// /* */ // Get the red channel.
+// /* */ static int get_r(int rgba)
+// /* */ {
+// /* */     // Move 3 bytes to the right and mask out the first byte.
+// /* */     return ((rgba >> 24) & 0xFF);
+// /* */ }
+// /* */ 
+// /* */ // Get the green channel.
+// /* */ static int get_g(int rgba)
+// /* */ {
+// /* */     // Move 2 bytes to the right and mask out the first byte.
+// /* */     return ((rgba >> 16) & 0xFF);
+// /* */ }
+// /* */ 
+// /* */ // Get the blue channel.
+// /* */ static int get_b(int rgba)
+// /* */ {
+// /* */     // Move 1 byte to the right and mask out the first byte.
+// /* */     return ((rgba >> 8) & 0xFF);
+// /* */ }
+// /* */ 
+// /* */ // Get the alpha channel.
+// /* */ static int get_a(int rgba)
+// /* */ {
+// /* */     // Move 0 bytes to the right and mask out the first byte.
+// /* */     return (rgba & 0xFF);
+// /* */ }
+// /* */ static void	print_tex(t_texture *tmp)
+// /* */ {
+// /* */ 	printf(
+// /* */ 	"[%p] {\n"
+// /* */ 	"       type          :  {\n"
+// /* */ 	"                          UNDEFINED     [%d]\n"
+// /* */ 	"                          VALID         [%d]\n"
+// /* */ 	"                          COLOR         [%d]\n"
+// /* */ 	"                          IMAGE         [%d]\n"
+// /* */ 	"                          SKYBOX        [%d]\n"
+// /* */ 	"                          NO_CLIP    [%d]\n"
+// /* */ 	"                          TRANSPARENCY  [%d]\n"
+// /* */ 	"                        },\n"
+// /* */ 	"       token         :  \'%c\',\n"
+// /* */ 	"       *path         :  \"%.15s\",\n"
+// /* */ 	"       *image        :  [%p],\n"
+// /* */ 	"       token_ptr :  \'%c\',\n"
+// /* */ 	"       *skybox_tex   :  [%p],\n"
+// /* */ 	"       color         :  [%d, %d, %d, %d]\n"
+// /* */ 	"     }\n",
+// /* */ 	(tmp),
+// /* */ 
+// /* */ 	(tmp->type & UNDEFINED) != 0,
+// /* */ 	(tmp->type & VALID) != 0,
+// /* */ 	(tmp->type & COLOR) != 0,
+// /* */ 	(tmp->type & IMAGE) != 0,
+// /* */ 	(tmp->type & SKYBOX) != 0,
+// /* */ 	(tmp->type & NO_CLIP) != 0,
+// /* */ 	(tmp->type & TRANSPARENCY) != 0,
+// /* */ 	
+// /* */ 	tmp->token,
+// /* */ 	tmp->path,
+// /* */ 	tmp->image,
+// /* */ 
+// /* */ 	
+// /* */ 	tmp->token_ptr,
+// /* */ 	tmp->skybox_tex,
+// /* */ 
+// /* */ 	get_r(tmp->color),
+// /* */ 	get_g(tmp->color),
+// /* */ 	get_b(tmp->color),
+// /* */ 	get_a(tmp->color));
+// /* */ }
+/******************************************************************************/
+
 int	init_map_while(t_parser *data)
 {
 	int32_t		x;

@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 14:27:58 by mahadad           #+#    #+#             */
-/*   Updated: 2022/12/30 11:26:02 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/12/15 11:36:34 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 #include "cube3d_utils.h"
 
 #include "cube3d_debug.h"
+
+#include <stdio.h>//TODO REMOVE
 
 /**
  * @author @Matthew-Dreemurr
