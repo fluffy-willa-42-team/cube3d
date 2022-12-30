@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:56:12 by mahadad           #+#    #+#             */
-/*   Updated: 2022/12/28 11:15:49 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/30 11:27:45 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include "mlx_utils.h"
 #include "cube3d_debug.h"
 
-#include <stdio.h>//TODO REMOVE
+#include <stdio.h>
 
 #include "cube3d_utils.h"
 

@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 12:51:50 by mahadad           #+#    #+#             */
-/*   Updated: 2022/12/28 14:04:26 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/30 11:27:28 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,6 @@
 #include "cube3d_debug.h"
 #include "mlx_utils.h"
 
-#include <stdio.h>//TODO REMOVE
-/**
- * @author @Matthew-Dreemurr
- * 
- * @brief Free all buffer from the parse that is not in use by the game engine.
- * //TODO #11 Free all allocated memory and open file/image.
- * 
- */
 int	destroy_data(int ret, t_parser *data)
 {
 	int			i;
