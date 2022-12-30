@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:53:32 by mahadad           #+#    #+#             */
-/*   Updated: 2022/12/29 16:41:43 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/12/30 10:40:01 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,30 +22,6 @@
 /******************************************************************************/
 /******************************************************************************/
 /******************************************************************************/
-
-// Get the red channel.
-static int	get_r(int rgba)
-{
-	return ((rgba >> 24) & 0xFF);
-}
-
-// Get the green channel.
-static int	get_g(int rgba)
-{
-	return ((rgba >> 16) & 0xFF);
-}
-
-// Get the blue channel.
-static int	get_b(int rgba)
-{
-	return ((rgba >> 8) & 0xFF);
-}
-
-// Get the alpha channel.
-static int	get_a(int rgba)
-{
-	return (rgba & 0xFF);
-}
 
 static void	print_tex(t_parser *data, char i)
 {
@@ -65,7 +41,7 @@ static void	print_tex(t_parser *data, char i)
 		"       *image        :  [%p],\n"
 		"       token_ptr :  \'%c\',\n"
 		"       *skybox_tex   :  [%p],\n"
-		"       color         :  [%d, %d, %d, %d]\n"
+		"       color         :  [0x%.8x]\n"
 		"     }\n",
 		(char)i,
 		(get_tex_ptr(&data->tex_list, i)),
@@ -81,10 +57,7 @@ static void	print_tex(t_parser *data, char i)
 		get_tex_ptr(&data->tex_list, i)->image,
 		get_tex_ptr(&data->tex_list, i)->token_ptr,
 		get_tex_ptr(&data->tex_list, i)->skybox_tex,
-		get_r(get_tex_ptr(&data->tex_list, i)->color),
-		get_g(get_tex_ptr(&data->tex_list, i)->color),
-		get_b(get_tex_ptr(&data->tex_list, i)->color),
-		get_a(get_tex_ptr(&data->tex_list, i)->color));
+		get_tex_ptr(&data->tex_list, i)->color);
 }
 
 /******************************************************************************/
@@ -94,13 +67,16 @@ static void	print_tex(t_parser *data, char i)
 int	tex_debug(t_parser *data)
 {
 	t_texture	*tmp;
+	int			i;
 
 	tmp = NULL;
-	for (int i = '!'; i < 125; i++)
+	i = 0;
+	while (i < 125)
 	{
 		tmp = get_tex_ptr(&data->tex_list, i);
 		if (tmp && tmp->type > 0 && DEBUG_PARSE)
 			print_tex(data, i);
+		i++;
 	}
 	return (EXIT_SUCCESS);
 }
@@ -152,6 +128,6 @@ int	parser(char *av, t_parser *data)
 		|| cube_to_t_map(data))
 		return (EXIT_FAILURE);
 	map_debug(data);
-	tex_debug(data);//TODO REMOVE
+	tex_debug(data);
 	return (EXIT_SUCCESS);
 }
