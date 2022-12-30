@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 15:58:16 by mahadad           #+#    #+#             */
-/*   Updated: 2022/12/29 16:31:01 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/12/30 10:35:54 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,6 @@ int	check_map(t_parser *data)
 	if (check_player(data))
 		return (ret_print(EXIT_FAILURE, ERR_BAD_P_NO));
 	if (check_map_border(data))
-		return (ret_print(EXIT_FAILURE, "//TODO BREAKPOINT TO REMOVE"));
+		return (ret_print(EXIT_FAILURE, ERR_MAP_NOT_CLOSED));
 	return (EXIT_SUCCESS);
 }

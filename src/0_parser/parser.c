@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:53:32 by mahadad           #+#    #+#             */
-/*   Updated: 2022/12/30 10:17:54 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/30 10:58:33 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,87 +23,55 @@
 /******************************************************************************/
 /******************************************************************************/
 
-// // Get the red channel.
-// static int	get_r(int rgba)
-// {
-// 	return ((rgba >> 24) & 0xFF);
-// }
+static void	print_tex(t_parser *data, char i)
+{
+	const t_texture	*tex = get_tex_ptr(&data->tex_list, i);
 
-// // Get the green channel.
-// static int	get_g(int rgba)
-// {
-// 	return ((rgba >> 16) & 0xFF);
-// }
-
-// // Get the blue channel.
-// static int	get_b(int rgba)
-// {
-// 	return ((rgba >> 8) & 0xFF);
-// }
-
-// // Get the alpha channel.
-// static int	get_a(int rgba)
-// {
-// 	return (rgba & 0xFF);
-// }
-
-// static void	print_tex(t_parser *data, char i)
-// {
-// 	printf(
-// 		"[%c][%p] {\n"
-// 		"       type          :  {\n"
-// 		"                          UNDEFINED     [%d]\n"
-// 		"                          VALID         [%d]\n"
-// 		"                          COLOR         [%d]\n"
-// 		"                          IMAGE         [%d]\n"
-// 		"                          SKYBOX        [%d]\n"
-// 		"                          ALLOW_CLIP    [%d]\n"
-// 		"                          TRANSPARENCY  [%d]\n"
-// 		"                        },\n"
-// 		"       token         :  \'%c\',\n"
-// 		"       *path         :  \"%.15s\",\n"
-// 		"       *image        :  [%p],\n"
-// 		"       token_ptr :  \'%c\',\n"
-// 		"       *skybox_tex   :  [%p],\n"
-// 		"       color         :  [%d, %d, %d, %d]\n"
-// 		"     }\n",
-// 		(char)i,
-// 		(get_tex_ptr(&data->tex_list, i)),
-// 		(get_tex_ptr(&data->tex_list, i)->type & UNDEFINED) != 0,
-// 		(get_tex_ptr(&data->tex_list, i)->type & VALID) != 0,
-// 		(get_tex_ptr(&data->tex_list, i)->type & COLOR) != 0,
-// 		(get_tex_ptr(&data->tex_list, i)->type & IMAGE) != 0,
-// 		(get_tex_ptr(&data->tex_list, i)->type & SKYBOX) != 0,
-// 		(get_tex_ptr(&data->tex_list, i)->type & NO_CLIP) != 0,
-// 		(get_tex_ptr(&data->tex_list, i)->type & TRANSPARENCY) != 0,
-// 		get_tex_ptr(&data->tex_list, i)->token,
-// 		get_tex_ptr(&data->tex_list, i)->path,
-// 		get_tex_ptr(&data->tex_list, i)->image,
-// 		get_tex_ptr(&data->tex_list, i)->token_ptr,
-// 		get_tex_ptr(&data->tex_list, i)->skybox_tex,
-// 		get_r(get_tex_ptr(&data->tex_list, i)->color),
-// 		get_g(get_tex_ptr(&data->tex_list, i)->color),
-// 		get_b(get_tex_ptr(&data->tex_list, i)->color),
-// 		get_a(get_tex_ptr(&data->tex_list, i)->color));
-// }
+	printf(
+		"[%c][%p] {\n"
+		"       type          :  {\n"
+		"                          UNDEFINED     [%d]\n"
+		"                          VALID         [%d]\n"
+		"                          COLOR         [%d]\n"
+		"                          IMAGE         [%d]\n"
+		"                          SKYBOX        [%d]\n"
+		"                          ALLOW_CLIP    [%d]\n"
+		"                          TRANSPARENCY  [%d]\n"
+		"                        },\n"
+		"       token         :  \'%c\',\n"
+		"       *path         :  \"%.15s\",\n"
+		"       *image        :  [%p],\n"
+		"       token_ptr :  \'%c\',\n"
+		"       *skybox_tex   :  [%p],\n"
+		"       color         :  [0x%.8x]\n"
+		"     }\n",
+		(char)i, (tex), (tex->type & UNDEFINED) != 0, (tex->type & VALID) != 0,
+		(tex->type & COLOR) != 0, (tex->type & IMAGE) != 0,
+		(tex->type & SKYBOX) != 0, (tex->type & NO_CLIP) != 0,
+		(tex->type & TRANSPARENCY) != 0, tex->token, tex->path, tex->image,
+		tex->token_ptr, tex->skybox_tex, tex->color);
+}
 
 /******************************************************************************/
 /******************************************************************************/
 /******************************************************************************/
 
-// int	tex_debug(t_parser *data)
-// {
-// 	t_texture	*tmp;
+int	tex_debug(t_parser *data)
+{
+	t_texture	*tmp;
+	int			i;
 
-// 	tmp = NULL;
-// 	for (int i = '!'; i < 125; i++)
-// 	{
-// 		tmp = get_tex_ptr(&data->tex_list, i);
-// 		if (tmp && tmp->type > 0 && DEBUG_PARSE)
-// 			print_tex(data, i);
-// 	}
-// 	return (EXIT_SUCCESS);
-// }
+	tmp = NULL;
+	i = 0;
+	while (i < 125)
+	{
+		tmp = get_tex_ptr(&data->tex_list, i);
+		if (tmp && tmp->type > 0 && DEBUG_PARSE)
+			print_tex(data, i);
+		i++;
+	}
+	return (EXIT_SUCCESS);
+}
 
 void	map_debug(t_parser *data)
 {
@@ -152,6 +120,6 @@ int	parser(char *av, t_parser *data)
 		|| cube_to_t_map(data))
 		return (EXIT_FAILURE);
 	map_debug(data);
+	tex_debug(data);
 	return (EXIT_SUCCESS);
 }
-// tex_debug(data);//TODO REMOVE
