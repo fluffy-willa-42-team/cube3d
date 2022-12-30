@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:54:56 by mahadad           #+#    #+#             */
-/*   Updated: 2022/12/29 16:21:14 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/12/30 10:35:42 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int	ret_print(int ret, const char *msg);
 # define ERR_TEX_DUP			"Duplicate texture !"
 # define ERR_P_DUP				"Duplicate player !"
 # define ERR_NO_MAP_AFTER_TEX	"No map after texture !"
+# define ERR_MAP_NOT_CLOSED		"The map has a missing texture for closing it"
 # define ERR_BAD_CUB_CHAR		"Unauthorized character in the map !"
 # define ERR_CUB_CONV_FUNC		"f_{floor_level}_{char_type} fail !"
 # define ERR_SEQ_BAD			"Bad cube sequence"
