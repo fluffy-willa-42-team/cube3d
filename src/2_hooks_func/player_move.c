@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:18:47 by awillems          #+#    #+#             */
-/*   Updated: 2022/12/30 12:03:54 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/30 12:15:39 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ t_bool	is_a_wall_move(t_game *game, t_coord_f64 inter_point)
  */
 void	player_move(t_game *game, t_coord_f64 player, t_coord_f64 incr)
 {
-	const double		ray = game->param.ray;
 	const t_coord_f64	inter_p1_p2 = set_f64(
 			(int) player.x + (int []){0, 1}[incr.x > 0],
 			(int) player.y + (int []){0, 1}[incr.y > 0]);
@@ -51,16 +50,18 @@ void	player_move(t_game *game, t_coord_f64 player, t_coord_f64 incr)
 	t_coord_f64			dest;
 
 	dest = set_f64(player.x + incr.x, player.y + incr.y);
+	if ((int) player.x != (int)(dest.x) && (int) player.y != (int)(dest.y))
+		return ;
 	if ((int) player.x != (int)(dest.x)
 		&& is_a_wall_move(game, set_f64(inter_p1_p2.x, player.y)))
 		dest.x = player.x;
-	else if (fabs(inter_p2_r.x - dest.x) <= ray
+	else if (fabs(inter_p2_r.x - dest.x) <= game->param.ray
 		&& is_a_wall_move(game, set_f64(inter_p2_r.x, dest.y)))
 		dest.x = player.x;
 	if ((int) player.y != (int)(dest.y)
 		&& is_a_wall_move(game, set_f64(player.x, inter_p1_p2.y)))
 		dest.y = player.y;
-	else if ((fabs(inter_p2_r.y - dest.y) <= ray)
+	else if ((fabs(inter_p2_r.y - dest.y) <= game->param.ray)
 		&& is_a_wall_move(game, set_f64(dest.x, inter_p2_r.y)))
 		dest.y = player.y;
 	game->player.pos = dest;
