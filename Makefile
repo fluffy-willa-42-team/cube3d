@@ -236,9 +236,6 @@ clean:
 	fi; \
 done
 
-c:
-	@rm -rf $(OBJ)
-
 # **************************************************************************** #
 
 fclean:
@@ -248,9 +245,6 @@ fclean:
 		make -sC $$path fclean;\
 	fi; \
 done
-
-fc:
-	@rm -rf $(OBJ) $(INC_DIR)* $(NAME)
 
 # **************************************************************************** #
 
@@ -262,51 +256,5 @@ print_src:
 # **************************************************************************** #
 
 re: fclean all
-r:  fc all
-
-# **************************************************************************** #
-
-exe: all
-	@bash -c "./$(NAME) ./map/test.cube"
-
-test: clear_test
-	@make SANI=1 TEST_UNIT=1
-	@gcc -Wall -Wextra -Werror tester.c -o tester
-
-run_test:
-	@gcc -Wall -Wextra -Werror tester.c -o tester
-	@./tester
-
-clear_test:
-	@find . -type f -name "*.err" -prune -exec rm -rf {} \;
-	@find . -type f -name "*.out" -prune -exec rm -rf {} \;
-# **************************************************************************** #
-
-update_lib: fclean remove_stuff
-	git submodule init
-	git submodule update
-	git pull
-
-fluffy:
-	git config user.name "matthew-dreemurr"
-	git config user.email "hadadmat@gmail.com"
-
-STUFF_TO_REMOVE =	\
-					*.o\
-					*.a\
-					.DS_Store\
-					.vscode\
-					*.dSYM\
-					*.log\
-					*.txt\
-					tester\
-					*.err\
-					*.out
-
-remove_stuff:
-	@for stuff in $(STUFF_TO_REMOVE); do \
-	printf "remove all [%s]\n" $$stuff;\
-		find . -type f -name $$stuff -prune -exec rm -rf {} \; ;\
-	done
 
 .PHONY: all, fclean, clean, re, print_src, $(ALL_LIB), exe, fluffy
