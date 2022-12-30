@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 01:00:00 by mahadad           #+#    #+#             */
-/*   Updated: 2022/12/30 10:58:51 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/30 11:08:38 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ static int	check_y_while(t_parser *data, int x)
 	while (y < data->map_height)
 	{
 		if (check_y_while_while(data, set_i32(x, y), &count, &inside))
-			return (ret_print(EXIT_FAILURE, "FFFFFFF\n"));
+			return (EXIT_FAILURE);
 		y++;
 	}
 	return (count % 2);
