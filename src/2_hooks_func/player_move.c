@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:18:47 by awillems          #+#    #+#             */
-/*   Updated: 2022/12/30 11:41:38 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/30 11:43:35 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	player_move(t_game *game, t_coord_f64 player, t_coord_f64 incr)
 	y_step = set_f64((int) dest.y + (int []){0, 1}[incr.y > 0],
 			(int)(dest.y + incr.y) + (int []){0, 1}[incr.y > 0]);
 	if ((int) player.y != (int)(dest.y)
-		&& is_a_wall_move(game, set_f64(player.x, y_step.x)))
+		&& is_a_wall_move(game, set_f64(dest.x, y_step.x)))
 		dest.y = player.y;
 	else if ((fabs(y_step.y - dest.y) <= ray)
 		&& is_a_wall_move(game, set_f64(dest.x, y_step.y)))
