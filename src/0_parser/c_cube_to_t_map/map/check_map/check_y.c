@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 01:00:00 by mahadad           #+#    #+#             */
-/*   Updated: 2022/12/30 10:22:14 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/30 10:23:19 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,21 +57,21 @@ static int	check_y_while_while(
 	t_wall	wall;
 
 	wall = get_wall_y(data, pos);
-	if (!inside && wall & W2EMPTY)
+	if (!*inside && wall & W2EMPTY)
 		;
-	else if (!inside && wall & W2)
+	else if (!*inside && wall & W2)
 	{
-		count += 1;
-		inside = 1;
+		*count += 1;
+		*inside = 1;
 	}
-	else if (inside && wall & W1 && !(wall & W2) && wall & W2EMPTY)
+	else if (*inside && wall & W1 && !(wall & W2) && wall & W2EMPTY)
 	{
-		count += 1;
-		inside = 0;
+		*count += 1;
+		*inside = 0;
 	}
-	else if (inside && (wall & W1 || wall & W2))
-		count += 2;
-	else if (!inside && !(wall & W2EMPTY))
+	else if (*inside && (wall & W1 || wall & W2))
+		*count += 2;
+	else if (!*inside && !(wall & W2EMPTY))
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
