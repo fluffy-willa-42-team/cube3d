@@ -55,7 +55,6 @@ static int	set_player(t_parser *data, t_chunk *chunk, t_chunk_token *t)
 	return (EXIT_SUCCESS);
 }
 
-//TODO #12 Make the entity data structure for the player
 int	store_entity(t_parser *data, t_chunk *chunk, t_chunk_token *tokens)
 {
 	if (tokens->entity == E_PLAYER)
