@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:53:43 by mahadad           #+#    #+#             */
-/*   Updated: 2022/12/28 15:23:54 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/30 12:21:27 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,6 @@ typedef struct s_color
 	int	r;
 	int	g;
 	int	b;
-	int	a;
 }				t_color;
 
 typedef int	(*t_conv_fct)(t_parser *data, char c);

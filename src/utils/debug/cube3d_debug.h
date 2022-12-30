@@ -59,7 +59,6 @@ int	ret_print(int ret, const char *msg);
 # define ERR_COLOR_R			"Bad color channel R"
 # define ERR_COLOR_G			"Bad color channel G"
 # define ERR_COLOR_B			"Bad color channel B"
-# define ERR_COLOR_A			"Bad color channel A"
 
 # define UNAUTHORIZED_SPACE "\t\v\f\r"
 # define WHITE_SPACE "\t\v\f\r \n"

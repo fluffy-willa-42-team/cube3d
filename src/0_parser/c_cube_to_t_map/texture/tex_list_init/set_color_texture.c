@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 14:20:21 by mahadad           #+#    #+#             */
-/*   Updated: 2022/12/28 15:30:08 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/30 12:22:28 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,7 @@ static int	set_channel(int *channel, char *color)
  *             [8 ] b
  *             [9 ] b
  *             [10] b
- *             [11] ,
- *             [12] a
- *             [13] a
- *             [14] a
- * 
+ *
  * @param channel 
  * @return char* 
  */
@@ -89,9 +85,9 @@ static char	*get_next_channel(char *channel)
  * 
  * @brief Convert `r, g, b` to a int.
  */
-static int	get_argb(int r, int g, int b, int a)
+static int	get_rgb(int r, int g, int b)
 {
-	return (a << 24 | r << 16 | g << 8 | b);
+	return (r << 16 | g << 8 | b);
 }
 
 /**
@@ -117,9 +113,6 @@ static int	set_rgba_channel(t_texture *tex, t_color *channel)
 	color = get_next_channel(color);
 	if (set_channel(&(channel->b), color))
 		return (ret_print(EXIT_FAILURE, ERR_COLOR_B));
-	color = get_next_channel(color);
-	if (set_channel(&(channel->a), color))
-		return (ret_print(EXIT_FAILURE, ERR_COLOR_A));
 	return (EXIT_SUCCESS);
 }
 
@@ -134,6 +127,6 @@ int	set_color_texture(t_texture *tex)
 	t_color	channel;
 
 	set_rgba_channel(tex, &channel);
-	tex->color = get_argb(channel.r, channel.g, channel.b, channel.a);
+	tex->color = get_rgb(channel.r, channel.g, channel.b);
 	return (EXIT_SUCCESS);
 }
