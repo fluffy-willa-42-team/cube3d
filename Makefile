@@ -14,13 +14,83 @@
 #                                  CONFIG
 # **************************************************************************** #
 
-NAME		= cube3D
+NAME		= cub3D
 
 # **************************************************************************** #
 
-# SRCS		=	
+SRCS		=	 \
+read_file.c \
+file_sani.c \
+open_file.c \
+check_x.c \
+check_map_utils.c \
+check_map.c \
+check_y.c \
+zero_conv.c \
+space_conv.c \
+player_conv.c \
+one_conv.c \
+file_conv.c \
+cub_map_conv.c \
+tex_conv_utils.c \
+cub_tex_conv.c \
+get_chunk.c \
+store_entity.c \
+check_chunk.c \
+get_next_chunk.c \
+get_line_width.c \
+set_map_size.c \
+store_map.c \
+get_map_char_ptr.c \
+set_color_texture.c \
+init_texture.c \
+set_tex_config_utils.c \
+set_tex_config.c \
+get_current_tex_config.c \
+load_texture_config.c \
+cube_to_t_map.c \
+find_tex_type.c \
+get_tex.c \
+authzed_cube_char.c \
+authzed_cube_tex.c \
+parser.c \
+main.c \
+get_wall.c \
+draw_wall.c \
+draw_floor.c \
+draw_transparency.c \
+draw_wall_text.c \
+ray_caster.c \
+draw_skybox.c \
+minimap.c \
+minimap_utils.c \
+get_intersect.c \
+get_distance.c \
+get_inter_init.c \
+get_inter_step.c \
+hooks_utils.c \
+player_management.c \
+minimap_management.c \
+map_management.c \
+save_hooks.c \
+use_hooks.c \
+player_move.c \
+coordinate.c \
+init_player.c \
+init_params.c \
+print_err.c \
+math_utils.c \
+destroy_data.c \
+destroy_t_parser.c \
+struct_set.c \
+mlx_extra.c \
+draw_elem.c \
+draw_image.c \
+draw_minimap.c \
+run_game.c
 
-SRCS		= $(SRCS_FIND)
+
+#SRCS		= $(SRCS_FIND)
 
 # **************************************************************************** #
 
@@ -186,7 +256,6 @@ fc:
 
 print_src:
 	@for elem in $(SRCS_FIND); do \
-		printf "[%s]\n" $$path;\
 		echo $$elem;\
 	done
 
