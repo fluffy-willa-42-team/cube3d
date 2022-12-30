@@ -1,11 +1,11 @@
 ~ PTS* ptr
 
 ~ => COLOR
-R xxx. 255,0,0,0
-G xxx. 0,255,0,0
-B xxx. 0,0,255,0
-Y xxx. 255,0,255,0
-Q xxx. 128,128,128,0
+R xxx. 255,0,0
+G xxx. 0,255,0
+B xxx. 0,0,255
+Y xxx. 255,0,255
+Q xxx. 128,128,128
 
 ~ => MC
 g xxx. ./texture/mc/grass_side.xpm

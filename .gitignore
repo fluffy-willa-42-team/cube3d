@@ -60,3 +60,4 @@ include/
 tester/tester
 *.err
 /lib/minilibx_opengl_20191021/._font.xcf
+cub3D
