@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_x.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mahadad <mahadad@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 01:00:00 by mahadad           #+#    #+#             */
-/*   Updated: 2022/12/29 16:33:49 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/12/30 10:52:55 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,34 +47,47 @@ int	get_wall_x(t_parser *data, t_coord_i32 coord)
 	return (ret);
 }
 
+static int	check_x_while_while(
+	t_parser *data,
+	t_coord_i32 pos,
+	int *count,
+	int *inside
+)
+{
+	t_wall	wall;
+
+	wall = get_wall_x(data, pos);
+	if (!*inside && wall & W2EMPTY)
+		;
+	else if (!*inside && wall & W2)
+	{
+		*count += 1;
+		*inside = 1;
+	}
+	else if (*inside && wall & W1 && !(wall & W2) && wall & W2EMPTY)
+	{
+		*count += 1;
+		*inside = 0;
+	}
+	else if (*inside && (wall & W1 || wall & W2))
+		*count += 2;
+	else if (!*inside && !(wall & W2EMPTY))
+		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
+}
+
 static int	check_x_while(t_parser *data, int y)
 {
 	int		x;
 	int		inside;
 	int		count;
-	t_wall	wall;
 
 	x = -1;
 	inside = 0;
 	count = 0;
 	while (x < data->map_width)
 	{
-		wall = get_wall_x(data, set_i32(x, y));
-		if (!inside && wall & W2EMPTY)
-			;
-		else if (!inside && wall & W2)
-		{
-			count += 1;
-			inside = 1;
-		}
-		else if (inside && wall & W1 && !(wall & W2) && wall & W2EMPTY)
-		{
-			count += 1;
-			inside = 0;
-		}
-		else if (inside && (wall & W1 || wall & W2))
-			count += 2;
-		else if (!inside && !(wall & W2EMPTY))
+		if (check_x_while_while(data, set_i32(x, y), &count, &inside))
 			return (ret_print(EXIT_FAILURE, "FFFFFFF\n"));
 		x++;
 	}

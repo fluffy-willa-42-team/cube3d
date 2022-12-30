@@ -6,7 +6,7 @@
 /*   By: awillems <awillems@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:53:32 by mahadad           #+#    #+#             */
-/*   Updated: 2022/12/30 10:40:01 by awillems         ###   ########.fr       */
+/*   Updated: 2022/12/30 10:58:33 by awillems         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@
 
 static void	print_tex(t_parser *data, char i)
 {
+	const t_texture	*tex = get_tex_ptr(&data->tex_list, i);
+
 	printf(
 		"[%c][%p] {\n"
 		"       type          :  {\n"
@@ -43,21 +45,11 @@ static void	print_tex(t_parser *data, char i)
 		"       *skybox_tex   :  [%p],\n"
 		"       color         :  [0x%.8x]\n"
 		"     }\n",
-		(char)i,
-		(get_tex_ptr(&data->tex_list, i)),
-		(get_tex_ptr(&data->tex_list, i)->type & UNDEFINED) != 0,
-		(get_tex_ptr(&data->tex_list, i)->type & VALID) != 0,
-		(get_tex_ptr(&data->tex_list, i)->type & COLOR) != 0,
-		(get_tex_ptr(&data->tex_list, i)->type & IMAGE) != 0,
-		(get_tex_ptr(&data->tex_list, i)->type & SKYBOX) != 0,
-		(get_tex_ptr(&data->tex_list, i)->type & NO_CLIP) != 0,
-		(get_tex_ptr(&data->tex_list, i)->type & TRANSPARENCY) != 0,
-		get_tex_ptr(&data->tex_list, i)->token,
-		get_tex_ptr(&data->tex_list, i)->path,
-		get_tex_ptr(&data->tex_list, i)->image,
-		get_tex_ptr(&data->tex_list, i)->token_ptr,
-		get_tex_ptr(&data->tex_list, i)->skybox_tex,
-		get_tex_ptr(&data->tex_list, i)->color);
+		(char)i, (tex), (tex->type & UNDEFINED) != 0, (tex->type & VALID) != 0,
+		(tex->type & COLOR) != 0, (tex->type & IMAGE) != 0,
+		(tex->type & SKYBOX) != 0, (tex->type & NO_CLIP) != 0,
+		(tex->type & TRANSPARENCY) != 0, tex->token, tex->path, tex->image,
+		tex->token_ptr, tex->skybox_tex, tex->color);
 }
 
 /******************************************************************************/
