@@ -2,8 +2,8 @@ NO ./texture/mc/grass_side.xpm
 SO ./texture/mc/grass_side.xpm
 WE ./texture/mc/grass_side.xpm
 EA ./texture/mc/grass_side.xpm
-F ./texture/mc/grass_top.xpm
-C ./texture/mc/stone.xpm
+C 128,128,128,0
+F 25,25,25,0
                         111111
                         1000001
                        100111001
