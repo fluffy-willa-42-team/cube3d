@@ -817,18 +817,17 @@ The second is more devious and will force us to execute our mistake to show it.
 
 To the left is the working version and to the right is the one we have in our code.
 
-<img src="asset/draw_wall_fisheye/normal_3d.png" width="300"/> <img src="asset/draw_wall_fisheye/broken_3d.png" width="300"/>
+<img src="asset/draw_wall_fisheye/fisheye_effect.png" width="300"/>
 
 Something is going absolutely wrong. And it is called the fisheye effect.
 
-<img src="asset/draw_wall_fisheye/example.jpeg" width="300"/>
-
 The problem is that we expect all point in our screen to be directitly proportional to the distance but in fact the angle at which we look at impact it aswell.
 
+<!-- <img src="asset/draw_wall_fisheye/distance-fisheye.png" width="300"/>
 
+Our point I (Intersection) is at a certain angle $\alpha$ but the player is not looking that way. -->
 
-
-
+To better imagine this problem let's image a room perfectly round. What would you see ?
 
 ---
 
