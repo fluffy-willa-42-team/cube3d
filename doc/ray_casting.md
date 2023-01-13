@@ -893,21 +893,26 @@ typedef struct s_point
 	float y;
 }	t_point;
 
-t_map *map;
 t_point player;
 float player_alpha;
 
 float get_distance(t_point inter)
 {
-	return (inter.x * cos(player_alpha) + inter.y * sin(player_alpha));
+	return (abs(player.x - inter.x) * cos(player_alpha)
+		  + abs(player.y - inter.y) * sin(player_alpha));
 }
 ```
 
+yeah, i don't have an explonation for that :|
+
 </blockquote></details>
+
+Now the we have fixed thaat, we finally have the wall working well. (Or at least I hope).
 
 ---
 
 # 4. The floor, the ceiling and the skybox
+
 
 x  
 x  
