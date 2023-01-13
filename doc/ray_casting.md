@@ -827,7 +827,39 @@ The problem is that we expect all point in our screen to be directitly proportio
 
 Our point I (Intersection) is at a certain angle $\alpha$ but the player is not looking that way. -->
 
-To better imagine this problem let's image a room perfectly round. What would you see ?
+To better imagine this problem let's image a room perfectly round. You would see like this, right ?
+
+<img src="asset/draw_wall_fisheye/fisheye_simple_right.png" width="300"/>
+
+but in our current algorythm it will look like this :
+
+<img src="asset/draw_wall_fisheye/fisheye_simple_wrong.png" width="300"/>
+
+because, we define that our wall height is proportional to the distance of that wall and in a circle, every wall is at the same distance so we will have a flat rectangle wall.
+
+This is because our distance should not be the distance directly the orthogonal projection of our point I on the axe of the player direction. 
+
+<img src="asset/draw_wall_fisheye/distance-fisheye.png" width="300"/>
+
+$I$ : Intersection  
+$I'$ : Orthogonal projection of intersection on the axe of the player direction
+
+With the graph, it may be easier. To simplify, the distance we want is not $\overline{PI}$ but $\overline{PI'}$
+
+
+
+<details open><summary>Math Explonation</summary><blockquote> 
+
+*(I'll use Matt Godbolt's exellent explonation in [his video](https://youtu.be/eOCQfxRQ2pY?t=607))*
+
+First, let's see what we have in this problem
+
+<img src="asset/draw_wall_fisheye/fisheye_init.png" width="300"/>
+
+$$\overline{PI'} = \overline{PI}.cos(\alpha_{ray} - \alpha_{player})$$
+$$I = (\Delta x,\Delta y)$$
+
+</blockquote></details>
 
 ---
 
