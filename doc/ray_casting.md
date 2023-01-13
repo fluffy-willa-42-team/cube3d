@@ -846,9 +846,7 @@ $I'$ : Orthogonal projection of intersection on the axe of the player direction
 
 With the graph, it may be easier. To simplify, the distance we want is not $\overline{PI}$ but $\overline{PI'}$
 
-
-
-<details open><summary>Math Explonation</summary><blockquote> 
+<details open><summary>Math Explanations</summary><blockquote> 
 
 *(I'll use Matt Godbolt's exellent explonation in [his video](https://youtu.be/eOCQfxRQ2pY?t=607))*
 
@@ -856,8 +854,54 @@ First, let's see what we have in this problem
 
 <img src="asset/draw_wall_fisheye/fisheye_init.png" width="300"/>
 
-$$\overline{PI'} = \overline{PI}.cos(\alpha_{ray} - \alpha_{player})$$
 $$I = (\Delta x,\Delta y)$$
+
+$\Delta x$ is the x coordinate of our intersection.  
+$\Delta y$ is the y coordinate of our intersection.  
+
+$$\overline{PI'} = \overline{PI}.cos(\alpha_{ray} - \alpha_{player})$$
+
+With the formula : 
+$$cos(\alpha - \beta) = cos(\alpha).cos(\beta) + sin(\alpha).sin(\beta)$$
+
+We have then :
+$$\overline{PI'} = \overline{PI}.[cos(\alpha_{ray}).cos(\alpha_{player}) + sin(\alpha_{ray}).sin(\alpha_{player})]$$
+$$\overline{PI'} = \overline{PI}.cos(\alpha_{ray}).cos(\alpha_{player}) + \overline{PI}.sin(\alpha_{ray}).sin(\alpha_{player})$$
+
+but we with basic trigonometry, we can find that :
+$$\Delta x = \overline{PI}.cos(\alpha_{ray})$$
+$$\Delta y = \overline{PI}.sin(\alpha_{ray})$$
+
+and so in our formula, we have :
+
+$$\overline{PI'} = \Delta x.cos(\alpha_{player}) + \Delta y.sin(\alpha_{player})$$
+
+With this we have simplified our formula with only known elements. So now :
+
+$$Dist_{Wall} = \Delta x.cos(\alpha_{player}) + \Delta y.sin(\alpha_{player})$$
+
+</blockquote></details>
+
+
+
+<details open><summary>Pogram Explanations</summary><blockquote> 
+
+```c
+typedef struct s_point
+{
+	float x;
+	float y;
+}	t_point;
+
+t_map *map;
+t_point player;
+float player_alpha;
+
+float get_distance(t_point inter)
+{
+	return (inter.x * cos(player_alpha) + inter.y * sin(player_alpha));
+}
+```
 
 </blockquote></details>
 
