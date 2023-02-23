@@ -907,7 +907,7 @@ yeah, i don't have an explonation for that :|
 
 </blockquote></details>
 
-Now the we have fixed thaat, we finally have the wall working well. (Or at least I hope).
+Now the we have fixed that, we finally have the wall working well. (Or at least I hope).
 
 ---
 
