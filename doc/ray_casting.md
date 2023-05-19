@@ -100,7 +100,7 @@ $\pm$ is plus or minus
 
 <img src="asset/math_inter/yInter_init.png" width="300"/>
 
-<details closed><summary>Definitions</summary><blockquote>
+<details open><summary>Definitions</summary><blockquote>
 
 $P'$ is a point in the corner of the square where the player is.  
 $\Delta x$ is difference between $| P_x' - P_x|$  
@@ -156,7 +156,7 @@ $$yInter = \left(P_x - \Delta y . tan(\alpha_{ray}) \atop P_y' \right)$$
 
 </blockquote></details>
 
-<details closed><summary>Program Explanations</summary><blockquote>
+<details open><summary>Program Explanations</summary><blockquote>
 
 Now that we know the formula to calculate the first point of intersection. We see that we know $\alpha_{ray}$ and $P_x$ but only have a description of what $P_y'$ and $\Delta y$ are.
 
@@ -211,7 +211,7 @@ You'll see it works the same.
 
 <img src="asset/math_inter/xInter_init.png" width="300"/>
 
-<details closed><summary>Definitions</summary><blockquote> 
+<details open><summary>Definitions</summary><blockquote> 
 
 $P'$ is a point in the corner of the square where the player is.  
 $\Delta x$ is difference between $| P_x' - P_x|$  
@@ -223,7 +223,7 @@ Then $\Delta x$ and $\Delta y$ will do so as well.
 
 </blockquote></details>
 
-<details closed><summary>Math Explanations</summary><blockquote> 
+<details open><summary>Math Explanations</summary><blockquote> 
 
 
 
@@ -269,7 +269,7 @@ $$xInter = \left(P_x' \atop P_y - \dfrac{\Delta x}{tan(\alpha_{ray})} \right)$$
 
 </blockquote></details>
 
-<details closed><summary>Program Explanations</summary><blockquote> 
+<details open><summary>Program Explanations</summary><blockquote> 
 
 Now that we know the formula to calculate the first point of intersection. We see that we know $\alpha_{ray}$ and $P_x$ but only have a description of what $P_x'$ and $\Delta x$ are.
 
@@ -324,7 +324,7 @@ Now that we have found the first intersection for both $x$ and $y$ axis, we need
 
 <img src="asset/math_inter/yInter_next.png" width="300"/>
  
-<details closed><summary>Definitions</summary><blockquote> 
+<details open><summary>Definitions</summary><blockquote> 
 
 For readability, i will refer to :
 - "prev yInter" as $yInter(i)$
@@ -335,7 +335,7 @@ $\Delta y$ is difference between $| yInter(i)_y - yInter(i+1)_y |$
 
 </blockquote></details>
 
-<details closed><summary>Math Explanations</summary><blockquote> 
+<details open><summary>Math Explanations</summary><blockquote> 
 
 We need to get $yInter(i+1)$ and we know $yInter(i)$ and $\alpha_{ray}$
 
@@ -381,7 +381,7 @@ yInter(i)_y \pm 1
 
 </blockquote></details>
 
-<details closed><summary>Program Explanations</summary><blockquote> 
+<details open><summary>Program Explanations</summary><blockquote> 
 
 We now have the formula to get the next intersection of line where y is round. But to compute it we have to get rid of this $\pm$.
 
@@ -424,7 +424,7 @@ With that done, we have finished a step.
 
 <img src="asset/math_inter/xInter_next.png" width="300"/>
  
-<details closed><summary>Definitions</summary><blockquote> 
+<details open><summary>Definitions</summary><blockquote> 
 
 For readability, i will refer to :
 - "prev yInter" as $yInter(i)$
@@ -435,7 +435,7 @@ $\Delta y$ is difference between $| xInter(i)_y - xInter(i+1)_y |$
 
 </blockquote></details>
 
-<details closed><summary>Math Explanations</summary><blockquote> 
+<details open><summary>Math Explanations</summary><blockquote> 
 
 We need to get $xInter(i+1)$ and we know $xInter(i)$ and $\alpha_{ray}$
 
@@ -481,7 +481,7 @@ xInter(i+1)_y \pm \dfrac{1}{tan(\alpha_{ray})}
 
 </blockquote></details>
 
-<details closed><summary>Program Explanations</summary><blockquote> 
+<details open><summary>Program Explanations</summary><blockquote> 
 
 We now have the formula to get the next intersection of line where y is round. But to compute it, we have to get rid of this $\pm$.
 
@@ -526,7 +526,7 @@ Now we need to finalize the get Intersection function.
 
 You can to do it in two ways.
 
-<details closed><summary>Simple/Naive Way</summary><blockquote> 
+<details open><summary>Simple/Naive Way</summary><blockquote> 
 
 It is simple because it requires not much more than what we have.
 
@@ -578,7 +578,7 @@ t_point get_intersection(float ray_alpha)
 
 </blockquote></details>
 
-<details closed><summary>More optimized way</summary><blockquote> 
+<details open><summary>More optimized way</summary><blockquote> 
 
 The more optimized way is to only do the closest one step from the player, if the closest one is a wall you stop.
 
@@ -618,7 +618,7 @@ t_point get_intersection(float ray_alpha)
 
 </blockquote></details>
 
-<details closed><summary>Optimization for the Distance</summary><blockquote> 
+<details open><summary>Optimization for the Distance</summary><blockquote> 
 
 You might have seen the distance() function and imagined it to be a simple distance between two points.
 
@@ -838,7 +838,7 @@ $I'$ : Orthogonal projection of intersection on the axe of the player direction
 
 With the graph, it may be easier. To simplify, the distance we want is not $\overline{PI}$ but $\overline{PI'}$
 
-<details closed><summary>Math Explanations</summary><blockquote> 
+<details open><summary>Math Explanations</summary><blockquote> 
 
 *(I'll use Matt Godbolt's exellent explonation in [his video](https://youtu.be/eOCQfxRQ2pY?t=607))*
 
@@ -876,7 +876,7 @@ $$Dist_{Wall} = \Delta x.cos(\alpha_{player}) + \Delta y.sin(\alpha_{player})$$
 
 
 
-<details closed><summary>Program Explanations</summary><blockquote> 
+<details open><summary>Program Explanations</summary><blockquote> 
 
 ```c
 typedef struct s_point
