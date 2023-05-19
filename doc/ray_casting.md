@@ -154,8 +154,6 @@ In conclusion, we have that
 
 $$yInter = \left(P_x - \Delta y . tan(\alpha_{ray}) \atop P_y' \right)$$
 
-$$\left(P_x - \Delta y . tan(\alpha_{ray}) \atop P_y' \right)$$
-
 </blockquote></details>
 
 <details closed><summary>Program Explanations</summary><blockquote>
@@ -194,10 +192,7 @@ float delta_y = abs(player_y - P_prime_y);
 
 Now, we have everything to calculate $y_{Inter}$ with our formula :  
 
-$$yInter = \left(
-	P_x - \Delta y . tan(\alpha_{ray}) \atop
-	P_y'
-\right)$$
+$$yInter = \left(P_x - \Delta y . tan(\alpha_{ray}) \atop P_y' \right)$$
 
 ```c
 float yInter_x = player_x - delta_y * tan(alpha_ray);
@@ -270,10 +265,7 @@ $$P_y' + \Delta y = P_y$$
 
 In conclusion, we have that  
 
-$$xInter = \left(
-	P_x' \atop
-	P_y - \dfrac{\Delta x}{tan(\alpha_{ray})}
-\right)$$
+$$xInter = \left(P_x' \atop P_y - \dfrac{\Delta x}{tan(\alpha_{ray})} \right)$$
 
 </blockquote></details>
 
@@ -313,10 +305,7 @@ float delta_x = abs(player_x - P_prime_x);
 
 Now, we have everything to calculate xInter $x_{Inter}$ with our formula :  
 
-$$xInter = \left(
-	P_x' \atop
-	P_y - \dfrac{\Delta x}{tan(\alpha_{ray})}
-\right)$$
+$$xInter = \left(P_x' \atop P_y - \dfrac{\Delta x}{tan(\alpha_{ray})} \right)$$
 
 ```c
 float xInter_x = P_prime_x;
