@@ -362,7 +362,7 @@ So the only value missing is $\Delta x$ but we can it inside triangle made by th
 
 With $tan(\alpha) = \dfrac{opposite}{adjacent}$, we can determine that 
 
-$$\Delta x = \Delta y . tan(\alpha_{ray})$$
+t$$\Delta x = \Delta y . tan(\alpha_{ray})$$
 
 With that done, we now know that
 
