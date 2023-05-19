@@ -157,6 +157,8 @@ $$yInter = \left(
 	P_y'
 \right)$$
 
+$$\left(x \atop y \right)$$
+
 </blockquote></details>
 
 <details closed><summary>Program Explanations</summary><blockquote>
