@@ -358,7 +358,9 @@ yInter(i)_x - \Delta x \\
 yInter(i)_y - \Delta y
 \end{pmatrix}$$
 
-$$\begin{bmatrix}X\\Y\end{bmatrix}$$
+```math
+\begin{bmatrix}X\\Y\end{bmatrix}
+```
 
 but that is only valid if we are looking North-West. The sign of both $\Delta$ will vary in function of the angle we are looking at. I'm going to make the function with a $\pm$ but in the program section we will solve this issue.
 
