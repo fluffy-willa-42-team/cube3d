@@ -147,7 +147,7 @@ and so
 
 $$yInter_x = P'_y + \Delta x - \Delta y . tan(\alpha_{ray})$$
 
-$$yInter_x = P'y + \Delta x - \Delta y \cdot \tan(\alpha_{ray})$$
+$$yInter_x = P'_y + \Delta x - \Delta y \cdot \tan(\alpha_{ray})$$
 
 but
 
