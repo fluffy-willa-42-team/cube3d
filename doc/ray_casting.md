@@ -366,11 +366,11 @@ $$\Delta x = \Delta y . tan(\alpha_{ray})$$
 
 With that done, we now know that
 
-t$$yInter(i+1)_x = yInter(i)_x + \pm \Delta y . tan(\alpha_{ray})$$
+$yInter(i+1)_x = yInter(i)_x + \pm \Delta y . tan(\alpha_{ray})$
 
 but earlier we said that $\Delta y = 1$, so
 
-t$$yInter(i+1)_x = yInter(i)_x \pm tan(\alpha_{ray})$$
+$yInter(i+1)_x = yInter(i)_x \pm tan(\alpha_{ray})$
 
 And finally, 
 
