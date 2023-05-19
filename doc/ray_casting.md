@@ -104,7 +104,7 @@ $\pm$ is plus or minus
 <details open><summary>Definitions</summary><blockquote>
 
 $P'$ is a point in the corner of the square where the player is.  
-$\Delta x$ is difference between $| P'_x - P_x|$  
+$\Delta x$ is difference between $| P_x' - P_x|$  
 $\Delta y$ is difference between $| P_y' - P_y|$  
 
 **/!\ Warning /!\\**  
@@ -146,9 +146,7 @@ $$\overline{A\ yInter} = \Delta y . tan(\alpha_{ray})$$
 and so
 
 $$yInter_x = P_y' + \Delta x - \Delta y . tan(\alpha_{ray})$$
-
-$$yInter_x = P_y' + \Delta x - \Delta y \cdot \tan(\alpha_{ray})$$
-
+`
 but
 
 $$P_y' + \Delta x = P_x$$
@@ -220,7 +218,7 @@ You'll see it works the same.
 <details open><summary>Definitions</summary><blockquote> 
 
 $P'$ is a point in the corner of the square where the player is.  
-$\Delta x$ is difference between $| P'_x - P_x|$  
+$\Delta x$ is difference between $| P_x' - P_x|$  
 $\Delta y$ is difference between $| P_y' - P_y|$  
 
 **/!\ Warning /!\\**  
@@ -236,7 +234,7 @@ Then $\Delta x$ and $\Delta y$ will do so as well.
 We need to find $xInter$, but we already know it's $x$ value, it is the same $x$ as $P'$.  
 So 
 
-$$xInter = (p'_x, xInter_y)$$  
+$$xInter = (p_x', xInter_y)$$  
 
 The only needed value then is $xInter_y$.
 
@@ -249,11 +247,11 @@ $$\overline{P'\ xInter} = \overline{A\ xInter} - \Delta y$$
 
 so
 
-$$xInter_y = P'_x - (\overline{A\ xInter} - \Delta y)$$
+$$xInter_y = P_x' - (\overline{A\ xInter} - \Delta y)$$
 
 *The trick for if it's outside is here. With a double negative, the formula can be simplified.*
 
-$$xInter_y = P'_x + \Delta y - \overline{A\ xInter}$$
+$$xInter_y = P_x' + \Delta y - \overline{A\ xInter}$$
 
 So to find $xInter_y$ we need to find $\overline{A\ xInter}$ which is convinently a side of the triangle formed by $xInter$, $Player$ and $A$.  
 
@@ -264,7 +262,7 @@ $$\overline{A\ xInter} = \dfrac{\Delta x}{tan(\alpha_{ray})}$$
 
 and so  
 
-$$xInter_y = P'_x + \Delta y - \dfrac{\Delta x}{tan(\alpha_{ray})}$$
+$$xInter_y = P_x' + \Delta y - \dfrac{\Delta x}{tan(\alpha_{ray})}$$
 
 but
 $$P_y' + \Delta y = P_y$$
@@ -272,7 +270,7 @@ $$P_y' + \Delta y = P_y$$
 In conclusion, we have that  
 
 $$xInter = \begin{pmatrix}
-P'_x \\
+P_x' \\
 P_y - \dfrac{\Delta x}{tan(\alpha_{ray})}
 \end{pmatrix}$$
 
@@ -280,7 +278,7 @@ P_y - \dfrac{\Delta x}{tan(\alpha_{ray})}
 
 <details open><summary>Program Explanations</summary><blockquote> 
 
-Now that we know the formula to calculate the first point of intersection. We see that we know $\alpha_{ray}$ and $P_x$ but only have a description of what $P'_x$ and $\Delta x$ are.
+Now that we know the formula to calculate the first point of intersection. We see that we know $\alpha_{ray}$ and $P_x$ but only have a description of what $P_x'$ and $\Delta x$ are.
 
 We know that in the example in our graph that $P'$ is simply equal to a cast to an integer of $P$
 
@@ -306,7 +304,7 @@ if (!(90 < alpha_ray && alpha_ray <= 270))
 	P_prime_x += 1;
 ```
 
-We now know the value of $P'_x$. We only need $\Delta x$, for that we can simply use the formula in the definitions.
+We now know the value of $P_x'$. We only need $\Delta x$, for that we can simply use the formula in the definitions.
 
 ```c
 float delta_x = abs(player_x - P_prime_x);
@@ -315,7 +313,7 @@ float delta_x = abs(player_x - P_prime_x);
 Now, we have everything to calculate xInter $x_{Inter}$ with our formula :  
 
 $$xInter = \begin{pmatrix}
-P'_x \\
+P_x' \\
 P_y - \dfrac{\Delta x}{tan(\alpha_{ray})}
 \end{pmatrix}$$
 
