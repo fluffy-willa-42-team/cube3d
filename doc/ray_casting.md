@@ -368,10 +368,7 @@ $$yInter(i+1)_x = yInter(i)_x \pm tan(\alpha_{ray})$$
 
 And finally, 
 
-$$yInter(i+1) = \begin{pmatrix}
-yInter(i)_x \pm tan(\alpha_{ray}) \\
-yInter(i)_y \pm 1
-\end{pmatrix}$$
+$$yInter(i+1) = \left(yInter(i)_x \pm tan(\alpha_{ray}) \atop yInter(i)_y \pm 1 \right)$$
 
 </blockquote></details>
 
@@ -435,18 +432,12 @@ We need to get $xInter(i+1)$ and we know $xInter(i)$ and $\alpha_{ray}$
 
 We can see on the graph that :  
 
-$$xInter(i+1) = \begin{pmatrix}
-xInter(i)_x - \Delta x \\
-xInter(i)_y - \Delta y
-\end{pmatrix}$$
+$$xInter(i+1) = \left(xInter(i)_x - \Delta x \atop xInter(i)_y - \Delta y \right)$$
 
 But that is only valid if we are looking North-West. The sign of both $\Delta$ will vary in function of the angle we are looking at. I'm going to make the function with a $\pm$ but in the program section we will solve this issue.
 
 We have then :  
-$$xInter(i+1) = \begin{pmatrix}
-xInter(i)_x \pm \Delta x \\
-xInter(i)_y \pm \Delta y
-\end{pmatrix}$$
+$$xInter(i+1) = \left(xInter(i)_x \pm \Delta x \atop xInter(i)_y \pm \Delta y \right)$$
 
 We need to calculate both $\Delta$ but we can see that $\Delta x$ is equal to $1$ which makes sense because we need to find the next intersection with the line where $x = a + 1, a \in R^+$ from the intersection with the line where $x = a, a \in R^+$.
 
@@ -468,10 +459,7 @@ $$xInter(i+1)_y = xInter(i)_y \pm \dfrac{1}{tan(\alpha_{ray})}$$
 
 And finally, 
 
-$$xInter(i+1) = \begin{pmatrix}
-xInter(i)_x \pm 1 \\
-xInter(i)_y \pm \dfrac{1}{tan(\alpha_{ray})}
-\end{pmatrix}$$
+$$xInter(i+1) = \left(xInter(i)_x \pm 1 \atop xInter(i)_y \pm \dfrac{1}{tan(\alpha_{ray})} \right)$$
 
 </blockquote></details>
 
