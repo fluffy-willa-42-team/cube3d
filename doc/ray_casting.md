@@ -886,7 +886,7 @@ $$Dist_{Wall} = \Delta x.cos(\alpha_{player}) + \Delta y.sin(\alpha_{player})$$
 
 
 
-<details open><summary>Pogram Explanations</summary><blockquote> 
+<details open><summary>Program Explanations</summary><blockquote> 
 
 ```c
 typedef struct s_point
