@@ -157,7 +157,7 @@ $$yInter = \left(
 	P_y'
 \right)$$
 
-$$\left(x \atop y \right)$$
+$$\left(P_x - \Delta y . tan(\alpha_{ray}) \atop P_y' \right)$$
 
 </blockquote></details>
 
