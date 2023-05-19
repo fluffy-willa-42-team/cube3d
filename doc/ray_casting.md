@@ -88,7 +88,7 @@ We can also subdivide the process in two major sections. The first occurrence an
 
 Quickly, before the math comes in,
 
-$\begin{pmatrix}x \\y\end{pmatrix}$ is the notation for a set of coordinate.
+$\left(x \atop y \right)$ is the notation for a set of coordinate.
 
 $\overline{AB}$ is the distance between $A$ and $B$.  
 $A_x$ is the coordinate $x$ of the point $A$  
