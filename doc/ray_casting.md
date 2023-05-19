@@ -155,7 +155,7 @@ In conclusion, we have that
 
 $$yInter = \begin{pmatrix} P_x - \Delta y . tan(\alpha_{ray}) \\ P_y' \end{pmatrix}$$
 
-$$\begin{bmatrix}a\\b\end{bmatrix}$$
+$$\left[X\atop Y\right]$$
 
 </blockquote></details>
 
