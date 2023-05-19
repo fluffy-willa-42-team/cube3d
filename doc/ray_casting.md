@@ -71,7 +71,7 @@ What we want to find is $(X_{inter}, Y_{inter})$, the coordinates of Intersectio
 
 We know :  
 - $(X_{player}, Y_{player})$, the coordinates of the player  
-- $\alpha_{ray}$, the direction of the ray  
+- $\alpha_r$, the direction of the ray  
 
 To find the intersection, we will use the rules we set earlier. We know the map is a grid, so that mean our intersection is on one of the edges of a square.  
 That means that the point of intersection has to be on either a horizontal line with a round $y$ or a vertical line with a round $x$.
@@ -140,11 +140,11 @@ So to find $yInter_x$ we need to find $\overline{A\ yInter}$ which is confidentl
 
 With $tan(\alpha) = \dfrac{opposite}{adjacent}$, we can determine that
 
-$$\overline{A\ yInter} = \Delta y . tan(\alpha_{ray})$$
+$$\overline{A\ yInter} = \Delta y . tan(\alpha_r)$$
 
 and so
 
-$$yInter_x = P_y' + \Delta x - \Delta y . tan(\alpha_{ray})$$
+$$yInter_x = P_y' + \Delta x - \Delta y . tan(\alpha_r)$$
 
 but
 
@@ -152,13 +152,13 @@ $$P_y' + \Delta x = P_x$$
 
 In conclusion, we have that
 
-$$yInter = \left(P_x - \Delta y . tan(\alpha_{ray}) \atop P_y' \right)$$
+$$yInter = \left(P_x - \Delta y . tan(\alpha_r) \atop P_y' \right)$$
 
 </blockquote></details>
 
 <details open><summary>Program Explanations</summary><blockquote>
 
-Now that we know the formula to calculate the first point of intersection. We see that we know $\alpha_{ray}$ and $P_x$ but only have a description of what $P_y'$ and $\Delta y$ are.
+Now that we know the formula to calculate the first point of intersection. We see that we know $\alpha_r$ and $P_x$ but only have a description of what $P_y'$ and $\Delta y$ are.
 
 We know that in the example in our graph that $P'$ is simply equal to a cast to an integer of $P$
 
@@ -167,7 +167,7 @@ float P_prime_y = (int) player_y;
 ```
 
 But that only is the case when the player is looking to the North, or in more precise terms :   
-$\alpha_{ray}$ is between $0^\circ$ and $180^\circ$ or between $0$ and $\pi$ radian. 
+$\alpha_r$ is between $0^\circ$ and $180^\circ$ or between $0$ and $\pi$ radian. 
 
 ```c
 if (0 < alpha_ray && alpha_ray <= 180)
@@ -192,7 +192,7 @@ float delta_y = abs(player_y - P_prime_y);
 
 Now, we have everything to calculate $y_{Inter}$ with our formula :  
 
-$$yInter = \left(P_x - \Delta y . tan(\alpha_{ray}) \atop P_y' \right)$$
+$$yInter = \left(P_x - \Delta y . tan(\alpha_r) \atop P_y' \right)$$
 
 ```c
 float yInter_x = player_x - delta_y * tan(alpha_ray);
@@ -254,24 +254,24 @@ So to find $xInter_y$ we need to find $\overline{A\ xInter}$ which is convinentl
 <img src="asset/math_toa.png" width="300"/>
 
 With $tan(\alpha) = \dfrac{opposite}{adjacent}$, we can determine that  
-$$\overline{A\ xInter} = \dfrac{\Delta x}{tan(\alpha_{ray})}$$ 
+$$\overline{A\ xInter} = \dfrac{\Delta x}{tan(\alpha_r)}$$ 
 
 and so  
 
-$$xInter_y = P_x' + \Delta y - \dfrac{\Delta x}{tan(\alpha_{ray})}$$
+$$xInter_y = P_x' + \Delta y - \dfrac{\Delta x}{tan(\alpha_r)}$$
 
 but
 $$P_y' + \Delta y = P_y$$
 
 In conclusion, we have that  
 
-$$xInter = \left(P_x' \atop P_y - \dfrac{\Delta x}{tan(\alpha_{ray})} \right)$$
+$$xInter = \left(P_x' \atop P_y - \dfrac{\Delta x}{tan(\alpha_r)} \right)$$
 
 </blockquote></details>
 
 <details open><summary>Program Explanations</summary><blockquote> 
 
-Now that we know the formula to calculate the first point of intersection. We see that we know $\alpha_{ray}$ and $P_x$ but only have a description of what $P_x'$ and $\Delta x$ are.
+Now that we know the formula to calculate the first point of intersection. We see that we know $\alpha_r$ and $P_x$ but only have a description of what $P_x'$ and $\Delta x$ are.
 
 We know that in the example in our graph that $P'$ is simply equal to a cast to an integer of $P$
 
@@ -280,7 +280,7 @@ float P_prime_x = (int) player_x;
 ```
 
 But it's only the case when the player looking to the West, or in more precise terms :   
-$\alpha_{ray}$ is between $90^\circ$ and $270^\circ$ or between $\dfrac{\pi}{2}$ and $\dfrac{3\pi}{2}$ radian. 
+$\alpha_r$ is between $90^\circ$ and $270^\circ$ or between $\dfrac{\pi}{2}$ and $\dfrac{3\pi}{2}$ radian. 
 
 ```c
 if (90 < alpha_ray && alpha_ray <= 270)
@@ -305,7 +305,7 @@ float delta_x = abs(player_x - P_prime_x);
 
 Now, we have everything to calculate xInter $x_{Inter}$ with our formula :  
 
-$$xInter = \left(P_x' \atop P_y - \dfrac{\Delta x}{tan(\alpha_{ray})} \right)$$
+$$xInter = \left(P_x' \atop P_y - \dfrac{\Delta x}{tan(\alpha_r)} \right)$$
 
 ```c
 float xInter_x = P_prime_x;
@@ -337,7 +337,7 @@ $\Delta y$ is difference between $| yInter(i)_y - yInter(i+1)_y |$
 
 <details open><summary>Math Explanations</summary><blockquote> 
 
-We need to get $yInter(i+1)$ and we know $yInter(i)$ and $\alpha_{ray}$
+We need to get $yInter(i+1)$ and we know $yInter(i)$ and $\alpha_r$
 
 We can see on the graph that : 
 
@@ -356,19 +356,19 @@ So the only value missing is $\Delta x$ but we can it inside triangle made by th
 
 With $tan(\alpha) = \dfrac{opposite}{adjacent}$, we can determine that 
 
-$$\Delta x = \Delta y . tan(\alpha_{ray})$$
+$$\Delta x = \Delta y . tan(\alpha_r)$$
 
 With that done, we now know that
 
-$$yInter(i+1)_x = yInter(i)_x \pm \Delta y \cdot \tan(\alpha\\_{r})$$
+$$yInter(i+1)_x = yInter(i)_x \pm \Delta y \cdot \tan(\alpha_r)$$
 
 but earlier we said that $\Delta y = 1$, so
 
-$$yInter(i+1)_x = yInter(i)_x \pm \tan(\alpha_{ray})$$
+$$yInter(i+1)_x = yInter(i)_x \pm \tan(\alpha_r)$$
 
 And finally, 
 
-$$yInter(i+1) = \left(yInter(i)_x \pm \tan(\alpha_{ray}) \atop yInter(i)_y \pm 1 \right)$$
+$$yInter(i+1) = \left(yInter(i)_x \pm \tan(\alpha_r) \atop yInter(i)_y \pm 1 \right)$$
 
 </blockquote></details>
 
@@ -377,11 +377,11 @@ $$yInter(i+1) = \left(yInter(i)_x \pm \tan(\alpha_{ray}) \atop yInter(i)_y \pm 1
 We now have the formula to get the next intersection of line where y is round. But to compute it we have to get rid of this $\pm$.
 
 For that, we observe that we need to subtract $\Delta x$ if we are looking in the west and add if we are looking east.  
-The west being if $\alpha_{ray}$ is between $90^\circ$ and $270^\circ$ or between $\dfrac{\pi}{2}$ and $\dfrac{3\pi}{2}$ radian.
+The west being if $\alpha_r$ is between $90^\circ$ and $270^\circ$ or between $\dfrac{\pi}{2}$ and $\dfrac{3\pi}{2}$ radian.
 
 We will use this knowledge and our formula to compute it.
 
-$$yInter(i+1)_x = yInter(i)_x \pm tan(\alpha_{ray})$$
+$$yInter(i+1)_x = yInter(i)_x \pm tan(\alpha_r)$$
 
 ```c
 float deltaX = tan(alpha_ray);
@@ -393,7 +393,7 @@ else
 ```
 
 We have the $x$, now we need the $y$ except this time we add if we are looking south and subtract if we are looking north.  
-The north being if $\alpha_{ray}$ is between $0^\circ$ and $180^\circ$ or between $0$ and $\pi$ radian.
+The north being if $\alpha_r$ is between $0^\circ$ and $180^\circ$ or between $0$ and $\pi$ radian.
 
 And with our formula, 
 
@@ -428,7 +428,7 @@ $\Delta y$ is difference between $| xInter(i)_y - xInter(i+1)_y |$
 
 <details open><summary>Math Explanations</summary><blockquote> 
 
-We need to get $xInter(i+1)$ and we know $xInter(i)$ and $\alpha_{ray}$
+We need to get $xInter(i+1)$ and we know $xInter(i)$ and $\alpha_r$
 
 We can see on the graph that :  
 
@@ -447,19 +447,19 @@ So the only value missing is $\Delta y$ but we can it inside triangle made by th
 
 With $tan(\alpha) = \dfrac{opposite}{adjacent}$, we can determine that 
 
-$$\Delta y = \dfrac{\Delta x}{tan(\alpha_{ray})}$$
+$$\Delta y = \dfrac{\Delta x}{tan(\alpha_r)}$$
 
 With that done, we now know that
 
-$$xInter(i+1)_y = xInter(i)_y \pm \dfrac{\Delta x}{tan(\alpha_{ray})}$$
+$$xInter(i+1)_y = xInter(i)_y \pm \dfrac{\Delta x}{tan(\alpha_r)}$$
 
 but earlier we said that $\Delta y = 1$, so
 
-$$xInter(i+1)_y = xInter(i)_y \pm \dfrac{1}{tan(\alpha_{ray})}$$
+$$xInter(i+1)_y = xInter(i)_y \pm \dfrac{1}{tan(\alpha_r)}$$
 
 And finally, 
 
-$$xInter(i+1) = \left(xInter(i)_x \pm 1 \atop xInter(i)_y \pm \dfrac{1}{tan(\alpha_{ray})} \right)$$
+$$xInter(i+1) = \left(xInter(i)_x \pm 1 \atop xInter(i)_y \pm \dfrac{1}{tan(\alpha_r)} \right)$$
 
 </blockquote></details>
 
@@ -468,7 +468,7 @@ $$xInter(i+1) = \left(xInter(i)_x \pm 1 \atop xInter(i)_y \pm \dfrac{1}{tan(\alp
 We now have the formula to get the next intersection of line where y is round. But to compute it, we have to get rid of this $\pm$.
 
 For that, we observe that we need to subtract $\Delta x$ if we are looking in the west and add if we are looking east.  
-The west being if $\alpha_{ray}$ is between $90^\circ$ and $270^\circ$ or between $\dfrac{\pi}{2}$ and $\dfrac{3\pi}{2}$ radian.
+The west being if $\alpha_r$ is between $90^\circ$ and $270^\circ$ or between $\dfrac{\pi}{2}$ and $\dfrac{3\pi}{2}$ radian.
 
 We will use this knowledge and our formula to cumpute it.
 
@@ -482,11 +482,11 @@ else
 ```
 
 We have the $x$, now we need the $y$ except this time we add if we are looking south and subtract if we are looking north.  
-The north being if $\alpha_{ray}$ is between $0^\circ$ and $180^\circ$ or between $0$ and $\pi$ radian.
+The north being if $\alpha_r$ is between $0^\circ$ and $180^\circ$ or between $0$ and $\pi$ radian.
 
 And with our formula, 
 
-$$xInter(i+1)_y = xInter(i+1)_y \pm \dfrac{1}{tan(\alpha_{ray})}$$
+$$xInter(i+1)_y = xInter(i+1)_y \pm \dfrac{1}{tan(\alpha_r)}$$
 
 ```c
 float deltaY = 1 / tan(alpha_ray)
@@ -833,18 +833,18 @@ $$I = (\Delta x,\Delta y)$$
 $\Delta x$ is the x coordinate of our intersection.  
 $\Delta y$ is the y coordinate of our intersection.  
 
-$$\overline{PI'} = \overline{PI}.cos(\alpha_{ray} - \alpha_{player})$$
+$$\overline{PI'} = \overline{PI}.cos(\alpha_r - \alpha_{player})$$
 
 With the formula : 
 $$cos(\alpha - \beta) = cos(\alpha).cos(\beta) + sin(\alpha).sin(\beta)$$
 
 We have then :
-$$\overline{PI'} = \overline{PI}.[cos(\alpha_{ray}).cos(\alpha_{player}) + sin(\alpha_{ray}).sin(\alpha_{player})]$$
-$$\overline{PI'} = \overline{PI}.cos(\alpha_{ray}).cos(\alpha_{player}) + \overline{PI}.sin(\alpha_{ray}).sin(\alpha_{player})$$
+$$\overline{PI'} = \overline{PI}.[cos(\alpha_r).cos(\alpha_{player}) + sin(\alpha_r).sin(\alpha_{player})]$$
+$$\overline{PI'} = \overline{PI}.cos(\alpha_r).cos(\alpha_{player}) + \overline{PI}.sin(\alpha_r).sin(\alpha_{player})$$
 
 but we with basic trigonometry, we can find that :
-$$\Delta x = \overline{PI}.cos(\alpha_{ray})$$
-$$\Delta y = \overline{PI}.sin(\alpha_{ray})$$
+$$\Delta x = \overline{PI}.cos(\alpha_r)$$
+$$\Delta y = \overline{PI}.sin(\alpha_r)$$
 
 and so in our formula, we have :
 
