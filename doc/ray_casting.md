@@ -150,10 +150,7 @@ $$P'_y + \Delta x = P_x$$
 
 In conclusion, we have that
 
-$$yInter = \begin{pmatrix}
-P_x - \Delta y . tan(\alpha_{ray}) \\
-P'_y
-\end{pmatrix}$$
+$$yInter = \begin{pmatrix} P_x - \Delta y . tan(\alpha_{ray}) \\ P'_y \end{pmatrix}$$
 
 </blockquote></details>
 
