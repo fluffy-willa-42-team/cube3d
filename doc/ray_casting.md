@@ -7,7 +7,10 @@
 
 In this documentation, I'm going to explain the logic I found for a simple ray caster.
 This is in no way the most optimized version, but it's what worked and what I understood.  
-My English is not best, so sorry in advance if it's not clear.  
+My English is not best, so sorry in advance if it's not clear. 
+
+Last thing, this was coded in vscode with the preview tools with previews math expression
+
 With that out of the way, let's start.
 
 ---
@@ -142,7 +145,9 @@ $$\overline{A\ yInter} = \Delta y . tan(\alpha_{ray})$$
 
 and so
 
-$yInter_x = P'_y + \Delta x - \Delta y . tan(\alpha_{ray})$
+$$yInter_x = P'_y + \Delta x - \Delta y . tan(\alpha_{ray})$$
+
+$$yInter_x = P'y + \Delta x - \Delta y \cdot \tan(\alpha_{ray})$$
 
 but
 
