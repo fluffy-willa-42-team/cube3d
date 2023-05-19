@@ -6,10 +6,9 @@
 ## Disclaimer
 
 In this documentation, I'm going to explain the logic I found for a simple ray caster.
-This is in no way the most optimized version, but it's what worked and what I understood.  
-My English is not best, so sorry in advance if it's not clear. 
+This is in no way the most optimized version, but it's what worked and what I understood.
 
-Last thing, this was coded in vscode with the preview tools with previews math expression
+My English is not best, so sorry in advance if it's not clear. 
 
 With that out of the way, let's start.
 
@@ -153,9 +152,10 @@ $$P_y' + \Delta x = P_x$$
 
 In conclusion, we have that
 
-$$yInter = \begin{pmatrix} P_x - \Delta y . tan(\alpha_{ray}) \\ P_y' \end{pmatrix}$$
-
-$$\left[X\atop Y\right]$$
+$$yInter = \left(
+	P_x - \Delta y . tan(\alpha_{ray}) \atop
+	P_y'
+\right)$$
 
 </blockquote></details>
 
@@ -195,10 +195,10 @@ float delta_y = abs(player_y - P_prime_y);
 
 Now, we have everything to calculate $y_{Inter}$ with our formula :  
 
-$$yInter = \begin{pmatrix}
-P_x - \Delta y . tan(\alpha_{ray}) \\
-P_y'
-\end{pmatrix}$$
+$$yInter = \left(
+	P_x - \Delta y . tan(\alpha_{ray}) \atop
+	P_y'
+\right)$$
 
 ```c
 float yInter_x = player_x - delta_y * tan(alpha_ray);
@@ -271,10 +271,10 @@ $$P_y' + \Delta y = P_y$$
 
 In conclusion, we have that  
 
-$$xInter = \begin{pmatrix}
-P_x' \\
-P_y - \dfrac{\Delta x}{tan(\alpha_{ray})}
-\end{pmatrix}$$
+$$xInter = \left(
+	P_x' \atop
+	P_y - \dfrac{\Delta x}{tan(\alpha_{ray})}
+\right)$$
 
 </blockquote></details>
 
@@ -314,10 +314,10 @@ float delta_x = abs(player_x - P_prime_x);
 
 Now, we have everything to calculate xInter $x_{Inter}$ with our formula :  
 
-$$xInter = \begin{pmatrix}
-P_x' \\
-P_y - \dfrac{\Delta x}{tan(\alpha_{ray})}
-\end{pmatrix}$$
+$$xInter = \left(
+	P_x' \atop
+	P_y - \dfrac{\Delta x}{tan(\alpha_{ray})}
+\right)$$
 
 ```c
 float xInter_x = P_prime_x;
