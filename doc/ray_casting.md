@@ -146,7 +146,7 @@ $$\overline{A\ yInter} = \Delta y . tan(\alpha_{ray})$$
 and so
 
 $$yInter_x = P_y' + \Delta x - \Delta y . tan(\alpha_{ray})$$
-`
+
 but
 
 $$P_y' + \Delta x = P_x$$
@@ -154,6 +154,8 @@ $$P_y' + \Delta x = P_x$$
 In conclusion, we have that
 
 $$yInter = \begin{pmatrix} P_x - \Delta y . tan(\alpha_{ray}) \\ P_y' \end{pmatrix}$$
+
+$$\begin{bmatrix}a\\b\end{bmatrix}$$
 
 </blockquote></details>
 
