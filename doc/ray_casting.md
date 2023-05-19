@@ -142,7 +142,7 @@ $$\overline{A\ yInter} = \Delta y . tan(\alpha_{ray})$$
 
 and so
 
-$$yInter_x = P'_y + \Delta x - \Delta y . tan(\alpha_{ray})$$
+$yInter_x = P'_y + \Delta x - \Delta y . tan(\alpha_{ray})$
 
 but
 
