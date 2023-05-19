@@ -105,7 +105,7 @@ $\pm$ is plus or minus
 
 $P'$ is a point in the corner of the square where the player is.  
 $\Delta x$ is difference between $| P'_x - P_x|$  
-$\Delta y$ is difference between $| P^{'}_y - P_y|$  
+$\Delta y$ is difference between $| P_y' - P_y|$  
 
 **/!\ Warning /!\\**  
 $P'$ position will vary in function in which direction the player faces.  
@@ -119,13 +119,13 @@ We need to find $yInter$, but we already know it's $y$ value, it is the same $y$
 
 So
 
-$$yInter = (yInter_x, p^{'}_y)$$
+$$yInter = (yInter_x, p_y')$$
 
 The only needed value then is $yInter_x$.
 
 We can see that :
 
-$$yInter_x = P^{'}_y + \overline{P'\ yInter}$$
+$$yInter_x = P_y' + \overline{P'\ yInter}$$
 
 but we can see on the graph that
 
@@ -133,7 +133,7 @@ $$\overline{P'\ yInter} = \Delta x - \overline{A\ yInter}$$
 
 so
 
-$$yInter_x = P^{'}_y + \Delta x - \overline{A\ yInter}$$
+$$yInter_x = P_y' + \Delta x - \overline{A\ yInter}$$
 
 So to find $yInter_x$ we need to find $\overline{A\ yInter}$ which is confidently a side of the triangle formed by $yInter$, > $Player$ and $A$.  
 
@@ -145,23 +145,23 @@ $$\overline{A\ yInter} = \Delta y . tan(\alpha_{ray})$$
 
 and so
 
-$$yInter_x = P^{'}_y + \Delta x - \Delta y . tan(\alpha_{ray})$$
+$$yInter_x = P_y' + \Delta x - \Delta y . tan(\alpha_{ray})$$
 
-$$yInter_x = P^{'}_y + \Delta x - \Delta y \cdot \tan(\alpha_{ray})$$
+$$yInter_x = P_y' + \Delta x - \Delta y \cdot \tan(\alpha_{ray})$$
 
 but
 
-$$P^{'}_y + \Delta x = P_x$$
+$$P_y' + \Delta x = P_x$$
 
 In conclusion, we have that
 
-$$yInter = \begin{pmatrix} P_x - \Delta y . tan(\alpha_{ray}) \\ P^{'}_y \end{pmatrix}$$
+$$yInter = \begin{pmatrix} P_x - \Delta y . tan(\alpha_{ray}) \\ P_y' \end{pmatrix}$$
 
 </blockquote></details>
 
 <details open><summary>Program Explanations</summary><blockquote>
 
-Now that we know the formula to calculate the first point of intersection. We see that we know $\alpha_{ray}$ and $P_x$ but only have a description of what $P^{'}_y$ and $\Delta y$ are.
+Now that we know the formula to calculate the first point of intersection. We see that we know $\alpha_{ray}$ and $P_x$ but only have a description of what $P_y'$ and $\Delta y$ are.
 
 We know that in the example in our graph that $P'$ is simply equal to a cast to an integer of $P$
 
@@ -187,7 +187,7 @@ if (180 < alpha_ray && alpha_ray <= 360)
 	P_prime_y += 1;
 ```
 
-We now know the value of $P^{'}_y$. We only need $\Delta y$, for that we can simply use the formula in the definitions.
+We now know the value of $P_y'$. We only need $\Delta y$, for that we can simply use the formula in the definitions.
 
 ```c
 float delta_y = abs(player_y - P_prime_y);
@@ -197,7 +197,7 @@ Now, we have everything to calculate $y_{Inter}$ with our formula :
 
 $$yInter = \begin{pmatrix}
 P_x - \Delta y . tan(\alpha_{ray}) \\
-P^{'}_y
+P_y'
 \end{pmatrix}$$
 
 ```c
@@ -221,7 +221,7 @@ You'll see it works the same.
 
 $P'$ is a point in the corner of the square where the player is.  
 $\Delta x$ is difference between $| P'_x - P_x|$  
-$\Delta y$ is difference between $| P^{'}_y - P_y|$  
+$\Delta y$ is difference between $| P_y' - P_y|$  
 
 **/!\ Warning /!\\**  
 $P'$ position will vary in function in which direction the player faces.  
@@ -241,7 +241,7 @@ $$xInter = (p'_x, xInter_y)$$
 The only needed value then is $xInter_y$.
 
 We can see that :  
-$$xInter_y = P^{'}_y - \overline{P'\ xInter}$$
+$$xInter_y = P_y' - \overline{P'\ xInter}$$
 
 but we can see on the graph that
 
@@ -267,7 +267,7 @@ and so
 $$xInter_y = P'_x + \Delta y - \dfrac{\Delta x}{tan(\alpha_{ray})}$$
 
 but
-$$P^{'}_y + \Delta y = P_y$$
+$$P_y' + \Delta y = P_y$$
 
 In conclusion, we have that  
 
