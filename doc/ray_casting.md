@@ -354,7 +354,7 @@ yInter(i)_x \pm \Delta x \\
 yInter(i)_y \pm \Delta y
 \end{pmatrix}$$
 
-We need to calculate both $\Delta$ but we can see that $\Delta y$ is equal to $1$ which makes sense because we need to find the next intersection with the line where $y = a + 1, a \in \R^+$ from the intersection with the line where $y = a, a \in \R^+$.
+We need to calculate both $\Delta$ but we can see that $\Delta y$ is equal to $1$ which makes sense because we need to find the next intersection with the line where $y = a + 1, a \in R^+$ from the intersection with the line where $y = a, a \in R^+$.
 
 So the only value missing is $\Delta x$ but we can it inside triangle made by the point $A$, $yInter(i)$ and $yInter(i+1)$. So we can use our favorite trick : trigonometry.  
 
@@ -454,7 +454,7 @@ xInter(i)_x \pm \Delta x \\
 xInter(i)_y \pm \Delta y
 \end{pmatrix}$$
 
-We need to calculate both $\Delta$ but we can see that $\Delta x$ is equal to $1$ which makes sense because we need to find the next intersection with the line where $x = a + 1, a \in \R^+$ from the intersection with the line where $x = a, a \in \R^+$.
+We need to calculate both $\Delta$ but we can see that $\Delta x$ is equal to $1$ which makes sense because we need to find the next intersection with the line where $x = a + 1, a \in R^+$ from the intersection with the line where $x = a, a \in R^+$.
 
 So the only value missing is $\Delta y$ but we can it inside triangle made by the point $A$, $xInter(i)$ and $xInter(i+1)$. So we can use our favorite trick : trigonometry.  
 
