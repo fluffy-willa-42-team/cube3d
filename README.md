@@ -1,4 +1,9 @@
 # cube3d
+## How does it work ?
+
+[The math behind the projet](https://github.com/fluffy-willa-42-team/cube3d/blob/main/doc/ray_casting.md)
+[The map format description](https://github.com/fluffy-willa-42-team/cube3d/blob/main/doc/map_format.md)
+
 ## Why does the code look weird ?
 
 ![norminette](https://github.com/fluffy-willa-42-team/cube3d/actions/workflows/norminette.yml/badge.svg?branch=fluffy)

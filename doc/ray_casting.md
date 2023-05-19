@@ -258,8 +258,10 @@ So to find $xInter_y$ we need to find $\overline{A\ xInter}$ which is convinentl
 <img src="asset/math_toa.png" width="300"/>
 
 With $tan(\alpha) = \dfrac{opposite}{adjacent}$, we can determine that  
-$$\overline{A\ xInter} = \dfrac{\Delta x}{tan(\alpha_{ray})}$$  
+$$\overline{A\ xInter} = \dfrac{\Delta x}{tan(\alpha_{ray})}$$ 
+
 and so  
+
 $$xInter_y = P'_x + \Delta y - \dfrac{\Delta x}{tan(\alpha_{ray})}$$
 
 but
