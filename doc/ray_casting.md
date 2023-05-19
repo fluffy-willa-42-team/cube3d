@@ -112,7 +112,7 @@ Then $\Delta x$ and $\Delta y$ will do so as well.
 
 </blockquote></details>
 
-<details closed><summary>Math Explanations</summary><blockquote>
+<details open><summary>Math Explanations</summary><blockquote>
 
 We need to find $yInter$, but we already know it's $y$ value, it is the same $y$ as $P'$.
 
