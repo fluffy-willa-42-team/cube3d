@@ -360,15 +360,15 @@ $$\Delta x = \Delta y . tan(\alpha_{ray})$$
 
 With that done, we now know that
 
-$$yInter(i+1)_x = yInter(i)_x \pm \Delta y \cdot$$
+$$yInter(i+1)_x = yInter(i)_x \pm \Delta y \cdot \tan(\alpha_{ray})$$
 
 but earlier we said that $\Delta y = 1$, so
 
-$$yInter(i+1)_x = yInter(i)_x \pm tan(\alpha_{ray})$$
+$$yInter(i+1)_x = yInter(i)_x \pm \tan(\alpha_{ray})$$
 
 And finally, 
 
-$$yInter(i+1) = \left(yInter(i)_x \pm tan(\alpha_{ray}) \atop yInter(i)_y \pm 1 \right)$$
+$$yInter(i+1) = \left(yInter(i)_x \pm \tan(\alpha_{ray}) \atop yInter(i)_y \pm 1 \right)$$
 
 </blockquote></details>
 
