@@ -360,6 +360,9 @@ $$\Delta x = \Delta y . tan(\alpha_{ray})$$
 
 With that done, we now know that
 
+$$yInter(i+1)_x = \left(yInter(i)_x \pm \Delta x \atop yInter(i)_y \pm \Delta y \right)$$
+
+
 $$yInter(i+1)_x = yInter(i)_x \pm \Delta y . tan(\alpha_{ray})$$
 
 but earlier we said that $\Delta y = 1$, so
