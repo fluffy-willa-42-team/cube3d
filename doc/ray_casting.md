@@ -152,10 +152,7 @@ $$P_y' + \Delta x = P_x$$
 
 In conclusion, we have that
 
-$$yInter = \left(
-	P_x - \Delta y . tan(\alpha_{ray}) \atop
-	P_y'
-\right)$$
+$$yInter = \left(P_x - \Delta y . tan(\alpha_{ray}) \atop P_y' \right)$$
 
 $$\left(P_x - \Delta y . tan(\alpha_{ray}) \atop P_y' \right)$$
 
