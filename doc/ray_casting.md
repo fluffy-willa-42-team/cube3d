@@ -341,18 +341,12 @@ We need to get $yInter(i+1)$ and we know $yInter(i)$ and $\alpha_{ray}$
 
 We can see on the graph that :  
 
-$$yInter(i+1) = \begin{pmatrix}
-yInter(i)_x - \Delta x \\
-yInter(i)_y - \Delta y
-\end{pmatrix}$$
+$$yInter(i+1) = \begin{pmatrix} yInter(i)_x - \Delta x \\ yInter(i)_y - \Delta y \end{pmatrix}$$
 
 but that is only valid if we are looking North-West. The sign of both $\Delta$ will vary in function of the angle we are looking at. I'm going to make the function with a $\pm$ but in the program section we will solve this issue.
 
 We have then :  
-$$yInter(i+1) = \begin{pmatrix}
-yInter(i)_x \pm \Delta x \\
-yInter(i)_y \pm \Delta y
-\end{pmatrix}$$
+$$yInter(i+1) = \begin{pmatrix} yInter(i)_x \pm \Delta x \\ yInter(i)_y \pm \Delta y \end{pmatrix}$$
 
 We need to calculate both $\Delta$ but we can see that $\Delta y$ is equal to $1$ which makes sense because we need to find the next intersection with the line where $y = a + 1, a \in R^+$ from the intersection with the line where $y = a, a \in R^+$.
 
